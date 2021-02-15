@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "13457038544",
+    "project_id": "sahlaprovider",
+    "storage_bucket": "sahlaprovider.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13457038544:android:1e36ff81f72e9de2f012d5",
+        "android_client_info": {
+          "package_name": "com.nram.sahlaprovider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13457038544-iq35v6a21mfo4ns14hq384pcnu4dllps.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nram.sahlaprovider",
+            "certificate_hash": "8eb9a80ee2fec0fb2aca12bfb1874e8e5f80cbe0"
+          }
+        },
+        {
+          "client_id": "13457038544-nojp3haq3rnicp8fn36g5pr4eb9e3uls.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkIo6FkbrLjkGUO0sCowMlDU3JL1h5__k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13457038544-nojp3haq3rnicp8fn36g5pr4eb9e3uls.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
