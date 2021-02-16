@@ -51,15 +51,23 @@ class AgentData {
   String phone;
   int id;
   String email;
+  String serviceType;
   String token;
 
-  AgentData({this.name, this.phone, this.id, this.email, this.token});
+  AgentData(
+      {this.name,
+        this.phone,
+        this.id,
+        this.email,
+        this.serviceType,
+        this.token});
 
   AgentData.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     phone = json['phone'];
     id = json['id'];
     email = json['email'];
+    serviceType = json['service_type'];
     token = json['token'];
   }
 
@@ -69,6 +77,7 @@ class AgentData {
     data['phone'] = this.phone;
     data['id'] = this.id;
     data['email'] = this.email;
+    data['service_type'] = this.serviceType;
     data['token'] = this.token;
     return data;
   }

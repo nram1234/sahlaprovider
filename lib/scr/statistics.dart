@@ -31,18 +31,22 @@ class Statisticss extends StatefulWidget {
 
 class _StatisticssState extends State<Statisticss> {
   Uint8List bytes = Uint8List(0);
-  String _qrStringgnra='' ;
+  String _qrStringgnra = '';
+
   int _selectedIndex = 0;
   String token;
+  String service_type = '0';
   bool serch = false;
   bool qrgnratt = false;
   bool activediscount = false;
   final box = GetStorage();
   AllNetworking _allNetworking = AllNetworking();
-File _imge;
+  File _imge;
+
   @override
   void initState() {
     token = box.read('token');
+    service_type = box.read('service_type');
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -50,13 +54,12 @@ File _imge;
 
   @override
   Widget build(BuildContext context) {
-
-
     final high = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     var color = Colors.red;
     List bottomitem = <BottomNavigationBarItem>[
-      BottomNavigationBarItem(backgroundColor: Colors.red,
+      BottomNavigationBarItem(
+        backgroundColor: Colors.red,
         icon: Icon(Icons.home),
         label: 'الرئيسية',
       ),
@@ -123,8 +126,8 @@ File _imge;
                             child: TextField(
                           controller: _textEditingController,
                           textAlign: TextAlign.center,
-                          decoration:
-                              InputDecoration(hintText: 'بحث بالكود او رقم الهاتف '),
+                          decoration: InputDecoration(
+                              hintText: 'بحث بالكود او رقم الهاتف '),
                         )),
                         GestureDetector(
                           onTap: () async {
@@ -154,109 +157,34 @@ File _imge;
                                 print('tttttttttttttttttttttttttttttttttt');
                                 print(value.data['status']);
 
-
-                                if(value.data['status']){
-                                  String user_name=value.data['data']['user_name'];
-                                  String user_phone=value.data['data']['user_phone'];
+                                if (value.data['status']) {
+                                  String user_name =
+                                      value.data['data']['user_name'];
+                                  String user_phone =
+                                      value.data['data']['user_phone'];
                                   showDialog(
                                     context: context,
                                     barrierDismissible: false,
                                     builder: (BuildContext context) =>
-                                        CustomDialog(Text2: "عدد النقاط ${value.data['data']['user_total_points']}",
-                                          title: "كود الخصم",function: (){},buttonText2:"تنفيذ" ,
-                                          description:"رقم الهاتف  $user_phone"+ "\n"+"اسم المستخدم $user_name",
-                                          buttonText: "الفاء",phone: false,
-                                        ),
+                                        CustomDialog(
+                                      Text2:
+                                          "عدد النقاط ${value.data['data']['user_total_points']}",
+                                      title: "كود الخصم",
+                                      function: () {},
+                                      buttonText2: "تنفيذ",
+                                      description: "رقم الهاتف  $user_phone" +
+                                          "\n" +
+                                          "اسم المستخدم $user_name",
+                                      buttonText: "الفاء",
+                                      phone: false,
+                                    ),
                                   );
-
-                                }else{
-
-
-                                    // set up the button
-                                    Widget okButton = FlatButton(
-                                      child: Text("OK"),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-
-                                      },
-                                    );
-
-                                    // set up the AlertDialog
-                                    AlertDialog alert = AlertDialog(
-                                      title: Text("كود الخصم"),
-                                      content: Text(value.data['message']),
-                                      actions: [
-                                        okButton,
-                                      ],
-                                    );
-
-                                    // show the dialog
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return alert;
-                                      },
-                                    );
-
-                                }
-
-
-                                setState(() {
-                                  _textEditingController.text = "";
-                                  serch = false;
-                                });
-                              });
-                            }
-                          },
-                          child: serch
-                              ? CircularProgressIndicator()
-                              : Icon(
-                                  Icons.apps_outlined,
-                                  color: hexToColor('#00abeb'),
-                                ),
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),GestureDetector(
-                          onTap: () async {
-
-                            if (!_textEditingController.text.trim().isEmpty) {
-                              setState(() {
-                                serch = true;
-                              });
-                              _allNetworking
-                                  .check_phone(
-                                  token_id: token,
-                                  coupon: _textEditingController.text)
-                                  .then((value) {
-                                // set up the AlertDialog
-                                print('tttttttttttttttttttttttttttttttttt');
-                                print(value.data['status']);
-
-
-                                if(value.data['status']){
-                                  String user_name=value.data['data']['user_name'];
-                                  String user_phone=value.data['data']['user_phone'];
-                                  showDialog(
-                                    context: context,
-                                    barrierDismissible: false,
-                                    builder: (BuildContext context) =>
-                                        CustomDialog(Text2: "عدد النقاط ${value.data['data']['user_total_points']}",
-                                          title: "",function: (){},buttonText2:"تنفيذ" ,
-                                          description:"رقم الهاتف  $user_phone"+ "\n"+"اسم المستخدم $user_name",
-                                          buttonText: "الفاء",phone: true,
-                                        ),
-                                  );
-
-                                }else{
-
-
+                                } else {
                                   // set up the button
                                   Widget okButton = FlatButton(
                                     child: Text("OK"),
                                     onPressed: () {
                                       Navigator.of(context).pop();
-
                                     },
                                   );
 
@@ -276,9 +204,7 @@ File _imge;
                                       return alert;
                                     },
                                   );
-
                                 }
-
 
                                 setState(() {
                                   _textEditingController.text = "";
@@ -290,15 +216,96 @@ File _imge;
                           child: serch
                               ? CircularProgressIndicator()
                               : Icon(
-                            Icons.phone,
-                            color: hexToColor('#00abeb'),
-                          ),
+                                  Icons.apps_outlined,
+                                  color: hexToColor('#00abeb'),
+                                ),
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            if (!_textEditingController.text.trim().isEmpty) {
+                              setState(() {
+                                serch = true;
+                              });
+                              _allNetworking
+                                  .check_phone(
+                                      token_id: token,
+                                      coupon: _textEditingController.text)
+                                  .then((value) {
+                                // set up the AlertDialog
+                                print('tttttttttttttttttttttttttttttttttt');
+                                print(value.data['status']);
+
+                                if (value.data['status']) {
+                                  String user_name =
+                                      value.data['data']['user_name'];
+                                  String user_phone =
+                                      value.data['data']['user_phone'];
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (BuildContext context) =>
+                                        CustomDialog(
+                                      Text2:
+                                          "عدد النقاط ${value.data['data']['user_total_points']}",
+                                      title: "",
+                                      function: () {},
+                                      buttonText2: "تنفيذ",
+                                      description: "رقم الهاتف  $user_phone" +
+                                          "\n" +
+                                          "اسم المستخدم $user_name",
+                                      buttonText: "الفاء",
+                                      phone: true,
+                                    ),
+                                  );
+                                } else {
+                                  // set up the button
+                                  Widget okButton = FlatButton(
+                                    child: Text("OK"),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  );
+
+                                  // set up the AlertDialog
+                                  AlertDialog alert = AlertDialog(
+                                    title: Text("كود الخصم"),
+                                    content: Text(value.data['message']),
+                                    actions: [
+                                      okButton,
+                                    ],
+                                  );
+
+                                  // show the dialog
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return alert;
+                                    },
+                                  );
+                                }
+
+                                setState(() {
+                                  _textEditingController.text = "";
+                                  serch = false;
+                                });
+                              });
+                            }
+                          },
+                          child: serch
+                              ? CircularProgressIndicator()
+                              : Icon(
+                                  Icons.phone,
+                                  color: hexToColor('#00abeb'),
+                                ),
                         ),
 
-                SizedBox(
-                  width: 8,
-                )
-                   ,     Container(
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Container(
                           height: high * 0.04,
                           width: high * 0.05,
                           child: Image.asset(
@@ -319,41 +326,41 @@ File _imge;
                         child: Column(
                           children: [
                             // serchWidget(width: width, high: high, fun: fun),
-                            SizedBox(
-                              height: high * .02,
-                            ),
-
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Add_Photography_Requests()),
-                                );
-                              },
-                              child: Container(
-                                  height: high * .1,
-                                  width: width * 0.5,
-                                  child: Center(
-                                    child: Text('طلب تصميم وتصوير',
-                                        style: TextStyle(
-                                            fontFamily: 'Arbf',
-                                            color: Colors.white,
-                                            fontSize: 25)),
-                                  ),
-                                  decoration: BoxDecoration(
-                                      color: hexToColor('#00abeb'),
-                                      gradient: new LinearGradient(
-                                          colors: [
-                                            Colors.red[100],
-                                            Colors.red[900],
-                                          ],
-                                          begin: Alignment.centerLeft,
-                                          end: Alignment.centerRight,
-                                          tileMode: TileMode.clamp),
-                                      borderRadius: BorderRadius.circular(10))),
-                            ),
+                            // SizedBox(
+                            //   height: high * .02,
+                            // ),
+                            //
+                            // GestureDetector(
+                            //   onTap: () {
+                            //     Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //           builder: (context) =>
+                            //               Add_Photography_Requests()),
+                            //     );
+                            //   },
+                            //   child: Container(
+                            //       height: high * .1,
+                            //       width: width * 0.5,
+                            //       child: Center(
+                            //         child: Text('طلب تصميم وتصوير',
+                            //             style: TextStyle(
+                            //                 fontFamily: 'Arbf',
+                            //                 color: Colors.white,
+                            //                 fontSize: 25)),
+                            //       ),
+                            //       decoration: BoxDecoration(
+                            //           color: hexToColor('#00abeb'),
+                            //           gradient: new LinearGradient(
+                            //               colors: [
+                            //                 Colors.red[100],
+                            //                 Colors.red[900],
+                            //               ],
+                            //               begin: Alignment.centerLeft,
+                            //               end: Alignment.centerRight,
+                            //               tileMode: TileMode.clamp),
+                            //           borderRadius: BorderRadius.circular(10))),
+                            // ),
                             SizedBox(
                               height: high * .02,
                             ),
@@ -372,10 +379,21 @@ File _imge;
                                 children: [
                                   Column(
                                     children: [
-                                      Container(
-                                        width: width * .4,
-                                        height: width * .4,
-                                        color: Colors.orange,
+                                      Container(  decoration: BoxDecoration(
+                                          color: hexToColor('#00abeb'),
+                                          gradient: new LinearGradient(
+                                              colors: [
+                                                Colors.orange[100],
+                                                Colors.orange[900],
+                                              ],
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                              tileMode: TileMode.clamp),
+                                          borderRadius:
+                                          BorderRadius.circular(10.0)),
+                                        width: width * .3,
+                                        height: width * .3,
+
                                         child: Center(
                                           child: Text(
                                             data.totalSelling.toString(),
@@ -410,9 +428,21 @@ File _imge;
                                     child: Column(
                                       children: [
                                         Container(
-                                          width: width * .4,
-                                          height: width * .4,
-                                          color: Colors.purpleAccent,
+                                          decoration: BoxDecoration(
+                                              color: hexToColor('#00abeb'),
+                                              gradient: new LinearGradient(
+                                                  colors: [
+                                                    Colors.purpleAccent[100],
+                                                    Colors.purpleAccent[700],
+                                                  ],
+                                                  begin: Alignment.centerLeft,
+                                                  end: Alignment.centerRight,
+                                                  tileMode: TileMode.clamp),
+                                              borderRadius:
+                                              BorderRadius.circular(10.0)),
+                                          width: width * .3,
+                                          height: width * .3,
+
                                           child: Center(
                                             child: Text(
                                               data.totalViews.toString(),
@@ -441,23 +471,34 @@ File _imge;
                             ),
                             SizedBox(
                               height: high * .02,
-                            ),
+                            ),Container(height: 1,width: width*.7,color: Colors.red,),SizedBox(height: high*.02,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Column(
                                   children: [
-                                    Container(
-                                      width: width * .4,
-                                      height: width * .4,
-                                      color: Colors.brown,
+                                    Container( width: width * .3,
+                                      height: width * .3,
+                                      decoration: BoxDecoration(
+                                          color: hexToColor('#00abeb'),
+                                          gradient: new LinearGradient(
+                                              colors: [
+                                                Colors.brown[100],
+                                                Colors.brown[700],
+                                              ],
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                              tileMode: TileMode.clamp),
+                                          borderRadius:
+                                          BorderRadius.circular(10.0)),
+
                                       child: Center(
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                            data.datePackege,
+                                              data.datePackege,
                                               style: TextStyle(
                                                   fontFamily: 'Arbf',
                                                   color: Colors.white,
@@ -494,10 +535,21 @@ File _imge;
                                   },
                                   child: Column(
                                     children: [
-                                      Container(
-                                        width: width * .4,
-                                        height: width * .4,
-                                        color: Colors.pinkAccent,
+                                      Container( width: width * .3,
+                                        height: width * .3,
+                                        decoration: BoxDecoration(
+                                            color: hexToColor('#00abeb'),
+                                            gradient: new LinearGradient(
+                                                colors: [
+                                                  Colors.pinkAccent[100],
+                                                  Colors.pinkAccent[700],
+                                                ],
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                                tileMode: TileMode.clamp),
+                                            borderRadius:
+                                            BorderRadius.circular(10.0)),
+
                                         child: Center(
                                           child: Text(
                                             data.totalProduct.toString(),
@@ -523,9 +575,112 @@ File _imge;
                                 )
                               ],
                             ),
+
                             SizedBox(
                               height: high * .02,
-                            ),  GestureDetector(
+                            ),Container(height: 1,width: width*.7,color: Colors.red,),SizedBox(height: high*.02,),
+
+                       service_type=='1'?    Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                         children: [
+                           Column(
+                             children: [
+                               Container( width: width * .3,
+                                 height: width * .3,
+                                 decoration: BoxDecoration(
+                                     color: hexToColor('#00abeb'),
+                                     gradient: new LinearGradient(
+                                         colors: [
+                                           Colors.amberAccent[100],
+                                           Colors.amberAccent[700],
+                                         ],
+                                         begin: Alignment.centerLeft,
+                                         end: Alignment.centerRight,
+                                         tileMode: TileMode.clamp),
+                                     borderRadius:
+                                     BorderRadius.circular(10.0)),
+                                 child: Center(
+                                   child: Column(
+                                     mainAxisAlignment:
+                                     MainAxisAlignment.center,
+                                     children: [
+                                       Text(
+                                         "الطلبات الحالية"      ,
+                                         style: TextStyle(
+                                             fontFamily: 'Arbf',
+                                             color: Colors.white,
+                                             fontSize: 25),
+                                       ),
+
+                                     ],
+                                   ),
+                                 ),
+                               ),
+                               SizedBox(
+                                 height: .01,
+                               ),
+                               Text(
+                                 "الطلبات الحالية",
+                                 style: TextStyle(
+                                     fontFamily: 'Arbf',
+                                     color: Colors.black,
+                                     fontSize: 25),
+                               )
+                             ],
+                           ),
+                           GestureDetector(
+                             onTap: () {
+
+                             },
+                             child: Column(
+                               children: [
+                                 Container( width: width * .3,
+                                   height: width * .3,
+                                   decoration: BoxDecoration(
+                                       color: hexToColor('#00abeb'),
+                                       gradient: new LinearGradient(
+                                           colors: [
+                                             Colors.tealAccent[100],
+                                             Colors.tealAccent[700],
+                                           ],
+                                           begin: Alignment.centerLeft,
+                                           end: Alignment.centerRight,
+                                           tileMode: TileMode.clamp),
+                                       borderRadius:
+                                       BorderRadius.circular(10.0)),
+                                   child: Center(
+                                     child: Text(
+                                       "الطلبات السابقة"  ,
+                                       style: TextStyle(
+                                           fontFamily: 'Arbf',
+                                           color: Colors.white,
+                                           fontSize: 25),
+                                     ),
+                                   ),
+                                 ),
+                                 SizedBox(
+                                   height: .01,
+                                 ),
+                                 Text(
+                                   "الطلبات السابقة",
+                                   style: TextStyle(
+                                       fontFamily: 'Arbf',
+                                       color: Colors.black,
+                                       fontSize: 25),
+                                 )
+                               ],
+                             ),
+                           )
+                         ],
+                       ):SizedBox(),
+
+
+
+
+                            SizedBox(
+                              height: high * .02,
+                            ),Container(height: 1,width: width*.7,color: Colors.red,),SizedBox(height: high*.02,),
+                            GestureDetector(
                               onTap: () {
                                 Navigator.push(
                                   context,
@@ -536,14 +691,25 @@ File _imge;
                               },
                               child: Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Column(
                                     children: [
                                       Container(
-                                        width: width * .4,
-                                        height: width * .4,
-                                        color: Colors.deepPurpleAccent,
+                                        decoration: BoxDecoration(
+                                            color: hexToColor('#00abeb'),
+                                            gradient: new LinearGradient(
+                                                colors: [
+                                                  Colors.lime[100],
+                                                  Colors.lime[700],
+                                                ],
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                                tileMode: TileMode.clamp),
+                                            borderRadius:
+                                            BorderRadius.circular(10.0)),
+                                        width: width * .3,
+                                        height: width * .3,
                                         child: Center(
                                           child: Text(
                                             data.totalPoints.toString(),
@@ -566,96 +732,106 @@ File _imge;
                                       )
                                     ],
                                   ),
-
                                 ],
                               ),
                             ),
-                          Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [  qrgnratt?CircularProgressIndicator():
-                          GestureDetector(
-                            onTap: ()async {
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                qrgnratt
+                                    ? CircularProgressIndicator()
+                                    : GestureDetector(
+                                        onTap: () async {
+                                          int idOfQR = await box.read('id');
+                                          await _generateBarCode(
+                                              box.read('id').toString());
 
-                              int idOfQR= await box.read('id' );
-                              await  _generateBarCode(box.read('id' ).toString());
-
-                              //  Get.to(QRRead(),
-                              //     transition: Transition.leftToRightWithFade);
-                            },
-                            child: Container(
-                              height: high * .07,
-                              width: width * 0.4,
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(" انشاء  QR ",
-                                        style: TextStyle(
-                                            fontFamily: 'Arbf',
-                                            color: Colors.white,
-                                            )),
-                                    Icon(
-                                      Icons.qr_code,
-                                      color: Colors.white,
+                                          //  Get.to(QRRead(),
+                                          //     transition: Transition.leftToRightWithFade);
+                                        },
+                                        child: Container(
+                                          height: high * .07,
+                                          width: width * 0.4,
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(" انشاء  QR ",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Arbf',
+                                                      color: Colors.white,
+                                                    )),
+                                                Icon(
+                                                  Icons.qr_code,
+                                                  color: Colors.white,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          decoration: BoxDecoration(
+                                              color: hexToColor('#00abeb'),
+                                              gradient: new LinearGradient(
+                                                  colors: [
+                                                    Colors.red[100],
+                                                    Colors.red[900],
+                                                  ],
+                                                  begin: Alignment.centerLeft,
+                                                  end: Alignment.centerRight,
+                                                  tileMode: TileMode.clamp),
+                                              borderRadius:
+                                                  BorderRadius.circular(40.0)),
+                                        ),
+                                      ),
+                                GestureDetector(
+                                  onTap: () {
+                                    if (activediscount) {
+                                      _allNetworking
+                                          .create_coupon(
+                                              token_id: token, type: 0)
+                                          .then((value) {});
+                                      setState(() {});
+                                    } else {
+                                      _allNetworking
+                                          .create_coupon(
+                                              token_id: token, type: 1)
+                                          .then((value) {});
+                                      setState(() {});
+                                    }
+                                  },
+                                  child: Container(
+                                    height: high * .07,
+                                    width: width * 0.4,
+                                    child: Center(
+                                      child: activediscount
+                                          ? Text(
+                                              " الغاء  ${data.serviceCoupon}",
+                                              style: TextStyle(
+                                                  fontFamily: 'Arbf',
+                                                  color: Colors.white,
+                                                  fontSize: 25))
+                                          : Text(" تفعيل اكواد الخصم ",
+                                              style: TextStyle(
+                                                fontFamily: 'Arbf',
+                                                color: Colors.white,
+                                              )),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              decoration: BoxDecoration(
-                                  color: hexToColor('#00abeb'),
-                                  gradient: new LinearGradient(
-                                      colors: [
-                                        Colors.red[100],
-                                        Colors.red[900],
-                                      ],
-                                      begin: Alignment.centerLeft,
-                                      end: Alignment.centerRight,
-                                      tileMode: TileMode.clamp),
-                                  borderRadius: BorderRadius.circular(40.0)),
-                            ),
-                          ),
-
-                            GestureDetector(
-                              onTap: () {
-                                if (activediscount) {
-                                  _allNetworking
-                                      .create_coupon(token_id: token, type: 0)
-                                      .then((value) {});
-                                  setState(() {});
-                                } else {
-                                  _allNetworking
-                                      .create_coupon(token_id: token, type: 1)
-                                      .then((value) {});
-                                  setState(() {});
-                                }
-                              },
-                              child: Container(
-                                height: high * .07,
-                                width: width * 0.4,
-                                child: Center(
-                                  child: activediscount
-                                      ? Text(" الغاء  ${data.serviceCoupon}",
-                                      style: TextStyle(
-                                          fontFamily: 'Arbf',
-                                          color: Colors.white,
-                                          fontSize: 25))
-                                      : Text(" تفعيل اكواد الخصم ",
-                                      style: TextStyle(
-                                          fontFamily: 'Arbf',
-                                          color: Colors.white,
-                                          )),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: hexToColor('#00abeb'),
-                                    gradient: new LinearGradient(
-                                        colors: [
-                                          Colors.red[100],
-                                          Colors.red[900],
-                                        ],
-                                        begin: Alignment.centerLeft,
-                                        end: Alignment.centerRight,
-                                        tileMode: TileMode.clamp),
-                                    borderRadius: BorderRadius.circular(40.0)),
-                              ),
-                            )],)
+                                    decoration: BoxDecoration(
+                                        color: hexToColor('#00abeb'),
+                                        gradient: new LinearGradient(
+                                            colors: [
+                                              Colors.red[100],
+                                              Colors.red[900],
+                                            ],
+                                            begin: Alignment.centerLeft,
+                                            end: Alignment.centerRight,
+                                            tileMode: TileMode.clamp),
+                                        borderRadius:
+                                            BorderRadius.circular(40.0)),
+                                  ),
+                                )
+                              ],
+                            )
                           ],
                         ),
                       ),
@@ -677,28 +853,26 @@ File _imge;
     return Container();
   }
 
-
   Future _generateBarCode(String inputCode) async {
-    qrgnratt=true;
-    setState(() {
-
-    });
+    qrgnratt = true;
+    setState(() {});
 
     Uint8List result = await scanner.generateBarCode(inputCode);
     this.setState(() => this.bytes = result);
-     File.fromRawPath(result);  //_imge=
+    File.fromRawPath(result); //_imge=
     final success = await ImageGallerySaver.saveImage(this.bytes);
 
     String imageString = base64Encode(this.bytes);
     print(imageString);
 
-  await  _allNetworking.save_QR(token_id: token, file:imageString) .then((value) {
-
+    await _allNetworking
+        .save_QR(token_id: token, file: imageString)
+        .then((value) {
       print(value.data);
 
       Get.dialog(
         AlertDialog(
-          title: Text( ''),
+          title: Text(''),
           content: Text("تم حفظ الصوره في مكتبة الصور"),
           actions: <Widget>[
             FlatButton(
@@ -711,13 +885,10 @@ File _imge;
         ),
         barrierDismissible: false,
       );
-       });
-
-    qrgnratt=false;
-    setState(() {
-
     });
 
+    qrgnratt = false;
+    setState(() {});
   }
 }
 

@@ -1,14 +1,14 @@
-class Get_all_products_JSON {
+class Get_all_category_json {
   String message;
   int messageid;
   bool status;
   int total;
   Result result;
 
-  Get_all_products_JSON(
+  Get_all_category_json(
       {this.message, this.messageid, this.status, this.total, this.result});
 
-  Get_all_products_JSON.fromJson(Map<String, dynamic> json) {
+  Get_all_category_json.fromJson(Map<String, dynamic> json) {
     message = json['Message'];
     messageid = json['Messageid'];
     status = json['status'];
@@ -61,24 +61,18 @@ class AllProducts {
   String productName;
   String productNameEn;
   String productId;
-  String newPrice;
-  String oldPrice;
 
   AllProducts(
       {this.productImage,
         this.productName,
         this.productNameEn,
-        this.productId,
-        this.newPrice,
-        this.oldPrice});
+        this.productId});
 
   AllProducts.fromJson(Map<String, dynamic> json) {
     productImage = json['product_image'];
     productName = json['product_name'];
     productNameEn = json['product_name_en'];
     productId = json['product_id'];
-    newPrice = json['new_price'];
-    oldPrice = json['old_price'];
   }
 
   Map<String, dynamic> toJson() {
@@ -87,8 +81,6 @@ class AllProducts {
     data['product_name'] = this.productName;
     data['product_name_en'] = this.productNameEn;
     data['product_id'] = this.productId;
-    data['new_price'] = this.newPrice;
-    data['old_price'] = this.oldPrice;
     return data;
   }
 }

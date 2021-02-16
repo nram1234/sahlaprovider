@@ -12,6 +12,7 @@ import 'package:sahlaprovider/utilitie/jsondata/get_all_products_JSON.dart';
 import 'addNewProdect.dart';
  
 import 'editProduct.dart';
+import 'mainSections.dart';
 
 class ProductScr extends StatefulWidget {
   @override
@@ -29,7 +30,7 @@ class _ProductScrState extends State<ProductScr> {
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
   ScrollController _scrollController;
-
+  String service_type = '0';
   @override
   void initState() {
     super.initState();
@@ -37,6 +38,7 @@ class _ProductScrState extends State<ProductScr> {
       ..addListener(_scrollListener);
     phone = box.read('phone');
     token = box.read('token');
+    service_type = box.read('service_type');
     print('oooooooooooooooooooooooooooooooo');
     print(token);
     print('oooooooooooooooooooooooooooooooo');
@@ -61,7 +63,68 @@ class _ProductScrState extends State<ProductScr> {
           ),
           body: Column(
             children: [
-              GestureDetector(
+      service_type!=0?
+      Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
+        GestureDetector(
+        onTap: () {
+          Get.to(
+            AddNewProdect(),
+            transition: Transition.cupertino,
+          );
+        },
+        child: Container(
+            height: high * .05,
+            width: width * 0.35,
+            child: Center(
+              child: Text('اضافه منتج جديد',
+                  style: TextStyle(
+                      fontFamily: 'Arbf',
+                      color: Colors.white,
+                      fontSize: 18)),
+            ),
+            decoration: BoxDecoration(
+                color: hexToColor('#00abeb'),
+                gradient: new LinearGradient(
+                    colors: [
+                      Colors.red[100],
+                      Colors.red[900],
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    tileMode: TileMode.clamp),
+                borderRadius: BorderRadius.circular(40.0))),
+      ),GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              new MaterialPageRoute(
+                  builder: (context) =>
+                      MainSections( )),
+            );
+
+          },
+          child: Container(
+              height: high * .05,
+              width: width * 0.35,
+              child: Center(
+                child: Text('الاقسام الرئيسية',
+                    style: TextStyle(
+                        fontFamily: 'Arbf',
+                        color: Colors.white,
+                        fontSize: 18)),
+              ),
+              decoration: BoxDecoration(
+                  color: hexToColor('#00abeb'),
+                  gradient: new LinearGradient(
+                      colors: [
+                        Colors.red[100],
+                        Colors.red[900],
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      tileMode: TileMode.clamp),
+                  borderRadius: BorderRadius.circular(40.0))),
+        ),],):  GestureDetector(
                 onTap: () {
                   Get.to(
                     AddNewProdect(),

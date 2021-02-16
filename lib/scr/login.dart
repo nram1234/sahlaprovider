@@ -138,6 +138,12 @@ class _LoginScrState extends State<LoginScr> {
                               Agent_login_JSON data = Agent_login_JSON.fromJson(
                                   json.decode(value.body));
                               if (data.status) {
+                                print('00000000000000000000000000000000000000000000000');
+print(data.result.agentData.serviceType);
+print(data.result.agentData.token);
+                                print('00000000000000000000000000000000000000000000000');
+                                await box.write(
+                                    'service_type', data.result.agentData.serviceType);
                                 await box.write(
                                     'phone', data.result.agentData.phone);
                                 await box.write('firebase_token', valueee);

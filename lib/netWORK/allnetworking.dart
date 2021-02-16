@@ -3,6 +3,7 @@ import 'package:sahlaprovider/utilitie/jsondata/check_coupon_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/create_coupon_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/galler_jason.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_branches_JSON.dart';
+import 'package:sahlaprovider/utilitie/jsondata/get_all_category_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_order_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_user_coupons_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_visitor_json.dart';
@@ -24,7 +25,7 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
 class AllNetworking {
-  var paseurl = 'https://wasselni.ps';
+  var paseurl = 'https://sahla-eg.com/';
 
   //Response response;
   Dio dio = new Dio();
@@ -1248,5 +1249,34 @@ class AllNetworking {
     });
 
     return response;
+  }
+
+
+
+
+
+  Future<Get_all_category_json> get_all_category({
+    @required String token_id,
+    @required int limit,
+    @required int page_number,
+  }) async {
+    Get_all_category_json data;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "limit": limit,
+      "page_number": page_number,
+    });
+    await dio
+        .post(
+      paseurl + '/provider/get_all_category',
+      data: formData,
+    )
+        .then((value) {
+      data = Get_all_category_json.fromJson(value.data);
+    });
+
+    return data;
   }
 }
