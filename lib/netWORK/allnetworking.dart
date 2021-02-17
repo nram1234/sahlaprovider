@@ -5,12 +5,15 @@ import 'package:sahlaprovider/utilitie/jsondata/galler_jason.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_branches_JSON.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_category_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_order_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/get_all_products_cat_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_user_coupons_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_visitor_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_visitor_points_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_home_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_list_notifications_JSON.dart';
+import 'package:sahlaprovider/utilitie/jsondata/preparation_addproduct_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_branch_JSON.dart';
+import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_category_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_offer_JSON.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_product_JSON.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_points_json.dart';
@@ -96,13 +99,14 @@ class AllNetworking {
       @required String current_price,
       @required String old_price,
       @required String description_ar,
-      @required String description_en,
+      @required String description_en,    @required String cat_id,
       @required File file}) async {
     Response response;
     String fileName = file.path.split('/').last;
 
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
+      "cat_id": cat_id,
       "key": "1234567890",
       "token_id": token_id,
       "title": title,
@@ -153,7 +157,7 @@ class AllNetworking {
     @required String description_ar,
     @required String description_en,
     @required File file,
-    @required int id_product,
+    @required int id_product, @required String cat_id,
   }) async {
     Response response;
     String fileName;
@@ -169,7 +173,7 @@ class AllNetworking {
       "title_en": title_en,
       "current_price": current_price,
       "id_product": id_product,
-
+      "cat_id": cat_id,
       "old_price": old_price,
       "description_ar": description_ar,
       "description_en": description_en,
@@ -1275,6 +1279,164 @@ class AllNetworking {
     )
         .then((value) {
       data = Get_all_category_json.fromJson(value.data);
+    });
+
+    return data;
+  }
+
+
+
+
+  Future<Response> add_category(
+      {
+        @required String token_id,
+        @required String title,
+        @required String title_en,
+
+        @required File file}) async {
+    Response response;
+    String fileName = file.path.split('/').last;
+
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "title": title,
+      "title_en": title_en,
+
+      "file": await MultipartFile.fromFile(file.path,
+          filename: fileName, contentType: new MediaType('image', 'png')),
+    });
+    response =
+    await dio.post(paseurl + '/provider/add_category', data: formData);
+    return response;
+  }
+  Future<Response> delete_category({
+    @required String token_id,
+    @required String cat_id,
+  }) async {
+    Response response;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "cat_id": cat_id,
+    });
+    response = await dio.post(
+      paseurl + '/provider/delete_category',
+      data: formData,
+    );
+
+    return response;
+  }
+  Future<Preparation_edit_category_json> preparation_edit_category({
+    @required String token_id,
+    @required String cat_id,
+  }) async {
+    Preparation_edit_category_json data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "cat_id": cat_id,
+    });
+
+    await dio
+        .post(
+      paseurl + '/provider/preparation_edit_category',
+      data: formData,
+    )
+        .then((value) {
+      data = Preparation_edit_category_json.fromJson(value.data);
+    });
+
+    return data;
+  }
+  Future<Response> edit_category({
+    @required String token_id,
+    @required String title,
+    @required String title_en,
+
+    @required File file,
+    @required String cat_id,
+  }) async {
+    Response response;
+    String fileName;
+    if (file != null) {
+      fileName = file.path.split('/').last;
+    }
+
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "title": title,
+      "title_en": title_en,
+
+      "cat_id": cat_id,
+
+      "file": file != null
+          ? await MultipartFile.fromFile(file.path,
+          filename: fileName, contentType: new MediaType('image', 'png'))
+          : ' ',
+    });
+    response =
+    await dio.post(paseurl + '/provider/edit_category', data: formData);
+    return response;
+  }
+
+
+
+
+
+  Future<Preparation_addproduct_json> preparation_addproduct({
+    @required String token_id,
+
+  }) async {
+    Preparation_addproduct_json data;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+
+    });
+    await dio
+        .post(
+      paseurl + '/provider/preparation_addproduct',
+      data: formData,
+    )
+        .then((value) {
+      data = Preparation_addproduct_json.fromJson(value.data);
+    });
+
+    return data;
+  }
+
+
+
+
+
+  Future<Get_all_products_cat_json> get_all_products_cat({
+    @required String cat_id,
+    @required String token_id,
+    @required int limit,
+    @required int page_number,
+  }) async {
+    Get_all_products_cat_json data;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id, "cat_id": cat_id,
+      "limit": limit,
+      "page_number": page_number,
+    });
+    await dio
+        .post(
+      paseurl + '/provider/get_all_products_cat',
+      data: formData,
+    )
+        .then((value) {
+      data = Get_all_products_cat_json.fromJson(value.data);
     });
 
     return data;

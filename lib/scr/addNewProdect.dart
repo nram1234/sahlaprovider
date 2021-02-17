@@ -10,6 +10,7 @@ import 'package:sahlaprovider/myWidget/inputTextWidget.dart';
 import 'package:sahlaprovider/myWidget/myDrawer.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
+import 'package:sahlaprovider/utilitie/jsondata/preparation_addproduct_json.dart';
 
 class AddNewProdect extends StatefulWidget {
   @override
@@ -19,21 +20,44 @@ class AddNewProdect extends StatefulWidget {
 class _AddNewProdectState extends State<AddNewProdect> {
   datavalidatorAddOffer v = datavalidatorAddOffer();
 
-
-  TextEditingController _textEditingControllerthename=TextEditingController();
-  TextEditingController _textEditingControllertheenname=TextEditingController();
-  TextEditingController _textEditingControllertheoldprice=TextEditingController();
-  TextEditingController _textEditingControllertheardes=TextEditingController();
-  TextEditingController _textEditingControllertheendes=TextEditingController();
-  TextEditingController _textEditingControllerthenewprice=TextEditingController();
-
-
+  TextEditingController _textEditingControllerthename = TextEditingController();
+  TextEditingController _textEditingControllertheenname =
+      TextEditingController();
+  TextEditingController _textEditingControllertheoldprice =
+      TextEditingController();
+  TextEditingController _textEditingControllertheardes =
+      TextEditingController();
+  TextEditingController _textEditingControllertheendes =
+      TextEditingController();
+  TextEditingController _textEditingControllerthenewprice =
+      TextEditingController();
 
   File _image;
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
   String base64Image;
   bool savedata = false;
+  String service_type = '0';
+  String token;
+  CategoryList _categoryList;
+  List<CategoryList>categoryList = [];
+  bool getcategoryList=true;
+  @override
+  void initState() {token = box.read('token');
+    service_type = box.read('service_type');
+    _allNetworking.preparation_addproduct(token_id: token).then((value){
+      for(int i=0;i<value.result.categoryList.length;i++){
+
+        categoryList.add( value.result.categoryList[i]);
+      }
+
+      getcategoryList=false;
+      setState(() {
+
+      });
+
+    });
+  }
 
   @override
   void dispose() {
@@ -71,7 +95,7 @@ class _AddNewProdectState extends State<AddNewProdect> {
                     Text('اضافه صوره للمنتج',
                         style: TextStyle(
                             fontFamily: 'Arbf',
-                            color: hexToColor('#00abeb'),
+                            color:  hexToColor('#ed1c6f'),
                             fontSize: 20)),
                     GestureDetector(
                       onTap: () async {
@@ -101,7 +125,8 @@ class _AddNewProdectState extends State<AddNewProdect> {
                 SizedBox(
                   height: high * .02,
                 ),
-                inputText(textedet: _textEditingControllerthename,
+                inputText(
+                    textedet: _textEditingControllerthename,
                     inputtype: TextInputType.text,
                     changedata: (st) {
                       v.changeName(st);
@@ -112,7 +137,8 @@ class _AddNewProdectState extends State<AddNewProdect> {
                 SizedBox(
                   height: high * .02,
                 ),
-                inputText(textedet: _textEditingControllertheenname,
+                inputText(
+                    textedet: _textEditingControllertheenname,
                     inputtype: TextInputType.text,
                     changedata: (st) {
                       v.changeenname(st);
@@ -123,7 +149,8 @@ class _AddNewProdectState extends State<AddNewProdect> {
                 SizedBox(
                   height: high * .02,
                 ),
-                inputText(textedet: _textEditingControllertheardes,
+                inputText(
+                    textedet: _textEditingControllertheardes,
                     inputtype: TextInputType.multiline,
                     changedata: (st) {
                       v.changeardes(st);
@@ -134,7 +161,8 @@ class _AddNewProdectState extends State<AddNewProdect> {
                 SizedBox(
                   height: high * .02,
                 ),
-                inputText(textedet: _textEditingControllertheendes,
+                inputText(
+                    textedet: _textEditingControllertheendes,
                     inputtype: TextInputType.multiline,
                     changedata: (st) {
                       v.changeendes(st);
@@ -145,40 +173,10 @@ class _AddNewProdectState extends State<AddNewProdect> {
                 SizedBox(
                   height: high * .02,
                 ),
-                // TextFormField(controller: _textEditingControllertheoldprice,
-                //   keyboardType: TextInputType.number,
-                //   onChanged: (s) {
-                //     theoldprice = s;
-                //   },
-                //   textAlign: TextAlign.center,
-                //   maxLines: null,
-                //   style: TextStyle(
-                //     fontFamily: 'Arbf',
-                //     color: hexToColor('#ed1c6f'),
-                //   ),
-                //   decoration: InputDecoration(
-                //     labelText: 'ﺍﻟﺴﻌﺮ القديم',
-                //     enabledBorder: OutlineInputBorder(
-                //       borderSide:
-                //           BorderSide(color: hexToColor('#00abeb'), width: 2),
-                //       borderRadius: BorderRadius.circular(40.0),
-                //     ),
-                //     border: OutlineInputBorder(
-                //       borderSide:
-                //           BorderSide(color: hexToColor('#00abeb'), width: 2),
-                //       borderRadius: BorderRadius.circular(40.0),
-                //     ),
-                //     hintText: 'ﺍﻟﺴﻌﺮاالقديم',
-                //     hintStyle: TextStyle(
-                //       fontFamily: 'Arbf',
-                //       color: hexToColor('#ed1c6f'),
-                //     ),
-                //   ),
-                // ),
-                SizedBox(
-                  height: high * .02,
-                ),
-                TextFormField(controller: _textEditingControllerthenewprice,
+
+
+                TextFormField(
+                  controller: _textEditingControllerthenewprice,
                   keyboardType: TextInputType.number,
                   onChanged: (s) {
                     thenewprice = s;
@@ -192,20 +190,67 @@ class _AddNewProdectState extends State<AddNewProdect> {
                   decoration: InputDecoration(
                     labelText: 'ﺍﻟﺴﻌﺮ',
                     enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.grey, width: 2),
-                      borderRadius: BorderRadius.circular(40.0),
+                      borderSide: BorderSide(color: Colors.red, width: 2),
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
                     border: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color:Colors.grey, width: 2),
-                      borderRadius: BorderRadius.circular(40.0),
+                      borderSide: BorderSide(color: Colors.red, width: 2),
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
                     hintText: 'ﺍﻟﺴﻌﺮ',
                     hintStyle: TextStyle(
                       fontFamily: 'Arbf',
-                      color: hexToColor('#ed1c6f'),
+                      color:  hexToColor('#ed1c6f'),
                     ),
+                  ),
+                ),
+                SizedBox(
+                  height: high * .02,
+                ),
+                service_type == '0'
+                    ? SizedBox()
+                    :getcategoryList?CircularProgressIndicator(): Container(
+                  decoration: BoxDecoration(
+                    border: Border.all( color: Colors.red ),
+                    borderRadius: BorderRadius.all(Radius.circular(
+                        5.0) //         <--- border radius here
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('القسم'),
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      DropdownButton<CategoryList>(
+                        value: _categoryList,
+                      //  hint: Text(hintcety),
+                        icon: Icon(Icons.arrow_downward),
+                        iconSize: 24,
+                        elevation: 16,
+                        style: TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 2,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (CategoryList newValue) {
+                          setState(() {
+                            _categoryList = newValue;
+                          });
+                        },
+                        items: categoryList
+                            .map<DropdownMenuItem<CategoryList>>(
+                                (CategoryList value) {
+                              return DropdownMenuItem<CategoryList>(
+                                value: value,
+                                child: Text(value.categoryName),
+                              );
+                            }).toList(),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(
@@ -236,12 +281,13 @@ class _AddNewProdectState extends State<AddNewProdect> {
 
                                     _allNetworking
                                         .add_product(
-                                            phone: phone,
+                                            phone: phone,cat_id: _categoryList.categoryId ,
                                             token_id: token,
                                             title: thename,
                                             title_en: theenname,
                                             current_price: thenewprice,
-                                            old_price: "",//theoldprice,
+                                            old_price: "",
+                                            //theoldprice,
                                             description_ar: theardes,
                                             description_en: theendes,
                                             file: _image)
@@ -263,10 +309,10 @@ class _AddNewProdectState extends State<AddNewProdect> {
                                         barrierDismissible: false,
                                       );
 
-                                      _image=null;
+                                      _image = null;
                                       _textEditingControllerthename.clear();
 
-                                      _textEditingControllertheenname .clear();
+                                      _textEditingControllertheenname.clear();
                                       _textEditingControllertheoldprice.clear();
                                       _textEditingControllertheardes.clear();
                                       _textEditingControllertheendes.clear();
@@ -301,11 +347,11 @@ class _AddNewProdectState extends State<AddNewProdect> {
                                           begin: Alignment.centerLeft,
                                           end: Alignment.centerRight,
                                           tileMode: TileMode.clamp),
-                                      borderRadius: BorderRadius.circular(40.0))
+                                      borderRadius: BorderRadius.circular(5.0))
                                   : BoxDecoration(
                                       color: Colors.grey,
                                       borderRadius:
-                                          BorderRadius.circular(40.0)),
+                                          BorderRadius.circular(5.0)),
                             ),
                           );
                         },

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/scr/branch.dart';
 import 'package:sahlaprovider/scr/contactwithmanager.dart';
+import 'package:sahlaprovider/scr/login.dart';
 import 'package:sahlaprovider/scr/myprofile.dart';
 import 'package:sahlaprovider/scr/notificationScr.dart';
 import 'package:sahlaprovider/scr/pointScr.dart';
@@ -260,36 +261,34 @@ Widget mydrawer(context) {
                 style: TextStyle(
                     fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
             onTap: () {
-
               _allNetworking
                   .logout(
-                      token_id: box.read('token'),
-                      firebase_token: box.read('firebase_token'))
-                  .then((value) async{
-
-
+                  token_id: box.read('token'),
+                  firebase_token: box.read('firebase_token'))
+                  .then((value) async {
                 await box.remove(
-                    'phone',  );
+                  'phone',);
                 await box.remove(
-                    'firebase_token' );
+                    'firebase_token');
                 await box.remove(
-                    'name' );
+                    'name');
 
                 await box.remove(
-                    'token' );
+                    'token');
                 await box.remove(
-                    'email' );
-                await box.remove('id'   );
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    new MaterialPageRoute(
-                        builder: (context) =>
-                            MyApp()),
-                        (Route<dynamic> route) => false  );
-              });
-            },
-          )
-        ],
+                    'email');
+                await box.remove('id');
+                Get.offAll(LoginScr());
+                //   Navigator.pushAndRemoveUntil(
+                //       context,
+                //       new MaterialPageRoute(
+                //           builder: (context) =>
+                //               LoginScr()),
+                //           (Route<dynamic> route) => false  );
+                // });
+              },
+              );
+            })],
       ),
     ),
     elevation: 8,

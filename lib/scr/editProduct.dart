@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sahlaprovider/bloc/datavalidatorAddOffer.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
+import 'package:sahlaprovider/utilitie/jsondata/preparation_addproduct_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_product_JSON.dart';
 
 class EditProduct extends StatefulWidget {
@@ -37,11 +38,28 @@ class _EditProductState extends State<EditProduct> {
     v.despoos();
     super.dispose();
   }
-
+  String service_type = '0';
+  String token;
+  CategoryList _categoryList;
+  List<CategoryList>categoryList = [];
+  bool getcategoryList=true;
   @override
-  void initState() {
-    super.initState();
+  void initState() {token = box.read('token');
+  service_type = box.read('service_type');
+  _allNetworking.preparation_addproduct(token_id: token).then((value){
+    for(int i=0;i<value.result.categoryList.length;i++){
+
+      categoryList.add( value.result.categoryList[i]);
+    }
+
+    getcategoryList=false;
+    setState(() {
+
+    });
+
+  });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -140,13 +158,13 @@ class _EditProductState extends State<EditProduct> {
                             labelText: 'اسم المنتج',
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                                  color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                                  color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
                               fontFamily: 'Arbf',
@@ -170,13 +188,13 @@ class _EditProductState extends State<EditProduct> {
                             labelText: 'Product name',
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                                  color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                                  color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
                               fontFamily: 'Arbf',
@@ -200,13 +218,13 @@ class _EditProductState extends State<EditProduct> {
                             labelText: 'ﻭﺻﻒ ﺍﻟﻤﻨﺘﺞ',
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                                  color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                                  color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
                               fontFamily: 'Arbf',
@@ -230,13 +248,13 @@ class _EditProductState extends State<EditProduct> {
                             labelText: 'Details',
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                                  color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                                  color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
                               fontFamily: 'Arbf',
@@ -261,12 +279,12 @@ class _EditProductState extends State<EditProduct> {
                         //     enabledBorder: OutlineInputBorder(
                         //       borderSide: BorderSide(
                         //           color: hexToColor('#00abeb'), width: 2),
-                        //       borderRadius: BorderRadius.circular(40.0),
+                        //       borderRadius: BorderRadius.circular(5.0),
                         //     ),
                         //     border: OutlineInputBorder(
                         //       borderSide: BorderSide(
                         //           color: hexToColor('#00abeb'), width: 2),
-                        //       borderRadius: BorderRadius.circular(40.0),
+                        //       borderRadius: BorderRadius.circular(5.0),
                         //     ),
                         //     hintStyle: TextStyle(
                         //       fontFamily: 'Arbf',
@@ -290,13 +308,13 @@ class _EditProductState extends State<EditProduct> {
                             labelText: 'ﺍﻟﺴﻌﺮ',
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                                  color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                                  color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
                               fontFamily: 'Arbf',
@@ -306,6 +324,52 @@ class _EditProductState extends State<EditProduct> {
                         ),
                         SizedBox(
                           height: high * .02,
+                        ),
+                        service_type == '0'
+                            ? SizedBox()
+                            :getcategoryList?CircularProgressIndicator(): Container(
+                          decoration: BoxDecoration(
+                            border: Border.all( color: Colors.red ),
+                            borderRadius: BorderRadius.all(Radius.circular(
+                                5.0) //         <--- border radius here
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text('القسم'),
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              DropdownButton<CategoryList>(
+                                value: _categoryList,
+                                //  hint: Text(hintcety),
+                                icon: Icon(Icons.arrow_downward),
+                                iconSize: 24,
+                                elevation: 16,
+                                style: TextStyle(color: Colors.deepPurple),
+                                underline: Container(
+                                  height: 2,
+                                  color: Colors.deepPurpleAccent,
+                                ),
+                                onChanged: (CategoryList newValue) {
+                                  setState(() {
+                                    _categoryList = newValue;
+                                  });
+                                },
+                                items: categoryList
+                                    .map<DropdownMenuItem<CategoryList>>(
+                                        (CategoryList value) {
+                                      return DropdownMenuItem<CategoryList>(
+                                        value: value,
+                                        child: Text(value.categoryName),
+                                      );
+                                    }).toList(),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: high * .02,
@@ -333,7 +397,7 @@ class _EditProductState extends State<EditProduct> {
                                           current_price: thenewprice.text,
                                           old_price:'',// theoldprice.text,
                                           description_ar: detailsar.text,
-                                          description_en: detailsen.text,
+                                          description_en: detailsen.text,cat_id: _categoryList.categoryId ,
                                           file: _image)
                                       .then((value) {
                                     print(value.data);
@@ -378,7 +442,7 @@ class _EditProductState extends State<EditProduct> {
                                             end: Alignment.centerRight,
                                             tileMode: TileMode.clamp),
                                         borderRadius:
-                                            BorderRadius.circular(40.0))),
+                                            BorderRadius.circular(5.0))),
                               )
                       ]),
                     ),

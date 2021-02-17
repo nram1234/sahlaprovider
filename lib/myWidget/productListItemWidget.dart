@@ -20,7 +20,7 @@ Widget productListItem({high, AllProducts data,fun ,funedit,bool offer}) {
                   child: Container(child: Image.network(data.productImage,fit: BoxFit.fill,),
                     width: high * .12,
                     height: high * .12,
-                    color: Colors.deepPurpleAccent,
+                  //  color: Colors.deepPurpleAccent,
                   )),
               Positioned(
                   top: 2,
@@ -32,15 +32,13 @@ Widget productListItem({high, AllProducts data,fun ,funedit,bool offer}) {
                         data.productName,
                         style: TextStyle(
                             fontFamily: 'Arbf',
-                            color: Colors.black,
-                            fontSize: 16),
+                             color: Colors.red,fontWeight: FontWeight.bold ),
                       ),
                       Text(
                         data.productNameEn,
                         style: TextStyle(
                             fontFamily: 'Arbf',
-                            color: Colors.black,
-                            fontSize: 16),
+                            color: Colors.red,fontWeight: FontWeight.bold),
                       ),
                       // Text(
                       //   " السعر القديم " + data.oldPrice ,
@@ -59,8 +57,8 @@ Widget productListItem({high, AllProducts data,fun ,funedit,bool offer}) {
 
                       Row(
                         children: [
-                          InkWell( child: Icon(Icons.delete),onTap: fun,),SizedBox(width: 8,)
-                         ,offer?SizedBox(): InkWell(child: Icon(Icons.article_outlined),onTap: funedit,),
+                          InkWell( child: Icon(Icons.delete,color: Colors.amber,),onTap: fun,),SizedBox(width: 8,)
+                         ,offer?SizedBox(): InkWell(child: Icon(Icons.article_outlined,color: Colors.amber,),onTap: funedit,),
                         ],
                       )
                     ],

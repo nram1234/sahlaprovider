@@ -17,18 +17,18 @@ return  StreamBuilder(
           decoration: InputDecoration(
             labelText: hint,
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 2),
-              borderRadius: BorderRadius.circular(40.0),
+              borderSide: BorderSide(color: Colors.red, width: 2),
+              borderRadius: BorderRadius.circular(5.0),
             ),
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 2),
-              borderRadius: BorderRadius.circular(40.0),
+              borderSide: BorderSide(color: Colors.red, width: 2),
+              borderRadius: BorderRadius.circular(5.0),
             ),
             hintText: hint,
             errorText: snapshot.error,
             hintStyle:
              TextStyle(
-                fontFamily: 'Arbf', color: hexToColor('#ed1c6f'), ),
+                fontFamily: 'Arbf', color:hexToColor('#ed1c6f'), ),
           ),
         );
       });

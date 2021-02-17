@@ -62,7 +62,7 @@ class _ProductScrState extends State<ProductScr> {
                     fontFamily: 'Arbf', color: Colors.white, fontSize: 18)),
           ),
           body: Column(
-            children: [
+            children: [SizedBox(height: 10,),
       service_type!=0?
       Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
         GestureDetector(
@@ -153,7 +153,7 @@ class _ProductScrState extends State<ProductScr> {
                             tileMode: TileMode.clamp),
                         borderRadius: BorderRadius.circular(40.0))),
               ),
-              Expanded(
+              SizedBox(height: 10,),    Expanded(
                   flex: 1,
                   child: StreamBuilder(
                       stream: _allNetworking.Get_all_products(
