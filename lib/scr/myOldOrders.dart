@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
+import 'package:sahlaprovider/utilitie/jsondata/get_old_orders_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/get_order_details_json.dart';
+
+
+import 'login.dart';
 
 
 
@@ -14,12 +19,12 @@ class _OldOrdersState extends State<OldOrders> {
   final box = GetStorage();
   String token;
   AllNetworking _allNetworking = AllNetworking();
-  String lang;
+
   @override
   void initState() {
     super.initState();
     token = box.read('token');
-    lang = box.read('lang');
+
   }
 
   List<List<Widget>> list = [];
@@ -32,23 +37,22 @@ class _OldOrdersState extends State<OldOrders> {
       child: SafeArea(
         top: true,
         child: Scaffold(
-          appBar: AppBar(
-            title: Text( 'order'.tr),
-          ),
+
           body:token!=null? StreamBuilder<Get_old_orders_json>(
               stream: _allNetworking
-                  .get_old_orders(lang: 'ar', token_id: token)
+                  .get_old_orders( token_id: token)
                   .asStream(),
               builder: (context, snapshot) {
+                print(snapshot.data
+                );  print('000000000000000000000000000000000000000000');
+
+                print('000000000000000000000000000000000000000000');
                 if (snapshot.hasData) {
-                  if (snapshot.data.result.orderDetails.length > 0) {
+                  if (snapshot.data.result.allOrders.length > 0) {
                     return ListView.builder(
-                        itemCount: snapshot.data.result.orderDetails.length,
+                        itemCount: snapshot.data.result.allOrders.length,
                         itemBuilder: (context, pos) {
-                          print('000000000000000000000000000000000000000000');
-                          print(snapshot
-                              .data.result.orderDetails[pos].viewStore);
-                          print('000000000000000000000000000000000000000000');
+
 
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -62,7 +66,7 @@ class _OldOrdersState extends State<OldOrders> {
                                     bottomRight: Radius.circular(10)),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.blueAccent.withOpacity(0.5),
+                                    color: Colors.red.withOpacity(0.5),
                                     spreadRadius: 5,
                                     blurRadius: 7,
                                     offset: Offset(
@@ -75,7 +79,7 @@ class _OldOrdersState extends State<OldOrders> {
                                 children: [
                                   Container(
                                     height: 50,
-                                    color: Colors.blue,
+                                    color: Colors.red,
                                     child: Row(
                                       mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -87,39 +91,42 @@ class _OldOrdersState extends State<OldOrders> {
                                               child: snapshot
                                                   .data
                                                   .result
-                                                  .orderDetails[pos]
+                                                  .allOrders[pos]
                                                   .viewId==0
                                                   ? GestureDetector(
                                                   onTap: () {
-                                                    _allNetworking
-                                                        .cancel_order(
-                                                        lang:lang,
-                                                        token_id: token,
-                                                        order_id: snapshot
-                                                            .data
-                                                            .result
-                                                            .orderDetails[
-                                                        pos]
-                                                            .idOrder)
-                                                        .then((value) {
-                                                      Get.snackbar(
-                                                          '', value.message);
-                                                    });
+                                                    // _allNetworking
+                                                    //     .cancel_order(
+                                                    //     lang:lang,
+                                                    //     token_id: token,
+                                                    //     order_id: snapshot
+                                                    //         .data
+                                                    //         .result
+                                                    //         .orderDetails[
+                                                    //     pos]
+                                                    //         .idOrder)
+                                                    //     .then((value) {
+                                                    //   Get.snackbar(
+                                                    //       '', value.message);
+                                                    // });
                                                   },
-                                                  child: Text('Cancel'.tr))
+                                                  child: Text('Cancel' ))
                                                   : GestureDetector(
                                                   onTap: () {
                                                     _allNetworking
                                                         .delete_order(
-                                                        lang: 'ar',
+
                                                         token_id: token,
                                                         order_id: snapshot
                                                             .data
                                                             .result
-                                                            .orderDetails[
+                                                            .allOrders[
                                                         pos]
                                                             .idOrder)
                                                         .then((value) {
+                                                          setState(() {
+
+                                                          });
                                                       Get.snackbar(
                                                           '', value.message);
                                                     });
@@ -145,7 +152,7 @@ class _OldOrdersState extends State<OldOrders> {
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
                                         child: Text(snapshot.data.result
-                                            .orderDetails[pos].viewStore),
+                                            .allOrders[pos].viewStore.toString()),
                                       ),
                                     ],
                                   ),
@@ -157,7 +164,7 @@ class _OldOrdersState extends State<OldOrders> {
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
                                         child: Text(
-                                          'ordernum'.tr,
+                                          'ordernum' ,
                                           style: TextStyle(color: Colors.red),
                                         ),
                                       ),
@@ -165,7 +172,7 @@ class _OldOrdersState extends State<OldOrders> {
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
                                         child: Text(snapshot.data.result
-                                            .orderDetails[pos].idOrder
+                                            .allOrders[pos].idOrder
                                             .toString()),
                                       ),
                                     ],
@@ -178,23 +185,24 @@ class _OldOrdersState extends State<OldOrders> {
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
                                         child: Text(
-                                          'shipping'.tr ,
+                                          'shipping'  ,
                                           style: TextStyle(color: Colors.red),
                                         ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
-                                        child: Text(snapshot
-                                            .data
-                                            .result
-                                            .orderDetails[pos]
-                                            .shippingCharges +
-                                            " " +
+                                        child: Text(
+                                            // snapshot
+                                            // .data
+                                            // .result
+                                            // .allOrders[pos]
+                                            // .shippingCharges +
+                                            // " " +
                                             snapshot
                                                 .data
                                                 .result
-                                                .orderDetails[pos]
+                                                .allOrders[pos]
                                                 .currencyName),
                                       ),
                                     ],
@@ -207,7 +215,7 @@ class _OldOrdersState extends State<OldOrders> {
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
                                         child: Text(
-                                          'products'.tr,
+                                          'products' ,
                                           style: TextStyle(color: Colors.red),
                                         ),
                                       ),
@@ -215,7 +223,7 @@ class _OldOrdersState extends State<OldOrders> {
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
                                         child: Text(snapshot.data.result
-                                            .orderDetails[pos].totalProduct),
+                                            .allOrders[pos].totalProduct),
                                       ),
                                     ],
                                   ),
@@ -235,7 +243,7 @@ class _OldOrdersState extends State<OldOrders> {
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
                                         child: Text(snapshot.data.result
-                                            .orderDetails[pos].date),
+                                            .allOrders[pos].date),
                                       ),
                                     ],
                                   ),
@@ -257,14 +265,138 @@ class _OldOrdersState extends State<OldOrders> {
                                         child: Text(snapshot
                                             .data
                                             .result
-                                            .orderDetails[pos]
+                                            .allOrders[pos]
                                             .totalPrice +
                                             " " +
                                             snapshot
                                                 .data
                                                 .result
-                                                .orderDetails[pos]
+                                                .allOrders[pos]
                                                 .currencyName),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(width: size.width*.7,height: 1,color: Colors.red,),
+SizedBox(height: size.height*.01,),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(
+                                          'الاسم : ',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(snapshot
+                                            .data
+                                            .result
+                                            .allOrders[pos]
+                                            .fullname
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(
+                                          'التلفون : ',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(snapshot
+                                            .data
+                                            .result
+                                            .allOrders[pos]
+                                            .phone
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 1, right: 1),
+                                        child: Text(
+                                          'العنوان : ',maxLines: 2,
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                      Flexible (
+
+                                          child: Text(snapshot
+                                              .data
+                                              .result
+                                              .allOrders[pos]
+                                              .address
+                                          ),
+                                        ),
+
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 1, right: 1),
+                                        child: Text(
+                                          'العنوان : ',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 2, right: 2),
+                                        child: Container(
+                                          child: Text(snapshot
+                                              .data
+                                              .result
+                                              .allOrders[pos]
+                                              .antherAddress
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(
+                                          'اسم المدينه : ',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(snapshot
+                                            .data
+                                            .result
+                                            .allOrders[pos]
+                                            .cityName
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -272,10 +404,13 @@ class _OldOrdersState extends State<OldOrders> {
                                       future:
                                       _allNetworking.get_order_details(
                                           id_order: snapshot.data.result
-                                              .orderDetails[pos].idOrder,
+                                              .allOrders[pos].idOrder,
                                           token_id: token,
-                                          lang: 'ar'),
+                                         ),
                                       builder: (context, snapshot) {
+                                        print("snapshot.data");
+                                        print(snapshot.data);
+                                        print("snapshot.data");
                                         List<Widget> list = [];
                                         if (snapshot.hasData) {
                                           for (int i = 0;
@@ -314,19 +449,19 @@ class _OldOrdersState extends State<OldOrders> {
               }):Center(
             child: GestureDetector(
               onTap: () {
-                Get.to(LoginSCR());
+                Get.to(LoginScr());
               },
               child: Container(
                 height: 50,
                 width: 200,
                 child: Center(
-                  child: Text( 'savep'.tr,
+                  child: Text( 'savep' ,
                       style: TextStyle(
                           fontFamily: 'Arbf',
                           color: Colors.white,
                           fontSize: 23)),
                 ),
-                decoration: BoxDecoration(color:  Colors.blue[800],
+                decoration: BoxDecoration(color:  Colors.red[800],
                     borderRadius: BorderRadius.circular(40.0)),
               ),
             ),
@@ -348,7 +483,7 @@ class _OldOrdersState extends State<OldOrders> {
               bottomRight: Radius.circular(10)),
           boxShadow: [
             BoxShadow(
-              color: Colors.blueAccent.withOpacity(0.5),
+              color: Colors.red.withOpacity(0.5),
               spreadRadius: 5,
               blurRadius: 7,
               offset: Offset(0, 3), // changes position of shadow

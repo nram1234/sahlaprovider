@@ -23,6 +23,8 @@ import 'QRread.dart';
 import 'add_photography_requests.dart';
 import 'get_all_orderSCr.dart';
 import 'get_all_visitor_pointsSCR.dart';
+import 'myOldOrders.dart';
+import 'myorder.dart';
 
 class Statisticss extends StatefulWidget {
   @override
@@ -580,99 +582,56 @@ class _StatisticssState extends State<Statisticss> {
                               height: high * .02,
                             ),Container(height: 1,width: width*.7,color: Colors.red,),SizedBox(height: high*.02,),
 
-                       service_type=='1'?    Row(
-                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                         children: [
-                           Column(
-                             children: [
-                               Container( width: width * .3,
-                                 height: width * .3,
-                                 decoration: BoxDecoration(
-                                     color: hexToColor('#00abeb'),
-                                     gradient: new LinearGradient(
-                                         colors: [
-                                           Colors.amberAccent[100],
-                                           Colors.amberAccent[700],
-                                         ],
-                                         begin: Alignment.centerLeft,
-                                         end: Alignment.centerRight,
-                                         tileMode: TileMode.clamp),
-                                     borderRadius:
-                                     BorderRadius.circular(10.0)),
-                                 child: Center(
-                                   child: Column(
-                                     mainAxisAlignment:
-                                     MainAxisAlignment.center,
-                                     children: [
-                                       Text(
-                                         "الطلبات الحالية"      ,
-                                         style: TextStyle(
-                                             fontFamily: 'Arbf',
-                                             color: Colors.white,
-                                             fontSize: 25),
-                                       ),
+                       service_type=='1'?     GestureDetector(
+                         onTap: () {
+                           Navigator.push(
+                             context,
+                             MaterialPageRoute(
+                                 builder: (context) =>
+                                     MyOrder()),
+                           );
 
-                                     ],
-                                   ),
-                                 ),
-                               ),
-                               SizedBox(
-                                 height: .01,
-                               ),
-                               Text(
-                                 "الطلبات الحالية",
-                                 style: TextStyle(
-                                     fontFamily: 'Arbf',
-                                     color: Colors.black,
-                                     fontSize: 25),
-                               )
-                             ],
-                           ),
-                           GestureDetector(
-                             onTap: () {
-
-                             },
-                             child: Column(
-                               children: [
-                                 Container( width: width * .3,
-                                   height: width * .3,
-                                   decoration: BoxDecoration(
-                                       color: hexToColor('#00abeb'),
-                                       gradient: new LinearGradient(
-                                           colors: [
-                                             Colors.tealAccent[100],
-                                             Colors.tealAccent[700],
-                                           ],
-                                           begin: Alignment.centerLeft,
-                                           end: Alignment.centerRight,
-                                           tileMode: TileMode.clamp),
-                                       borderRadius:
-                                       BorderRadius.circular(10.0)),
-                                   child: Center(
-                                     child: Text(
-                                       "الطلبات السابقة"  ,
-                                       style: TextStyle(
-                                           fontFamily: 'Arbf',
-                                           color: Colors.white,
-                                           fontSize: 25),
-                                     ),
-                                   ),
-                                 ),
-                                 SizedBox(
-                                   height: .01,
-                                 ),
-                                 Text(
-                                   "الطلبات السابقة",
+                         },
+                         child: Column(
+                           children: [
+                             Container( width: width * .3,
+                               height: width * .3,
+                               decoration: BoxDecoration(
+                                   color: hexToColor('#00abeb'),
+                                   gradient: new LinearGradient(
+                                       colors: [
+                                         Colors.tealAccent[100],
+                                         Colors.tealAccent[700],
+                                       ],
+                                       begin: Alignment.centerLeft,
+                                       end: Alignment.centerRight,
+                                       tileMode: TileMode.clamp),
+                                   borderRadius:
+                                   BorderRadius.circular(10.0)),
+                               child: Center(
+                                 child: Text(
+                                   "الطلبات"  ,
                                    style: TextStyle(
                                        fontFamily: 'Arbf',
-                                       color: Colors.black,
+                                       color: Colors.white,
                                        fontSize: 25),
-                                 )
-                               ],
+                                 ),
+                               ),
                              ),
-                           )
-                         ],
-                       ):SizedBox(),
+                             SizedBox(
+                               height: .01,
+                             ),
+                             Text(
+                               "الطلبات السابقة",
+                               style: TextStyle(
+                                   fontFamily: 'Arbf',
+                                   color: Colors.black,
+                                   fontSize: 25),
+                             )
+                           ],
+                         ),
+                       )
+                        :SizedBox(),
 
 
 

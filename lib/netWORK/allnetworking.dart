@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:sahlaprovider/utilitie/jsondata/cancel_order_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/check_coupon_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/create_coupon_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/galler_jason.dart';
@@ -11,6 +12,8 @@ import 'package:sahlaprovider/utilitie/jsondata/get_all_visitor_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_visitor_points_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_home_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_list_notifications_JSON.dart';
+import 'package:sahlaprovider/utilitie/jsondata/get_old_orders_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/get_order_details_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_addproduct_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_branch_JSON.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_category_json.dart';
@@ -1441,4 +1444,92 @@ class AllNetworking {
 
     return data;
   }
+
+  Future<Get_old_orders_json> get_old_orders({
+
+    @required String token_id,
+  }) async {
+    Get_old_orders_json data;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+
+      "token_id": token_id,
+    });
+    await dio
+        .post(
+      paseurl + '/provider/get_old_orders',
+      data: formData,
+    )
+        .then((value) {
+      print('000000000000000000000000000000000000000000');
+      print(value.data['result']["all_orders"][1]['date']);
+      print('000000000000000000000000000000000000000000');
+
+
+      data = Get_old_orders_json.fromJson(value.data);
+
+    });
+    //  print(data.result.contactInfo[0].);
+    return data;
+  }
+
+
+
+
+
+
+  Future<Get_order_details_json> get_order_details({
+    @required int id_order,
+
+    @required String token_id,
+  }) async {
+    Get_order_details_json data;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "id_order": id_order,
+
+      "token_id": token_id,
+    });
+    await dio
+        .post(
+      paseurl + '/provider/get_order_details',
+      data: formData,
+    )
+        .then((value) {
+      print("snapshot.data");
+          print(value.data);
+      print("snapshot.data");
+      data = Get_order_details_json.fromJson(value.data);
+    });
+    //  print(data.result.contactInfo[0].);
+    return data;
+  }
+
+  Future<Cancel_order_json> delete_order({
+
+    @required String token_id,
+    @required int order_id,
+  }) async {
+    Cancel_order_json data;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "id_order": order_id,
+
+    });
+    await dio
+        .post(
+      paseurl + '/provider/delete_order',
+      data: formData,
+    )
+        .then((value) {
+      data = Cancel_order_json.fromJson(value.data);
+    });
+    //  print(data.result.contactInfo[0].);
+    return data;
+  }
+
 }
