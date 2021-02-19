@@ -10,10 +10,12 @@ import 'package:sahlaprovider/utilitie/jsondata/get_all_products_cat_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_user_coupons_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_visitor_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_visitor_points_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/get_current_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_home_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_list_notifications_JSON.dart';
-import 'package:sahlaprovider/utilitie/jsondata/get_old_orders_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/get_waiting_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_order_details_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/get_previous_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_addproduct_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_branch_JSON.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_category_json.dart';
@@ -1445,11 +1447,11 @@ class AllNetworking {
     return data;
   }
 
-  Future<Get_old_orders_json> get_old_orders({
+  Future<Get_Waiting_Orders_json> get_waiting_orders({
 
     @required String token_id,
   }) async {
-    Get_old_orders_json data;
+    Get_Waiting_Orders_json data;
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
@@ -1458,16 +1460,14 @@ class AllNetworking {
     });
     await dio
         .post(
-      paseurl + '/provider/get_old_orders',
+      paseurl + '/provider/get_waiting_orders',
       data: formData,
     )
         .then((value) {
-      print('000000000000000000000000000000000000000000');
-      print(value.data['result']["all_orders"][1]['date']);
-      print('000000000000000000000000000000000000000000');
 
 
-      data = Get_old_orders_json.fromJson(value.data);
+
+      data = Get_Waiting_Orders_json.fromJson(value.data);
 
     });
     //  print(data.result.contactInfo[0].);
@@ -1498,9 +1498,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-      print("snapshot.data");
-          print(value.data);
-      print("snapshot.data");
+
       data = Get_order_details_json.fromJson(value.data);
     });
     //  print(data.result.contactInfo[0].);
@@ -1531,5 +1529,91 @@ class AllNetworking {
     //  print(data.result.contactInfo[0].);
     return data;
   }
+  Future<Get_previous_orders_json> get_previous_orders({
 
+    @required String token_id,
+  }) async {
+    Get_previous_orders_json data;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+
+      "token_id": token_id,
+    });
+    await dio
+        .post(
+      paseurl + '/provider/get_previous_orders',
+      data: formData,
+    )
+        .then((value) {
+
+
+
+      data = Get_previous_orders_json.fromJson(value.data);
+
+    });
+    //  print(data.result.contactInfo[0].);
+    return data;
+  }
+
+  Future<Get_current_orders_json> get_current_orders({
+
+    @required String token_id,
+  }) async {
+    Get_current_orders_json data;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+
+      "token_id": token_id,
+    });
+    await dio
+        .post(
+      paseurl + '/provider/get_current_orders',
+      data: formData,
+    )
+        .then((value) {
+
+
+
+      data = Get_current_orders_json.fromJson(value.data);
+
+    });
+    //  print(data.result.contactInfo[0].);
+    return data;
+  }
+
+
+
+
+
+
+
+
+
+
+
+  Future<Response> update_order({
+    @required String token_id,
+    @required String id_order, @required int key_action,
+  }) async {
+    Response data;
+
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "id_order": id_order,"key_action": key_action,
+    });
+    await dio
+        .post(
+      paseurl + '/provider/update_order',
+      data: formData,
+    )
+        .then((value) {
+      data = value;
+    });
+
+    return data;
+  }
 }

@@ -1,30 +1,38 @@
 import 'package:flutter/material.dart';
 
-import 'myOldOrders.dart';
+import 'get_current_orders.dart';
+import 'get_previous_orders.dart';
+import 'get_waiting_orders.dart';
+
 class MyOrder extends StatefulWidget {
   @override
   _MyOrderState createState() => _MyOrderState();
 }
 
 class _MyOrderState extends State<MyOrder> {
-  PageController _pageController = PageController( initialPage: 0,
-    keepPage: true,);
+  PageController _pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
   int _curr = 0;
-  List<Widget> _list = <Widget>[
-    new OldOrders(),
-    new  Container(),
-    new  Container( ),
+  List<Widget> _list = <Widget>[new Get_Waiting_Orders(),
+    new Get_current_orders(),
 
+    new Get_previous_orders(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    var size =MediaQuery.of(context).size;
-    return  SafeArea(top: true,
+    var size = MediaQuery.of(context).size;
+    return SafeArea(
+      top: true,
       child: Directionality(
         textDirection: TextDirection.rtl,
-        child: Scaffold(appBar: AppBar(centerTitle: true,title: Text('طلباتي'),),
-
+        child: Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text('طلباتي'),
+            ),
             body: Column(
               children: [
                 Container(
@@ -34,17 +42,14 @@ class _MyOrderState extends State<MyOrder> {
                     children: [
                       GestureDetector(
                         onTap: () {
-
                           if (_pageController.hasClients) {
                             _pageController.jumpToPage(
                               0,
-
                             );
                           }
-
                         },
                         child: Container(
-                          width: size.width*.25,
+                          width: size.width * .25,
                           height: 30,
                           child: Center(child: Text('المنتظر')),
                           decoration: BoxDecoration(
@@ -58,12 +63,11 @@ class _MyOrderState extends State<MyOrder> {
                           if (_pageController.hasClients) {
                             _pageController.jumpToPage(
                               1,
-
                             );
                           }
                         },
                         child: Container(
-                          width: size.width*.25,
+                          width: size.width * .25,
                           height: 30,
                           child: Center(child: Text('الحالي')),
                           decoration: BoxDecoration(
@@ -77,21 +81,19 @@ class _MyOrderState extends State<MyOrder> {
                           if (_pageController.hasClients) {
                             _pageController.jumpToPage(
                               2,
-
                             );
                           }
                         },
                         child: Container(
-                          width: size.width*.25,
+                          width: size.width * .25,
                           height: 30,
                           child: Center(child: Text('المنتهي')),
                           decoration: BoxDecoration(
-                            color: _curr == 2? Colors.amber : Colors.black12,
+                            color: _curr == 2 ? Colors.amber : Colors.black12,
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),

@@ -1,12 +1,13 @@
-class Get_old_orders_json {
+class Get_Waiting_Orders_json {
   String message;
   int errNum;
   bool status;
   Result result;
 
-  Get_old_orders_json({this.message, this.errNum, this.status, this.result});
+  Get_Waiting_Orders_json(
+      {this.message, this.errNum, this.status, this.result});
 
-  Get_old_orders_json.fromJson(Map<String, dynamic> json) {
+  Get_Waiting_Orders_json.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     errNum = json['errNum'];
     status = json['status'];
@@ -61,9 +62,7 @@ class AllOrders {
   String cityName;
   String phone;
   String currencyName;
-  String date;
-  String viewStore;
-  int viewId;
+  String orderDate;
 
   AllOrders(
       {this.codeName,
@@ -77,9 +76,7 @@ class AllOrders {
         this.cityName,
         this.phone,
         this.currencyName,
-        this.date,
-        this.viewStore,
-        this.viewId});
+        this.orderDate});
 
   AllOrders.fromJson(Map<String, dynamic> json) {
     codeName = json['code_name'];
@@ -93,9 +90,7 @@ class AllOrders {
     cityName = json['city_name'];
     phone = json['phone'];
     currencyName = json['currency_name'];
-    date = json['date'];
-    viewStore = json['view_store'];
-    viewId = json['view_id'];
+    orderDate = json['order_date'];
   }
 
   Map<String, dynamic> toJson() {
@@ -111,9 +106,7 @@ class AllOrders {
     data['city_name'] = this.cityName;
     data['phone'] = this.phone;
     data['currency_name'] = this.currencyName;
-    data['date'] = this.date;
-    data['view_store'] = this.viewStore;
-    data['view_id'] = this.viewId;
+    data['order_date'] = this.orderDate;
     return data;
   }
 }

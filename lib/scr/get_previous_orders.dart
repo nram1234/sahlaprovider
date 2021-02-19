@@ -2,20 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
-import 'package:sahlaprovider/utilitie/jsondata/get_old_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_order_details_json.dart';
-
+import 'package:sahlaprovider/utilitie/jsondata/get_previous_orders_json.dart';
 
 import 'login.dart';
-
-
-
-class OldOrders extends StatefulWidget {
+class Get_previous_orders extends StatefulWidget {
   @override
-  _OldOrdersState createState() => _OldOrdersState();
+  _Get_previous_ordersState createState() => _Get_previous_ordersState();
 }
 
-class _OldOrdersState extends State<OldOrders> {
+class _Get_previous_ordersState extends State<Get_previous_orders> {
   final box = GetStorage();
   String token;
   AllNetworking _allNetworking = AllNetworking();
@@ -24,7 +20,6 @@ class _OldOrdersState extends State<OldOrders> {
   void initState() {
     super.initState();
     token = box.read('token');
-
   }
 
   List<List<Widget>> list = [];
@@ -37,23 +32,18 @@ class _OldOrdersState extends State<OldOrders> {
       child: SafeArea(
         top: true,
         child: Scaffold(
-
-          body:token!=null? StreamBuilder<Get_old_orders_json>(
-              stream: _allNetworking
-                  .get_old_orders( token_id: token)
-                  .asStream(),
+          body: token != null
+              ? StreamBuilder<Get_previous_orders_json>(
+              stream:
+              _allNetworking.get_previous_orders(token_id: token).asStream(),
               builder: (context, snapshot) {
-                print(snapshot.data
-                );  print('000000000000000000000000000000000000000000');
+                print(snapshot.data);
 
-                print('000000000000000000000000000000000000000000');
                 if (snapshot.hasData) {
                   if (snapshot.data.result.allOrders.length > 0) {
                     return ListView.builder(
                         itemCount: snapshot.data.result.allOrders.length,
                         itemBuilder: (context, pos) {
-
-
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
@@ -84,58 +74,45 @@ class _OldOrdersState extends State<OldOrders> {
                                       mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                       children: [
-                                        GestureDetector(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 16, right: 16),
-                                              child: snapshot
-                                                  .data
-                                                  .result
-                                                  .allOrders[pos]
-                                                  .viewId==0
-                                                  ? GestureDetector(
-                                                  onTap: () {
-                                                    // _allNetworking
-                                                    //     .cancel_order(
-                                                    //     lang:lang,
-                                                    //     token_id: token,
-                                                    //     order_id: snapshot
-                                                    //         .data
-                                                    //         .result
-                                                    //         .orderDetails[
-                                                    //     pos]
-                                                    //         .idOrder)
-                                                    //     .then((value) {
-                                                    //   Get.snackbar(
-                                                    //       '', value.message);
-                                                    // });
-                                                  },
-                                                  child: Text('Cancel' ))
-                                                  : GestureDetector(
-                                                  onTap: () {
-                                                    _allNetworking
-                                                        .delete_order(
+                                      Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(snapshot.data.result.allOrders[pos].viewStore,  style: TextStyle(
+                                              color:
+                                              Colors.white,
+                                              fontWeight:
+                                              FontWeight
+                                                  .bold,fontSize:18 )),
 
-                                                        token_id: token,
-                                                        order_id: snapshot
-                                                            .data
-                                                            .result
-                                                            .allOrders[
-                                                        pos]
-                                                            .idOrder)
-                                                        .then((value) {
-                                                          setState(() {
+                                      ),
+                                        RaisedButton(color: Colors.red[900],
+                                            onPressed:  () {
+                                              _allNetworking
+                                                  .delete_order(
+                                                  token_id: token,
+                                                  order_id:   snapshot
+                                                      .data
+                                                      .result
+                                                      .allOrders[pos]
+                                                      .idOrder
 
-                                                          });
-                                                      Get.snackbar(
-                                                          '', value.message);
-                                                    });
-                                                  },
-                                                  child: Text('حذف')),
-                                            ))
+                                                  )
+                                                  .then((value) { setState(() {});
+                                                // Get.snackbar(
+                                                // '', value.message);
+                                              });
+                                            },
+                                            child: Text('حذف',
+                                                style: TextStyle(
+                                                    color:
+                                                    Colors.white,
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .bold,fontSize:18 ))),
+
                                       ],
                                     ),
                                   ),
+
                                   Row(
                                     mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -144,28 +121,9 @@ class _OldOrdersState extends State<OldOrders> {
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
                                         child: Text(
-                                          'الحاله : ',
-                                          style: TextStyle(color: Colors.red),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 16, right: 16),
-                                        child: Text(snapshot.data.result
-                                            .allOrders[pos].viewStore.toString()),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 16, right: 16),
-                                        child: Text(
-                                          'ordernum' ,
-                                          style: TextStyle(color: Colors.red),
+                                          'كود الطلب',
+                                          style:
+                                          TextStyle(color: Colors.red),
                                         ),
                                       ),
                                       Padding(
@@ -185,8 +143,9 @@ class _OldOrdersState extends State<OldOrders> {
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
                                         child: Text(
-                                          'shipping'  ,
-                                          style: TextStyle(color: Colors.red),
+                                          'تكلفة الشحن',
+                                          style:
+                                          TextStyle(color: Colors.red),
                                         ),
                                       ),
                                       Padding(
@@ -194,16 +153,21 @@ class _OldOrdersState extends State<OldOrders> {
                                             left: 16, right: 16),
                                         child: Text(
                                             // snapshot
-                                            // .data
-                                            // .result
-                                            // .allOrders[pos]
-                                            // .shippingCharges +
-                                            // " " +
-                                            snapshot
-                                                .data
-                                                .result
-                                                .allOrders[pos]
-                                                .currencyName),
+                                            //     .data
+                                            //     .result
+                                            //     .allOrders[pos]
+                                            //     .shippingCharges.trim().isEmpty?'' :snapshot
+                                            //     .data
+                                            //     .result
+                                            //     .allOrders[pos]
+                                            //     .shippingCharges+
+                                                " " //+
+                                                // snapshot
+                                                //     .data
+                                                //     .result
+                                                //     .allOrders[pos]
+                                                //     .currencyName
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -215,8 +179,9 @@ class _OldOrdersState extends State<OldOrders> {
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
                                         child: Text(
-                                          'products' ,
-                                          style: TextStyle(color: Colors.red),
+                                          'اجمالي المنتجات',
+                                          style:
+                                          TextStyle(color: Colors.red),
                                         ),
                                       ),
                                       Padding(
@@ -235,8 +200,9 @@ class _OldOrdersState extends State<OldOrders> {
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
                                         child: Text(
-                                          'التاريخ : ',
-                                          style: TextStyle(color: Colors.red),
+                                          'تاريخ الطلب : ',
+                                          style:
+                                          TextStyle(color: Colors.red),
                                         ),
                                       ),
                                       Padding(
@@ -256,28 +222,35 @@ class _OldOrdersState extends State<OldOrders> {
                                             left: 16, right: 16),
                                         child: Text(
                                           'التكلفة الكلية : ',
-                                          style: TextStyle(color: Colors.red),
+                                          style:
+                                          TextStyle(color: Colors.red),
                                         ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
-                                        child: Text(snapshot
-                                            .data
-                                            .result
-                                            .allOrders[pos]
-                                            .totalPrice +
-                                            " " +
-                                            snapshot
-                                                .data
-                                                .result
-                                                .allOrders[pos]
-                                                .currencyName),
+                                        child: Text(snapshot.data.result
+                                            .allOrders[pos].totalPrice
+                                            // +
+                                            // " " +
+                                            // snapshot
+                                            //     .data
+                                            //     .result
+                                            //     .allOrders[pos]
+                                            //     .currencyName
+
+                                        ),
                                       ),
                                     ],
                                   ),
-                                  Container(width: size.width*.7,height: 1,color: Colors.red,),
-SizedBox(height: size.height*.01,),
+                                  Container(
+                                    width: size.width * .7,
+                                    height: 1,
+                                    color: Colors.red,
+                                  ),
+                                  SizedBox(
+                                    height: size.height * .01,
+                                  ),
                                   Row(
                                     mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -287,18 +260,15 @@ SizedBox(height: size.height*.01,),
                                             left: 16, right: 16),
                                         child: Text(
                                           'الاسم : ',
-                                          style: TextStyle(color: Colors.red),
+                                          style:
+                                          TextStyle(color: Colors.red),
                                         ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
-                                        child: Text(snapshot
-                                            .data
-                                            .result
-                                            .allOrders[pos]
-                                            .fullname
-                                            ),
+                                        child: Text(snapshot.data.result
+                                            .allOrders[pos].fullname),
                                       ),
                                     ],
                                   ),
@@ -311,18 +281,15 @@ SizedBox(height: size.height*.01,),
                                             left: 16, right: 16),
                                         child: Text(
                                           'التلفون : ',
-                                          style: TextStyle(color: Colors.red),
+                                          style:
+                                          TextStyle(color: Colors.red),
                                         ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
-                                        child: Text(snapshot
-                                            .data
-                                            .result
-                                            .allOrders[pos]
-                                            .phone
-                                        ),
+                                        child: Text(snapshot.data.result
+                                            .allOrders[pos].phone),
                                       ),
                                     ],
                                   ),
@@ -332,46 +299,42 @@ SizedBox(height: size.height*.01,),
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.only(
-                                            left: 1, right: 1),
-                                        child: Text(
-                                          'العنوان : ',maxLines: 2,
-                                          style: TextStyle(color: Colors.red),
-                                        ),
-                                      ),
-                                      Flexible (
-
-                                          child: Text(snapshot
-                                              .data
-                                              .result
-                                              .allOrders[pos]
-                                              .address
-                                          ),
-                                        ),
-
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 1, right: 1),
+                                            left: 16, right: 16),
                                         child: Text(
                                           'العنوان : ',
-                                          style: TextStyle(color: Colors.red),
+                                          maxLines: 2,
+                                          style:
+                                          TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                      Flexible(
+                                        child: Text(snapshot.data.result
+                                            .allOrders[pos].address),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(
+                                          'العنوان : ',
+                                          style:
+                                          TextStyle(color: Colors.red),
                                         ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(
-                                            left: 2, right: 2),
+                                            left: 16, right: 16),
                                         child: Container(
                                           child: Text(snapshot
                                               .data
                                               .result
                                               .allOrders[pos]
-                                              .antherAddress
-                                          ),
+                                              .antherAddress),
                                         ),
                                       ),
                                     ],
@@ -385,28 +348,25 @@ SizedBox(height: size.height*.01,),
                                             left: 16, right: 16),
                                         child: Text(
                                           'اسم المدينه : ',
-                                          style: TextStyle(color: Colors.red),
+                                          style:
+                                          TextStyle(color: Colors.red),
                                         ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
-                                        child: Text(snapshot
-                                            .data
-                                            .result
-                                            .allOrders[pos]
-                                            .cityName
-                                        ),
+                                        child: Text(snapshot.data.result
+                                            .allOrders[pos].cityName),
                                       ),
                                     ],
                                   ),
                                   FutureBuilder<Get_order_details_json>(
                                       future:
                                       _allNetworking.get_order_details(
-                                          id_order: snapshot.data.result
-                                              .allOrders[pos].idOrder,
-                                          token_id: token,
-                                         ),
+                                        id_order: snapshot.data.result
+                                            .allOrders[pos].idOrder,
+                                        token_id: token,
+                                      ),
                                       builder: (context, snapshot) {
                                         print("snapshot.data");
                                         print(snapshot.data);
@@ -446,7 +406,8 @@ SizedBox(height: size.height*.01,),
                     child: CircularProgressIndicator(),
                   );
                 }
-              }):Center(
+              })
+              : Center(
             child: GestureDetector(
               onTap: () {
                 Get.to(LoginScr());
@@ -455,17 +416,19 @@ SizedBox(height: size.height*.01,),
                 height: 50,
                 width: 200,
                 child: Center(
-                  child: Text( 'savep' ,
+                  child: Text('savep',
                       style: TextStyle(
                           fontFamily: 'Arbf',
                           color: Colors.white,
                           fontSize: 23)),
                 ),
-                decoration: BoxDecoration(color:  Colors.red[800],
+                decoration: BoxDecoration(
+                    color: Colors.red[800],
                     borderRadius: BorderRadius.circular(40.0)),
               ),
             ),
-          ),),
+          ),
+        ),
       ),
     );
   }

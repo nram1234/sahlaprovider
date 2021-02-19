@@ -32,6 +32,7 @@ class Result {
   String datePackege;
   String totalPoints;
   String totalSelling;
+  int totalOrders;
   String serviceCoupon;
   int type;
 
@@ -41,6 +42,7 @@ class Result {
         this.datePackege,
         this.totalPoints,
         this.totalSelling,
+        this.totalOrders,
         this.serviceCoupon,
         this.type});
 
@@ -50,6 +52,7 @@ class Result {
     datePackege = json['date_packege'];
     totalPoints = json['total_points'];
     totalSelling = json['total_selling'];
+    totalOrders = json['total_orders'];
     serviceCoupon = json['service_coupon'];
     type = json['type'];
   }
@@ -61,6 +64,7 @@ class Result {
     data['date_packege'] = this.datePackege;
     data['total_points'] = this.totalPoints;
     data['total_selling'] = this.totalSelling;
+    data['total_orders'] = this.totalOrders;
     data['service_coupon'] = this.serviceCoupon;
     data['type'] = this.type;
     return data;

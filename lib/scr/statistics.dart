@@ -23,7 +23,7 @@ import 'QRread.dart';
 import 'add_photography_requests.dart';
 import 'get_all_orderSCr.dart';
 import 'get_all_visitor_pointsSCR.dart';
-import 'myOldOrders.dart';
+import 'get_waiting_orders.dart';
 import 'myorder.dart';
 
 class Statisticss extends StatefulWidget {
@@ -381,21 +381,21 @@ class _StatisticssState extends State<Statisticss> {
                                 children: [
                                   Column(
                                     children: [
-                                      Container(  decoration: BoxDecoration(
-                                          color: hexToColor('#00abeb'),
-                                          gradient: new LinearGradient(
-                                              colors: [
-                                                Colors.orange[100],
-                                                Colors.orange[900],
-                                              ],
-                                              begin: Alignment.centerLeft,
-                                              end: Alignment.centerRight,
-                                              tileMode: TileMode.clamp),
-                                          borderRadius:
-                                          BorderRadius.circular(10.0)),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: hexToColor('#00abeb'),
+                                            gradient: new LinearGradient(
+                                                colors: [
+                                                  Colors.orange[100],
+                                                  Colors.orange[900],
+                                                ],
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                                tileMode: TileMode.clamp),
+                                            borderRadius:
+                                                BorderRadius.circular(10.0)),
                                         width: width * .3,
                                         height: width * .3,
-
                                         child: Center(
                                           child: Text(
                                             data.totalSelling.toString(),
@@ -441,10 +441,9 @@ class _StatisticssState extends State<Statisticss> {
                                                   end: Alignment.centerRight,
                                                   tileMode: TileMode.clamp),
                                               borderRadius:
-                                              BorderRadius.circular(10.0)),
+                                                  BorderRadius.circular(10.0)),
                                           width: width * .3,
                                           height: width * .3,
-
                                           child: Center(
                                             child: Text(
                                               data.totalViews.toString(),
@@ -473,13 +472,22 @@ class _StatisticssState extends State<Statisticss> {
                             ),
                             SizedBox(
                               height: high * .02,
-                            ),Container(height: 1,width: width*.7,color: Colors.red,),SizedBox(height: high*.02,),
+                            ),
+                            Container(
+                              height: 1,
+                              width: width * .7,
+                              color: Colors.red,
+                            ),
+                            SizedBox(
+                              height: high * .02,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Column(
                                   children: [
-                                    Container( width: width * .3,
+                                    Container(
+                                      width: width * .3,
                                       height: width * .3,
                                       decoration: BoxDecoration(
                                           color: hexToColor('#00abeb'),
@@ -492,8 +500,7 @@ class _StatisticssState extends State<Statisticss> {
                                               end: Alignment.centerRight,
                                               tileMode: TileMode.clamp),
                                           borderRadius:
-                                          BorderRadius.circular(10.0)),
-
+                                              BorderRadius.circular(10.0)),
                                       child: Center(
                                         child: Column(
                                           mainAxisAlignment:
@@ -537,7 +544,8 @@ class _StatisticssState extends State<Statisticss> {
                                   },
                                   child: Column(
                                     children: [
-                                      Container( width: width * .3,
+                                      Container(
+                                        width: width * .3,
                                         height: width * .3,
                                         decoration: BoxDecoration(
                                             color: hexToColor('#00abeb'),
@@ -550,8 +558,7 @@ class _StatisticssState extends State<Statisticss> {
                                                 end: Alignment.centerRight,
                                                 tileMode: TileMode.clamp),
                                             borderRadius:
-                                            BorderRadius.circular(10.0)),
-
+                                                BorderRadius.circular(10.0)),
                                         child: Center(
                                           child: Text(
                                             data.totalProduct.toString(),
@@ -580,120 +587,126 @@ class _StatisticssState extends State<Statisticss> {
 
                             SizedBox(
                               height: high * .02,
-                            ),Container(height: 1,width: width*.7,color: Colors.red,),SizedBox(height: high*.02,),
-
-                       service_type=='1'?     GestureDetector(
-                         onTap: () {
-                           Navigator.push(
-                             context,
-                             MaterialPageRoute(
-                                 builder: (context) =>
-                                     MyOrder()),
-                           );
-
-                         },
-                         child: Column(
-                           children: [
-                             Container( width: width * .3,
-                               height: width * .3,
-                               decoration: BoxDecoration(
-                                   color: hexToColor('#00abeb'),
-                                   gradient: new LinearGradient(
-                                       colors: [
-                                         Colors.tealAccent[100],
-                                         Colors.tealAccent[700],
-                                       ],
-                                       begin: Alignment.centerLeft,
-                                       end: Alignment.centerRight,
-                                       tileMode: TileMode.clamp),
-                                   borderRadius:
-                                   BorderRadius.circular(10.0)),
-                               child: Center(
-                                 child: Text(
-                                   "الطلبات"  ,
-                                   style: TextStyle(
-                                       fontFamily: 'Arbf',
-                                       color: Colors.white,
-                                       fontSize: 25),
-                                 ),
-                               ),
-                             ),
-                             SizedBox(
-                               height: .01,
-                             ),
-                             Text(
-                               "الطلبات السابقة",
-                               style: TextStyle(
-                                   fontFamily: 'Arbf',
-                                   color: Colors.black,
-                                   fontSize: 25),
-                             )
-                           ],
-                         ),
-                       )
-                        :SizedBox(),
-
-
-
-
+                            ),
+                            Container(
+                              height: 1,
+                              width: width * .7,
+                              color: Colors.red,
+                            ),
                             SizedBox(
                               height: high * .02,
-                            ),Container(height: 1,width: width*.7,color: Colors.red,),SizedBox(height: high*.02,),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Get_all_visitor_points(token)),
-                                );
-                              },
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: hexToColor('#00abeb'),
-                                            gradient: new LinearGradient(
-                                                colors: [
-                                                  Colors.lime[100],
-                                                  Colors.lime[700],
-                                                ],
-                                                begin: Alignment.centerLeft,
-                                                end: Alignment.centerRight,
-                                                tileMode: TileMode.clamp),
-                                            borderRadius:
-                                            BorderRadius.circular(10.0)),
-                                        width: width * .3,
-                                        height: width * .3,
-                                        child: Center(
-                                          child: Text(
-                                            data.totalPoints.toString(),
-                                            style: TextStyle(
-                                                fontFamily: 'Arbf',
-                                                color: Colors.white,
-                                                fontSize: 25),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: .01,
-                                      ),
-                                      Text(
-                                        "ﻋﺪﺩ نقاط المستخدمين ",
-                                        style: TextStyle(
-                                            fontFamily: 'Arbf',
-                                            color: Colors.black,
-                                            fontSize: 25),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
                             ),
+Row( mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
+  service_type == '1'
+      ? GestureDetector(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MyOrder()),
+      );
+    },
+    child: Column(
+      children: [
+        Container(
+          width: width * .3,
+          height: width * .3,
+          decoration: BoxDecoration(
+              color: hexToColor('#00abeb'),
+              gradient: new LinearGradient(
+                  colors: [
+                    Colors.tealAccent[100],
+                    Colors.tealAccent[700],
+                  ],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  tileMode: TileMode.clamp),
+              borderRadius:
+              BorderRadius.circular(10.0)),
+          child: Center(
+            child: Text(
+              snapshot.data.result.totalOrders
+                  .toString(),
+              style: TextStyle(
+                  fontFamily: 'Arbf',
+                  color: Colors.white,
+                  fontSize: 25),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: .01,
+        ),
+        Text(
+          "الطلبات",
+          style: TextStyle(
+              fontFamily: 'Arbf',
+              color: Colors.black,
+              fontSize: 25),
+        )
+      ],
+    ),
+  )
+      : SizedBox(),
+  GestureDetector(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                Get_all_visitor_points(token)),
+      );
+    },
+    child: Row(
+      // mainAxisAlignment:
+      // MainAxisAlignment.spaceAround,
+      children: [
+        Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: hexToColor('#00abeb'),
+                  gradient: new LinearGradient(
+                      colors: [
+                        Colors.lime[100],
+                        Colors.lime[700],
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      tileMode: TileMode.clamp),
+                  borderRadius:
+                  BorderRadius.circular(10.0)),
+              width: width * .3,
+              height: width * .3,
+              child: Center(
+                child: Text(
+                  data.totalPoints.toString(),
+                  style: TextStyle(
+                      fontFamily: 'Arbf',
+                      color: Colors.white,
+                      fontSize: 25),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: .01,
+            ),
+            Text(
+              "ﻋﺪﺩ نقاط المستخدمين ",
+              style: TextStyle(
+                  fontFamily: 'Arbf',
+                  color: Colors.black,
+                  fontSize: 25),
+            )
+          ],
+        ),
+      ],
+    ),
+  ),],),
+                            SizedBox(
+                              height: high * .02,
+                            ),
+
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
