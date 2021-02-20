@@ -7,6 +7,7 @@ import 'package:sahlaprovider/myWidget/myDrawer.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 
 import 'package:sahlaprovider/scr/offer.dart';
+import 'package:sahlaprovider/scr/pharmacy.dart';
 import 'package:sahlaprovider/scr/product.dart';
 import 'package:sahlaprovider/scr/visitorCount.dart';
 
@@ -143,7 +144,15 @@ class _StatisticssState extends State<Statisticss> {
                             );
                             Widget continueButton = FlatButton(
                               child: Text("تنفيذ"),
-                              onPressed: () {},
+                              onPressed: () {
+
+
+
+                             //   _textEditingController
+
+
+
+                              },
                             );
 
                             if (!_textEditingController.text.trim().isEmpty) {
@@ -156,7 +165,7 @@ class _StatisticssState extends State<Statisticss> {
                                       coupon: _textEditingController.text)
                                   .then((value) {
                                 // set up the AlertDialog
-                                print('tttttttttttttttttttttttttttttttttt');
+                               
                                 print(value.data['status']);
 
                                 if (value.data['status']) {
@@ -366,57 +375,58 @@ class _StatisticssState extends State<Statisticss> {
                             SizedBox(
                               height: high * .02,
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Get_all_order(token)),
-                                );
-                              },
-                              child: Row(
+                      Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  Column(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: hexToColor('#00abeb'),
-                                            gradient: new LinearGradient(
-                                                colors: [
-                                                  Colors.orange[100],
-                                                  Colors.orange[900],
-                                                ],
-                                                begin: Alignment.centerLeft,
-                                                end: Alignment.centerRight,
-                                                tileMode: TileMode.clamp),
-                                            borderRadius:
-                                                BorderRadius.circular(10.0)),
-                                        width: width * .3,
-                                        height: width * .3,
-                                        child: Center(
-                                          child: Text(
-                                            data.totalSelling.toString(),
-                                            style: TextStyle(
-                                                fontFamily: 'Arbf',
-                                                color: Colors.white,
-                                                fontSize: 25),
+                          GestureDetector(
+                          onTap: () {
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                      builder: (context) =>
+                      Get_all_order(token)),
+                      );
+                      },
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              color: hexToColor('#00abeb'),
+                                              gradient: new LinearGradient(
+                                                  colors: [
+                                                    Colors.orange[100],
+                                                    Colors.orange[900],
+                                                  ],
+                                                  begin: Alignment.centerLeft,
+                                                  end: Alignment.centerRight,
+                                                  tileMode: TileMode.clamp),
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0)),
+                                          width: width * .3,
+                                          height: width * .3,
+                                          child: Center(
+                                            child: Text(
+                                              data.totalSelling.toString(),
+                                              style: TextStyle(
+                                                  fontFamily: 'Arbf',
+                                                  color: Colors.white,
+                                                  fontSize: 25),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: .01,
-                                      ),
-                                      Text(
-                                        "ﻋﺪﺩ ﺍﻟﻄﻠﺒﺎﺕ ",
-                                        style: TextStyle(
-                                            fontFamily: 'Arbf',
-                                            color: Colors.black,
-                                            fontSize: 25),
-                                      )
-                                    ],
+                                        SizedBox(
+                                          height: .01,
+                                        ),
+                                        Text(
+                                          "عدد الكوبونات",
+                                          style: TextStyle(
+                                              fontFamily: 'Arbf',
+                                              color: Colors.black,
+                                              fontSize: 25),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                   GestureDetector(
                                     onTap: () {
@@ -468,7 +478,7 @@ class _StatisticssState extends State<Statisticss> {
                                     ),
                                   )
                                 ],
-                              ),
+
                             ),
                             SizedBox(
                               height: high * .02,
@@ -597,6 +607,61 @@ class _StatisticssState extends State<Statisticss> {
                               height: high * .02,
                             ),
 Row( mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
+
+  service_type == '1'
+      ? GestureDetector(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Pharmacy()),
+      );
+    },
+    child: Column(
+      children: [
+        Container(
+          width: width * .3,
+          height: width * .3,
+          decoration: BoxDecoration(
+              color: hexToColor('#00abeb'),
+              gradient: new LinearGradient(
+                  colors: [
+                    Colors.tealAccent[100],
+                    Colors.tealAccent[700],
+                  ],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  tileMode: TileMode.clamp),
+              borderRadius:
+              BorderRadius.circular(10.0)),
+          child: Center(
+            child: Text(
+              snapshot.data.result.totalOrders
+                  .toString(),
+              style: TextStyle(
+                  fontFamily: 'Arbf',
+                  color: Colors.white,
+                  fontSize: 25),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: .01,
+        ),
+        Text(
+          "سلة المشتروات",
+          style: TextStyle(
+              fontFamily: 'Arbf',
+              color: Colors.black,
+              fontSize: 25),
+        )
+      ],
+    ),
+  )
+      : SizedBox(),
+
+
+
   service_type == '1'
       ? GestureDetector(
     onTap: () {
@@ -638,7 +703,7 @@ Row( mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
           height: .01,
         ),
         Text(
-          "الطلبات",
+          "سلة المشتروات",
           style: TextStyle(
               fontFamily: 'Arbf',
               color: Colors.black,
@@ -657,52 +722,49 @@ Row( mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
                 Get_all_visitor_points(token)),
       );
     },
-    child: Row(
-      // mainAxisAlignment:
-      // MainAxisAlignment.spaceAround,
+    child: Column(
       children: [
-        Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  color: hexToColor('#00abeb'),
-                  gradient: new LinearGradient(
-                      colors: [
-                        Colors.lime[100],
-                        Colors.lime[700],
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      tileMode: TileMode.clamp),
-                  borderRadius:
-                  BorderRadius.circular(10.0)),
-              width: width * .3,
-              height: width * .3,
-              child: Center(
-                child: Text(
-                  data.totalPoints.toString(),
-                  style: TextStyle(
-                      fontFamily: 'Arbf',
-                      color: Colors.white,
-                      fontSize: 25),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: .01,
-            ),
-            Text(
-              "ﻋﺪﺩ نقاط المستخدمين ",
+        Container(
+          decoration: BoxDecoration(
+              color: hexToColor('#00abeb'),
+              gradient: new LinearGradient(
+                  colors: [
+                    Colors.lime[100],
+                    Colors.lime[700],
+                  ],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  tileMode: TileMode.clamp),
+              borderRadius:
+              BorderRadius.circular(10.0)),
+          width: width * .3,
+          height: width * .3,
+          child: Center(
+            child: Text(
+              data.totalPoints.toString(),
               style: TextStyle(
                   fontFamily: 'Arbf',
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 25),
-            )
-          ],
+            ),
+          ),
         ),
+        SizedBox(
+          height: .01,
+        ),
+        Text(
+          "ﻋﺪﺩ نقاط ",
+          style: TextStyle(
+              fontFamily: 'Arbf',
+              color: Colors.black,
+              fontSize: 25),
+        )
       ],
     ),
   ),],),
+
+
+
                             SizedBox(
                               height: high * .02,
                             ),
@@ -864,41 +926,3 @@ Row( mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
   }
 }
 
-//
-//
-// BottomNavyBar(
-// selectedIndex: _currentIndex,
-// showElevation: true,
-// itemCornerRadius: 24,
-// curve: Curves.easeIn,
-// onItemSelected: (indexw) {
-//
-// setState(() {
-// _currentIndex = indexw;
-// Get.snackbar("title", "message");
-// });
-//
-// },
-// items: <BottomNavyBarItem>[
-// BottomNavyBarItem(
-// icon: Icon(Icons.apps),
-// title: Text('منتجات الفرع'),
-// activeColor: Colors.red,
-// textAlign: TextAlign.center,
-// ),
-// BottomNavyBarItem(
-// icon: Icon(Icons.people),
-// title: Text('Users'),
-// activeColor: Colors.purpleAccent,
-// textAlign: TextAlign.center,
-// ),
-// BottomNavyBarItem(
-// icon: Icon(Icons.message),
-// title: Text(
-// 'Messages test for mes teset test test ',
-// ),
-// activeColor: Colors.pink,
-// textAlign: TextAlign.center,
-// ),
-// ],
-// ),

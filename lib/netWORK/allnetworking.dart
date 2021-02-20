@@ -16,6 +16,7 @@ import 'package:sahlaprovider/utilitie/jsondata/get_list_notifications_JSON.dart
 import 'package:sahlaprovider/utilitie/jsondata/get_waiting_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_order_details_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_previous_orders_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/pharmacies_image_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_addproduct_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_branch_JSON.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_category_json.dart';
@@ -1612,6 +1613,35 @@ class AllNetworking {
     )
         .then((value) {
       data = value;
+    });
+
+    return data;
+  }
+
+
+
+
+
+
+  Future<Pharmacies_image_json> pharmacies_image({
+    @required String token_id,
+
+  }) async {
+    Pharmacies_image_json data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+
+    });
+
+    await dio
+        .post(
+      paseurl + '/medicine/pharmacies_image',
+      data: formData,
+    )
+        .then((value) {
+      data = Pharmacies_image_json.fromJson(value.data);
     });
 
     return data;
