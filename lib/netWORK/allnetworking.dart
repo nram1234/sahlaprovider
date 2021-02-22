@@ -1,7 +1,9 @@
 import 'dart:io';
+import 'package:sahlaprovider/utilitie/jsondata/buy_prescription_request_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/cancel_order_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/check_coupon_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/create_coupon_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/delete_pharamices_image_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/galler_jason.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_branches_JSON.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_category_json.dart';
@@ -16,8 +18,10 @@ import 'package:sahlaprovider/utilitie/jsondata/get_list_notifications_JSON.dart
 import 'package:sahlaprovider/utilitie/jsondata/get_waiting_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_order_details_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_previous_orders_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/list_appointments_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/pharmacies_image_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_addproduct_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/preparation_doc_profile_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_branch_JSON.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_category_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_offer_JSON.dart';
@@ -1646,4 +1650,259 @@ class AllNetworking {
 
     return data;
   }
+
+
+
+
+  Future<Delete_pharamices_image_json> delete_pharamices_image({
+    @required String token_id,
+    @required String id_request,
+  }) async {
+    Delete_pharamices_image_json data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "id_request": id_request,
+    });
+
+    await dio
+        .post(
+      paseurl + '/medicine/delete_pharamices_image',
+      data: formData,
+    )
+        .then((value) {
+      data = Delete_pharamices_image_json.fromJson(value.data);
+    });
+
+    return data;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Future<Response> add_replay({
+    @required String token_id,
+    @required String id_request,
+    @required String price,
+    @required String message,
+  }) async {
+    Response data;
+
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "id_request": id_request
+      ,"price": price
+      ,"message": message,
+    });
+    await dio
+        .post(
+      paseurl + '/medicine/add_replay',
+      data: formData,
+    )
+        .then((value) {
+      data = value;
+    });
+
+    return data;
+  }
+
+
+
+
+
+
+
+  Future<Buy_prescription_request_json> buy_prescription_request({
+    @required String token_id,
+
+  }) async {
+    Buy_prescription_request_json data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+
+    });
+
+    await dio
+        .post(
+      paseurl + '/medicine/buy_prescription_request',
+      data: formData,
+    )
+        .then((value) {
+      data = Buy_prescription_request_json.fromJson(value.data);
+    });
+
+    return data;
+  }
+
+
+
+
+
+
+
+
+  Future<Preparation_doc_profile_json> preparation_doc_profile({
+    @required String token_id,
+  }) async {
+    Preparation_doc_profile_json response;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+    });
+    await dio
+        .post(
+      paseurl + '/medicine/preparation_profile',
+      data: formData,
+    )
+        .then((value) {
+      response = Preparation_doc_profile_json.fromJson(value.data);
+    });
+
+    return response;
+  }
+
+
+
+
+
+  Future<Response> edit_doc_profile({
+    @required String token_id,
+    @required String password,
+    @required String name_ar,
+    @required String name_en,
+    @required String phone,
+    @required String whatsapp,
+    @required String floar_num,
+    @required String description,
+    @required String description_en,
+    @required String phone_second,
+    @required String phone_third,
+    @required File main_img,
+    @required String location,
+//========================
+    @required String instagram,
+    @required String twitter,
+    @required String facebook,
+    @required String website,
+    @required String email,
+    @required String address,
+    @required String addressEn,
+    @required double lat,
+    @required double lag,
+
+
+
+
+    @required String detection_price,
+    @required String detection_price_en,
+    @required String waiting_time,
+
+    @required String specialization,
+    @required String waiting_time_en,
+    @required String specialization_en,
+  }) async {
+    Response data;
+    String fileName;
+    if (main_img != null) {
+      fileName = main_img.path.split('/').last;
+    }
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "location": location,
+      //==============
+      "lat": lat,
+      "lag": lag, "instagram": instagram, "twitter": twitter,
+      "facebook": facebook,
+      "website": website,
+      "email": email,
+      "name_ar": name_ar,
+      "name_en": name_en,
+      "phone": phone,
+      "whatsapp": whatsapp,
+      "address": address, "addressEn": addressEn,
+      "floar_num": floar_num,
+      "description": description,
+      "description_en": description_en,
+      "phone_second": phone_second,
+      "password": password,
+      "phone_third": phone_third,
+
+
+
+
+      "detection_price": detection_price,
+      "detection_price_en": detection_price_en,
+      "waiting_time": waiting_time,
+      "waiting_time_en": waiting_time_en,
+      "specialization": specialization,
+      "specialization_en": specialization_en,
+
+
+
+      "main_img": main_img != null
+          ? await MultipartFile.fromFile(main_img.path,
+          filename: fileName, contentType: new MediaType('image', 'png'))
+          : null,
+    });
+
+    await dio
+        .post(
+      paseurl + '/medicine/edit_profile',
+      data: formData,
+    )
+        .then((value) {
+      data = value;
+    });
+
+    return data;
+  }
+
+
+
+
+
+
+
+
+
+
+  Future<List_appointments_json> list_appointments({
+    @required String token_id,
+  }) async {
+    List_appointments_json response;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+    });
+    await dio
+        .post(
+      paseurl + '/medicine/list_appointments',
+      data: formData,
+    )
+        .then((value) {
+      response = List_appointments_json.fromJson(value.data);
+    });
+
+    return response;
+  }
+
 }

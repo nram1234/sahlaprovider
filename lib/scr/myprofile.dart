@@ -434,8 +434,8 @@ print(dat.mainImg);
                                     color: hexToColor('#00abeb'),
                                     gradient: new LinearGradient(
                                         colors: [
-                                          hexToColor('#2358a6'),
-                                          hexToColor('#00abeb')
+                                          Colors.red[900],
+                                          Colors.red[100],
                                         ],
                                         begin: Alignment.centerLeft,
                                         end: Alignment.centerRight,

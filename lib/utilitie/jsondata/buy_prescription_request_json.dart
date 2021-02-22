@@ -1,12 +1,13 @@
-class Pharmacies_image_json {
+class Buy_prescription_request_json {
   String message;
   int codenum;
   bool status;
   Result result;
 
-  Pharmacies_image_json({this.message, this.codenum, this.status, this.result});
+  Buy_prescription_request_json(
+      {this.message, this.codenum, this.status, this.result});
 
-  Pharmacies_image_json.fromJson(Map<String, dynamic> json) {
+  Buy_prescription_request_json.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     codenum = json['codenum'];
     status = json['status'];
