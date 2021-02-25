@@ -127,12 +127,12 @@ class _Edit_CategoryState extends State<Edit_Category> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
                               fontFamily: 'Arbf',
@@ -157,12 +157,12 @@ class _Edit_CategoryState extends State<Edit_Category> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
                               fontFamily: 'Arbf',
@@ -237,7 +237,7 @@ class _Edit_CategoryState extends State<Edit_Category> {
                                       end: Alignment.centerRight,
                                       tileMode: TileMode.clamp),
                                   borderRadius:
-                                  BorderRadius.circular(40.0))),
+                                  BorderRadius.circular(5.0))),
                         )
                       ]),
                     ),

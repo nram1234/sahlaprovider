@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:sahlaprovider/utilitie/jsondata/agent_login_JSON.dart';
 import 'package:sahlaprovider/utilitie/jsondata/buy_prescription_request_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/cancel_order_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/check_coupon_json.dart';
@@ -15,6 +16,7 @@ import 'package:sahlaprovider/utilitie/jsondata/get_all_visitor_points_json.dart
 import 'package:sahlaprovider/utilitie/jsondata/get_current_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_home_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_list_notifications_JSON.dart';
+import 'package:sahlaprovider/utilitie/jsondata/get_list_reservation_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_waiting_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_order_details_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_previous_orders_json.dart';
@@ -43,25 +45,32 @@ class AllNetworking {
   //Response response;
   Dio dio = new Dio();
 
-  Future<http.Response> Login({
+  Future<Agent_login_JSON> Login({
     @required String phone,
     @required String password,
     @required String firebase_token,
     @required String lang,
   }) async {
-    http.Response response = await http.post(
+    FormData formData = new FormData.fromMap( {
+      "mode": "formdata",
+      "key": "1234567890",
+      "password": password,
+      "phone": phone,
+      "firebase_token": firebase_token,
+      "lang": lang,
+    });
+    Agent_login_JSON data;
+    await dio
+        .post(
       paseurl + '/provider/agent_login',
-      body: {
-        "mode": "formdata",
-        "key": "1234567890",
-        "password": password,
-        "phone": phone,
-        "firebase_token": firebase_token,
-        "lang": lang,
-      },
-    );
+      data: formData,
+    )
+        .then((value) {
+      data = Agent_login_JSON.fromJson(value.data);
+    });
 
-    return response;
+    print(data);
+    return data;
   }
 
   Future<http.Response> Get_all_products({
@@ -1905,4 +1914,59 @@ class AllNetworking {
     return response;
   }
 
+
+
+
+
+
+  Future<Response>add_appointment({
+    @required String token_id,
+    @required String name,
+
+    @required String name_en,
+    @required String from_hrs,
+
+    @required String from_hrs_en,
+    @required String to_hrs,  @required String to_hrs_en,
+  }) async {
+    Response response;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "name": name,
+      "name_en": name_en,
+      "from_hrs": from_hrs,
+      "from_hrs_en": from_hrs_en,     "to_hrs": to_hrs,
+      "to_hrs_en": to_hrs_en,
+    });
+    response = await dio.post(
+      paseurl + '/medicine/add_appointment',
+      data: formData,
+    );
+
+    return response;
+  }
+
+  Future<Get_list_reservation_json>  get_list_reservation({
+    @required String token_id,
+  }) async {
+    Get_list_reservation_json data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+    });
+
+    await dio
+        .post(
+      paseurl + '/medicine/get_list_reservation',
+      data: formData,
+    )
+        .then((value) {
+      data = Get_list_reservation_json.fromJson(value.data);
+    });
+
+    return data;
+  }
 }

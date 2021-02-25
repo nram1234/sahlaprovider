@@ -26,6 +26,7 @@ import 'buy_prescription_request.dart';
 import 'doc_profile.dart';
 import 'get_all_orderSCr.dart';
 import 'get_all_visitor_pointsSCR.dart';
+import 'get_list_reservation.dart';
 import 'get_waiting_orders.dart';
 import 'list_appointments.dart';
 import 'myorder.dart';
@@ -606,7 +607,7 @@ class _StatisticssState extends State<Statisticss> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                service_type == '2'
+                                service_type == '1'
                                     ? GestureDetector(
                                         onTap: () {
                                           Navigator.push(
@@ -836,8 +837,7 @@ class _StatisticssState extends State<Statisticss> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    List_Appointments(
-                                                        )),
+                                                    List_Appointments()),
                                           );
                                         },
                                         child: Column(
@@ -939,105 +939,152 @@ class _StatisticssState extends State<Statisticss> {
                             SizedBox(
                               height: high * .02,
                             ),
-
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                qrgnratt
-                                    ? CircularProgressIndicator()
-                                    : GestureDetector(
-                                        onTap: () async {
-                                          int idOfQR = await box.read('id');
-                                          await _generateBarCode(
-                                              box.read('id').toString());
-
-                                          //  Get.to(QRRead(),
-                                          //     transition: Transition.leftToRightWithFade);
-                                        },
-                                        child: Container(
-                                          height: high * .07,
-                                          width: width * 0.4,
-                                          child: Center(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(" انشاء  QR ",
-                                                    style: TextStyle(
-                                                      fontFamily: 'Arbf',
-                                                      color: Colors.white,
-                                                    )),
-                                                Icon(
-                                                  Icons.qr_code,
-                                                  color: Colors.white,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          decoration: BoxDecoration(
-                                              color: hexToColor('#00abeb'),
-                                              gradient: new LinearGradient(
-                                                  colors: [
-                                                    Colors.red[100],
-                                                    Colors.red[900],
-                                                  ],
-                                                  begin: Alignment.centerLeft,
-                                                  end: Alignment.centerRight,
-                                                  tileMode: TileMode.clamp),
-                                              borderRadius:
-                                                  BorderRadius.circular(40.0)),
-                                        ),
-                                      ),
-                                GestureDetector(
-                                  onTap: () {
-                                    if (activediscount) {
-                                      _allNetworking
-                                          .create_coupon(
-                                              token_id: token, type: 0)
-                                          .then((value) {});
-                                      setState(() {});
-                                    } else {
-                                      _allNetworking
-                                          .create_coupon(
-                                              token_id: token, type: 1)
-                                          .then((value) {});
-                                      setState(() {});
-                                    }
-                                  },
-                                  child: Container(
-                                    height: high * .07,
-                                    width: width * 0.4,
-                                    child: Center(
-                                      child: activediscount
-                                          ? Text(
-                                              " الغاء  ${data.serviceCoupon}",
-                                              style: TextStyle(
-                                                  fontFamily: 'Arbf',
-                                                  color: Colors.white,
-                                                  fontSize: 25))
-                                          : Text(" تفعيل اكواد الخصم ",
-                                              style: TextStyle(
-                                                fontFamily: 'Arbf',
-                                                color: Colors.white,
-                                              )),
-                                    ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Get_list_reservation()),
+                                );
+                              },
+                              child: Column(
+                                children: [
+                                  Container(
                                     decoration: BoxDecoration(
                                         color: hexToColor('#00abeb'),
                                         gradient: new LinearGradient(
                                             colors: [
-                                              Colors.red[100],
-                                              Colors.red[900],
+                                              Colors.lime[100],
+                                              Colors.lime[700],
                                             ],
                                             begin: Alignment.centerLeft,
                                             end: Alignment.centerRight,
                                             tileMode: TileMode.clamp),
                                         borderRadius:
-                                            BorderRadius.circular(40.0)),
+                                            BorderRadius.circular(10.0)),
+                                    width: width * .3,
+                                    height: width * .3,
+                                    child: Center(
+                                      child: Text(
+                                        data.totalPoints.toString(),
+                                        style: TextStyle(
+                                            fontFamily: 'Arbf',
+                                            color: Colors.white,
+                                            fontSize: 25),
+                                      ),
+                                    ),
                                   ),
-                                )
-                              ],
-                            )
-                          ],
+                                  SizedBox(
+                                    height: .01,
+                                  ),
+                                  Text(
+                                    "Get_list_reservation",
+                                    style: TextStyle(
+                                        fontFamily: 'Arbf',
+                                        color: Colors.black,
+                                        fontSize: 25),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: high * .02,
+                            ),
+                            qrgnratt
+                                ? CircularProgressIndicator()
+                                : GestureDetector(
+                              onTap: () async {
+                                int idOfQR = await box.read('id');
+                                await _generateBarCode(
+                                    box.read('id').toString());
+
+                                //  Get.to(QRRead(),
+                                //     transition: Transition.leftToRightWithFade);
+                              },
+                              child: Container(
+                                height: high * .07,
+                                width: width * 0.8,
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                    children: [
+                                      Text(" انشاء  QR ",
+                                          style: TextStyle(
+                                            fontFamily: 'Arbf',
+                                            color: Colors.white,
+                                          )),
+                                      Icon(
+                                        Icons.qr_code,
+                                        color: Colors.white,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                decoration: BoxDecoration(
+                                    color: hexToColor('#00abeb'),
+                                    gradient: new LinearGradient(
+                                        colors: [
+                                          Colors.red[100],
+                                          Colors.red[900],
+                                        ],
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                        tileMode: TileMode.clamp),
+                                    borderRadius:
+                                    BorderRadius.circular(40.0)),
+                              ),
+                            ), SizedBox(
+                              height:high * .02,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                if (activediscount) {
+                                  _allNetworking
+                                      .create_coupon(
+                                      token_id: token, type: 0)
+                                      .then((value) {});
+                                  setState(() {});
+                                } else {
+                                  _allNetworking
+                                      .create_coupon(
+                                      token_id: token, type: 1)
+                                      .then((value) {});
+                                  setState(() {});
+                                }
+                              },
+                              child: Container(
+                                height: high * .07,
+                                width: width * 0.8,
+                                child: Center(
+                                  child: activediscount
+                                      ? Text(
+                                      " الغاء  ${data.serviceCoupon}",
+                                      style: TextStyle(
+                                          fontFamily: 'Arbf',
+                                          color: Colors.white,
+                                          fontSize: 25))
+                                      : Text(" تفعيل اكواد الخصم ",
+                                      style: TextStyle(
+                                        fontFamily: 'Arbf',
+                                        color: Colors.white,
+                                      )),
+                                ),
+                                decoration: BoxDecoration(
+                                    color: hexToColor('#00abeb'),
+                                    gradient: new LinearGradient(
+                                        colors: [
+                                          Colors.red[100],
+                                          Colors.red[900],
+                                        ],
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                        tileMode: TileMode.clamp),
+                                    borderRadius:
+                                    BorderRadius.circular(40.0)),
+                              ),
+                            )   ],
                         ),
                       ),
                     ),

@@ -85,11 +85,11 @@ bool adddata=false;
                   labelText: 'اسم القسم',
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   hintText: 'اسم القسم',
 
@@ -113,11 +113,11 @@ bool adddata=false;
                   labelText: 'Category name',
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   hintText: 'Category name',
 
@@ -177,7 +177,7 @@ setState(() {
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
                           tileMode: TileMode.clamp),
-                      borderRadius: BorderRadius.circular(40.0)))     )
+                      borderRadius: BorderRadius.circular(5.0)))     )
             ]),
           )),
     );

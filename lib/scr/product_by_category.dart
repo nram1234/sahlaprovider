@@ -62,11 +62,19 @@ class _Product_By_CategoryState extends State<Product_By_Category> {
           body: Column(
             children: [SizedBox(height: 10,),
           GestureDetector(
-            onTap: () {
-              Get.to(
-                AddNewProdect(),
-                transition: Transition.cupertino,
+            onTap: () async{
+
+
+              final value = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddNewProdect(context)),
+
               );
+              setState(() {
+
+              });
+
             },
             child: Container(
                 height: high * .05,

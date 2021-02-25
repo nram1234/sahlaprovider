@@ -98,11 +98,11 @@ class _AddNewProdectNEWState extends State<AddNewProdectNEW> {
                   labelText: 'اسم المنتج',
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   hintText: 'اسم المنتج',
 
@@ -126,11 +126,11 @@ class _AddNewProdectNEWState extends State<AddNewProdectNEW> {
                   labelText: 'Product name',
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   hintText: 'Product name',
 
@@ -155,11 +155,11 @@ class _AddNewProdectNEWState extends State<AddNewProdectNEW> {
                   labelText:'ﻭﺻﻒ ﺍﻟﻤﻨﺘﺞ',
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   hintText:'ﻭﺻﻒ ﺍﻟﻤﻨﺘﺞ',
 
@@ -184,11 +184,11 @@ class _AddNewProdectNEWState extends State<AddNewProdectNEW> {
                   labelText:'Details',
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   hintText:'Details',
 
@@ -213,11 +213,11 @@ class _AddNewProdectNEWState extends State<AddNewProdectNEW> {
                   labelText:'ﺍﻟﺴﻌﺮالقديم',
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   hintText:'ﺍﻟﺴﻌﺮالقديم',
 
@@ -241,11 +241,11 @@ class _AddNewProdectNEWState extends State<AddNewProdectNEW> {
                   labelText:'ﺍﻟﺴﻌﺮ الجديد',
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   hintText:'ﺍﻟﺴﻌﺮالجديد',
 

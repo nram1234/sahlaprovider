@@ -44,8 +44,16 @@ class _BranchState extends State<Branch> {
         body: Column(
           children: [
             GestureDetector(
-              onTap: () {
-                Get.to(AddnewPranch(), transition: Transition.leftToRight);
+              onTap: ()async {
+                final value = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AddnewPranch()),
+
+                );
+                setState(() {
+
+                });
               },
               child: Container(
                 height: high * .07,

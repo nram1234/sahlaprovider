@@ -163,11 +163,11 @@ class _AddOfferState extends State<AddOffer> {
                     labelText:'السعر قبل الخصم',
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey, width: 2),
-                      borderRadius: BorderRadius.circular(40.0),
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey, width: 2),
-                      borderRadius: BorderRadius.circular(40.0),
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
                     hintText:'السعر قبل الخصم',
 
@@ -192,11 +192,11 @@ class _AddOfferState extends State<AddOffer> {
                     labelText:'السعر بعد الخصم',
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey, width: 2),
-                      borderRadius: BorderRadius.circular(40.0),
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey, width: 2),
-                      borderRadius: BorderRadius.circular(40.0),
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
                     hintText:'السعر بعد الخصم',
 
@@ -237,7 +237,7 @@ class _AddOfferState extends State<AddOffer> {
                         color: Colors.grey,
                         width: 2,
                       ),
-                      borderRadius: BorderRadius.circular(40.0),
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
                       child: Center(
                         child: Text(
@@ -276,7 +276,7 @@ class _AddOfferState extends State<AddOffer> {
                         color: Colors.grey,
                         width: 2,
                       ),
-                      borderRadius: BorderRadius.circular(40.0),
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
                       child: Center(
                         child: Text(
@@ -398,11 +398,11 @@ print(end_date);
                                 begin: Alignment.centerLeft,
                                 end: Alignment.centerRight,
                                 tileMode: TileMode.clamp),
-                            borderRadius: BorderRadius.circular(40.0))
+                            borderRadius: BorderRadius.circular(5.0))
                             : BoxDecoration(
                             color: Colors.grey,
                             borderRadius:
-                            BorderRadius.circular(40.0)),
+                            BorderRadius.circular(5.0)),
                       ),
                     );
                   },

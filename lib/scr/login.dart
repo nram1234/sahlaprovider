@@ -135,33 +135,32 @@ class _LoginScrState extends State<LoginScr> {
                                     firebase_token: valueee,
                                     lang: 'ar')
                                 .then((value) async {
-                              Agent_login_JSON data = Agent_login_JSON.fromJson(
-                                  json.decode(value.body));
-                              if (data.status) {
+
+                              if (value.status) {
                                 print('00000000000000000000000000000000000000000000000');
-print(data.result.agentData.serviceType);
-print(data.result.agentData.token);
+print(value.result.agentData.serviceType);
+print(value.result.agentData.token);
                                 print('00000000000000000000000000000000000000000000000');
                                 await box.write(
-                                    'service_type', data.result.agentData.serviceType);
+                                    'service_type', value.result.agentData.serviceType);
                                 await box.write(
-                                    'phone', data.result.agentData.phone);
+                                    'phone', value.result.agentData.phone);
                                 await box.write('firebase_token', valueee);
                                 await box.write(
-                                    'name', data.result.agentData.name);
+                                    'name', value.result.agentData.name);
 
                                 await box.write(
-                                    'token', data.result.agentData.token);
+                                    'token', value.result.agentData.token);
                                 await box.write(
-                                    'email', data.result.agentData.email);
-                                await box.write('id', data.result.agentData.id);
+                                    'email', value.result.agentData.email);
+                                await box.write('id', value.result.agentData.id);
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     new MaterialPageRoute(
                                         builder: (context) => Statisticss()),
                                     (Route<dynamic> route) => false);
                               } else {
-                                Get.snackbar('', data.message);
+                                Get.snackbar('', value.message);
                               }
 
                               login = false;

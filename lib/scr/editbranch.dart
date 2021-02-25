@@ -98,8 +98,8 @@ class _EditPranchState extends State<EditPranch> {
     // final CameraPosition _kLake = CameraPosition(
     //   bearing: 192.8334901395799,
     //   target: LatLng(37.43296265331129, -122.08832357078792),
-    //   tilt: 59.440717697143555,
-    //   zoom: 19.151926040649414);
+    //   tilt: 59.45717697143555,
+    //   zoom: 19.15192605649414);
 
     return Directionality(
         textDirection: TextDirection.rtl,
@@ -232,7 +232,7 @@ class _EditPranchState extends State<EditPranch> {
                                     begin: Alignment.centerLeft,
                                     end: Alignment.centerRight,
                                     tileMode: TileMode.clamp),
-                                borderRadius: BorderRadius.circular(40.0)),
+                                borderRadius: BorderRadius.circular(5.0)),
                           ),
                           SizedBox(
                             height: 10,
@@ -253,12 +253,12 @@ class _EditPranchState extends State<EditPranch> {
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'الاسم بالكامل',
                               hintStyle: TextStyle(
@@ -283,12 +283,12 @@ class _EditPranchState extends State<EditPranch> {
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'Name',
                               hintStyle: TextStyle(
@@ -313,12 +313,12 @@ class _EditPranchState extends State<EditPranch> {
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'رقم التلفون',
                               hintStyle: TextStyle(
@@ -343,12 +343,12 @@ class _EditPranchState extends State<EditPranch> {
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'رقم التلفون',
                               hintStyle: TextStyle(
@@ -373,12 +373,12 @@ class _EditPranchState extends State<EditPranch> {
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'رقم التلفون',
                               hintStyle: TextStyle(
@@ -403,12 +403,12 @@ class _EditPranchState extends State<EditPranch> {
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'رقم الوتس اب',
                               hintStyle: TextStyle(
@@ -433,12 +433,12 @@ class _EditPranchState extends State<EditPranch> {
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'العنوان',
                               hintStyle: TextStyle(
@@ -463,12 +463,12 @@ class _EditPranchState extends State<EditPranch> {
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'address',
                               hintStyle: TextStyle(
@@ -493,12 +493,12 @@ class _EditPranchState extends State<EditPranch> {
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color:Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'تفاصيل',
                               hintStyle: TextStyle(
@@ -523,12 +523,12 @@ class _EditPranchState extends State<EditPranch> {
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color:Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'description',
                               hintStyle: TextStyle(
@@ -553,12 +553,12 @@ class _EditPranchState extends State<EditPranch> {
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.grey, width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'عنوان علي الخريطه',
                               hintStyle: TextStyle(
@@ -679,7 +679,7 @@ class _EditPranchState extends State<EditPranch> {
                                         begin: Alignment.centerLeft,
                                         end: Alignment.centerRight,
                                         tileMode: TileMode.clamp),
-                                    borderRadius: BorderRadius.circular(40.0))),
+                                    borderRadius: BorderRadius.circular(5.0))),
                           )
                         ],
                       ),

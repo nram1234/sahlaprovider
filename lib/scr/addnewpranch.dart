@@ -448,7 +448,9 @@ class _AddnewPranchState extends State<AddnewPranch> {
                                         file: _image)
                                     .then((value) {
                                   print(value);
+                                  Navigator.pop(context);
                                 });
+
                                 // print("_locationData.longitude");
                                 // print(_locationData.longitude);
                                 // print(_locationData.latitude);

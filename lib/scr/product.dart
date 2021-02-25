@@ -66,11 +66,26 @@ class _ProductScrState extends State<ProductScr> {
       service_type!=0?
       Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
         GestureDetector(
-        onTap: () {
-          Get.to(
-            AddNewProdect(),
-            transition: Transition.cupertino,
+        onTap: ()async {
+
+
+
+
+          final value = await Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AddNewProdect(context)),
+
           );
+          setState(() {
+
+          });
+
+
+          // Get.to(
+          //   AddNewProdect(context),
+          //   transition: Transition.cupertino,
+          // );
         },
         child: Container(
             height: high * .05,
@@ -92,7 +107,7 @@ class _ProductScrState extends State<ProductScr> {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     tileMode: TileMode.clamp),
-                borderRadius: BorderRadius.circular(40.0))),
+                borderRadius: BorderRadius.circular(5.0))),
       ),GestureDetector(
           onTap: () {
             Navigator.push(
@@ -123,13 +138,26 @@ class _ProductScrState extends State<ProductScr> {
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
                       tileMode: TileMode.clamp),
-                  borderRadius: BorderRadius.circular(40.0))),
+                  borderRadius: BorderRadius.circular(5.0))),
         ),],):  GestureDetector(
-                onTap: () {
-                  Get.to(
-                    AddNewProdect(),
-                    transition: Transition.cupertino,
+                onTap: ()async {
+
+
+
+                  final value = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AddNewProdect(context)),
+
                   );
+                  setState(() {
+
+                  });
+
+                  // Get.to(
+                  //   AddNewProdect(),
+                  //   transition: Transition.cupertino,
+                  // );
                 },
                 child: Container(
                     height: high * .05,
@@ -151,7 +179,7 @@ class _ProductScrState extends State<ProductScr> {
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                             tileMode: TileMode.clamp),
-                        borderRadius: BorderRadius.circular(40.0))),
+                        borderRadius: BorderRadius.circular(5.0))),
               ),
               SizedBox(height: 10,),    Expanded(
                   flex: 1,

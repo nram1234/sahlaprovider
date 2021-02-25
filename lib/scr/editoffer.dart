@@ -148,12 +148,12 @@ class _EditOfferState extends State<EditOffer> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
                               fontFamily: 'Arbf',
@@ -178,12 +178,12 @@ class _EditOfferState extends State<EditOffer> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
                               fontFamily: 'Arbf',
@@ -208,12 +208,12 @@ class _EditOfferState extends State<EditOffer> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color:Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
                               fontFamily: 'Arbf',
@@ -238,12 +238,12 @@ class _EditOfferState extends State<EditOffer> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
                               fontFamily: 'Arbf',
@@ -269,12 +269,12 @@ class _EditOfferState extends State<EditOffer> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
                               fontFamily: 'Arbf',
@@ -300,12 +300,12 @@ class _EditOfferState extends State<EditOffer> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color:Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.grey, width: 2),
-                              borderRadius: BorderRadius.circular(40.0),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
                               fontFamily: 'Arbf',
@@ -336,7 +336,7 @@ class _EditOfferState extends State<EditOffer> {
                                   color: Colors.grey,
                                   width: 2,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               child: Center(
                                 child: Text(startpick == null
@@ -368,7 +368,7 @@ class _EditOfferState extends State<EditOffer> {
                                   color: Colors.grey,
                                   width: 2,
                                 ),
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               child: Center(
                                 child: Text(endpick == null
@@ -475,7 +475,7 @@ print(start_date);
                                             end: Alignment.centerRight,
                                             tileMode: TileMode.clamp),
                                         borderRadius:
-                                            BorderRadius.circular(40.0))),
+                                            BorderRadius.circular(5.0))),
                               )
                       ]),
                     ),

@@ -13,6 +13,10 @@ import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_addproduct_json.dart';
 
 class AddNewProdect extends StatefulWidget {
+  BuildContext mycontext;
+
+  AddNewProdect(this.mycontext);
+
   @override
   _AddNewProdectState createState() => _AddNewProdectState();
 }
@@ -293,37 +297,40 @@ class _AddNewProdectState extends State<AddNewProdect> {
                                             file: _image)
                                         .then((value) {
                                       print(value.data);
-                                      Get.dialog(
-                                        AlertDialog(
-                                          title: Text(''),
-                                          content: Text("تم اضافة المنتج"),
-                                          actions: <Widget>[
-                                            FlatButton(
-                                              child: Text("CLOSE"),
-                                              onPressed: () {
-                                                Get.back();
-                                              },
-                                            )
-                                          ],
-                                        ),
-                                        barrierDismissible: false,
-                                      );
+                                      Navigator.pop(widget.mycontext);
 
-                                      _image = null;
-                                      _textEditingControllerthename.clear();
 
-                                      _textEditingControllertheenname.clear();
-                                      _textEditingControllertheoldprice.clear();
-                                      _textEditingControllertheardes.clear();
-                                      _textEditingControllertheendes.clear();
-                                      _textEditingControllerthenewprice.clear();
-
-                                      print(
-                                          'ppppppppppppppppppppppppppppppppppppppppppp');
-                                      savedata = false;
-
-                                      setState(() {});
-                                    });
+                                    //   Get.dialog(
+                                    //     AlertDialog(
+                                    //       title: Text(''),
+                                    //       content: Text("تم اضافة المنتج"),
+                                    //       actions: <Widget>[
+                                    //         FlatButton(
+                                    //           child: Text("CLOSE"),
+                                    //           onPressed: () {
+                                    //             Get.back();
+                                    //           },
+                                    //         )
+                                    //       ],
+                                    //     ),
+                                    //     barrierDismissible: false,
+                                    //   );
+                                    //
+                                    //   _image = null;
+                                    //   _textEditingControllerthename.clear();
+                                    //
+                                    //   _textEditingControllertheenname.clear();
+                                    //   _textEditingControllertheoldprice.clear();
+                                    //   _textEditingControllertheardes.clear();
+                                    //   _textEditingControllertheendes.clear();
+                                    //   _textEditingControllerthenewprice.clear();
+                                    //
+                                    //   print(
+                                    //       'ppppppppppppppppppppppppppppppppppppppppppp');
+                                    //   savedata = false;
+                                    //
+                                    //   setState(() {});
+                                  });
                                   }
                                 : null,
                             child: Container(
