@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_doc_profile_json.dart';
@@ -32,39 +33,14 @@ class _Doc_ProfileState extends State<Doc_Profile> {
   TextEditingController priceen = TextEditingController();
   AllNetworking _allNetworking = AllNetworking();
   bool senddata = false;
-  Location location = new Location();
+
   Completer<GoogleMapController> _controller = Completer();
   PermissionStatus _permissionGranted;
-  LocationData _locationData;
+  LatLng _locationData;
   bool _serviceEnabled;
   CameraPosition _kGooglePlex;
   bool setcaruntloction = false;
 
-  getloc() async {
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return;
-      }
-    }
-
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return;
-      }
-    }
-    _locationData = await location.getLocation();
-    _kGooglePlex = CameraPosition(
-      target: LatLng(_locationData.latitude, _locationData.longitude),
-      zoom: 15,
-    );
-    setState(() {
-      print(_kGooglePlex.target);
-    });
-  }
 
   final box = GetStorage();
   String token;
@@ -73,7 +49,10 @@ class _Doc_ProfileState extends State<Doc_Profile> {
   void initState() {
     super.initState();
     token = box.read('token');
-    getloc();
+    _kGooglePlex = CameraPosition(
+      target: LatLng(30.518043908795214, 31.575481854379177),
+      zoom: 15,
+    );
   }
 
   @override
@@ -290,7 +269,11 @@ print( snapshot.data.result.serviceDetails[0].detectionPriceEn);
                                 ? CircularProgressIndicator()
                                 : GoogleMap(
                                     mapType: MapType.normal,
-                                    initialCameraPosition: _kGooglePlex,
+                                    initialCameraPosition: _kGooglePlex,onTap: (LatLng mylocation){
+
+                              _locationData=mylocation;
+                              print(_locationData);
+                            },
                                     onMapCreated:
                                         (GoogleMapController controller) {
                                       _controller.complete(controller);

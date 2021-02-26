@@ -81,12 +81,20 @@ class _OfferScrState extends State<OfferScr> {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [ GestureDetector(
-                                onTap: () {
+                                onTap: () async{
 
-                                  Navigator.push(
+
+                                  final value = await Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => AddOffer() ),
+                                    MaterialPageRoute(
+                                        builder: (context) => AddOffer(context)),
+
                                   );
+                                  setState(() {
+
+                                  });
+
+
 
 
                                   // Get.to(

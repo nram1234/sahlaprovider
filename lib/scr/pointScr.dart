@@ -39,12 +39,12 @@ bool save=false;
               decoration: InputDecoration(
                 labelText: "عدد النقاط لكل طلب",
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey, width: 2),
-                  borderRadius: BorderRadius.circular(40.0),
+                  borderSide: BorderSide(color: Colors.red, width: 2),
+                  borderRadius: BorderRadius.circular(5.0),
                 ),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey, width: 2),
-                  borderRadius: BorderRadius.circular(40.0),
+                  borderSide: BorderSide(color: Colors.red, width: 2),
+                  borderRadius: BorderRadius.circular(5.0),
                 ),
                 hintText: 'عدد النقاط لكل طلب',
 
@@ -79,7 +79,7 @@ _allNetworking.edit_points(token_id: box.read('token'), total_points: _textEditi
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                         tileMode: TileMode.clamp),
-                    borderRadius: BorderRadius.circular(40.0)),
+                    borderRadius: BorderRadius.circular(5.0)),
               ),
             ),],
           );}else{return Center(child: CircularProgressIndicator(),);}

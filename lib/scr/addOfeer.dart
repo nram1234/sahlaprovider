@@ -14,6 +14,9 @@ import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
 
 class AddOffer extends StatefulWidget {
+  BuildContext mycontext;
+
+  AddOffer(this.mycontext);
   @override
   _AddOfferState createState() => _AddOfferState();
 }
@@ -162,11 +165,11 @@ class _AddOfferState extends State<AddOffer> {
                   decoration: InputDecoration(
                     labelText:'السعر قبل الخصم',
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 2),
+                      borderSide: BorderSide(color: Colors.red, width: 2),
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 2),
+                      borderSide: BorderSide(color: Colors.red, width: 2),
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     hintText:'السعر قبل الخصم',
@@ -191,11 +194,11 @@ class _AddOfferState extends State<AddOffer> {
                   decoration: InputDecoration(
                     labelText:'السعر بعد الخصم',
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 2),
+                      borderSide: BorderSide(color: Colors.red, width: 2),
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 2),
+                      borderSide: BorderSide(color: Colors.red, width: 2),
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     hintText:'السعر بعد الخصم',
@@ -234,7 +237,7 @@ class _AddOfferState extends State<AddOffer> {
                         .size
                         .width * .9, decoration: BoxDecoration(
                       border: Border.all(
-                        color: Colors.grey,
+                        color: Colors.red,
                         width: 2,
                       ),
                       borderRadius: BorderRadius.circular(5.0),
@@ -273,7 +276,7 @@ class _AddOfferState extends State<AddOffer> {
                         .size
                         .width * .9, decoration: BoxDecoration(
                       border: Border.all(
-                        color: Colors.grey,
+                        color: Colors.red,
                         width: 2,
                       ),
                       borderRadius: BorderRadius.circular(5.0),
@@ -334,47 +337,50 @@ print(end_date);
                             :start_date,
                             file: _image)
                             .then((value) {
-                          _image=null;
-                          _textEditingControllerthename.clear();
 
-                          _textEditingControllertheenname .clear();
-                         _textEditingControllertheoldprice.clear();
-                           _textEditingControllertheardes.clear();
-                         _textEditingControllertheendes.clear();
-                     _textEditingControllerthenewprice.clear();
-
-
-
-
-
-                          thename=''; theenname='';  theoldprice=''; theardes='';  theendes='';  thenewprice='';
-                          print(value.data);
-                          print(
-                              'ppppppppppppppppppppppppppppppppppppppppppp');
-                          savedata = false;
-
-
-                          setState(() {});
-                          Get.dialog(
-                            AlertDialog(
-                              title: Text( ''),
-                              content: Text("تم اضافة العرض"),
-                              actions: <Widget>[
-                                FlatButton(
-                                  child: Text("CLOSE"),
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                )
-                           ,FlatButton(
-                                  child: Text("تنفيذ"),
-                                  onPressed: () {
-
-                                  },
-                                )   ],
-                            ),
-                            barrierDismissible: false,
-                          );   });
+                          Navigator.pop(widget.mycontext);
+                     //      _image=null;
+                     //      _textEditingControllerthename.clear();
+                     //
+                     //      _textEditingControllertheenname .clear();
+                     //     _textEditingControllertheoldprice.clear();
+                     //       _textEditingControllertheardes.clear();
+                     //     _textEditingControllertheendes.clear();
+                     // _textEditingControllerthenewprice.clear();
+                     //
+                     //
+                     //
+                     //
+                     //
+                     //      thename=''; theenname='';  theoldprice=''; theardes='';  theendes='';  thenewprice='';
+                     //      print(value.data);
+                     //      print(
+                     //          'ppppppppppppppppppppppppppppppppppppppppppp');
+                     //      savedata = false;
+                     //
+                     //
+                     //      setState(() {});
+                     //      Get.dialog(
+                     //        AlertDialog(
+                     //          title: Text( ''),
+                     //          content: Text("تم اضافة العرض"),
+                     //          actions: <Widget>[
+                     //            FlatButton(
+                     //              child: Text("CLOSE"),
+                     //              onPressed: () {
+                     //                Get.back();
+                     //              },
+                     //            )
+                     //       ,FlatButton(
+                     //              child: Text("تنفيذ"),
+                     //              onPressed: () {
+                     //
+                     //              },
+                     //            )   ],
+                     //        ),
+                     //        barrierDismissible: false,
+                     //      );
+        });
                       }
                           : null,
                       child: Container(

@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:location/location.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 import 'package:sahlaprovider/bloc/addPranchvalidator.dart';
 import 'package:sahlaprovider/myWidget/inputTextWidget.dart';
 import 'package:sahlaprovider/myWidget/myDrawer.dart';
@@ -20,7 +21,7 @@ class AddnewPranch extends StatefulWidget {
 
 class _AddnewPranchState extends State<AddnewPranch> {
   DatavalidatorAddPranch v = DatavalidatorAddPranch();
-  Location location = new Location();
+
   Completer<GoogleMapController> _controller = Completer();
 
   TextEditingController address = TextEditingController();
@@ -32,7 +33,7 @@ class _AddnewPranchState extends State<AddnewPranch> {
   AllNetworking _allNetworking = AllNetworking();
   bool _serviceEnabled;
   PermissionStatus _permissionGranted;
-  LocationData _locationData;
+  LatLng _locationData;
   String title,
       titlen_en,
       phone,
@@ -47,40 +48,20 @@ class _AddnewPranchState extends State<AddnewPranch> {
       addersinmap,
       city_id;
 
-  getloc() async {
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return;
-      }
-    }
 
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return;
-      }
-    }
-    _locationData = await location.getLocation();
-    _kGooglePlex = CameraPosition(
-      target: LatLng(_locationData.latitude, _locationData.longitude),
-      zoom: 15,
-    );
-    setState(() {
-      print(_kGooglePlex.target);
-    });
-  }
-
+bool svaedata=false;
   String token;
   final box = GetStorage();
 
   @override
   void initState() {
-    getloc();
+
     token = box.read('token');
     super.initState();
+    _kGooglePlex = CameraPosition(
+      target: LatLng(30.518043908795214, 31.575481854379177),
+      zoom: 15,
+    );
   }
 
   @override
@@ -97,8 +78,8 @@ class _AddnewPranchState extends State<AddnewPranch> {
     // final CameraPosition _kLake = CameraPosition(
     //   bearing: 192.8334901395799,
     //   target: LatLng(37.43296265331129, -122.08832357078792),
-    //   tilt: 59.440717697143555,
-    //   zoom: 19.151926040649414);
+    //   tilt: 59.45717697143555,
+    //   zoom: 19.15192605649414);
 
     return Directionality(
         textDirection: TextDirection.rtl,
@@ -162,7 +143,7 @@ class _AddnewPranchState extends State<AddnewPranch> {
                     padding: EdgeInsets.only(right: 50, left: 50),
                     height: 5,
                     decoration: BoxDecoration(
-                        color: Colors.grey,
+                        color: Colors.red,
                         gradient: new LinearGradient(
                             colors: [
                               Colors.red[100],
@@ -171,7 +152,7 @@ class _AddnewPranchState extends State<AddnewPranch> {
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                             tileMode: TileMode.clamp),
-                        borderRadius: BorderRadius.circular(40.0)),
+                        borderRadius: BorderRadius.circular(5.0)),
                   ),
                   SizedBox(
                     height: 10,
@@ -278,13 +259,13 @@ class _AddnewPranchState extends State<AddnewPranch> {
                       labelText: 'العنوان',
                       enabledBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Colors.grey, width: 2),
-                        borderRadius: BorderRadius.circular(40.0),
+                            BorderSide(color: Colors.red, width: 2),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                       border: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Colors.grey, width: 2),
-                        borderRadius: BorderRadius.circular(40.0),
+                            BorderSide(color: Colors.red, width: 2),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                       hintText: 'العنوان',
                       hintStyle: TextStyle(
@@ -309,13 +290,13 @@ class _AddnewPranchState extends State<AddnewPranch> {
                       labelText: 'address',
                       enabledBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Colors.grey, width: 2),
-                        borderRadius: BorderRadius.circular(40.0),
+                            BorderSide(color: Colors.red, width: 2),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                       border: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Colors.grey, width: 2),
-                        borderRadius: BorderRadius.circular(40.0),
+                            BorderSide(color: Colors.red, width: 2),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                       hintText: 'address',
                       hintStyle: TextStyle(
@@ -341,13 +322,13 @@ class _AddnewPranchState extends State<AddnewPranch> {
                       labelText: 'التفاصيل',
                       enabledBorder: OutlineInputBorder(
                         borderSide:
-                        BorderSide(color: Colors.grey, width: 2),
-                        borderRadius: BorderRadius.circular(40.0),
+                        BorderSide(color: Colors.red, width: 2),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                       border: OutlineInputBorder(
                         borderSide:
-                        BorderSide(color: Colors.grey, width: 2),
-                        borderRadius: BorderRadius.circular(40.0),
+                        BorderSide(color: Colors.red, width: 2),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                       hintText: 'التفاصيل',
                       hintStyle: TextStyle(
@@ -372,13 +353,13 @@ class _AddnewPranchState extends State<AddnewPranch> {
                       labelText: 'description',
                       enabledBorder: OutlineInputBorder(
                         borderSide:
-                        BorderSide(color: Colors.grey, width: 2),
-                        borderRadius: BorderRadius.circular(40.0),
+                        BorderSide(color: Colors.red, width: 2),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                       border: OutlineInputBorder(
                         borderSide:
-                        BorderSide(color: Colors.grey, width: 2),
-                        borderRadius: BorderRadius.circular(40.0),
+                        BorderSide(color: Colors.red, width: 2),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                       hintText: 'description',
                       hintStyle: TextStyle(
@@ -407,7 +388,11 @@ class _AddnewPranchState extends State<AddnewPranch> {
                           ? CircularProgressIndicator()
                           : GoogleMap(
                               mapType: MapType.normal,
-                              initialCameraPosition: _kGooglePlex,
+                              initialCameraPosition: _kGooglePlex,onTap: (LatLng mylocation){
+
+                        _locationData=mylocation;
+                        print(_locationData);
+                      },
                               onMapCreated: (GoogleMapController controller) {
                                 _controller.complete(controller);
                               },
@@ -417,76 +402,68 @@ class _AddnewPranchState extends State<AddnewPranch> {
                   SizedBox(
                     height: high * .01,
                   ),
-                  StreamBuilder(
-                    initialData: false,
-                    stream: v.profilevileddatastraim,
-                    builder: (context, data) {
-                      return GestureDetector(
-                        onTap: data.data != false
-                            ? () {
-                          print('888888888888888888888');
-                          print(  address_en.text+"     "+
-                         address.text);
-                                _allNetworking
-                                    .add_branch(
-                                        token_id: token,
-                                        title: title,
-                                        location: addersinmap,
-                                        titlen_en: titlen_en ,
-                                        phone: phone  ,
-                                        address_en: address_en.text,
-                                        address: address.text,
-                                        whatsapp: whatsapp ,
+          svaedata?CircularProgressIndicator() :   GestureDetector(
+                onTap:   () {
+                  svaedata=true;
+                  setState(() {
+                    
+                  });
+                  _allNetworking
+                      .add_branch(
+                      token_id: token,
+                      title: title,
+                      location: addersinmap,
+                      titlen_en: titlen_en ,
+                      phone: phone  ,
+                      address_en: address_en.text,
+                      address: address.text,
+                      whatsapp: whatsapp ,
 
-                                        description: description ,
-                                        description_en: description_en ,
-                                        phone_second: phone2 ,
-                                        phone_third: phone3,
+                      description: description ,
+                      description_en: description_en ,
+                      phone_second: phone2 ,
+                      phone_third: phone3,
 
-                                        lag: _locationData.longitude,
-                                        lat: _locationData.latitude,
-                                        file: _image)
-                                    .then((value) {
-                                  print(value);
-                                  Navigator.pop(context);
-                                });
 
-                                // print("_locationData.longitude");
-                                // print(_locationData.longitude);
-                                // print(_locationData.latitude);
-                                // print(_locationData.accuracy);
-                                // print(_locationData.time);
-                              }
-                            : null,
-                        child: Container(
-                          height: high * .1,
-                          width: width * 0.5,
-                          child: Center(
-                            child: Text('حفظ',
-                                style: TextStyle(
-                                    fontFamily: 'Arbf',
-                                    color: Colors.white,
-                                    fontSize: 25)),
-                          ),
-                          decoration: data.data != false
-                              ? BoxDecoration(
-                                  color: hexToColor('#00abeb'),
-                                  gradient: new LinearGradient(
-                                      colors: [
-                                        Colors.red[100],
-                                        Colors.red[900],
-                                      ],
-                                      begin: Alignment.centerLeft,
-                                      end: Alignment.centerRight,
-                                      tileMode: TileMode.clamp),
-                                  borderRadius: BorderRadius.circular(40.0))
-                              : BoxDecoration(
-                                  color: Colors.grey,
-                                  borderRadius: BorderRadius.circular(40.0)),
-                        ),
-                      );
-                    },
-                  )
+                      lag: _locationData==null?37.43296265331129: _locationData.longitude ,
+                      lat: _locationData==null?-122.08832357078792:   _locationData.latitude ,
+                      file: _image)
+                      .then((value) {
+                    print(value);
+                    Navigator.pop(context);
+                  });
+
+                  // print("_locationData.longitude");
+                  // print(_locationData.longitude);
+                  // print(_locationData.latitude);
+                  // print(_locationData.accuracy);
+                  // print(_locationData.time);
+                }
+                    ,
+                child: Container(
+                  height: high * .1,
+                  width: width * 0.5,
+                  child: Center(
+                    child: Text('حفظ',
+                        style: TextStyle(
+                            fontFamily: 'Arbf',
+                            color: Colors.white,
+                            fontSize: 25)),
+                  ),
+                  decoration: BoxDecoration(
+                      color: hexToColor('#00abeb'),
+                      gradient: new LinearGradient(
+                          colors: [
+                            Colors.red[100],
+                            Colors.red[900],
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          tileMode: TileMode.clamp),
+                      borderRadius: BorderRadius.circular(5.0))
+
+                ),
+              )
                 ],
               ),
             ),

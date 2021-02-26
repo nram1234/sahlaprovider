@@ -14,11 +14,11 @@ Widget inputTextwithoutstraim({hint,inputtype}) {
             labelText: hint,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: hexToColor('#00abeb'), width: 2),
-              borderRadius: BorderRadius.circular(40.0),
+              borderRadius: BorderRadius.circular(5.0),
             ),
             border: OutlineInputBorder(
               borderSide: BorderSide(color: hexToColor('#00abeb'), width: 2),
-              borderRadius: BorderRadius.circular(40.0),
+              borderRadius: BorderRadius.circular(5.0),
             ),
             hintText: hint,
 

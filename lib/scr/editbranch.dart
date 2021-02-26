@@ -7,7 +7,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:location/location.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 import 'package:sahlaprovider/myWidget/myDrawer.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
@@ -24,7 +25,7 @@ class EditPranch extends StatefulWidget {
 }
 
 class _EditPranchState extends State<EditPranch> {
-  Location location = new Location();
+
   Completer<GoogleMapController> _controller = Completer();
   CameraPosition _kGooglePlexfromweb;
   CameraPosition _kGooglePlex;
@@ -33,8 +34,7 @@ class _EditPranchState extends State<EditPranch> {
   AllNetworking _allNetworking = AllNetworking();
   bool _serviceEnabled;
   PermissionStatus _permissionGranted;
-  LocationData _locationData;
-  bool showcurntpos = false;
+
   TextEditingController title = TextEditingController();
   TextEditingController titlen_en = TextEditingController();
   TextEditingController phone = TextEditingController();
@@ -53,39 +53,40 @@ class _EditPranchState extends State<EditPranch> {
 
   TextEditingController address = TextEditingController();
   TextEditingController address_en = TextEditingController();
-
-  getloc() async {
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return;
-      }
-    }
-
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return;
-      }
-    }
-    _locationData = await location.getLocation();
-    _kGooglePlex = CameraPosition(
-      target: LatLng(_locationData.latitude, _locationData.longitude),
-      zoom: 15,
-    );
-    setState(() {
-      print(_kGooglePlex.target);
-    });
-  }
+  LatLng mlocation;
+  bool svaedata=false;
+  // getloc() async {
+  //   _serviceEnabled = await location.serviceEnabled();
+  //   if (!_serviceEnabled) {
+  //     _serviceEnabled = await location.requestService();
+  //     if (!_serviceEnabled) {
+  //       return;
+  //     }
+  //   }
+  //
+  //   _permissionGranted = await location.hasPermission();
+  //   if (_permissionGranted == PermissionStatus.denied) {
+  //     _permissionGranted = await location.requestPermission();
+  //     if (_permissionGranted != PermissionStatus.granted) {
+  //       return;
+  //     }
+  //   }
+  //   _locationData = await location.getLocation();
+  //   _kGooglePlex = CameraPosition(
+  //     target: LatLng(_locationData.latitude, _locationData.longitude),
+  //     zoom: 15,
+  //   );
+  //   setState(() {
+  //     print(_kGooglePlex.target);
+  //   });
+  // }
 
   String token;
   final box = GetStorage();
 
   @override
   void initState() {
-    getloc();
+    //  getloc();
     token = box.read('token');
     super.initState();
   }
@@ -98,8 +99,8 @@ class _EditPranchState extends State<EditPranch> {
     // final CameraPosition _kLake = CameraPosition(
     //   bearing: 192.8334901395799,
     //   target: LatLng(37.43296265331129, -122.08832357078792),
-    //   tilt: 59.45717697143555,
-    //   zoom: 19.15192605649414);
+    //   tilt: 59.440717697143555,
+    //   zoom: 19.151926040649414);
 
     return Directionality(
         textDirection: TextDirection.rtl,
@@ -129,20 +130,17 @@ class _EditPranchState extends State<EditPranch> {
                   description.text = snap.data.result.allProducts.description;
                   description_en.text =
                       snap.data.result.allProducts.descriptionEn;
+                  mlocation=LatLng(double.parse(snap.data.result.allProducts.lat),
+                      double.parse(snap.data.result.allProducts.lag));
 
-                  print('999999999999999999999999999999999999999999999');
-                  print(titlen_en.text);
-                  print(address.text);
-                  print(widget.bid);
-                  if (!snap.data.result.allProducts.lat.trim().isEmpty) {
-                    showcurntpos = true;
-                    _kGooglePlexfromweb = CameraPosition(
-                      target: LatLng(
-                          double.parse(snap.data.result.allProducts.lat),
-                          double.parse(snap.data.result.allProducts.lag)),
-                      zoom: 15,
-                    );
-                  }
+                  _kGooglePlexfromweb = CameraPosition(
+                    target: mlocation,
+                    zoom: 10,
+                  );
+                  // if (!snap.data.result.allProducts.lat.trim().isEmpty) {
+                  //   showcurntpos = true;
+                  //
+                  // }
                   // description.text=snap.data.result.allProducts.;
                   // description_en,
                   //  phone_second,
@@ -150,7 +148,9 @@ class _EditPranchState extends State<EditPranch> {
                   //  city_id.text=snap.data.result.allProducts.c;
                   addersinmap.text =
                       snap.data.result.allProducts.location ?? " ";
-
+                  print('pppppppppppppppppppppppppppppppppppppppppppp');
+                  print(mlocation);
+                  print('pppppppppppppppppppppppppppppppppppppppppppp');
                   return SingleChildScrollView(
                     child: Container(
                       padding: EdgeInsets.only(
@@ -168,10 +168,10 @@ class _EditPranchState extends State<EditPranch> {
                                 onTap: () async {
                                   var image = await ImagePicker.platform
                                       .pickImage(
-                                          source: ImageSource.gallery,
-                                          maxHeight: 200,
-                                          maxWidth: 200,
-                                          imageQuality: 100);
+                                      source: ImageSource.gallery,
+                                      maxHeight: 200,
+                                      maxWidth: 200,
+                                      imageQuality: 100);
                                   setState(() {
                                     if (image != null) {
                                       _image = File(image.path);
@@ -226,8 +226,8 @@ class _EditPranchState extends State<EditPranch> {
                                 color: hexToColor('#00abeb'),
                                 gradient: new LinearGradient(
                                     colors: [
-                                      Colors.red[100],
-                                      Colors.red[900],
+                                      hexToColor('#2358a6'),
+                                      hexToColor('#00abeb')
                                     ],
                                     begin: Alignment.centerLeft,
                                     end: Alignment.centerRight,
@@ -252,12 +252,12 @@ class _EditPranchState extends State<EditPranch> {
                               labelText: 'الاسم بالكامل',
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'الاسم بالكامل',
@@ -282,12 +282,12 @@ class _EditPranchState extends State<EditPranch> {
                               labelText: 'Name',
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'Name',
@@ -312,12 +312,12 @@ class _EditPranchState extends State<EditPranch> {
                               labelText: 'رقم التلفون',
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'رقم التلفون',
@@ -342,12 +342,12 @@ class _EditPranchState extends State<EditPranch> {
                               labelText: 'رقم التلفون',
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'رقم التلفون',
@@ -372,12 +372,12 @@ class _EditPranchState extends State<EditPranch> {
                               labelText: 'رقم التلفون',
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'رقم التلفون',
@@ -402,12 +402,12 @@ class _EditPranchState extends State<EditPranch> {
                               labelText: 'رقم الوتس اب',
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'رقم الوتس اب',
@@ -432,12 +432,12 @@ class _EditPranchState extends State<EditPranch> {
                               labelText: 'العنوان',
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'العنوان',
@@ -462,12 +462,12 @@ class _EditPranchState extends State<EditPranch> {
                               labelText: 'address',
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'address',
@@ -492,12 +492,12 @@ class _EditPranchState extends State<EditPranch> {
                               labelText: 'تفاصيل',
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color:Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'تفاصيل',
@@ -522,12 +522,12 @@ class _EditPranchState extends State<EditPranch> {
                               labelText: 'description',
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color:Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'description',
@@ -552,12 +552,12 @@ class _EditPranchState extends State<EditPranch> {
                               labelText: 'عنوان علي الخريطه',
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.grey, width: 2),
+                                    color: hexToColor('#00abeb'), width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'عنوان علي الخريطه',
@@ -567,73 +567,75 @@ class _EditPranchState extends State<EditPranch> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: high * .01,
-                          ),
-                          CheckboxListTile(
-                            title: Text("تغير الموقع الحالي الي موقع جديد"),
-                            value: setcaruntloction,
-                            onChanged: (newValue) {
-                              setState(() {
-                                setcaruntloction = newValue;
-                              });
-                            },
-                            controlAffinity: ListTileControlAffinity
-                                .leading, //  <-- leading Checkbox
-                          ),
+                          // SizedBox(
+                          //   height: high * .01,
+                          // ),
+                          // CheckboxListTile(
+                          //   title: Text("تغير الموقع الحالي الي موقع جديد"),
+                          //   value: setcaruntloction,
+                          //   onChanged: (newValue) {
+                          //     setState(() {
+                          //       setcaruntloction = newValue;
+                          //     });
+                          //   },
+                          //   controlAffinity: ListTileControlAffinity
+                          //       .leading, //  <-- leading Checkbox
+                          // ),
                           SizedBox(
                             height: high * .01,
                           ),
                           Container(
                             height: high * .3,
                             child: Center(
-                              child: _kGooglePlex == null
-                                  ? CircularProgressIndicator()
-                                  : GoogleMap(
-                                      mapType: MapType.normal,
-                                      initialCameraPosition: showcurntpos
-                                          ? _kGooglePlexfromweb
-                                          : _kGooglePlex,
-                                      onMapCreated:
-                                          (GoogleMapController controller) {
-                                        _controller.complete(controller);
-                                      },
-                                    ),
+                              child: GoogleMap(
+                                mapType: MapType.normal,zoomGesturesEnabled: true,
+                                initialCameraPosition:   _kGooglePlexfromweb
+                                ,onTap: (LatLng mylocation){
+
+                                mlocation=mylocation;
+                                print(mlocation);
+                              },
+                                onMapCreated:
+                                    (GoogleMapController controller) {
+                                  _controller.complete(controller);
+                                },
+                              ),
                             ),
                           ),
                           SizedBox(
                             height: high * .01,
                           ),
-                          GestureDetector(
+                          svaedata?CircularProgressIndicator() :    GestureDetector(
                             onTap: () {
-                              print('00000000000000000000000000000000000000000');
-                              print(titlen_en.text);
-                              print(address.text);
-                              print(widget.bid);
+                              svaedata=true;
+                              setState(() {
+
+                              });
+                              print('pppppppppppppppppppppppppppppppppppppppppppp');
+                              print(mlocation);
+                              print('pppppppppppppppppppppppppppppppppppppppppppp');
                               _allNetworking
                                   .edit_branch(
-                                      token_id: token,
-                                      id_branch: widget.bid,
-                                      location: addersinmap.text,
-                                      title: title.text,
-                                      titlen_en: titlen_en.text,
-                                      phone: phone.text,
-                                      whatsapp: whatsapp.text,
-                                      address: address.text,
-                                      address_en: address_en.text,
-                                      description: description.text,
-                                      description_en: description_en.text,
-                                      phone_second: phone2.text,
-                                      phone_third: phone3.text,
-                                      lag: setcaruntloction
-                                          ? _locationData.longitude
-                                          : double.parse(
-                                              snap.data.result.allProducts.lag),
-                                      lat: setcaruntloction
-                                          ? _locationData.latitude
-                                          : double.parse(
-                                              snap.data.result.allProducts.lat),
-                                      file: _image)
+                                  token_id: token,
+                                  id_branch: widget.bid,
+                                  location: addersinmap.text,
+                                  title: title.text,
+                                  titlen_en: titlen_en.text,
+                                  phone: phone.text,
+                                  whatsapp: whatsapp.text,
+                                  address: address.text,
+                                  address_en: address_en.text,
+                                  description: description.text,
+                                  description_en: description_en.text,
+                                  phone_second: phone2.text,
+                                  phone_third: phone3.text,
+                                  lag:
+                                  mlocation.longitude
+                                  ,
+                                  lat:
+                                  mlocation.latitude,
+
+                                  file: _image)
                                   .then((value) {
                                 Get.dialog(
                                   AlertDialog(
@@ -650,6 +652,10 @@ class _EditPranchState extends State<EditPranch> {
                                   ),
                                   barrierDismissible: false,
                                 );
+                                svaedata=false;
+                                setState(() {
+
+                                });
                                 print(value.data);
                                 print(value.data["message"]);
                               });

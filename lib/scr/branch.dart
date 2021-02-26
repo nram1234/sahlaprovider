@@ -73,7 +73,7 @@ class _BranchState extends State<Branch> {
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                         tileMode: TileMode.clamp),
-                    borderRadius: BorderRadius.circular(40.0)),
+                    borderRadius: BorderRadius.circular(5.0)),
               ),
             ),
             Expanded(
@@ -100,6 +100,9 @@ class _BranchState extends State<Branch> {
                                           id_branch: snapshot.data.result
                                               .allProducts[pos].prodId)
                                       .then((value) {
+                                        setState(() {
+
+                                        });
                                         print(value);
                                   });
                                 });

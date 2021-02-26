@@ -70,21 +70,21 @@ class _LoginScrState extends State<LoginScr> {
                 controller: phone,
                 decoration: InputDecoration(  fillColor: Colors.white,
                   filled: true,
-                  labelText: ' رقم الهاتف',
+                  //labelText: ' رقم الهاتف',
                   enabledBorder: OutlineInputBorder(
                     borderSide:
                         BorderSide(color: Colors.white, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   border: OutlineInputBorder(
                     borderSide:
                         BorderSide(color:Colors.white, width: 2),
-                    borderRadius: BorderRadius.circular(40.0),
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
                   hintText: 'رقم الهاتف',
                   hintStyle: TextStyle(
                     fontFamily: 'Arbf',
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 )),
             SizedBox(height: 8.0),
@@ -93,28 +93,28 @@ class _LoginScrState extends State<LoginScr> {
               controller: password,
               decoration: InputDecoration( fillColor: Colors.white,
                 filled: true,
-                labelText: ' كلمه السر',
+              // labelText: ' كلمه السر',
                 enabledBorder: OutlineInputBorder(
                   borderSide:
                       BorderSide(color: Colors.white, width: 2),
-                  borderRadius: BorderRadius.circular(40.0),
+                  borderRadius: BorderRadius.circular(5.0),
                 ),
                 border: OutlineInputBorder(
                   borderSide:
                       BorderSide(color: Colors.white, width: 2),
-                  borderRadius: BorderRadius.circular(40.0),
+                  borderRadius: BorderRadius.circular(5.0),
                 ),
                 hintText: ' كلمه السر',
                 hintStyle: TextStyle(
                   fontFamily: 'Arbf',
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
             ),
             SizedBox(height: 24.0),
             login
                 ? Container(
-                    height: 100, width: 100, child: CircularProgressIndicator())
+                    height: 100, width: 100, child: CircularProgressIndicator(backgroundColor: Colors.white,))
                 : Padding(
                     padding: EdgeInsets.symmetric(vertical: 16.0),
                     child: RaisedButton(

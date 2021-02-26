@@ -22,13 +22,13 @@ Widget offertListItem({high, AllOffers data,fun ,funedit }) {
                       Container(child: Image.network(data.offersImage,fit: BoxFit.fill,),
                         width: high * .12,
                         height: high * .12,
-                        color: Colors.blueAccent,
+                        color: Colors.red,
                       ),
                       Text(
                         data.expireDate=="1"?"تم انتهاء العرض":"العرض جاري",
                         style: TextStyle(
                             fontFamily: 'Arbf',
-                            color: Colors.blueAccent,
+                            color: Colors.red,
                             fontSize: 16),
                       ),  ],
                   )),

@@ -140,7 +140,7 @@ class _StatisticssState extends State<Statisticss> {
                           onTap: () async {
                             // set up the buttons
                             Widget cancelButton = FlatButton(
-                              child: Text("الفاء"),
+                              child: Text("إلغاء"),
                               onPressed: () {
                                 Navigator.of(context, rootNavigator: true)
                                     .pop();
@@ -234,6 +234,10 @@ class _StatisticssState extends State<Statisticss> {
                         ),
                         GestureDetector(
                           onTap: () async {
+
+                           print("888888888888888888");
+
+
                             if (!_textEditingController.text.trim().isEmpty) {
                               setState(() {
                                 serch = true;
@@ -244,7 +248,7 @@ class _StatisticssState extends State<Statisticss> {
                                       coupon: _textEditingController.text)
                                   .then((value) {
                                 // set up the AlertDialog
-                                print('tttttttttttttttttttttttttttttttttt');
+
                                 print(value.data['status']);
 
                                 if (value.data['status']) {

@@ -64,13 +64,13 @@ Widget mydrawer(context) {
                       labelText: 'رقم الهاتف',
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: hexToColor('#00abeb'), width: 2),
-                        borderRadius: BorderRadius.circular(40.0),
+                            color: Colors.red, width: 2),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: hexToColor('#00abeb'), width: 2),
-                        borderRadius: BorderRadius.circular(40.0),
+                            color: Colors.red, width: 2),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                       hintStyle: TextStyle(
                         fontFamily: 'Arbf',
@@ -92,13 +92,13 @@ Widget mydrawer(context) {
                       labelText: 'عدد النقاط',
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: hexToColor('#00abeb'), width: 2),
-                        borderRadius: BorderRadius.circular(40.0),
+                            color: Colors.red, width: 2),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: hexToColor('#00abeb'), width: 2),
-                        borderRadius: BorderRadius.circular(40.0),
+                            color: Colors.red, width: 2),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                       hintStyle: TextStyle(
                         fontFamily: 'Arbf',

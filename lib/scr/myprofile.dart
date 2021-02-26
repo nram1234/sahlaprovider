@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:location/location.dart';
+
 import 'package:sahlaprovider/myWidget/gallery.dart';
 import 'package:sahlaprovider/myWidget/myDrawer.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
@@ -48,45 +48,46 @@ class _ProfileeState extends State<Profilee> {
 
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
-  Location location = new Location();
+  // Location location = new Location();
   Completer<GoogleMapController> _controller = Completer();
-  PermissionStatus _permissionGranted;
-  LocationData _locationData;
+  //PermissionStatus _permissionGranted;
+  LatLng _locationData;
   bool _serviceEnabled;
   CameraPosition _kGooglePlex;
   bool setcaruntloction = false;
   File _image;
-bool senddata=false;
-  getloc() async {
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return;
-      }
-    }
-
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return;
-      }
-    }
-    _locationData = await location.getLocation();
-    _kGooglePlex = CameraPosition(
-      target: LatLng(_locationData.latitude, _locationData.longitude),
-      zoom: 15,
-    );
-    setState(() {
-      print(_kGooglePlex.target);
-    });
-  }
+  bool senddata=false;
+  // getloc() async {
+  //   _serviceEnabled = await location.serviceEnabled();
+  //   if (!_serviceEnabled) {
+  //     _serviceEnabled = await location.requestService();
+  //     if (!_serviceEnabled) {
+  //       return;
+  //     }
+  //   }
+  //
+  //   _permissionGranted = await location.hasPermission();
+  //   if (_permissionGranted == PermissionStatus.denied) {
+  //     _permissionGranted = await location.requestPermission();
+  //     if (_permissionGranted != PermissionStatus.granted) {
+  //       return;
+  //     }
+  //   }
+  //   _locationData = await location.getLocation();
+  //   _kGooglePlex = CameraPosition(
+  //     target: LatLng(_locationData.latitude, _locationData.longitude),
+  //     zoom: 15,
+  //   );
+  //   setState(() {
+  //     print(_kGooglePlex.target);
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
-    getloc();
+    //getloc();
+
   }
 
   @override
@@ -152,7 +153,18 @@ bool senddata=false;
                   facebook.text = dat.facebook;
                   twiter.text = dat.twitter;
                   insta.text = dat.instagram;
-
+                  if(dat.lag.trim().isEmpty){
+                    _kGooglePlex = CameraPosition(
+                      target: LatLng(30.518043908795214, 31.575481854379177),
+                      zoom: 15,
+                    );
+                  }else{
+                    _kGooglePlex = CameraPosition(
+                      target: LatLng(double.parse(dat.lat),
+                          double.parse(dat.lag)),
+                      zoom: 15,
+                    );
+                  }
                   if (dat.deliveryOn == '1') {
                     dlivery.text = 'يوجد دليفيري';
                   } else {
@@ -160,7 +172,7 @@ bool senddata=false;
                   }
                   print('iiiiiiiiiiiiiiiii');
                   print(dat.mainImg);
-print(dat.mainImg);
+                  print(dat.mainImg);
                   return SingleChildScrollView(
                     child: Container(
                       padding: EdgeInsets.only(
@@ -225,16 +237,16 @@ print(dat.mainImg);
                             padding: EdgeInsets.only(right: 50, left: 50),
                             height: 5,
                             decoration: BoxDecoration(
-                                color: hexToColor('#00abeb'),
+                                color:Colors.red,
                                 gradient: new LinearGradient(
                                     colors: [
-                                      hexToColor('#2358a6'),
-                                      hexToColor('#00abeb')
+                                      Colors.red[100],
+                                      Colors.red[900],
                                     ],
                                     begin: Alignment.centerLeft,
                                     end: Alignment.centerRight,
                                     tileMode: TileMode.clamp),
-                                borderRadius: BorderRadius.circular(40.0)),
+                                borderRadius: BorderRadius.circular(5.0)),
                           ),
                           SizedBox(
                             height: 10,
@@ -361,13 +373,13 @@ print(dat.mainImg);
                               labelText: 'عنوان علي الخريطه',
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: hexToColor('#00abeb'), width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                    color: Colors.red, width: 2),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: hexToColor('#00abeb'), width: 2),
-                                borderRadius: BorderRadius.circular(40.0),
+                                    color:Colors.red, width: 2),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'عنوان علي الخريطه',
                               hintStyle: TextStyle(
@@ -390,7 +402,7 @@ print(dat.mainImg);
                                 name_en: titlen_en.text,
                                 phone: phone.text,
                                 whatsapp: whatsapp.text,
-                               address: address.text,
+                                address: address.text,
 
                                 floar_num: bilednumber.text,
                                 description: description.text,  description_en: description_en.text,
@@ -398,23 +410,23 @@ print(dat.mainImg);
                                 phone_second: phone2.text,
                                 phone_third: phone3.text,
                                 main_img
-                                :_image,password: password.text,
+                                    :_image,password: password.text,
                                 location: addersinmap.text,
                                 instagram: insta.text,
                                 twitter: twiter.text,
                                 facebook: facebook.text,
                                 website: website.text,
                                 email: email.text,
-                                lat: setcaruntloction
-                                    ? _locationData.latitude
+                                lat: //setcaruntloction
+                                _locationData!=null     ? _locationData.latitude
                                     : null,
-                                lag: setcaruntloction
-                                    ? _locationData.latitude
+                                lag:// setcaruntloction
+                                _locationData!=null        ? _locationData.latitude
                                     : null,).then((value) {
                                 Get.snackbar('', value.statusMessage);
 
 
-                                      senddata=false;
+                                senddata=false;
                                 setState(() {
 
                                 });
@@ -434,26 +446,28 @@ print(dat.mainImg);
                                     color: hexToColor('#00abeb'),
                                     gradient: new LinearGradient(
                                         colors: [
-                                          Colors.red[900],
                                           Colors.red[100],
+                                          Colors.red[900],
                                         ],
                                         begin: Alignment.centerLeft,
                                         end: Alignment.centerRight,
                                         tileMode: TileMode.clamp),
-                                    borderRadius: BorderRadius.circular(40.0))),
-                          ), SizedBox(
-                            height: high * .01,
-                          ), CheckboxListTile(
-                            title: Text("تغير الموقع الحالي الي موقع جديد"),
-                            value: setcaruntloction,
-                            onChanged: (newValue) {
-                              setState(() {
-                                setcaruntloction = newValue;
-                              });
-                            },
-                            controlAffinity: ListTileControlAffinity
-                                .leading, //  <-- leading Checkbox
+                                    borderRadius: BorderRadius.circular(5.0))),
                           ),
+                          // SizedBox(
+                          //   height: high * .01,
+                          // ),
+                          // CheckboxListTile(
+                          //   title: Text("تغير الموقع الحالي الي موقع جديد"),
+                          //   value: setcaruntloction,
+                          //   onChanged: (newValue) {
+                          //     setState(() {
+                          //       setcaruntloction = newValue;
+                          //     });
+                          //   },
+                          //   controlAffinity: ListTileControlAffinity
+                          //       .leading, //  <-- leading Checkbox
+                          // ),
                           SizedBox(
                             height: high * .01,
                           ), Container(
@@ -462,8 +476,12 @@ print(dat.mainImg);
                               child: _kGooglePlex == null
                                   ? CircularProgressIndicator()
                                   : GoogleMap(
-                                mapType: MapType.normal,
-                                initialCameraPosition: _kGooglePlex,
+                                mapType: MapType.normal,onTap: (LatLng mylocation){
+
+                                _locationData=mylocation;
+                                print(_locationData);
+                              },
+                                initialCameraPosition: _kGooglePlex,   zoomGesturesEnabled: true,
                                 onMapCreated:
                                     (GoogleMapController controller) {
                                   _controller.complete(controller);
@@ -496,12 +514,12 @@ print(dat.mainImg);
       decoration: InputDecoration(
         labelText: hint,
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey, width: 2),
-          borderRadius: BorderRadius.circular(40.0),
+          borderSide: BorderSide(color: Colors.red, width: 2),
+          borderRadius: BorderRadius.circular(5.0),
         ),
         border: OutlineInputBorder(
-          borderSide: BorderSide(color:Colors.grey, width: 2),
-          borderRadius: BorderRadius.circular(40.0),
+          borderSide: BorderSide(color: Colors.red, width: 2),
+          borderRadius: BorderRadius.circular(5.0),
         ),
         hintText: hint,
         hintStyle: TextStyle(
