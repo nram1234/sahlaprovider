@@ -201,7 +201,7 @@ bool svaedata=false;
                     height: high * .01,
                   ),
                   inputText(
-                    hint: 'رقم التلفون',
+                    hint: 'رقم التليفون',
                     stram: v.mobilePranch,
                     changedata: (st) {
                       v.changearmobile(st);
@@ -214,7 +214,7 @@ bool svaedata=false;
                     height: high * .01,
                   ),
                   inputText(
-                    hint: 'رقم التلفون ',
+                    hint: 'رقم التليفون ',
                     changedata: (st) {
                       phone2 = st;
                     },
@@ -224,7 +224,7 @@ bool svaedata=false;
                     height: high * .01,
                   ),
                   inputText(
-                    hint: 'رقم التلفون',
+                    hint: 'رقم التليفون',
                     changedata: (st) {
                       phone3 = st;
                     },

@@ -417,12 +417,7 @@ class _ProfileeState extends State<Profilee> {
                                 facebook: facebook.text,
                                 website: website.text,
                                 email: email.text,
-                                lat: //setcaruntloction
-                                _locationData!=null     ? _locationData.latitude
-                                    : null,
-                                lag:// setcaruntloction
-                                _locationData!=null        ? _locationData.latitude
-                                    : null,).then((value) {
+                             ).then((value) {
                                 Get.snackbar('', value.statusMessage);
 
 

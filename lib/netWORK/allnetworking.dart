@@ -40,7 +40,7 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
 class AllNetworking {
-  var paseurl = 'https://sahla-eg.com/';
+  var paseurl = 'https://sahla-eg.com';
 
   //Response response;
   Dio dio = new Dio();

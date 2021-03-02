@@ -930,7 +930,7 @@ class _StatisticssState extends State<Statisticss> {
                                     height: .01,
                                   ),
                                   Text(
-                                    "Buy_prescription_request",
+                                    "تسعير روشتة",
                                     style: TextStyle(
                                         fontFamily: 'Arbf',
                                         color: Colors.black,
@@ -1000,6 +1000,8 @@ class _StatisticssState extends State<Statisticss> {
                                 : GestureDetector(
                               onTap: () async {
                                 int idOfQR = await box.read('id');
+                                print( '5555555555555555555555555555555555555555555');
+                                print( box.read('id'));
                                 await _generateBarCode(
                                     box.read('id').toString());
 
@@ -1120,7 +1122,7 @@ class _StatisticssState extends State<Statisticss> {
 
     String imageString = base64Encode(this.bytes);
     print(imageString);
-
+    print(success);
     await _allNetworking
         .save_QR(token_id: token, file: imageString)
         .then((value) {
