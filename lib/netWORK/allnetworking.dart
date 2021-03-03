@@ -860,6 +860,7 @@ class AllNetworking {
         .then((value) {
           print('ggggggggggggggggggggggggggggggggggggggggggggggggg');
       print(value.data);
+          print('ggggggggggggggggggggggggggggggggggggggggggggggggg');
       response = Get_home_json.fromJson(value.data);
     });
 

@@ -20,14 +20,14 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'QRread.dart';
-import 'add_photography_requests.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 import 'buy_prescription_request.dart';
 import 'doc_profile.dart';
 import 'get_all_orderSCr.dart';
 import 'get_all_visitor_pointsSCR.dart';
 import 'get_list_reservation.dart';
-import 'get_waiting_orders.dart';
+
 import 'list_appointments.dart';
 import 'myorder.dart';
 
@@ -54,6 +54,7 @@ class _StatisticssState extends State<Statisticss> {
   void initState() {
     token = box.read('token');
     service_type = box.read('service_type');
+    _requestPermission();
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -110,7 +111,7 @@ class _StatisticssState extends State<Statisticss> {
           stream:
               _allNetworking.get_home(token_id: token, lang: 'ar').asStream(),
           builder: (context, snapshot) {
-            print(snapshot.data);
+            print(snapshot);
             if (snapshot.hasData) {
               Result data = snapshot.data.result;
               if (data.type == 0) {
@@ -1111,26 +1112,28 @@ class _StatisticssState extends State<Statisticss> {
     return Container();
   }
 
+
   Future _generateBarCode(String inputCode) async {
-    qrgnratt = true;
-    setState(() {});
+    qrgnratt=true;
+    setState(() {
+
+    });
 
     Uint8List result = await scanner.generateBarCode(inputCode);
     this.setState(() => this.bytes = result);
-    File.fromRawPath(result); //_imge=
+    File.fromRawPath(result);  //_imge=
     final success = await ImageGallerySaver.saveImage(this.bytes);
 
     String imageString = base64Encode(this.bytes);
     print(imageString);
     print(success);
-    await _allNetworking
-        .save_QR(token_id: token, file: imageString)
-        .then((value) {
+    await  _allNetworking.save_QR(token_id: token, file:imageString) .then((value) {
+
       print(value.data);
 
       Get.dialog(
         AlertDialog(
-          title: Text(''),
+          title: Text( ''),
           content: Text("تم حفظ الصوره في مكتبة الصور"),
           actions: <Widget>[
             FlatButton(
@@ -1145,7 +1148,24 @@ class _StatisticssState extends State<Statisticss> {
       );
     });
 
-    qrgnratt = false;
-    setState(() {});
+    qrgnratt=false;
+    setState(() {
+
+    });
+
   }
+
+
+  _requestPermission() async {
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.storage,
+    ].request();
+
+    final info = statuses[Permission.storage].toString();
+    print(info);
+
+  }
+
+
+
 }

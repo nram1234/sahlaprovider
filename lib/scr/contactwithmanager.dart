@@ -7,6 +7,10 @@ import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
 import 'package:sahlaprovider/utilitie/jsondata/tickets_types_json.dart';
 
 class ContactWithManager extends StatefulWidget {
+  BuildContext mycontext;
+
+  ContactWithManager(this.mycontext);
+
   @override
   _ContactWithManagerState createState() => _ContactWithManagerState();
 }
@@ -160,6 +164,9 @@ List<TicketsTypes>dataaa=[];
                                   title: title,
                                   content: data)
                               .then((value) {
+
+
+                            Navigator.pop(widget.mycontext);
                             print(value.data);
                             senddata = false;
                             setState(() {});

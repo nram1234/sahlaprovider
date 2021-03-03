@@ -35,7 +35,7 @@ dependencies:
   google_maps_flutter: ^1.0.6
   qrscan: ^0.2.19
   image_picker: ^0.6.7+14
-  image_gallery_saver: ^1.6.7
+  image_gallery_saver: ^1.6.8
   connectivity:
   photo_view: ^0.10.3
 

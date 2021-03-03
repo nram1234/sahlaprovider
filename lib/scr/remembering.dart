@@ -58,8 +58,23 @@ class _RememberingState extends State<Remembering> {
               height: MediaQuery.of(context).size.height * .01,
             ),
             GestureDetector(
-              onTap: () {
-Get.to(ContactWithManager());
+              onTap: () async{
+
+
+
+
+                final value = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ContactWithManager(context)),
+
+                );
+                setState(() {
+
+                });
+
+
+
               },
               child: Padding(
                 padding: const EdgeInsets.only(top: 8,bottom: 4,right: 20,left: 20),

@@ -32,7 +32,7 @@ class Result {
   String datePackege;
   String totalPoints;
   String totalSelling;
-  int totalOrders;
+  String totalOrders;
   String serviceCoupon;
   int type;
 
