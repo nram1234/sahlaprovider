@@ -1993,4 +1993,32 @@ class AllNetworking {
     return response;
   }
 
+
+
+
+
+
+  Future<Get_notification_details_json>  get_notification_details({
+    @required String token_id,
+  }) async {
+    Get_list_reservation_json data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+    });
+
+    await dio
+        .post(
+      paseurl + '/medicine/get_notification_details',
+      data: formData,
+    )
+        .then((value) {
+      data = Get_list_reservation_json.fromJson(value.data);
+    });
+
+    return data;
+  }
+
+
 }
