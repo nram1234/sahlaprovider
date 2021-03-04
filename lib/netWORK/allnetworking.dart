@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:sahlaprovider/utilitie/jsondata/Get_notification_details_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/agent_login_JSON.dart';
 import 'package:sahlaprovider/utilitie/jsondata/buy_prescription_request_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/cancel_order_json.dart';
@@ -1999,13 +2000,13 @@ class AllNetworking {
 
 
   Future<Get_notification_details_json>  get_notification_details({
-    @required String token_id,
+    @required String token_id,@required int id_notify,
   }) async {
-    Get_list_reservation_json data;
+    Get_notification_details_json data;
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
       "key": "1234567890",
-      "token_id": token_id,
+      "token_id": token_id,"id_notify": id_notify,
     });
 
     await dio
@@ -2014,7 +2015,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-      data = Get_list_reservation_json.fromJson(value.data);
+      data = Get_notification_details_json.fromJson(value.data);
     });
 
     return data;
