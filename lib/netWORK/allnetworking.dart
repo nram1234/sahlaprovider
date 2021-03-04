@@ -1970,4 +1970,27 @@ class AllNetworking {
 
     return data;
   }
+
+
+
+
+  Future<Response> delete_ticket({
+    @required String token_id,
+    @required int id_ticket,
+  }) async {
+    Response response;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "id_ticket": id_ticket,
+    });
+    response = await dio.post(
+      paseurl + '/provider/delete_ticket',
+      data: formData,
+    );
+
+    return response;
+  }
+
 }

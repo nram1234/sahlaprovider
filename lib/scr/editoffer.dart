@@ -58,7 +58,12 @@ class _EditOfferState extends State<EditOffer> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-          appBar: AppBar(
+          appBar: AppBar(actions: [GestureDetector(
+            onTap: () {
+              Navigator.pop(context, false);
+            }, child: Icon(Icons.arrow_back),)
+          ]
+            ,
             centerTitle: true,
             title: Text('تعديل العرض ',
                 style: TextStyle(

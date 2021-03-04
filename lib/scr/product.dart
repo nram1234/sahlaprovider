@@ -15,6 +15,10 @@ import 'editProduct.dart';
 import 'mainSections.dart';
 
 class ProductScr extends StatefulWidget {
+   VoidCallback back;
+
+   ProductScr(this.back);
+
   @override
   _ProductScrState createState() => _ProductScrState();
 }
@@ -55,7 +59,7 @@ class _ProductScrState extends State<ProductScr> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
           drawer: mydrawer(context),
-          appBar: AppBar(
+          appBar: AppBar(actions: [GestureDetector( onTap: widget.back,child: Icon(Icons.arrow_back),)],
             centerTitle: true,
             title: Text('المنتجات',
                 style: TextStyle(
@@ -108,8 +112,10 @@ class _ProductScrState extends State<ProductScr> {
                     end: Alignment.centerRight,
                     tileMode: TileMode.clamp),
                 borderRadius: BorderRadius.circular(5.0))),
-      ),GestureDetector(
+      ),
+        GestureDetector(
           onTap: () {
+
             Navigator.push(
               context,
               new MaterialPageRoute(
@@ -139,7 +145,8 @@ class _ProductScrState extends State<ProductScr> {
                       end: Alignment.centerRight,
                       tileMode: TileMode.clamp),
                   borderRadius: BorderRadius.circular(5.0))),
-        ),],):  GestureDetector(
+        ),],):
+      GestureDetector(
                 onTap: ()async {
 
 
@@ -181,7 +188,8 @@ class _ProductScrState extends State<ProductScr> {
                             tileMode: TileMode.clamp),
                         borderRadius: BorderRadius.circular(5.0))),
               ),
-              SizedBox(height: 10,),    Expanded(
+              SizedBox(height: 10,),
+              Expanded(
                   flex: 1,
                   child: StreamBuilder(
                       stream: _allNetworking.Get_all_products(

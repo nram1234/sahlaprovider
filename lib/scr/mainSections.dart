@@ -10,6 +10,7 @@ import 'add_category.dart';
 import 'edit_category.dart';
 
 class MainSections extends StatefulWidget {
+
   @override
   _MainSectionsState createState() => _MainSectionsState();
 }
@@ -42,7 +43,7 @@ class _MainSectionsState extends State<MainSections> {
             onTap: () async{
 
               final result = await Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Add_Category()),);
+                MaterialPageRoute(builder: (context) => Add_Category(context)),);
               //refresh the state of your Widget
               setState(() {
 
@@ -82,8 +83,9 @@ class _MainSectionsState extends State<MainSections> {
                     .asStream(),
                 builder: (context, snap) {
                   if (snap.hasData) {
-                    print(snap.data);
-
+                    print('00000000000000000000000000000000000000000000000000000');
+                    print(snap.data.result.allProducts);
+                    print('00000000000000000000000000000000000000000000000000000');
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GridView.builder(
@@ -163,7 +165,7 @@ class _MainSectionsState extends State<MainSections> {
   }
 
   Widget listhomeitem(
-      {context, String name, String pic, onclick, String ename, edit, delet}) {
+      {context, String name, String pic, onclick, String ename, edit, delet,String active}) {
     return GestureDetector(
       onTap: onclick,
       child: Container( decoration: BoxDecoration(
@@ -201,6 +203,9 @@ class _MainSectionsState extends State<MainSections> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 GestureDetector(onTap: delet, child: Icon(Icons.delete,color: Colors.amber,),),
+
+                Text(active=='1'?'مفعل':'غير مفعل',style: TextStyle(color: active=='1'?Colors.red:Colors.amber,fontWeight: FontWeight.bold),),
+
                 GestureDetector(onTap: edit,child: Icon(Icons.edit,color: Colors.amber,))
               ],
             )

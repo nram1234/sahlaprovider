@@ -8,8 +8,11 @@ import 'package:sahlaprovider/myWidget/myDrawer.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
 class Add_Category extends StatefulWidget {
+  BuildContext mycontext;
   @override
   _Add_CategoryState createState() => _Add_CategoryState();
+
+  Add_Category(this.mycontext);
 }
 
 class _Add_CategoryState extends State<Add_Category> {
@@ -28,7 +31,9 @@ bool adddata=false;
       textDirection: TextDirection.rtl,
       child: Scaffold(
           drawer: mydrawer(context),
-          appBar: AppBar(
+          appBar: AppBar(automaticallyImplyLeading: true,leading: IconButton(icon:Icon(Icons.arrow_back),
+            onPressed:() => Navigator.pop(context, false),
+          ),
             centerTitle: true,
             title: Text('اضافة قسم جديد',
                 style: TextStyle(
@@ -150,6 +155,9 @@ bool adddata=false;
                         title_en:   theenname  ,
 
                         file: _image ).then((value){
+
+                      Navigator.pop(widget.mycontext);
+
 print(value.data);
 adddata=false;
 setState(() {

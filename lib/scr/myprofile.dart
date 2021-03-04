@@ -105,7 +105,12 @@ class _ProfileeState extends State<Profilee> {
         textDirection: TextDirection.rtl,
         child: Scaffold(
           drawer: mydrawer(context),
-          appBar: AppBar(
+          appBar: AppBar(actions: [GestureDetector(
+            onTap: () {
+              Navigator.pop(context, false);
+            }, child: Icon(Icons.arrow_back),)
+          ]
+            ,
             centerTitle: true,
             title: Text('ﺍﻟﺒﺮﻭﻓﺎﻳﻞ',
                 style: TextStyle(

@@ -27,7 +27,7 @@ class _Buy_prescription_requestState extends State<Buy_prescription_request> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(appBar: AppBar(centerTitle: true,title: Text('طلبات شراء روشتة'),),
+    return Scaffold(appBar: AppBar( centerTitle: true,title: Text('طلبات شراء روشتة'),),
       body: Column(
         children: [
           SizedBox(

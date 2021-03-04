@@ -59,18 +59,21 @@ class Result {
 class AllProducts {
   String productImage;
   String productName;
+  String view;
   String productNameEn;
   String productId;
 
   AllProducts(
       {this.productImage,
         this.productName,
+        this.view,
         this.productNameEn,
         this.productId});
 
   AllProducts.fromJson(Map<String, dynamic> json) {
     productImage = json['product_image'];
     productName = json['product_name'];
+    view = json['view'];
     productNameEn = json['product_name_en'];
     productId = json['product_id'];
   }
@@ -79,6 +82,7 @@ class AllProducts {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['product_image'] = this.productImage;
     data['product_name'] = this.productName;
+    data['view'] = this.view;
     data['product_name_en'] = this.productNameEn;
     data['product_id'] = this.productId;
     return data;

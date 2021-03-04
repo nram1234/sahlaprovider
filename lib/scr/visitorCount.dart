@@ -33,7 +33,12 @@ class _VisitorCountState extends State<VisitorCount> {
       child: SafeArea(
           top: true,
           child: Scaffold(
-            appBar: AppBar(
+            appBar: AppBar(actions: [GestureDetector(
+              onTap: () {
+                Navigator.pop(context, false);
+              }, child: Icon(Icons.arrow_back),)
+            ]
+              ,
               centerTitle: true,
               title:Text('عدد الزوار'),
             ),

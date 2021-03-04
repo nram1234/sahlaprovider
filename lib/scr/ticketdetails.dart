@@ -36,7 +36,12 @@ class _TicketDetailsState extends State<TicketDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(drawer: mydrawer(context),
-      appBar: AppBar(elevation: 8,
+      appBar: AppBar(elevation: 8,actions: [GestureDetector(
+        onTap: () {
+          Navigator.pop(context, false);
+        }, child: Icon(Icons.arrow_back),)
+      ]
+        ,
         centerTitle: true,
         title: Text('ﺗﻔﺎﺻﻴﻞ ﺍﻟﺘﺬﻛﺮﺓ'),
       ),

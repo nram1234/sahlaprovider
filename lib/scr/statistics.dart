@@ -1105,9 +1105,17 @@ class _StatisticssState extends State<Statisticss> {
             }
           });
     } else if (pos == 1) {
-      return ProductScr();
+      return ProductScr( () {
+        _selectedIndex = 0;
+
+        setState(() {});
+      } );
     } else if (pos == 2) {
-      return OfferScr();
+      return OfferScr(() {
+        _selectedIndex = 0;
+
+        setState(() {});
+      } );
     }
     return Container();
   }

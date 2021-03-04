@@ -7,10 +7,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_category_json.dart';
+
 class Edit_Category extends StatefulWidget {
   String token;
 
   String cat_id;
+
   Edit_Category({this.token, this.cat_id});
 
 
@@ -26,9 +28,9 @@ class _Edit_CategoryState extends State<Edit_Category> {
 
   File _image;
   bool savedata = false;
+
   @override
   void dispose() {
-
     super.dispose();
   }
 
@@ -39,13 +41,25 @@ class _Edit_CategoryState extends State<Edit_Category> {
 
   @override
   Widget build(BuildContext context) {
-    var high = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    var high = MediaQuery
+        .of(context)
+        .size
+        .height;
+    var width = MediaQuery
+        .of(context)
+        .size
+        .width;
 
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
           appBar: AppBar(
+            actions: [GestureDetector(
+              onTap: () {
+                Navigator.pop(context, false);
+              }, child: Icon(Icons.arrow_back),)
+            ]
+            ,
             centerTitle: true,
             title: Text('تعديل منتج ',
                 style: TextStyle(
@@ -192,7 +206,8 @@ class _Edit_CategoryState extends State<Edit_Category> {
                                 .edit_category(
                                 token_id: token,
                                 title: pronamear.text,
-                                cat_id: widget.cat_id,title_en: pronamear.text,
+                                cat_id: widget.cat_id,
+                                title_en: pronamear.text,
                                 file: _image)
                                 .then((value) {
                               print(value.data);
@@ -202,7 +217,7 @@ class _Edit_CategoryState extends State<Edit_Category> {
                               setState(() {});
                               Get.dialog(
                                 AlertDialog(
-                                  title: Text( ''),
+                                  title: Text(''),
                                   content: Text("تم التعديل"),
                                   actions: <Widget>[
                                     FlatButton(
@@ -214,7 +229,8 @@ class _Edit_CategoryState extends State<Edit_Category> {
                                   ],
                                 ),
                                 barrierDismissible: false,
-                              );});
+                              );
+                            });
                           },
                           child: Container(
                               height: high * .1,

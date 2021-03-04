@@ -62,7 +62,12 @@ class _Doc_ProfileState extends State<Doc_Profile> {
     return SafeArea(
       top: true,
       child: Scaffold(
-        appBar: AppBar(
+        appBar: AppBar(actions: [GestureDetector(
+          onTap: () {
+            Navigator.pop(context, false);
+          }, child: Icon(Icons.arrow_back),)
+        ]
+          ,
           title: Text('البروفيل'),
           centerTitle: true,
         ),

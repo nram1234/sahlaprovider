@@ -14,6 +14,10 @@ import 'addOfeer.dart';
 import 'editoffer.dart';
 
 class OfferScr extends StatefulWidget {
+  VoidCallback back;
+
+  OfferScr(this.back);
+
   @override
   _OfferScrState createState() => _OfferScrState();
 }
@@ -52,7 +56,7 @@ class _OfferScrState extends State<OfferScr> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
           drawer: mydrawer(context),
-          appBar: AppBar(actions: [],
+          appBar: AppBar(actions: [GestureDetector( onTap: widget.back,child: Icon(Icons.arrow_back),)],
             centerTitle: true,
             title: Text('offer'.tr,
                 style: TextStyle(

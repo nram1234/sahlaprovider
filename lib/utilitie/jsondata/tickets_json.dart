@@ -61,6 +61,7 @@ class MyTickets {
   String color;
   String content;
   String createdAt;
+  String senderReplay;
 
   MyTickets(
       {this.id,
@@ -69,7 +70,8 @@ class MyTickets {
         this.senderType,
         this.color,
         this.content,
-        this.createdAt});
+        this.createdAt,
+        this.senderReplay});
 
   MyTickets.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -79,6 +81,7 @@ class MyTickets {
     color = json['color'];
     content = json['content'];
     createdAt = json['created_at'];
+    senderReplay = json['sender_replay'];
   }
 
   Map<String, dynamic> toJson() {
@@ -90,6 +93,7 @@ class MyTickets {
     data['color'] = this.color;
     data['content'] = this.content;
     data['created_at'] = this.createdAt;
+    data['sender_replay'] = this.senderReplay;
     return data;
   }
 }

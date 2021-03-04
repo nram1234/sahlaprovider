@@ -40,7 +40,12 @@ class _AddNewProdectNEWState extends State<AddNewProdectNEW> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
           drawer: mydrawer(context),
-          appBar: AppBar(
+          appBar: AppBar(actions: [GestureDetector(
+            onTap: () {
+              Navigator.pop(context, false);
+            }, child: Icon(Icons.arrow_back),)
+          ]
+            ,
             centerTitle: true,
             title: Text('اضافة منتج جديد',
                 style: TextStyle(

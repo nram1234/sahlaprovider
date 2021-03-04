@@ -106,7 +106,12 @@ class _EditPranchState extends State<EditPranch> {
         textDirection: TextDirection.rtl,
         child: Scaffold(
             drawer: mydrawer(context),
-            appBar: AppBar(
+            appBar: AppBar(actions: [GestureDetector(
+              onTap: () {
+                Navigator.pop(context, false);
+              }, child: Icon(Icons.arrow_back),)
+            ]
+              ,
               centerTitle: true,
               title: Text('تعديل فرع',
                   style: TextStyle(

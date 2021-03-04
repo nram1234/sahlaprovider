@@ -41,7 +41,12 @@ List<TicketsTypes>dataaa=[];
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: mydrawer(context),
-      appBar: AppBar(
+      appBar: AppBar(actions: [GestureDetector(
+        onTap: () {
+          Navigator.pop(context, false);
+        }, child: Icon(Icons.arrow_back),)
+      ]
+        ,
         centerTitle: true,
         title: Text('تواصل مع الادارة'),
       ),

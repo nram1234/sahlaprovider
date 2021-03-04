@@ -15,7 +15,12 @@ class _NotifictionSCRState extends State<NotifictionDetSCR> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(top: true,
-      child: Scaffold(appBar: AppBar(centerTitle: true,title:Text(widget._allNotifications.title) ,),body: SingleChildScrollView(child: Padding(
+      child: Scaffold(appBar: AppBar(actions: [GestureDetector(
+        onTap: () {
+          Navigator.pop(context, false);
+        }, child: Icon(Icons.arrow_back),)
+      ]
+        ,centerTitle: true,title:Text(widget._allNotifications.title) ,),body: SingleChildScrollView(child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(children: [
           Text(widget._allNotifications.createdAt),

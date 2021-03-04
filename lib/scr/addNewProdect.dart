@@ -80,8 +80,9 @@ class _AddNewProdectState extends State<AddNewProdect> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
           drawer: mydrawer(context),
-          appBar: AppBar(
-            centerTitle: true,
+          appBar: AppBar(automaticallyImplyLeading: true,leading: IconButton(icon:Icon(Icons.arrow_back),
+        onPressed:() => Navigator.pop(context, false),
+          ),  centerTitle: true,
             title: Text('اضافة منتج جديد',
                 style: TextStyle(
                     fontFamily: 'Arbf', color: Colors.white, fontSize: 18)),
@@ -285,7 +286,7 @@ class _AddNewProdectState extends State<AddNewProdect> {
 
                                     _allNetworking
                                         .add_product(
-                                            phone: phone,cat_id: _categoryList.categoryId ,
+                                            phone: phone,cat_id: _categoryList==null?"":_categoryList.categoryId ,
                                             token_id: token,
                                             title: thename,
                                             title_en: theenname,

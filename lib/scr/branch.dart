@@ -37,7 +37,9 @@ class _BranchState extends State<Branch> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         drawer: mydrawer(context),
-        appBar: AppBar(
+        appBar: AppBar(automaticallyImplyLeading: true,leading: IconButton(icon:Icon(Icons.arrow_back),
+          onPressed:() => Navigator.pop(context, false),
+        ),
           centerTitle: true,
           title: Text('الفروع'),
         ),

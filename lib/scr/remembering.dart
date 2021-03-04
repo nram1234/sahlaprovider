@@ -1,5 +1,3 @@
- 
-
 import 'package:sahlaprovider/myWidget/myDrawer.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
@@ -17,7 +15,6 @@ class Remembering extends StatefulWidget {
 }
 
 class _RememberingState extends State<Remembering> {
-
   int sizelist = 0;
   bool getprodect = true;
   int limit = 10;
@@ -38,46 +35,44 @@ class _RememberingState extends State<Remembering> {
     print(token);
     print('oooooooooooooooooooooooooooooooo');
   }
+
   @override
   Widget build(BuildContext context) {
-   var height= MediaQuery.of(context).size.height;
- var   width= MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       drawer: mydrawer(context),
       appBar: AppBar(
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context, false),
+        ),
         elevation: 8,
         centerTitle: true,
         title: Text("ﺍﻟﺘﺬﺍﻛﺮ"),
       ),
       body: Container(
         padding: EdgeInsets.only(left: 8, right: 8),
-      width: width,height: height,
+        width: width,
+        height: height,
         child: Column(
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height * .01,
             ),
             GestureDetector(
-              onTap: () async{
-
-
-
-
+              onTap: () async {
                 final value = await Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => ContactWithManager(context)),
-
                 );
-                setState(() {
-
-                });
-
-
-
+                setState(() {});
               },
               child: Padding(
-                padding: const EdgeInsets.only(top: 8,bottom: 4,right: 20,left: 20),
+                padding: const EdgeInsets.only(
+                    top: 8, bottom: 4, right: 20, left: 20),
                 child: Container(
                     height: MediaQuery.of(context).size.height * .1,
                     width: MediaQuery.of(context).size.width * 0.5,
@@ -101,59 +96,84 @@ class _RememberingState extends State<Remembering> {
                         borderRadius: BorderRadius.circular(40.0))),
               ),
             ),
-      Expanded(
-        flex: 1,
-        child: StreamBuilder<Tickets_json>(
-            stream: _allNetworking
-                .tickets(
-                token_id: token,
-                limit: limit ,
-                page_number: 0 )
-                .asStream(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-
-                return ListView.builder(
-                    itemCount: snapshot.data.result.myTickets.length,
-                    controller: _scrollController,
-                    itemBuilder: (context, pos) {
-                      return Itemli(high: height,data: snapshot.data.result.myTickets[pos]);
-                    });
-              } else {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            }),
-      ),
+            Expanded(
+              flex: 1,
+              child: StreamBuilder<Tickets_json>(
+                  stream: _allNetworking
+                      .tickets(token_id: token, limit: limit, page_number: 0)
+                      .asStream(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                          itemCount: snapshot.data.result.myTickets.length,
+                          controller: _scrollController,
+                          itemBuilder: (context, pos) {
+                            return Itemli(
+                                high: height,
+                                data: snapshot.data.result.myTickets[pos]);
+                          });
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget Itemli( {high,MyTickets data}) {
-    return Card(elevation: 5,
-
-      child: GestureDetector(onTap: (){ Get.to(TicketDetails(data.id));},
-        child: Container(padding: EdgeInsets.all(8),height: high*.15,color: Colors.red,
+  Widget Itemli({high, MyTickets data}) {
+    return Card(
+      elevation: 5,
+      child: GestureDetector(
+        onTap: () {
+          Get.to(TicketDetails(data.id));
+        },
+        child: Container(
+          padding: EdgeInsets.all(8),color: data.senderReplay=='0'?Colors.white:Colors.grey,
+          height: high * .15,
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [ Text(data.createdAt),Icon(Icons.delete),],
+                children: [
+                  Text(data.createdAt),
+                  GestureDetector(onTap: ( ) {
+
+
+
+
+
+_allNetworking.delete_ticket(token_id: token, id_ticket: data.id).then((value) {
+
+  setState(() {
+
+  });
+  Get.snackbar('', value.data["message"]);
+
+
+});
+
+
+
+
+                  }, child: Icon(Icons.delete)),
+                ],
               ),
-              Expanded(
-                  child: Text(data.title))
+              Expanded(child: Text(data.title))
             ],
           ),
         ),
       ),
     );
   }
+
   _scrollListener() {
     if (_scrollController.offset >=
-        _scrollController.position.maxScrollExtent &&
+            _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
       if (sizelist > 8) {
         limit = limit + 20;
