@@ -22,6 +22,7 @@ import 'package:sahlaprovider/utilitie/jsondata/get_waiting_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_order_details_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_previous_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/list_appointments_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/list_wedding_reservation_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/pharmacies_image_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_addproduct_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_doc_profile_json.dart';
@@ -984,12 +985,12 @@ class AllNetworking {
     return response;
   }
 
-  Future<Get_all_order_json> get_all_order({
+  Future<Get_all_users_visting_json> get_all_users_visting({
     @required String token_id,
     @required int limit,
     @required int page_number,
   }) async {
-    Get_all_order_json data;
+    Get_all_users_visting_json data;
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
@@ -999,11 +1000,11 @@ class AllNetworking {
     });
     await dio
         .post(
-      paseurl + '/provider/get_all_order',
+      paseurl + '/provider/get_all_users_visting',
       data: formData,
     )
         .then((value) {
-      data = Get_all_order_json.fromJson(value.data);
+      data = Get_all_users_visting_json.fromJson(value.data);
     });
 
     return data;
@@ -1759,7 +1760,31 @@ class AllNetworking {
 
     return data;
   }
-
+//000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+//   Future<Buy_prescription_request_json> buy_prescription_request({
+//     @required String token_id,
+//
+//   }) async {
+//     Buy_prescription_request_json data;
+//     FormData formData = new FormData.fromMap({
+//       // "mode": "formdata",
+//       "key": "1234567890",
+//       "token_id": token_id,
+//
+//     });
+//
+//     await dio
+//         .post(
+//       paseurl + '/medicine/buy_prescription_request',
+//       data: formData,
+//     )
+//         .then((value) {
+//       data = Buy_prescription_request_json.fromJson(value.data);
+//     });
+//
+//     return data;
+//   }
+//
 
 
 
@@ -1973,6 +1998,28 @@ class AllNetworking {
   }
 
 
+  Future<Get_List_wedding_reservation_json>  get_List_wedding_reservation({
+    @required String token_id,
+  }) async {
+    Get_List_wedding_reservation_json data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+    });
+
+    await dio
+        .post(
+      paseurl + '/medicine/list_wedding_reservation',
+      data: formData,
+    )
+        .then((value) {
+      data = Get_List_wedding_reservation_json.fromJson(value.data);
+    });
+
+    return data;
+  }
+
 
 
   Future<Response> delete_ticket({
@@ -2016,6 +2063,68 @@ class AllNetworking {
     )
         .then((value) {
       data = Get_notification_details_json.fromJson(value.data);
+    });
+
+    return data;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Future<Response> delete_list_reservation({
+    @required String token_id,
+    @required int id_list,
+  }) async {
+    Response data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "id_list": id_list,
+    });
+
+    await dio
+        .post(
+      paseurl + '/medicine/delete_list_reservation',
+      data: formData,
+    )
+        .then((value) {
+      data = value;
+    });
+
+    return data;
+  }
+
+
+  Future<Response> accepted_list_reservation({
+    @required String token_id,
+    @required int id_list,
+  }) async {
+    Response data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "id_list": id_list,
+    });
+
+    await dio
+        .post(
+      paseurl + '/medicine/accepted_list_reservation',
+      data: formData,
+    )
+        .then((value) {
+      data = value;
     });
 
     return data;

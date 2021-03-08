@@ -311,7 +311,7 @@ class _Get_current_ordersState extends State<Get_current_orders> {
                                             padding: const EdgeInsets.only(
                                                 left: 16, right: 16),
                                             child: Text(
-                                              'التلفون : ',
+                                              'التليفون : ',
                                               style:
                                                   TextStyle(color: Colors.red),
                                             ),

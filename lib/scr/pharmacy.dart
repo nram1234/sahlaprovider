@@ -42,6 +42,10 @@ class _PharmacyState extends State<Pharmacy> {
                 _allNetworking.pharmacies_image(token_id: token).asStream(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
+                    print("snapshot.data.result.allRequested   Pharmacy");
+                    print(snapshot.data.result.allRequested);
+                    print(token);
+                    print("snapshot.data.result.allRequested      Pharmacy");
                     return ListView.builder(
                         itemCount: snapshot.data.result.allRequested.length,
                         itemBuilder: (context, pos) {

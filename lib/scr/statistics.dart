@@ -9,6 +9,7 @@ import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/scr/offer.dart';
 import 'package:sahlaprovider/scr/pharmacy.dart';
 import 'package:sahlaprovider/scr/product.dart';
+import 'package:sahlaprovider/scr/qrClient.dart';
 import 'package:sahlaprovider/scr/visitorCount.dart';
 
 import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
@@ -28,6 +29,7 @@ import 'get_all_orderSCr.dart';
 import 'get_all_visitor_pointsSCR.dart';
 import 'get_list_reservation.dart';
 
+import 'get_list_wedding_reservation.dart';
 import 'list_appointments.dart';
 import 'myorder.dart';
 
@@ -182,7 +184,7 @@ class _StatisticssState extends State<Statisticss> {
                                       title: "كود الخصم",
                                       function: () {},
                                       buttonText2: "تنفيذ",
-                                      description: "رقم الهاتف  $user_phone" +
+                                      description: "رقم التليفون  $user_phone" +
                                           "\n" +
                                           "اسم المستخدم $user_name",
                                       buttonText: "الفاء",
@@ -191,7 +193,7 @@ class _StatisticssState extends State<Statisticss> {
                                   );
                                 } else {
                                   // set up the button
-                                  Widget okButton = FlatButton(
+                                  Widget okButton = TextButton(
                                     child: Text("OK"),
                                     onPressed: () {
                                       Navigator.of(context).pop();
@@ -276,7 +278,7 @@ class _StatisticssState extends State<Statisticss> {
                                   );
                                 } else {
                                   // set up the button
-                                  Widget okButton = FlatButton(
+                                  Widget okButton = TextButton(
                                     child: Text("OK"),
                                     onPressed: () {
                                       Navigator.of(context).pop();
@@ -437,7 +439,7 @@ class _StatisticssState extends State<Statisticss> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              VisitorCount(token)),
+                                              VisitorCount (token)),
                                     );
                                   },
                                   child: Column(
@@ -523,7 +525,7 @@ class _StatisticssState extends State<Statisticss> {
                                               style: TextStyle(
                                                   fontFamily: 'Arbf',
                                                   color: Colors.white,
-                                                  fontSize: 25),
+                                                  fontSize: 22),
                                             ),
                                             // Text(
                                             //   '20-20',
@@ -612,64 +614,10 @@ class _StatisticssState extends State<Statisticss> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                service_type == '1'
-                                    ? GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Pharmacy()),
-                                          );
-                                        },
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              width: width * .3,
-                                              height: width * .3,
-                                              decoration: BoxDecoration(
-                                                  color: hexToColor('#00abeb'),
-                                                  gradient: new LinearGradient(
-                                                      colors: [
-                                                        Colors.tealAccent[100],
-                                                        Colors.tealAccent[700],
-                                                      ],
-                                                      begin:
-                                                          Alignment.centerLeft,
-                                                      end:
-                                                          Alignment.centerRight,
-                                                      tileMode: TileMode.clamp),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0)),
-                                              child: Center(
-                                                child: Text(
-                                                  snapshot
-                                                      .data.result.totalOrders
-                                                      .toString(),
-                                                  style: TextStyle(
-                                                      fontFamily: 'Arbf',
-                                                      color: Colors.white,
-                                                      fontSize: 25),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: .01,
-                                            ),
-                                            Text(
-                                              "سلة المشتروات",
-                                              style: TextStyle(
-                                                  fontFamily: 'Arbf',
-                                                  color: Colors.black,
-                                                  fontSize: 25),
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    : SizedBox(),
-                                service_type == '1'
-                                    ? GestureDetector(
+
+                                // service_type == '1'
+                                //     ?
+                                GestureDetector(
                                         onTap: () {
                                           Navigator.push(
                                             context,
@@ -723,15 +671,15 @@ class _StatisticssState extends State<Statisticss> {
                                           ],
                                         ),
                                       )
-                                    : SizedBox(),
-                                Expanded(child: SizedBox()),
+                                   // : SizedBox(),
+                            ,    Expanded(child: SizedBox()),
                                 GestureDetector(
                                   onTap: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              Get_all_visitor_points(token)),
+                                              Get_all_visitor_points         (token)),
                                     );
                                   },
                                   child: Column(
@@ -891,56 +839,179 @@ class _StatisticssState extends State<Statisticss> {
                                     ],
                                   )
                                 : SizedBox(),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Buy_prescription_request()),
-                                );
-                              },
-                              child: Column(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: hexToColor('#00abeb'),
-                                        gradient: new LinearGradient(
-                                            colors: [
-                                              Colors.lime[100],
-                                              Colors.lime[700],
-                                            ],
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
-                                            tileMode: TileMode.clamp),
-                                        borderRadius:
-                                            BorderRadius.circular(10.0)),
-                                    width: width * .3,
-                                    height: width * .3,
-                                    child: Center(
-                                      child: Text(
-                                        data.totalPoints.toString(),
+                            Row( mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                              children: [         // service_type == '1'
+                                //     ?
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Pharmacy()),
+                                    );
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        width: width * .3,
+                                        height: width * .3,
+                                        decoration: BoxDecoration(
+                                            color: hexToColor('#00abeb'),
+                                            gradient: new LinearGradient(
+                                                colors: [
+                                                  Colors.tealAccent[100],
+                                                  Colors.tealAccent[700],
+                                                ],
+                                                begin:
+                                                Alignment.centerLeft,
+                                                end:
+                                                Alignment.centerRight,
+                                                tileMode: TileMode.clamp),
+                                            borderRadius:
+                                            BorderRadius.circular(
+                                                10.0)),
+                                        child: Center(
+                                          child: Text(
+                                            snapshot
+                                                .data.result.totalOrders
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontFamily: 'Arbf',
+                                                color: Colors.white,
+                                                fontSize: 25),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: .01,
+                                      ),
+                                      Text(
+                                        "Pharmacy",
                                         style: TextStyle(
                                             fontFamily: 'Arbf',
-                                            color: Colors.white,
+                                            color: Colors.black,
                                             fontSize: 25),
+                                      )
+                                    ],
+                                  ),
+                                )
+                                // : SizedBox(),
+                               , GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Buy_prescription_request()),
+                                    );
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: hexToColor('#00abeb'),
+                                            gradient: new LinearGradient(
+                                                colors: [
+                                                  Colors.lime[100],
+                                                  Colors.lime[700],
+                                                ],
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                                tileMode: TileMode.clamp),
+                                            borderRadius:
+                                                BorderRadius.circular(10.0)),
+                                        width: width * .3,
+                                        height: width * .3,
+                                        child: Center(
+                                          child: Text(
+                                            data.totalPoints.toString(),
+                                            style: TextStyle(
+                                                fontFamily: 'Arbf',
+                                                color: Colors.white,
+                                                fontSize: 25),
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                      SizedBox(
+                                        height: .01,
+                                      ),
+                                      Text(
+                                        "تسعير روشتة",
+                                        style: TextStyle(
+                                            fontFamily: 'Arbf',
+                                            color: Colors.black,
+                                            fontSize: 25),
+                                      )
+                                    ],
                                   ),
-                                  SizedBox(
-                                    height: .01,
-                                  ),
-                                  Text(
-                                    "تسعير روشتة",
-                                    style: TextStyle(
-                                        fontFamily: 'Arbf',
-                                        color: Colors.black,
-                                        fontSize: 25),
-                                  )
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
+                            Row( mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                              children: [         // service_type == '1'
 
+                                GestureDetector(
+                                  onTap: () {
+
+
+
+
+
+
+
+
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Get_list_wedding_reservation()),
+                                    );
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: hexToColor('#00abeb'),
+                                            gradient: new LinearGradient(
+                                                colors: [
+                                                  Colors.lime[100],
+                                                  Colors.lime[700],
+                                                ],
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                                tileMode: TileMode.clamp),
+                                            borderRadius:
+                                            BorderRadius.circular(10.0)),
+                                        width: width * .3,
+                                        height: width * .3,
+                                        child: Center(
+                                          child: Text(
+                                            data.totalPoints.toString(),
+                                            style: TextStyle(
+                                                fontFamily: 'Arbf',
+                                                color: Colors.white,
+                                                fontSize: 25),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: .01,
+                                      ),
+                                      Text(
+                                        "حجز قاعات افرح ودور مناسبات",
+                                        style: TextStyle(
+                                            fontFamily: 'Arbf',
+                                            color: Colors.black,
+                                            fontSize: 25),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                             SizedBox(
                               height: high * .02,
                             ),

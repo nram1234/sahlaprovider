@@ -35,18 +35,13 @@ String f="";
       child: SafeArea(
           top: true,
           child: Scaffold(
-            appBar: AppBar(actions: [GestureDetector(
-              onTap: () {
-                Navigator.pop(context, false);
-              }, child: Icon(Icons.arrow_back),)
-            ]
-              ,
+            appBar: AppBar(
               centerTitle: true,
               title: Text('عدد الطلبات'),
             ),
-            body: StreamBuilder<Get_all_order_json>(
+            body: StreamBuilder<Get_all_users_visting_json>(
                 stream: _allNetworking
-                    .get_all_order(
+                    .get_all_users_visting(
                     token_id: widget.token_id, limit: limit, page_number: 0)
                     .asStream() ,
                 builder: (context, snapshot) {

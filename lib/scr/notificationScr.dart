@@ -64,14 +64,14 @@ class _NotificationScrState extends State<NotificationScr> {
                     itemCount: snapshot.data.result.allNotifications.length,
                     itemBuilder: (cont, pos) {
                       return Card(
-                        color:
-                            snapshot.data.result.allNotifications[pos].isRead ==
-                                    1
-                                ? Colors.black12
-                                : Colors.grey,
+
                         elevation: 8,
                         child: Container(
-                          //height: 100,
+                          color:
+                          snapshot.data.result.allNotifications[pos].isRead ==
+                              1
+                              ? Colors.black12
+                              : Colors.grey,
                           child: Column(
                             children: [
                               Row(

@@ -131,7 +131,8 @@ class _MainSectionsState extends State<MainSections> {
                                         Edit_Category(cat_id: snap
                                             .data.result.allProducts[index].productId , token: token,)),
                               );
-                            }  );
+                            } ,active:snap
+                                .data.result.allProducts[index].view  );
                           }),
                     );
                   } else {

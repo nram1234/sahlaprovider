@@ -35,14 +35,9 @@ class _Get_all_orderState extends State<Get_all_visitor_points> {
       child: SafeArea(
           top: true,
           child: Scaffold(
-            appBar: AppBar(actions: [GestureDetector(
-              onTap: () {
-                Navigator.pop(context, false);
-              }, child: Icon(Icons.arrow_back),)
-            ]
-              ,
+            appBar: AppBar(
               centerTitle: true,
-              title: Text('عدد الزوار'),
+              title: Text('اجمالي نقاط المستخدمين'),
             ),
             body: StreamBuilder<Get_all_visitor_points_json>(
                 stream: _allNetworking
@@ -81,7 +76,7 @@ class _Get_all_orderState extends State<Get_all_visitor_points> {
                                         });
                                       },
                                           decoration: InputDecoration(
-                                            hintText: 'البحث برقم التلفون',
+                                            hintText: 'البحث برقم التليفون',
                                             hintStyle: TextStyle(
                                               fontFamily: 'Arbf',
                                               color: hexToColor('#ed1c6f'),
@@ -114,7 +109,7 @@ class _Get_all_orderState extends State<Get_all_visitor_points> {
                                           Text(
                                               f.trim().isEmpty?'اسم العميل : ${snapshot.data.result.allVisitoe[pos].userName}':'اسم العميل : ${data[pos].userName}'),
                                           Text(
-                                              f.trim().isEmpty? 'رقم التلفون : ${snapshot.data.result.allVisitoe[pos].userPhone}':'رقم التلفون : ${data[pos].userPhone}'),
+                                              f.trim().isEmpty? 'رقم التليفون : ${snapshot.data.result.allVisitoe[pos].userPhone}':'رقم التلفون : ${data[pos].userPhone}'),
                                           Row(
                                             mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,

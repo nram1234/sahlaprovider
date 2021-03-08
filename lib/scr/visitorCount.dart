@@ -33,14 +33,9 @@ class _VisitorCountState extends State<VisitorCount> {
       child: SafeArea(
           top: true,
           child: Scaffold(
-            appBar: AppBar(actions: [GestureDetector(
-              onTap: () {
-                Navigator.pop(context, false);
-              }, child: Icon(Icons.arrow_back),)
-            ]
-              ,
+            appBar: AppBar(
               centerTitle: true,
-              title:Text('عدد الزوار'),
+              title:Text('اجمالي عدد زوار البروفايل'),
             ),
             body: StreamBuilder<Get_all_visitor_json>(
                 stream: _allNetworking
@@ -76,7 +71,7 @@ class _VisitorCountState extends State<VisitorCount> {
                                       },
                                           textAlign: TextAlign.center,
                                           decoration: InputDecoration(
-                                            hintText: 'البحث برقم التلفون',
+                                            hintText: 'البحث برقم التليفون',
                                             hintStyle: TextStyle(
                                               fontFamily: 'Arbf',
                                               color: hexToColor('#ed1c6f'),
@@ -109,7 +104,7 @@ class _VisitorCountState extends State<VisitorCount> {
                                           Text(
                                               f.trim().isEmpty?    'اسم العميل : ${snapshot.data.result.allVisitoe[pos].userName}': 'اسم العميل : ${data[pos].userName}'),
                                           Text(
-                                              f.trim().isEmpty?     'رقم التلفون : ${snapshot.data.result.allVisitoe[pos].userPhone}': 'رقم التلفون : ${data[pos].userPhone}'),
+                                              f.trim().isEmpty?     'رقم التليفون : ${snapshot.data.result.allVisitoe[pos].userPhone}': 'رقم التلفون : ${data[pos].userPhone}'),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,

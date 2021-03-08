@@ -1,14 +1,14 @@
-class Get_all_order_json {
+class Get_all_users_visting_json {
   String message;
   int messageid;
   bool status;
   int total;
   Result result;
 
-  Get_all_order_json(
+  Get_all_users_visting_json(
       {this.message, this.messageid, this.status, this.total, this.result});
 
-  Get_all_order_json.fromJson(Map<String, dynamic> json) {
+  Get_all_users_visting_json.fromJson(Map<String, dynamic> json) {
     message = json['Message'];
     messageid = json['Messageid'];
     status = json['status'];

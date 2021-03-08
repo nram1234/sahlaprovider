@@ -39,7 +39,11 @@ class _Buy_prescription_requestState extends State<Buy_prescription_request> {
                     .buy_prescription_request(token_id: token)
                     .asStream(),
                 builder: (context, snapshot) {
+
                   if (snapshot.hasData) {
+                    print("snapshot.data.result.allRequested");
+                    print(snapshot.data.result.allRequested);
+                    print("snapshot.data.result.allRequested");
                     return ListView.builder(
                         itemCount: snapshot.data.result.allRequested.length,
                         itemBuilder: (context, pos) {
@@ -135,7 +139,7 @@ class _Buy_prescription_requestState extends State<Buy_prescription_request> {
                                                       ),
                                                     ),
                                                     actions: <Widget>[
-                                                      FlatButton(
+                                                      TextButton(
                                                         child: Text('غلق'),
                                                         onPressed: () {
                                                           Navigator.of(context)
@@ -201,7 +205,7 @@ class _Buy_prescription_requestState extends State<Buy_prescription_request> {
                                                                   .descriptionDec),
                                                             ),
                                                             actions: <Widget>[
-                                                              FlatButton(
+                                                              TextButton(
                                                                 child: Text(
                                                                   'غلق',
                                                                   style: TextStyle(

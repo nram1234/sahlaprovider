@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
-import 'package:sahlaprovider/utilitie/jsondata/get_list_reservation_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/list_wedding_reservation_json.dart';
 
-class Get_list_reservation extends StatefulWidget {
+class Get_list_wedding_reservation extends StatefulWidget {
   @override
-  _Get_list_reservationState createState() => _Get_list_reservationState();
+  _Get_list_wedding_reservationState createState() =>
+      _Get_list_wedding_reservationState();
 }
 
-class _Get_list_reservationState extends State<Get_list_reservation> {
+class _Get_list_wedding_reservationState
+    extends State<Get_list_wedding_reservation> {
   final box = GetStorage();
   String token;
   AllNetworking _allNetworking = AllNetworking();
@@ -31,9 +33,10 @@ class _Get_list_reservationState extends State<Get_list_reservation> {
         appBar: AppBar(
           title: Text('الحجوزات'),
         ),
-        body: StreamBuilder<Get_list_reservation_json>(
-            stream:
-                _allNetworking.get_list_reservation(token_id: token).asStream(),
+        body: StreamBuilder<Get_List_wedding_reservation_json>(
+            stream: _allNetworking
+                .get_List_wedding_reservation(token_id: token)
+                .asStream(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 if (snapshot.data.result.allReservation.length > 0) {
@@ -220,7 +223,7 @@ class _Get_list_reservationState extends State<Get_list_reservation> {
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     GestureDetector(onTap: (){
                                       _allNetworking
@@ -251,17 +254,17 @@ class _Get_list_reservationState extends State<Get_list_reservation> {
                                       onTap: () {
                                         _allNetworking
                                             .delete_list_reservation(
-                                            token_id: token,
+                                                token_id: token,
                                             id_list: snapshot
-                                                .data
-                                                .result
-                                                .allReservation[pos]
-                                                .idOrder)
+                                                    .data
+                                                    .result
+                                                    .allReservation[pos]
+                                                    .idOrder)
                                             .then((value) {
-                                          print(value.data);
-                                          setState(() {
+                                              print(value.data);
+                                              setState(() {
 
-                                          });
+                                              });
                                         })
                                             .catchError((e) {
                                           print(e);
