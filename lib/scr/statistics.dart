@@ -51,6 +51,7 @@ class _StatisticssState extends State<Statisticss> {
   final box = GetStorage();
   AllNetworking _allNetworking = AllNetworking();
   File _imge;
+  List<Widget> homebagelist = [];
 
   @override
   void initState() {
@@ -229,7 +230,7 @@ class _StatisticssState extends State<Statisticss> {
                               ? CircularProgressIndicator()
                               : Icon(
                                   Icons.apps_outlined,
-                                  color: hexToColor('#00abeb'),
+                                  color: Colors.red,
                                 ),
                         ),
                         SizedBox(
@@ -237,9 +238,7 @@ class _StatisticssState extends State<Statisticss> {
                         ),
                         GestureDetector(
                           onTap: () async {
-
-                           print("888888888888888888");
-
+                            print("888888888888888888");
 
                             if (!_textEditingController.text.trim().isEmpty) {
                               setState(() {
@@ -314,7 +313,7 @@ class _StatisticssState extends State<Statisticss> {
                               ? CircularProgressIndicator()
                               : Icon(
                                   Icons.phone,
-                                  color: hexToColor('#00abeb'),
+                                  color: Colors.red,
                                 ),
                         ),
 
@@ -380,350 +379,662 @@ class _StatisticssState extends State<Statisticss> {
                             SizedBox(
                               height: high * .02,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              Get_all_order(token)),
-                                    );
-                                  },
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: hexToColor('#00abeb'),
-                                            gradient: new LinearGradient(
-                                                colors: [
-                                                  Colors.orange[100],
-                                                  Colors.orange[900],
-                                                ],
-                                                begin: Alignment.centerLeft,
-                                                end: Alignment.centerRight,
-                                                tileMode: TileMode.clamp),
-                                            borderRadius:
-                                                BorderRadius.circular(10.0)),
-                                        width: width * .3,
-                                        height: width * .3,
-                                        child: Center(
-                                          child: Text(
-                                            data.totalSelling.toString(),
-                                            style: TextStyle(
-                                                fontFamily: 'Arbf',
-                                                color: Colors.white,
-                                                fontSize: 25),
-                                          ),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Get_all_order(token)),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/coupon.png',
+                                    width: width,
+                                    number: data.totalSelling.toString(),
+                                    name: "عدد الكوبونات")),
+
+                            SizedBox(
+                              height: 8,
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            VisitorCount(token)),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/community.png',
+                                    width: width,
+                                    number: data.totalSelling.toString(),
+                                    name: "عدد الزوار")),
+
+                            SizedBox(
+                              height: 8,
+                            ),
+
+                            GestureDetector(
+                                onTap: () {
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) =>
+                                  //           VisitorCount(token)),
+                                  // );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/calendar.png',
+                                    width: width,
+                                    number: data.datePackege,
+                                    name: "ﺗﺎﺭﻳﺦ ﺍﻻﺷﺘﺮﺍﻙ")),
+
+                            SizedBox(
+                              height: 8,
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _selectedIndex = 1;
+                                  });
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/box.png',
+                                    width: width,
+                                    number: data.totalProduct.toString(),
+                                    name: "ﻋﺪﺩ ﺍﻟﻤﻨﺘﺠﺎﺕ")),
+
+                            SizedBox(
+                              height: 8,
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => MyOrder()),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/shopping_cart.png',
+                                    width: width,
+                                    number: snapshot.data.result.totalOrders
+                                        .toString(),
+                                    name: "سلة المشتروات")),
+
+                            SizedBox(
+                              height: 8,
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Get_all_visitor_points(token)),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/scoreboard.png',
+                                    number:data.totalPoints.toString(),
+                                    width: width,
+                                    name: "ﻋﺪﺩ نقاط")),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            service_type == '1'
+                                ? GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Doc_Profile()),
+                                      );
+                                    },
+                                    child: item_home_list(
+                                        icon: 'assets/images/scoreboard.png',
+                                        number: "",
+                                        width: width,
+                                        name: "تعديل البروفيل"))
+                                : SizedBox(),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            service_type == '1'
+                                ? GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                List_Appointments()),
+                                      );
+                                    },
+                                    child: item_home_list(
+                                        icon: 'assets/images/scoreboard.png',
+                                        number: "",//data.totalProduct.toString(),
+                                        width: width,
+                                        name: "مواعيد الكشف"))
+                                : SizedBox(),
+                            SizedBox(
+                              height: 8,
+                            ),
+
+
+
+                            ///===============================================================================
+                            ///
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Pharmacy()),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/scoreboard.png',
+                                    number:"",// data.totalProduct.toString(),
+                                    width: width,
+                                    name: "Pharmacy")),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Buy_prescription_request()),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/scoreboard.png',
+                                    number:"",// data.totalProduct.toString(),
+                                    width: width,
+                                    name: "تسعير روشتة")),
+                            SizedBox(
+                              height: 8,
+                            ),
+
+
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Get_list_wedding_reservation()),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/scoreboard.png',
+                                    number:"",// data.totalProduct.toString(),
+                                    width: width,
+                                    name: "حجز قاعات افرح ودور مناسبات")),
+                            SizedBox(
+                              height: 8,
+                            ),
+
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Get_list_reservation()),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/scoreboard.png',
+                                    number:"",// data.totalProduct.toString(),
+                                    width: width,
+                                    name: "Get_list_reservation")),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            //==============================
+                            qrgnratt
+                                ? CircularProgressIndicator()
+                                : GestureDetector(
+                                    onTap: () async {
+                                      int idOfQR = await box.read('id');
+                                      print(
+                                          '5555555555555555555555555555555555555555555');
+                                      print(box.read('id'));
+                                      await _generateBarCode(
+                                          box.read('id').toString());
+
+                                      //  Get.to(QRRead(),
+                                      //     transition: Transition.leftToRightWithFade);
+                                    },
+                                    child: Container(
+                                      height: high * .07,
+                                      width: width * 0.8,
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(" انشاء  QR ",
+                                                style: TextStyle(
+                                                  fontFamily: 'Arbf',
+                                                  color: Colors.white,
+                                                )),
+                                            Icon(
+                                              Icons.qr_code,
+                                              color: Colors.white,
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: .01,
-                                      ),
-                                      Text(
-                                        "عدد الكوبونات",
-                                        style: TextStyle(
-                                            fontFamily: 'Arbf',
-                                            color: Colors.black,
-                                            fontSize: 25),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Expanded(child: SizedBox()),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              VisitorCount (token)),
-                                    );
-                                  },
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: hexToColor('#00abeb'),
-                                            gradient: new LinearGradient(
-                                                colors: [
-                                                  Colors.purpleAccent[100],
-                                                  Colors.purpleAccent[700],
-                                                ],
-                                                begin: Alignment.centerLeft,
-                                                end: Alignment.centerRight,
-                                                tileMode: TileMode.clamp),
-                                            borderRadius:
-                                                BorderRadius.circular(10.0)),
-                                        width: width * .3,
-                                        height: width * .3,
-                                        child: Center(
-                                          child: Text(
-                                            data.totalViews.toString(),
-                                            style: TextStyle(
-                                                fontFamily: 'Arbf',
-                                                color: Colors.white,
-                                                fontSize: 25),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: .01,
-                                      ),
-                                      Text(
-                                        "عدد الزوار",
-                                        style: TextStyle(
-                                            fontFamily: 'Arbf',
-                                            color: Colors.black,
-                                            fontSize: 25),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: high * .02,
-                            ),
-                            Container(
-                              height: 1,
-                              width: width * .7,
-                              color: Colors.red,
-                            ),
-                            SizedBox(
-                              height: high * .02,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Column(
-                                  children: [
-                                    Container(
-                                      width: width * .3,
-                                      height: width * .3,
                                       decoration: BoxDecoration(
                                           color: hexToColor('#00abeb'),
                                           gradient: new LinearGradient(
                                               colors: [
-                                                Colors.brown[100],
-                                                Colors.brown[700],
+                                                Colors.red[100],
+                                                Colors.red[900],
                                               ],
                                               begin: Alignment.centerLeft,
                                               end: Alignment.centerRight,
                                               tileMode: TileMode.clamp),
                                           borderRadius:
-                                              BorderRadius.circular(10.0)),
-                                      child: Center(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              data.datePackege,
-                                              style: TextStyle(
-                                                  fontFamily: 'Arbf',
-                                                  color: Colors.white,
-                                                  fontSize: 22),
-                                            ),
-                                            // Text(
-                                            //   '20-20',
-                                            //   style: TextStyle(
-                                            //       fontFamily: 'Arbf',
-                                            //       color: Colors.white,
-                                            //       fontSize: 25),
-                                            // )
-                                          ],
-                                        ),
-                                      ),
+                                              BorderRadius.circular(40.0)),
                                     ),
-                                    SizedBox(
-                                      height: .01,
-                                    ),
-                                    Text(
-                                      "ﺗﺎﺭﻳﺦ ﺍﻻﺷﺘﺮﺍﻙ ",
-                                      style: TextStyle(
-                                          fontFamily: 'Arbf',
-                                          color: Colors.black,
-                                          fontSize: 25),
-                                    )
-                                  ],
-                                ),
-                                Expanded(child: SizedBox()),
-                                GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      _selectedIndex = 1;
-                                    });
-                                  },
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        width: width * .3,
-                                        height: width * .3,
-                                        decoration: BoxDecoration(
-                                            color: hexToColor('#00abeb'),
-                                            gradient: new LinearGradient(
-                                                colors: [
-                                                  Colors.pinkAccent[100],
-                                                  Colors.pinkAccent[700],
-                                                ],
-                                                begin: Alignment.centerLeft,
-                                                end: Alignment.centerRight,
-                                                tileMode: TileMode.clamp),
-                                            borderRadius:
-                                                BorderRadius.circular(10.0)),
-                                        child: Center(
-                                          child: Text(
-                                            data.totalProduct.toString(),
-                                            style: TextStyle(
-                                                fontFamily: 'Arbf',
-                                                color: Colors.white,
-                                                fontSize: 25),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: .01,
-                                      ),
-                                      Text(
-                                        " ﻋﺪﺩ ﺍﻟﻤﻨﺘﺠﺎﺕ",
-                                        style: TextStyle(
-                                            fontFamily: 'Arbf',
-                                            color: Colors.black,
-                                            fontSize: 25),
-                                      )
-                                    ],
                                   ),
-                                )
-                              ],
-                            ),
-
                             SizedBox(
                               height: high * .02,
                             ),
-                            Container(
-                              height: 1,
-                              width: width * .7,
-                              color: Colors.red,
-                            ),
-                            SizedBox(
-                              height: high * .02,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-
-                                // service_type == '1'
-                                //     ?
-                                GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MyOrder()),
-                                          );
-                                        },
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              width: width * .3,
-                                              height: width * .3,
-                                              decoration: BoxDecoration(
-                                                  color: hexToColor('#00abeb'),
-                                                  gradient: new LinearGradient(
-                                                      colors: [
-                                                        Colors.tealAccent[100],
-                                                        Colors.tealAccent[700],
-                                                      ],
-                                                      begin:
-                                                          Alignment.centerLeft,
-                                                      end:
-                                                          Alignment.centerRight,
-                                                      tileMode: TileMode.clamp),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0)),
-                                              child: Center(
-                                                child: Text(
-                                                  snapshot
-                                                      .data.result.totalOrders
-                                                      .toString(),
-                                                  style: TextStyle(
-                                                      fontFamily: 'Arbf',
-                                                      color: Colors.white,
-                                                      fontSize: 25),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: .01,
-                                            ),
-                                            Text(
-                                              "سلة المشتروات",
-                                              style: TextStyle(
-                                                  fontFamily: 'Arbf',
-                                                  color: Colors.black,
-                                                  fontSize: 25),
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                   // : SizedBox(),
-                            ,    Expanded(child: SizedBox()),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              Get_all_visitor_points         (token)),
-                                    );
-                                  },
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: hexToColor('#00abeb'),
-                                            gradient: new LinearGradient(
-                                                colors: [
-                                                  Colors.lime[100],
-                                                  Colors.lime[700],
-                                                ],
-                                                begin: Alignment.centerLeft,
-                                                end: Alignment.centerRight,
-                                                tileMode: TileMode.clamp),
-                                            borderRadius:
-                                                BorderRadius.circular(10.0)),
-                                        width: width * .3,
-                                        height: width * .3,
-                                        child: Center(
-                                          child: Text(
-                                            data.totalPoints.toString(),
-                                            style: TextStyle(
-                                                fontFamily: 'Arbf',
-                                                color: Colors.white,
-                                                fontSize: 25),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: .01,
-                                      ),
-                                      Text(
-                                        "ﻋﺪﺩ نقاط",
-                                        style: TextStyle(
+                            GestureDetector(
+                              onTap: () {
+                                if (activediscount) {
+                                  _allNetworking
+                                      .create_coupon(token_id: token, type: 0)
+                                      .then((value) {});
+                                  setState(() {});
+                                } else {
+                                  _allNetworking
+                                      .create_coupon(token_id: token, type: 1)
+                                      .then((value) {});
+                                  setState(() {});
+                                }
+                              },
+                              child: Container(
+                                height: high * .07,
+                                width: width * 0.8,
+                                child: Center(
+                                  child: activediscount
+                                      ? Text(" الغاء  ${data.serviceCoupon}",
+                                          style: TextStyle(
+                                              fontFamily: 'Arbf',
+                                              color: Colors.white,
+                                              fontSize: 25))
+                                      : Text(" تفعيل اكواد الخصم ",
+                                          style: TextStyle(
                                             fontFamily: 'Arbf',
-                                            color: Colors.black,
-                                            fontSize: 25),
-                                      )
-                                    ],
-                                  ),
+                                            color: Colors.white,
+                                          )),
                                 ),
-                              ],
-                            ),
+                                decoration: BoxDecoration(
+                                    color: hexToColor('#00abeb'),
+                                    gradient: new LinearGradient(
+                                        colors: [
+                                          Colors.red[100],
+                                          Colors.red[900],
+                                        ],
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                        tileMode: TileMode.clamp),
+                                    borderRadius: BorderRadius.circular(40.0)),
+                              ),
+                            )
+                            // SizedBox(
+                            //   height: 8,
+                            // ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            //   children: [
+                            //     GestureDetector(
+                            //       onTap: () {
+                            //         Navigator.push(
+                            //           context,
+                            //           MaterialPageRoute(
+                            //               builder: (context) =>
+                            //                   Get_all_order(token)),
+                            //         );
+                            //       },
+                            //       child: Column(
+                            //         children: [
+                            //           Container(
+                            //             decoration: BoxDecoration(
+                            //                 color: hexToColor('#00abeb'),
+                            //                 gradient: new LinearGradient(
+                            //                     colors: [
+                            //                       Colors.orange[100],
+                            //                       Colors.orange[900],
+                            //                     ],
+                            //                     begin: Alignment.centerLeft,
+                            //                     end: Alignment.centerRight,
+                            //                     tileMode: TileMode.clamp),
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(10.0)),
+                            //             width: width * .3,
+                            //             height: width * .3,
+                            //             child: Center(
+                            //               child: Text(
+                            //                 data.totalSelling.toString(),
+                            //                 style: TextStyle(
+                            //                     fontFamily: 'Arbf',
+                            //                     color: Colors.white,
+                            //                     fontSize: 25),
+                            //               ),
+                            //             ),
+                            //           ),
+                            //           SizedBox(
+                            //             height: .01,
+                            //           ),
+                            //           Text(
+                            //             "عدد الكوبونات",
+                            //             style: TextStyle(
+                            //                 fontFamily: 'Arbf',
+                            //                 color: Colors.black,
+                            //                 fontSize: 25),
+                            //           )
+                            //         ],
+                            //       ),
+                            //     ),
+                            //     Expanded(child: SizedBox()),
+                            //     GestureDetector(
+                            //       onTap: () {
+                            //         Navigator.push(
+                            //           context,
+                            //           MaterialPageRoute(
+                            //               builder: (context) =>
+                            //                   VisitorCount(token)),
+                            //         );
+                            //       },
+                            //       child: Column(
+                            //         children: [
+                            //           Container(
+                            //             decoration: BoxDecoration(
+                            //                 color: hexToColor('#00abeb'),
+                            //                 gradient: new LinearGradient(
+                            //                     colors: [
+                            //                       Colors.purpleAccent[100],
+                            //                       Colors.purpleAccent[700],
+                            //                     ],
+                            //                     begin: Alignment.centerLeft,
+                            //                     end: Alignment.centerRight,
+                            //                     tileMode: TileMode.clamp),
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(10.0)),
+                            //             width: width * .3,
+                            //             height: width * .3,
+                            //             child: Center(
+                            //               child: Text(
+                            //                 data.totalViews.toString(),
+                            //                 style: TextStyle(
+                            //                     fontFamily: 'Arbf',
+                            //                     color: Colors.white,
+                            //                     fontSize: 25),
+                            //               ),
+                            //             ),
+                            //           ),
+                            //           SizedBox(
+                            //             height: .01,
+                            //           ),
+                            //           Text(
+                            //             "عدد الزوار",
+                            //             style: TextStyle(
+                            //                 fontFamily: 'Arbf',
+                            //                 color: Colors.black,
+                            //                 fontSize: 25),
+                            //           )
+                            //         ],
+                            //       ),
+                            //     )
+                            //   ],
+                            // ),
+                            // SizedBox(
+                            //   height: high * .02,
+                            // ),
+                            // Container(
+                            //   height: 1,
+                            //   width: width * .7,
+                            //   color: Colors.red,
+                            // ),
+                            // SizedBox(
+                            //   height: high * .02,
+                            // ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            //   children: [
+                            //     Column(
+                            //       children: [
+                            //         Container(
+                            //           width: width * .3,
+                            //           height: width * .3,
+                            //           decoration: BoxDecoration(
+                            //               color: hexToColor('#00abeb'),
+                            //               gradient: new LinearGradient(
+                            //                   colors: [
+                            //                     Colors.brown[100],
+                            //                     Colors.brown[700],
+                            //                   ],
+                            //                   begin: Alignment.centerLeft,
+                            //                   end: Alignment.centerRight,
+                            //                   tileMode: TileMode.clamp),
+                            //               borderRadius:
+                            //                   BorderRadius.circular(10.0)),
+                            //           child: Center(
+                            //             child: Column(
+                            //               mainAxisAlignment:
+                            //                   MainAxisAlignment.center,
+                            //               children: [
+                            //                 Text(
+                            //                   data.datePackege,
+                            //                   style: TextStyle(
+                            //                       fontFamily: 'Arbf',
+                            //                       color: Colors.white,
+                            //                       fontSize: 22),
+                            //                 ),
+                            //                 // Text(
+                            //                 //   '20-20',
+                            //                 //   style: TextStyle(
+                            //                 //       fontFamily: 'Arbf',
+                            //                 //       color: Colors.white,
+                            //                 //       fontSize: 25),
+                            //                 // )
+                            //               ],
+                            //             ),
+                            //           ),
+                            //         ),
+                            //         SizedBox(
+                            //           height: .01,
+                            //         ),
+                            //         Text(
+                            //           "ﺗﺎﺭﻳﺦ ﺍﻻﺷﺘﺮﺍﻙ ",
+                            //           style: TextStyle(
+                            //               fontFamily: 'Arbf',
+                            //               color: Colors.black,
+                            //               fontSize: 25),
+                            //         )
+                            //       ],
+                            //     ),
+                            //     Expanded(child: SizedBox()),
+                            //     GestureDetector(
+                            //       onTap: () {
+                            //         setState(() {
+                            //           _selectedIndex = 1;
+                            //         });
+                            //       },
+                            //       child: Column(
+                            //         children: [
+                            //           Container(
+                            //             width: width * .3,
+                            //             height: width * .3,
+                            //             decoration: BoxDecoration(
+                            //                 color: hexToColor('#00abeb'),
+                            //                 gradient: new LinearGradient(
+                            //                     colors: [
+                            //                       Colors.pinkAccent[100],
+                            //                       Colors.pinkAccent[700],
+                            //                     ],
+                            //                     begin: Alignment.centerLeft,
+                            //                     end: Alignment.centerRight,
+                            //                     tileMode: TileMode.clamp),
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(10.0)),
+                            //             child: Center(
+                            //               child: Text(
+                            //                 data.totalProduct.toString(),
+                            //                 style: TextStyle(
+                            //                     fontFamily: 'Arbf',
+                            //                     color: Colors.white,
+                            //                     fontSize: 25),
+                            //               ),
+                            //             ),
+                            //           ),
+                            //           SizedBox(
+                            //             height: .01,
+                            //           ),
+                            //           Text(
+                            //             " سلة المشتروات",
+                            //             style: TextStyle(
+                            //                 fontFamily: 'Arbf',
+                            //                 color: Colors.black,
+                            //                 fontSize: 25),
+                            //           )
+                            //         ],
+                            //       ),
+                            //     )
+                            //   ],
+                            // ),
+                            //
+                            // SizedBox(
+                            //   height: high * .02,
+                            // ),
+                            // Container(
+                            //   height: 1,
+                            //   width: width * .7,
+                            //   color: Colors.red,
+                            // ),
+                            // SizedBox(
+                            //   height: high * .02,
+                            // ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            //   children: [
+                            //     // service_type == '1'
+                            //     //     ?
+                            //     GestureDetector(
+                            //       onTap: () {
+                            //         Navigator.push(
+                            //           context,
+                            //           MaterialPageRoute(
+                            //               builder: (context) => MyOrder()),
+                            //         );
+                            //       },
+                            //       child: Column(
+                            //         children: [
+                            //           Container(
+                            //             width: width * .3,
+                            //             height: width * .3,
+                            //             decoration: BoxDecoration(
+                            //                 color: hexToColor('#00abeb'),
+                            //                 gradient: new LinearGradient(
+                            //                     colors: [
+                            //                       Colors.tealAccent[100],
+                            //                       Colors.tealAccent[700],
+                            //                     ],
+                            //                     begin: Alignment.centerLeft,
+                            //                     end: Alignment.centerRight,
+                            //                     tileMode: TileMode.clamp),
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(10.0)),
+                            //             child: Center(
+                            //               child: Text(
+                            //                 snapshot.data.result.totalOrders
+                            //                     .toString(),
+                            //                 style: TextStyle(
+                            //                     fontFamily: 'Arbf',
+                            //                     color: Colors.white,
+                            //                     fontSize: 25),
+                            //               ),
+                            //             ),
+                            //           ),
+                            //           SizedBox(
+                            //             height: .01,
+                            //           ),
+                            //           Text(
+                            //             "ﻋﺪﺩ نقاط",
+                            //             style: TextStyle(
+                            //                 fontFamily: 'Arbf',
+                            //                 color: Colors.black,
+                            //                 fontSize: 25),
+                            //           )
+                            //         ],
+                            //       ),
+                            //     )
+                            //     // : SizedBox(),
+                            //     ,
+                            //     Expanded(child: SizedBox()),
+                            //     GestureDetector(
+                            //       onTap: () {
+                            //         Navigator.push(
+                            //           context,
+                            //           MaterialPageRoute(
+                            //               builder: (context) =>
+                            //                   Get_all_visitor_points(token)),
+                            //         );
+                            //       },
+                            //       child: Column(
+                            //         children: [
+                            //           Container(
+                            //             decoration: BoxDecoration(
+                            //                 color: hexToColor('#00abeb'),
+                            //                 gradient: new LinearGradient(
+                            //                     colors: [
+                            //                       Colors.lime[100],
+                            //                       Colors.lime[700],
+                            //                     ],
+                            //                     begin: Alignment.centerLeft,
+                            //                     end: Alignment.centerRight,
+                            //                     tileMode: TileMode.clamp),
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(10.0)),
+                            //             width: width * .3,
+                            //             height: width * .3,
+                            //             child: Center(
+                            //               child: Text(
+                            //                 data.totalPoints.toString(),
+                            //                 style: TextStyle(
+                            //                     fontFamily: 'Arbf',
+                            //                     color: Colors.white,
+                            //                     fontSize: 25),
+                            //               ),
+                            //             ),
+                            //           ),
+                            //           SizedBox(
+                            //             height: .01,
+                            //           ),
+                            //           Text(
+                            //             "ﻋﺪﺩ نقاط",
+                            //             style: TextStyle(
+                            //                 fontFamily: 'Arbf',
+                            //                 color: Colors.black,
+                            //                 fontSize: 25),
+                            //           )
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
+                            ,
                             service_type == '1'
                                 ? Row(
                                     mainAxisAlignment:
@@ -839,17 +1150,17 @@ class _StatisticssState extends State<Statisticss> {
                                     ],
                                   )
                                 : SizedBox(),
-                            Row( mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                              children: [         // service_type == '1'
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                // service_type == '1'
                                 //     ?
                                 GestureDetector(
                                   onTap: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              Pharmacy()),
+                                          builder: (context) => Pharmacy()),
                                     );
                                   },
                                   child: Column(
@@ -864,18 +1175,14 @@ class _StatisticssState extends State<Statisticss> {
                                                   Colors.tealAccent[100],
                                                   Colors.tealAccent[700],
                                                 ],
-                                                begin:
-                                                Alignment.centerLeft,
-                                                end:
-                                                Alignment.centerRight,
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
                                                 tileMode: TileMode.clamp),
                                             borderRadius:
-                                            BorderRadius.circular(
-                                                10.0)),
+                                                BorderRadius.circular(10.0)),
                                         child: Center(
                                           child: Text(
-                                            snapshot
-                                                .data.result.totalOrders
+                                            snapshot.data.result.totalOrders
                                                 .toString(),
                                             style: TextStyle(
                                                 fontFamily: 'Arbf',
@@ -898,7 +1205,8 @@ class _StatisticssState extends State<Statisticss> {
                                   ),
                                 )
                                 // : SizedBox(),
-                               , GestureDetector(
+                                ,
+                                GestureDetector(
                                   onTap: () {
                                     Navigator.push(
                                       context,
@@ -949,20 +1257,13 @@ class _StatisticssState extends State<Statisticss> {
                                 ),
                               ],
                             ),
-                            Row( mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                              children: [         // service_type == '1'
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                // service_type == '1'
 
                                 GestureDetector(
                                   onTap: () {
-
-
-
-
-
-
-
-
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -984,7 +1285,7 @@ class _StatisticssState extends State<Statisticss> {
                                                 end: Alignment.centerRight,
                                                 tileMode: TileMode.clamp),
                                             borderRadius:
-                                            BorderRadius.circular(10.0)),
+                                                BorderRadius.circular(10.0)),
                                         width: width * .3,
                                         height: width * .3,
                                         child: Center(
@@ -1064,105 +1365,11 @@ class _StatisticssState extends State<Statisticss> {
                                 ],
                               ),
                             ),
+
                             SizedBox(
                               height: high * .02,
                             ),
-                            qrgnratt
-                                ? CircularProgressIndicator()
-                                : GestureDetector(
-                              onTap: () async {
-                                int idOfQR = await box.read('id');
-                                print( '5555555555555555555555555555555555555555555');
-                                print( box.read('id'));
-                                await _generateBarCode(
-                                    box.read('id').toString());
-
-                                //  Get.to(QRRead(),
-                                //     transition: Transition.leftToRightWithFade);
-                              },
-                              child: Container(
-                                height: high * .07,
-                                width: width * 0.8,
-                                child: Center(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
-                                    children: [
-                                      Text(" انشاء  QR ",
-                                          style: TextStyle(
-                                            fontFamily: 'Arbf',
-                                            color: Colors.white,
-                                          )),
-                                      Icon(
-                                        Icons.qr_code,
-                                        color: Colors.white,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: hexToColor('#00abeb'),
-                                    gradient: new LinearGradient(
-                                        colors: [
-                                          Colors.red[100],
-                                          Colors.red[900],
-                                        ],
-                                        begin: Alignment.centerLeft,
-                                        end: Alignment.centerRight,
-                                        tileMode: TileMode.clamp),
-                                    borderRadius:
-                                    BorderRadius.circular(40.0)),
-                              ),
-                            ), SizedBox(
-                              height:high * .02,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                if (activediscount) {
-                                  _allNetworking
-                                      .create_coupon(
-                                      token_id: token, type: 0)
-                                      .then((value) {});
-                                  setState(() {});
-                                } else {
-                                  _allNetworking
-                                      .create_coupon(
-                                      token_id: token, type: 1)
-                                      .then((value) {});
-                                  setState(() {});
-                                }
-                              },
-                              child: Container(
-                                height: high * .07,
-                                width: width * 0.8,
-                                child: Center(
-                                  child: activediscount
-                                      ? Text(
-                                      " الغاء  ${data.serviceCoupon}",
-                                      style: TextStyle(
-                                          fontFamily: 'Arbf',
-                                          color: Colors.white,
-                                          fontSize: 25))
-                                      : Text(" تفعيل اكواد الخصم ",
-                                      style: TextStyle(
-                                        fontFamily: 'Arbf',
-                                        color: Colors.white,
-                                      )),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: hexToColor('#00abeb'),
-                                    gradient: new LinearGradient(
-                                        colors: [
-                                          Colors.red[100],
-                                          Colors.red[900],
-                                        ],
-                                        begin: Alignment.centerLeft,
-                                        end: Alignment.centerRight,
-                                        tileMode: TileMode.clamp),
-                                    borderRadius:
-                                    BorderRadius.circular(40.0)),
-                              ),
-                            )   ],
+                          ],
                         ),
                       ),
                     ),
@@ -1176,46 +1383,44 @@ class _StatisticssState extends State<Statisticss> {
             }
           });
     } else if (pos == 1) {
-      return ProductScr( () {
+      return ProductScr(() {
         _selectedIndex = 0;
 
         setState(() {});
-      } );
+      });
     } else if (pos == 2) {
       return OfferScr(() {
         _selectedIndex = 0;
 
         setState(() {});
-      } );
+      });
     }
     return Container();
   }
 
-
   Future _generateBarCode(String inputCode) async {
-    qrgnratt=true;
-    setState(() {
-
-    });
+    qrgnratt = true;
+    setState(() {});
 
     Uint8List result = await scanner.generateBarCode(inputCode);
     this.setState(() => this.bytes = result);
-    File.fromRawPath(result);  //_imge=
+    File.fromRawPath(result); //_imge=
     final success = await ImageGallerySaver.saveImage(this.bytes);
 
     String imageString = base64Encode(this.bytes);
     print(imageString);
     print(success);
-    await  _allNetworking.save_QR(token_id: token, file:imageString) .then((value) {
-
+    await _allNetworking
+        .save_QR(token_id: token, file: imageString)
+        .then((value) {
       print(value.data);
 
       Get.dialog(
         AlertDialog(
-          title: Text( ''),
+          title: Text(''),
           content: Text("تم حفظ الصوره في مكتبة الصور"),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text("CLOSE"),
               onPressed: () {
                 Get.back();
@@ -1227,13 +1432,9 @@ class _StatisticssState extends State<Statisticss> {
       );
     });
 
-    qrgnratt=false;
-    setState(() {
-
-    });
-
+    qrgnratt = false;
+    setState(() {});
   }
-
 
   _requestPermission() async {
     Map<Permission, PermissionStatus> statuses = await [
@@ -1242,9 +1443,67 @@ class _StatisticssState extends State<Statisticss> {
 
     final info = statuses[Permission.storage].toString();
     print(info);
-
   }
 
-
-
+  Widget item_home_list({String name, String number, String icon, width}) {
+    return Container(
+      width: width,
+      height: 100,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: Colors.white,
+        border: Border.all(
+          width: 1.0,
+          color: const Color(0xFFF0F0F0),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFFF4F4F4).withOpacity(0.8),
+            offset: Offset(0, 2.0),
+            blurRadius: 2.0,
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 8,
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Container(
+              height: 50,
+              width: 50,
+              child: Image.asset(
+                icon,
+                color: Colors.red,
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          Expanded(
+            flex: 1,
+            child: Row(
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(name,
+                    style: TextStyle(
+                        fontFamily: 'Arbf', color: Colors.black, fontSize: 20)),
+                Expanded(flex: 1, child: SizedBox()),
+                Text(number,
+                    style: TextStyle(
+                        fontFamily: 'Arbf', color: Colors.red, fontSize: 20)),
+                SizedBox(
+                  width: 8,
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
 }

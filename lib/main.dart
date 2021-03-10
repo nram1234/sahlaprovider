@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sahlaprovider/scr/login.dart';
+import 'package:sahlaprovider/scr/splashSCR.dart';
 import 'Translation/Trans.dart';
 import 'myWidget/testthemap.dart';
 import 'scr/QRread.dart';
@@ -29,6 +30,8 @@ class MyApp extends StatelessWidget {
     final box = GetStorage();
     String token=  box.read(
         'token' );
+    print('000000000000000000000000000000000000000000000000000000000');
+    print(token);
     return GetMaterialApp(
         locale: LocalizationService.locale,
         translations: LocalizationService(),
@@ -50,7 +53,7 @@ class MyApp extends StatelessWidget {
                   return tstart();
                 else if (snapshot.data == false) {
                   return tstart();
-                }return token!=null?Statisticss():LoginScr();//Statisticss();token!=null?Statisticss():
+                }return  token!=null?Statisticss():LoginScr();//Statisticss();token!=null?Statisticss():
 
             }
           },
