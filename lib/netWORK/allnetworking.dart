@@ -18,6 +18,7 @@ import 'package:sahlaprovider/utilitie/jsondata/get_current_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_home_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_list_notifications_JSON.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_list_reservation_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/get_list_weddings_services_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_waiting_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_order_details_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_previous_orders_json.dart';
@@ -32,6 +33,7 @@ import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_offer_JSON.dart
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_product_JSON.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_points_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_profile_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/preparation_wedding_service_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/ticket_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/tickets_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/tickets_types_json.dart';
@@ -562,6 +564,8 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
+      print('0000000000000000000000000000000000000000');
+      print(value.data);
       data = Get_list_notifications_JSON.fromJson(value.data);
     });
 
@@ -2058,10 +2062,12 @@ class AllNetworking {
 
     await dio
         .post(
-      paseurl + '/medicine/get_notification_details',
+      paseurl + '/provider/get_notification_details',
       data: formData,
     )
         .then((value) {
+      print('0000000000000000000000000000000000000000');
+          print(value.data);
       data = Get_notification_details_json.fromJson(value.data);
     });
 
@@ -2131,4 +2137,96 @@ class AllNetworking {
   }
 
 
+
+  Future< Get_list_weddings_services_json>  get_list_weddings_services({
+    @required String token_id,
+  }) async {
+    Get_list_weddings_services_json data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+    });
+
+    await dio
+        .post(
+      paseurl + '/weddings/list_weddings_services',
+      data: formData,
+    )
+        .then((value) {
+      data =  Get_list_weddings_services_json.fromJson(value.data);
+    });
+
+    return data;
+  }
+  Future<Response> delete_wedding_service({
+    @required String token_id,
+    @required String id_list,
+  }) async {
+    Response response;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "id_list": id_list,
+    });
+    response = await dio.post(
+      paseurl + '/weddings/delete_wedding_service',
+      data: formData,
+    );
+
+    return response;
+  }
+
+
+
+
+  Future<Response> add__wedding_service(
+      {
+        @required String token_id,
+        @required String name,
+        @required String name_en,
+        @required String price,@required int currency_id,
+       }) async {
+    Response response;
+
+
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "name": name,
+      "name_en": name_en,
+      "currency_id": currency_id,"price": price,
+
+    });
+    response =
+    await dio.post(paseurl + '/weddings/add__wedding_service', data: formData);
+    return response;
+  }
+
+
+
+
+  Future< Preparation_wedding_service_json>  Preparation_wedding_service({
+    @required String token_id,
+  }) async {
+    Preparation_wedding_service_json data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+    });
+
+    await dio
+        .post(
+      paseurl + '/weddings/list_weddings_services',
+      data: formData,
+    )
+        .then((value) {
+      data =  Preparation_wedding_service_json.fromJson(value.data);
+    });
+
+    return data;
+  }
 }

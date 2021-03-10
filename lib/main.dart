@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
                   return tstart();
                 else if (snapshot.data == false) {
                   return tstart();
-                }return  token!=null?Statisticss():LoginScr();//Statisticss();token!=null?Statisticss():
+                }return Splash();// token!=null?Statisticss():LoginScr();//Statisticss();token!=null?Statisticss():
 
             }
           },

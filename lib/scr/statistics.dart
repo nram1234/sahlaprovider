@@ -31,6 +31,7 @@ import 'get_list_reservation.dart';
 
 import 'get_list_wedding_reservation.dart';
 import 'list_appointments.dart';
+import 'list_weddings_services.dart';
 import 'myorder.dart';
 
 class Statisticss extends StatefulWidget {
@@ -576,6 +577,23 @@ class _StatisticssState extends State<Statisticss> {
                                     number:"",// data.totalProduct.toString(),
                                     width: width,
                                     name: "حجز قاعات افرح ودور مناسبات")),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            List_weddings_services()),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/scoreboard.png',
+                                    number:"",// data.totalProduct.toString(),
+                                    width: width,
+                                    name: "خدمات القاعة")),
                             SizedBox(
                               height: 8,
                             ),
