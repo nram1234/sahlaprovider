@@ -515,7 +515,7 @@ class _StatisticssState extends State<Statisticss> {
                                       );
                                     },
                                     child: item_home_list(
-                                        icon: 'assets/images/scoreboard.png',
+                                        icon: 'assets/images/medical.png',
                                         number: "",//data.totalProduct.toString(),
                                         width: width,
                                         name: "مواعيد الكشف"))
@@ -537,7 +537,7 @@ class _StatisticssState extends State<Statisticss> {
                                   );
                                 },
                                 child: item_home_list(
-                                    icon: 'assets/images/scoreboard.png',
+                                    icon: 'assets/images/pills.png',
                                     number:"",// data.totalProduct.toString(),
                                     width: width,
                                     name: "Pharmacy")),
@@ -554,7 +554,7 @@ class _StatisticssState extends State<Statisticss> {
                                   );
                                 },
                                 child: item_home_list(
-                                    icon: 'assets/images/scoreboard.png',
+                                    icon: 'assets/images/medical_prescription.png',
                                     number:"",// data.totalProduct.toString(),
                                     width: width,
                                     name: "تسعير روشتة")),
@@ -573,7 +573,7 @@ class _StatisticssState extends State<Statisticss> {
                                   );
                                 },
                                 child: item_home_list(
-                                    icon: 'assets/images/scoreboard.png',
+                                    icon: 'assets/images/wedding.png',
                                     number:"",// data.totalProduct.toString(),
                                     width: width,
                                     name: "حجز قاعات افرح ودور مناسبات")),
@@ -590,7 +590,7 @@ class _StatisticssState extends State<Statisticss> {
                                   );
                                 },
                                 child: item_home_list(
-                                    icon: 'assets/images/scoreboard.png',
+                                    icon: 'assets/images/food.png',
                                     number:"",// data.totalProduct.toString(),
                                     width: width,
                                     name: "خدمات القاعة")),

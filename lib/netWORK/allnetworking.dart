@@ -55,7 +55,7 @@ class AllNetworking {
     @required String firebase_token,
     @required String lang,
   }) async {
-    FormData formData = new FormData.fromMap( {
+    FormData formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "password": password,
@@ -122,7 +122,8 @@ class AllNetworking {
       @required String current_price,
       @required String old_price,
       @required String description_ar,
-      @required String description_en,    @required String cat_id,
+      @required String description_en,
+      @required String cat_id,
       @required File file}) async {
     Response response;
     String fileName = file.path.split('/').last;
@@ -180,7 +181,8 @@ class AllNetworking {
     @required String description_ar,
     @required String description_en,
     @required File file,
-    @required int id_product, @required String cat_id,
+    @required int id_product,
+    @required String cat_id,
   }) async {
     Response response;
     String fileName;
@@ -379,7 +381,6 @@ class AllNetworking {
     @required String titlen_en,
     @required String phone,
     @required String whatsapp,
-   
     @required String description,
     @required String description_en,
     @required String phone_second,
@@ -414,7 +415,6 @@ class AllNetworking {
       "phone": phone,
       "whatsapp": whatsapp,
 
-    
       "description": description,
       "description_en": description_en,
       "phone_second": phone_second,
@@ -864,9 +864,9 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-          print('ggggggggggggggggggggggggggggggggggggggggggggggggg');
+      print('ggggggggggggggggggggggggggggggggggggggggggggggggg');
       print(value.data);
-          print('ggggggggggggggggggggggggggggggggggggggggggggggggg');
+      print('ggggggggggggggggggggggggggggggggggggggggggggggggg');
       response = Get_home_json.fromJson(value.data);
     });
 
@@ -1156,10 +1156,6 @@ class AllNetworking {
     return data;
   }
 
-
-
-
-
   Future<Response> logout({
     @required String token_id,
     @required String firebase_token,
@@ -1184,17 +1180,12 @@ class AllNetworking {
     return data;
   }
 
-
-
-
-
   Future<Response> save_QR({
     @required String token_id,
     @required String file,
   }) async {
     Response response;
-    String fileName='o';
-
+    String fileName = 'o';
 
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
@@ -1202,12 +1193,10 @@ class AllNetworking {
       "token_id": token_id,
 
       "file": file
-
     });
     response = await dio.post(paseurl + '/provider/save_QR', data: formData);
     return response;
   }
-
 
   Future<Get_all_visitor_points_json> get_all_visitor_points({
     @required String token_id,
@@ -1233,6 +1222,7 @@ class AllNetworking {
 
     return data;
   }
+
   Future<Response> delete_points({
     @required String token_id,
     @required String visitor_id,
@@ -1256,10 +1246,10 @@ class AllNetworking {
     return response;
   }
 
-
   Future<Response> empty_points({
     @required String total_points,
-    @required String phone,@required String token_id,
+    @required String phone,
+    @required String token_id,
   }) async {
     Response response;
     FormData formData = new FormData.fromMap({
@@ -1280,10 +1270,6 @@ class AllNetworking {
 
     return response;
   }
-
-
-
-
 
   Future<Get_all_category_json> get_all_category({
     @required String token_id,
@@ -1310,16 +1296,11 @@ class AllNetworking {
     return data;
   }
 
-
-
-
   Future<Response> add_category(
-      {
-        @required String token_id,
-        @required String title,
-        @required String title_en,
-
-        @required File file}) async {
+      {@required String token_id,
+      @required String title,
+      @required String title_en,
+      @required File file}) async {
     Response response;
     String fileName = file.path.split('/').last;
 
@@ -1334,9 +1315,10 @@ class AllNetworking {
           filename: fileName, contentType: new MediaType('image', 'png')),
     });
     response =
-    await dio.post(paseurl + '/provider/add_category', data: formData);
+        await dio.post(paseurl + '/provider/add_category', data: formData);
     return response;
   }
+
   Future<Response> delete_category({
     @required String token_id,
     @required String cat_id,
@@ -1355,6 +1337,7 @@ class AllNetworking {
 
     return response;
   }
+
   Future<Preparation_edit_category_json> preparation_edit_category({
     @required String token_id,
     @required String cat_id,
@@ -1378,11 +1361,11 @@ class AllNetworking {
 
     return data;
   }
+
   Future<Response> edit_category({
     @required String token_id,
     @required String title,
     @required String title_en,
-
     @required File file,
     @required String cat_id,
   }) async {
@@ -1403,28 +1386,22 @@ class AllNetworking {
 
       "file": file != null
           ? await MultipartFile.fromFile(file.path,
-          filename: fileName, contentType: new MediaType('image', 'png'))
+              filename: fileName, contentType: new MediaType('image', 'png'))
           : ' ',
     });
     response =
-    await dio.post(paseurl + '/provider/edit_category', data: formData);
+        await dio.post(paseurl + '/provider/edit_category', data: formData);
     return response;
   }
 
-
-
-
-
   Future<Preparation_addproduct_json> preparation_addproduct({
     @required String token_id,
-
   }) async {
     Preparation_addproduct_json data;
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
-
     });
     await dio
         .post(
@@ -1438,10 +1415,6 @@ class AllNetworking {
     return data;
   }
 
-
-
-
-
   Future<Get_all_products_cat_json> get_all_products_cat({
     @required String cat_id,
     @required String token_id,
@@ -1452,7 +1425,8 @@ class AllNetworking {
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
-      "token_id": token_id, "cat_id": cat_id,
+      "token_id": token_id,
+      "cat_id": cat_id,
       "limit": limit,
       "page_number": page_number,
     });
@@ -1469,14 +1443,12 @@ class AllNetworking {
   }
 
   Future<Get_Waiting_Orders_json> get_waiting_orders({
-
     @required String token_id,
   }) async {
     Get_Waiting_Orders_json data;
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
-
       "token_id": token_id,
     });
     await dio
@@ -1485,24 +1457,14 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-
-
-
       data = Get_Waiting_Orders_json.fromJson(value.data);
-
     });
     //  print(data.result.contactInfo[0].);
     return data;
   }
 
-
-
-
-
-
   Future<Get_order_details_json> get_order_details({
     @required int id_order,
-
     @required String token_id,
   }) async {
     Get_order_details_json data;
@@ -1510,7 +1472,6 @@ class AllNetworking {
       "mode": "formdata",
       "key": "1234567890",
       "id_order": id_order,
-
       "token_id": token_id,
     });
     await dio
@@ -1519,7 +1480,6 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-
       data = Get_order_details_json.fromJson(value.data);
     });
     //  print(data.result.contactInfo[0].);
@@ -1527,7 +1487,6 @@ class AllNetworking {
   }
 
   Future<Cancel_order_json> delete_order({
-
     @required String token_id,
     @required int order_id,
   }) async {
@@ -1537,7 +1496,6 @@ class AllNetworking {
       "key": "1234567890",
       "token_id": token_id,
       "id_order": order_id,
-
     });
     await dio
         .post(
@@ -1550,15 +1508,14 @@ class AllNetworking {
     //  print(data.result.contactInfo[0].);
     return data;
   }
-  Future<Get_previous_orders_json> get_previous_orders({
 
+  Future<Get_previous_orders_json> get_previous_orders({
     @required String token_id,
   }) async {
     Get_previous_orders_json data;
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
-
       "token_id": token_id,
     });
     await dio
@@ -1567,25 +1524,19 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-
-
-
       data = Get_previous_orders_json.fromJson(value.data);
-
     });
     //  print(data.result.contactInfo[0].);
     return data;
   }
 
   Future<Get_current_orders_json> get_current_orders({
-
     @required String token_id,
   }) async {
     Get_current_orders_json data;
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
       "key": "1234567890",
-
       "token_id": token_id,
     });
     await dio
@@ -1594,29 +1545,16 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-
-
-
       data = Get_current_orders_json.fromJson(value.data);
-
     });
     //  print(data.result.contactInfo[0].);
     return data;
   }
 
-
-
-
-
-
-
-
-
-
-
   Future<Response> update_order({
     @required String token_id,
-    @required String id_order, @required int key_action,
+    @required String id_order,
+    @required int key_action,
   }) async {
     Response data;
 
@@ -1624,7 +1562,8 @@ class AllNetworking {
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
-      "id_order": id_order,"key_action": key_action,
+      "id_order": id_order,
+      "key_action": key_action,
     });
     await dio
         .post(
@@ -1638,21 +1577,14 @@ class AllNetworking {
     return data;
   }
 
-
-
-
-
-
   Future<Pharmacies_image_json> pharmacies_image({
     @required String token_id,
-
   }) async {
     Pharmacies_image_json data;
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
-
     });
 
     await dio
@@ -1666,9 +1598,6 @@ class AllNetworking {
 
     return data;
   }
-
-
-
 
   Future<Delete_pharamices_image_json> delete_pharamices_image({
     @required String token_id,
@@ -1694,19 +1623,6 @@ class AllNetworking {
     return data;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   Future<Response> add_replay({
     @required String token_id,
     @required String id_request,
@@ -1719,9 +1635,9 @@ class AllNetworking {
       "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
-      "id_request": id_request
-      ,"price": price
-      ,"message": message,
+      "id_request": id_request,
+      "price": price,
+      "message": message,
     });
     await dio
         .post(
@@ -1735,22 +1651,14 @@ class AllNetworking {
     return data;
   }
 
-
-
-
-
-
-
   Future<Buy_prescription_request_json> buy_prescription_request({
     @required String token_id,
-
   }) async {
     Buy_prescription_request_json data;
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
-
     });
 
     await dio
@@ -1764,6 +1672,7 @@ class AllNetworking {
 
     return data;
   }
+
 //000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 //   Future<Buy_prescription_request_json> buy_prescription_request({
 //     @required String token_id,
@@ -1790,12 +1699,6 @@ class AllNetworking {
 //   }
 //
 
-
-
-
-
-
-
   Future<Preparation_doc_profile_json> preparation_doc_profile({
     @required String token_id,
   }) async {
@@ -1816,10 +1719,6 @@ class AllNetworking {
 
     return response;
   }
-
-
-
-
 
   Future<Response> edit_doc_profile({
     @required String token_id,
@@ -1845,14 +1744,9 @@ class AllNetworking {
     @required String addressEn,
     @required double lat,
     @required double lag,
-
-
-
-
     @required String detection_price,
     @required String detection_price_en,
     @required String waiting_time,
-
     @required String specialization,
     @required String waiting_time_en,
     @required String specialization_en,
@@ -1885,9 +1779,6 @@ class AllNetworking {
       "password": password,
       "phone_third": phone_third,
 
-
-
-
       "detection_price": detection_price,
       "detection_price_en": detection_price_en,
       "waiting_time": waiting_time,
@@ -1895,11 +1786,9 @@ class AllNetworking {
       "specialization": specialization,
       "specialization_en": specialization_en,
 
-
-
       "main_img": main_img != null
           ? await MultipartFile.fromFile(main_img.path,
-          filename: fileName, contentType: new MediaType('image', 'png'))
+              filename: fileName, contentType: new MediaType('image', 'png'))
           : null,
     });
 
@@ -1914,15 +1803,6 @@ class AllNetworking {
 
     return data;
   }
-
-
-
-
-
-
-
-
-
 
   Future<List_appointments_json> list_appointments({
     @required String token_id,
@@ -1945,20 +1825,14 @@ class AllNetworking {
     return response;
   }
 
-
-
-
-
-
-  Future<Response>add_appointment({
+  Future<Response> add_appointment({
     @required String token_id,
     @required String name,
-
     @required String name_en,
     @required String from_hrs,
-
     @required String from_hrs_en,
-    @required String to_hrs,  @required String to_hrs_en,
+    @required String to_hrs,
+    @required String to_hrs_en,
   }) async {
     Response response;
     FormData formData = new FormData.fromMap({
@@ -1968,7 +1842,8 @@ class AllNetworking {
       "name": name,
       "name_en": name_en,
       "from_hrs": from_hrs,
-      "from_hrs_en": from_hrs_en,     "to_hrs": to_hrs,
+      "from_hrs_en": from_hrs_en,
+      "to_hrs": to_hrs,
       "to_hrs_en": to_hrs_en,
     });
     response = await dio.post(
@@ -1979,7 +1854,7 @@ class AllNetworking {
     return response;
   }
 
-  Future<Get_list_reservation_json>  get_list_reservation({
+  Future<Get_list_reservation_json> get_list_reservation({
     @required String token_id,
   }) async {
     Get_list_reservation_json data;
@@ -2001,8 +1876,7 @@ class AllNetworking {
     return data;
   }
 
-
-  Future<Get_List_wedding_reservation_json>  get_List_wedding_reservation({
+  Future<Get_List_wedding_reservation_json> get_List_wedding_reservation({
     @required String token_id,
   }) async {
     Get_List_wedding_reservation_json data;
@@ -2024,8 +1898,6 @@ class AllNetworking {
     return data;
   }
 
-
-
   Future<Response> delete_ticket({
     @required String token_id,
     @required int id_ticket,
@@ -2045,19 +1917,15 @@ class AllNetworking {
     return response;
   }
 
-
-
-
-
-
-  Future<Get_notification_details_json>  get_notification_details({
-    @required String token_id,@required int id_notify,
+  Future<Get_notification_details_json> get_notification_details({
+    @required String token_id,
+    @required int id_notify,
   }) async {
     Get_notification_details_json data;
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
       "key": "1234567890",
-      "token_id": token_id,"id_notify": id_notify,
+      "token_id": token_id, "id_notify": id_notify,
     });
 
     await dio
@@ -2067,25 +1935,12 @@ class AllNetworking {
     )
         .then((value) {
       print('0000000000000000000000000000000000000000');
-          print(value.data);
+      print(value.data);
       data = Get_notification_details_json.fromJson(value.data);
     });
 
     return data;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   Future<Response> delete_list_reservation({
     @required String token_id,
@@ -2111,7 +1966,6 @@ class AllNetworking {
     return data;
   }
 
-
   Future<Response> accepted_list_reservation({
     @required String token_id,
     @required int id_list,
@@ -2136,9 +1990,7 @@ class AllNetworking {
     return data;
   }
 
-
-
-  Future< Get_list_weddings_services_json>  get_list_weddings_services({
+  Future<Get_list_weddings_services_json> get_list_weddings_services({
     @required String token_id,
   }) async {
     Get_list_weddings_services_json data;
@@ -2154,11 +2006,12 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-      data =  Get_list_weddings_services_json.fromJson(value.data);
+      data = Get_list_weddings_services_json.fromJson(value.data);
     });
 
     return data;
   }
+
   Future<Response> delete_wedding_service({
     @required String token_id,
     @required String id_list,
@@ -2178,18 +2031,14 @@ class AllNetworking {
     return response;
   }
 
-
-
-
-  Future<Response> add__wedding_service(
-      {
-        @required String token_id,
-        @required String name,
-        @required String name_en,
-        @required String price,@required int currency_id,
-       }) async {
+  Future<Response> add__wedding_service({
+    @required String token_id,
+    @required String name,
+    @required String name_en,
+    @required String price,
+    @required int currency_id,
+  }) async {
     Response response;
-
 
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
@@ -2197,18 +2046,14 @@ class AllNetworking {
       "token_id": token_id,
       "name": name,
       "name_en": name_en,
-      "currency_id": currency_id,"price": price,
-
+      "currency_id": currency_id, "price": price,
     });
-    response =
-    await dio.post(paseurl + '/weddings/add__wedding_service', data: formData);
+    response = await dio.post(paseurl + '/weddings/add_wedding_service',
+        data: formData);
     return response;
   }
 
-
-
-
-  Future< Preparation_wedding_service_json>  Preparation_wedding_service({
+  Future<Preparation_wedding_service_json> Preparation_wedding_service({
     @required String token_id,
   }) async {
     Preparation_wedding_service_json data;
@@ -2220,13 +2065,36 @@ class AllNetworking {
 
     await dio
         .post(
-      paseurl + '/weddings/list_weddings_services',
+      paseurl + '/weddings/preparation_wedding_service',
       data: formData,
     )
         .then((value) {
-      data =  Preparation_wedding_service_json.fromJson(value.data);
+      print(value.data);
+      data = Preparation_wedding_service_json.fromJson(value.data);
     });
 
     return data;
+  }
+
+  Future<Response> edit_wedding_service({
+    @required String token_id,
+    @required String name,
+    @required String name_en,
+    @required String price,
+    @required int currency_id,  @required String id_list
+  }) async {
+    Response response;
+
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "name": name,
+      "name_en": name_en,
+      "currency_id": currency_id, "price": price, "id_list": id_list,
+    });
+    response = await dio.post(paseurl + '/weddings/edit_wedding_service',
+        data: formData);
+    return response;
   }
 }

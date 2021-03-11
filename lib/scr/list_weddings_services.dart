@@ -5,6 +5,7 @@ import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_list_weddings_services_json.dart';
 
 import 'add__wedding_service.dart';
+import 'edit_wedding_service.dart';
 
 class List_weddings_services extends StatefulWidget {
   @override
@@ -134,13 +135,13 @@ class _List_weddings_servicesState extends State<List_weddings_services> {
                                 });
                               },
                               edit: () {
-                                // Navigator.push(
-                                //   context,
-                                //   new MaterialPageRoute(
-                                //       builder: (context) =>
-                                //           Edit_Category(cat_id: snap
-                                //               .data.result.allProducts[index].productId , token: token,)),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  new MaterialPageRoute(
+                                      builder: (context) =>
+                                          Edit_Wedding_Service(mycontext: context,weddingsServices:  snap
+                                              .data.result.listWeddingsServices[index],)),
+                                );
                               },
                             );
                           }),

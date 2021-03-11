@@ -1,26 +1,29 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:sahlaprovider/myWidget/myDrawer.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
+import 'package:sahlaprovider/utilitie/jsondata/get_list_weddings_services_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_wedding_service_json.dart';
-
-class Add__wedding_service extends StatefulWidget {
+class Edit_Wedding_Service extends StatefulWidget {
+  ListWeddingsServices weddingsServices;
   BuildContext mycontext;
 
-  Add__wedding_service(this.mycontext);
+  Edit_Wedding_Service({this.weddingsServices, this.mycontext});
 
   @override
-  _Add__wedding_serviceState createState() => _Add__wedding_serviceState();
+  _Edit_Wedding_ServiceState createState() => _Edit_Wedding_ServiceState();
+
 }
 
-class _Add__wedding_serviceState extends State<Add__wedding_service> {
+class _Edit_Wedding_ServiceState extends State<Edit_Wedding_Service> {
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
   String token;
+
+TextEditingController thename=TextEditingController();
+  TextEditingController theenname=TextEditingController();
+  TextEditingController price=TextEditingController();
 
   bool getdata = true;
   AllCurrency dropdownValue;
@@ -31,18 +34,22 @@ class _Add__wedding_serviceState extends State<Add__wedding_service> {
   void initState() {
     super.initState();
     token = box.read('token');
+
+    thename.text=widget.weddingsServices.servicesName;
+   theenname.text=widget.weddingsServices.servicesNameEn;
+      price.text=widget.weddingsServices.price;
     _allNetworking.Preparation_wedding_service(token_id: token).then((value) {
       print(value);
 
       dataaa = value.result.allCurrency;
       print(dataaa);
-     getdata = false;
-     setState(() {});
+      getdata = false;
+      setState(() {});
     });
   }
 
   bool adddata = false;
-  String thename, theenname, price;
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +67,7 @@ class _Add__wedding_serviceState extends State<Add__wedding_service> {
               onPressed: () => Navigator.pop(context, false),
             ),
             centerTitle: true,
-            title: Text('اضافة خدمات',
+            title: Text('تعديل خدمة',
                 style: TextStyle(
                     fontFamily: 'Arbf', color: Colors.white, fontSize: 18)),
           ),
@@ -105,10 +112,8 @@ class _Add__wedding_serviceState extends State<Add__wedding_service> {
                 height: high * .02,
               ),
               TextFormField(
-                keyboardType: TextInputType.text,
-                onChanged: (s) {
-                  thename = s;
-                },
+                keyboardType: TextInputType.text,controller: thename,
+
                 textAlign: TextAlign.center,
                 maxLines: null,
                 style: TextStyle(
@@ -136,10 +141,8 @@ class _Add__wedding_serviceState extends State<Add__wedding_service> {
                 height: high * .02,
               ),
               TextFormField(
-                keyboardType: TextInputType.text,
-                onChanged: (s) {
-                  theenname = s;
-                },
+                keyboardType: TextInputType.text,controller: theenname,
+
                 textAlign: TextAlign.center,
                 maxLines: null,
                 style: TextStyle(
@@ -167,10 +170,8 @@ class _Add__wedding_serviceState extends State<Add__wedding_service> {
                 height: high * .02,
               ),
               TextFormField(
-                keyboardType: TextInputType.number,
-                onChanged: (s) {
-                  price = s;
-                },
+                keyboardType: TextInputType.number,controller: price,
+
                 textAlign: TextAlign.center,
                 maxLines: null,
                 style: TextStyle(
@@ -202,29 +203,29 @@ class _Add__wedding_serviceState extends State<Add__wedding_service> {
                 child: getdata
                     ? CircularProgressIndicator()
                     : DropdownButton<AllCurrency>(
-                        value: dropdownValue,
-                        hint: Text('نوع العملة'),
-                        icon: Icon(Icons.arrow_downward),
-                        iconSize: 24,
-                        elevation: 16,
-                        style: TextStyle(color: Colors.black),
-                        underline: Container(
-                          height: 2,
-                          color: Colors.black,
-                        ),
-                        onChanged: (AllCurrency newValue) {
-                          setState(() {
-                            dropdownValue = newValue;
-                          });
-                        },
-                        items: dataaa.map<DropdownMenuItem<AllCurrency>>(
-                            (AllCurrency value) {
-                          return DropdownMenuItem<AllCurrency>(
-                            value: value,
-                            child: Text(value.currencyName),
-                          );
-                        }).toList(),
-                      ),
+                  value: dropdownValue,
+                  hint: Text(widget.weddingsServices.currencyName),
+                  icon: Icon(Icons.arrow_downward),
+                  iconSize: 24,
+                  elevation: 16,
+                  style: TextStyle(color: Colors.black),
+                  underline: Container(
+                    height: 2,
+                    color: Colors.black,
+                  ),
+                  onChanged: (AllCurrency newValue) {
+                    setState(() {
+                      dropdownValue = newValue;
+                    });
+                  },
+                  items: dataaa.map<DropdownMenuItem<AllCurrency>>(
+                          (AllCurrency value) {
+                        return DropdownMenuItem<AllCurrency>(
+                          value: value,
+                          child: Text(value.currencyName),
+                        );
+                      }).toList(),
+                ),
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.grey,
@@ -239,53 +240,48 @@ class _Add__wedding_serviceState extends State<Add__wedding_service> {
               adddata
                   ? CircularProgressIndicator()
                   : GestureDetector(
-                      onTap: () async {
-                        adddata = true;
+                  onTap: () async {
+                    adddata = true;
+                    setState(() {});
+
+
+                      _allNetworking
+                          .edit_wedding_service(
+                          token_id: token,
+                          name: thename.text,
+                          name_en: theenname.text,id_list: widget.weddingsServices.idWeddingService,
+                          price: price.text,
+                          currency_id:dropdownValue!=null? dropdownValue.currencyId:null)
+                          .then((value) {
+                        Navigator.pop(widget.mycontext);
+
+                        print(value.data);
+                        adddata = false;
                         setState(() {});
+                      });
 
-                        if (dropdownValue != null) {
-                          _allNetworking
-                              .add__wedding_service(
-                                  token_id: token,
-                                  name: thename,
-                                  name_en: theenname,
-                                  price: price,
-                                  currency_id: dropdownValue.currencyId)
-                              .then((value) {
-                            Navigator.pop(widget.mycontext);
-
-                            print(value.data);
-                            adddata = false;
-                            setState(() {});
-                          });
-                        } else {
-                          adddata=false;
-                          setState(() {
-
-                          });
-                        }
-                      },
-                      child: Container(
-                          height: high * .05,
-                          width: width * 0.7,
-                          child: Center(
-                            child: Text('اضافه ',
-                                style: TextStyle(
-                                    fontFamily: 'Arbf',
-                                    color: Colors.white,
-                                    fontSize: 18)),
-                          ),
-                          decoration: BoxDecoration(
-                              color: hexToColor('#00abeb'),
-                              gradient: new LinearGradient(
-                                  colors: [
-                                    Colors.red[100],
-                                    Colors.red[900],
-                                  ],
-                                  begin: Alignment.centerLeft,
-                                  end: Alignment.centerRight,
-                                  tileMode: TileMode.clamp),
-                              borderRadius: BorderRadius.circular(5.0))))
+                  },
+                  child: Container(
+                      height: high * .05,
+                      width: width * 0.7,
+                      child: Center(
+                        child: Text('اضافه ',
+                            style: TextStyle(
+                                fontFamily: 'Arbf',
+                                color: Colors.white,
+                                fontSize: 18)),
+                      ),
+                      decoration: BoxDecoration(
+                          color: hexToColor('#00abeb'),
+                          gradient: new LinearGradient(
+                              colors: [
+                                Colors.red[100],
+                                Colors.red[900],
+                              ],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              tileMode: TileMode.clamp),
+                          borderRadius: BorderRadius.circular(5.0))))
             ]),
           )),
     );
