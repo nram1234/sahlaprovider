@@ -1,3 +1,4 @@
+import 'package:sahlaprovider/myWidget/customDialog.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_visitor_json.dart';
@@ -16,8 +17,10 @@ class _VisitorCountState extends State<VisitorCount> {
   AllNetworking _allNetworking = AllNetworking();
   int sizelist = 0;
   int limit = 1000;
-  String f="";
+  String f = "";
   ScrollController _scrollController;
+  TextEditingController addres = TextEditingController();
+  TextEditingController contant = TextEditingController();
 
   @override
   void initState() {
@@ -28,6 +31,7 @@ class _VisitorCountState extends State<VisitorCount> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: SafeArea(
@@ -35,7 +39,7 @@ class _VisitorCountState extends State<VisitorCount> {
           child: Scaffold(
             appBar: AppBar(
               centerTitle: true,
-              title:Text('اجمالي عدد زوار البروفايل'),
+              title: Text('اجمالي عدد زوار البروفايل'),
             ),
             body: StreamBuilder<Get_all_visitor_json>(
                 stream: _allNetworking
@@ -44,16 +48,15 @@ class _VisitorCountState extends State<VisitorCount> {
                     .asStream(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-    List<AllVisitoe>dat=snapshot.data.result.allVisitoe;
-    List<AllVisitoe>data=[];
-    dat.forEach((element) {
-    if(element.userPhone.contains(f)){
-    data.add(element);
-    }}
-    );
+                    List<AllVisitoe> dat = snapshot.data.result.allVisitoe;
+                    List<AllVisitoe> data = [];
+                    dat.forEach((element) {
+                      if (element.userPhone.contains(f)) {
+                        data.add(element);
+                      }
+                    });
 
-
-    return Column(
+                    return Column(
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -63,12 +66,11 @@ class _VisitorCountState extends State<VisitorCount> {
                               child: Row(
                                 children: [
                                   Expanded(
-                                      child: TextFormField(onChanged: (v){
-                                        f=v;
-                                        setState(() {
-
-                                        });
-                                      },
+                                      child: TextFormField(
+                                          onChanged: (v) {
+                                            f = v;
+                                            setState(() {});
+                                          },
                                           textAlign: TextAlign.center,
                                           decoration: InputDecoration(
                                             hintText: 'البحث برقم التليفون',
@@ -82,9 +84,154 @@ class _VisitorCountState extends State<VisitorCount> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height:size.height * .02,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext
+                              context) =>
+                                  AlertDialog(
+                                    title: Text('ارسل تنبيه'),
+                                    content: Container(
+                                      width: size.width * .8,
+                                      height: 300,
+                                      padding:
+                                      EdgeInsets.all(8),
+                                      decoration:
+                                      BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.red,
+                                          width: 1,
+                                        ),
+                                        borderRadius:
+                                        BorderRadius
+                                            .circular(10),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            decoration:
+                                            BoxDecoration(
+                                              border:
+                                              Border.all(
+                                                color: Colors
+                                                    .red,
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  10),
+                                            ),
+                                            width:
+                                            size.width *
+                                                .8,
+                                            child: TextField(controller: addres,
+                                              decoration: InputDecoration(
+                                                  focusedBorder:
+                                                  InputBorder
+                                                      .none,
+                                                  enabledBorder:
+                                                  InputBorder
+                                                      .none,
+                                                  hintText:
+                                                  'العنوان'),
+                                            ),
+                                          ),
+                                          Expanded(
+                                              child:
+                                              Container()),
+                                          Container(
+                                            decoration:
+                                            BoxDecoration(
+                                              border:
+                                              Border.all(
+                                                color: Colors
+                                                    .red,
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  10),
+                                            ),
+                                            child: TextField(controller: contant,
+                                              maxLines: 5,
+                                              decoration: InputDecoration(
+                                                  focusedBorder:
+                                                  InputBorder
+                                                      .none,
+                                                  enabledBorder:
+                                                  InputBorder
+                                                      .none,
+                                                  hintText:
+                                                  'المحتوي'),
+                                            ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .spaceBetween,
+                                            children: [
+                                              TextButton(
+                                                child: new Text(
+                                                    "الغاء"),
+                                                onPressed: () =>
+                                                    Navigator.pop(
+                                                        context,
+                                                        true),
+                                              ),
+                                              TextButton(
+                                                child: new Text(
+                                                    "ارسال"),
+                                                onPressed: (){
+
+
+
+
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                            );
+                          },
+                          child: Container(
+                            height: size.height * .07,
+                            width: size.width * 0.8,
+                            child: Center(
+                              child:Text(" ارسال تنبيه للكل ",
+                                  style: TextStyle(
+                                    fontFamily: 'Arbf',
+                                    color: Colors.white,
+                                  ))
+                            ),
+                            decoration: BoxDecoration(
+                                color: hexToColor('#00abeb'),
+                                gradient: new LinearGradient(
+                                    colors: [
+                                      Colors.red[100],
+                                      Colors.red[900],
+                                    ],
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight,
+                                    tileMode: TileMode.clamp),
+                                borderRadius: BorderRadius.circular(40.0)),
+                          ),
+                        ),
                         Expanded(
                           child: ListView.builder(
-                              itemCount:f.trim().isEmpty? snapshot.data.result.allVisitoe.length:data.length,controller: _scrollController,
+                              itemCount: f.trim().isEmpty
+                                  ? snapshot.data.result.allVisitoe.length
+                                  : data.length,
+                              controller: _scrollController,
                               itemBuilder: (context, pos) {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -101,40 +248,168 @@ class _VisitorCountState extends State<VisitorCount> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                              f.trim().isEmpty?    'اسم العميل : ${snapshot.data.result.allVisitoe[pos].userName}': 'اسم العميل : ${data[pos].userName}'),
-                                          Text(
-                                              f.trim().isEmpty?     'رقم التليفون : ${snapshot.data.result.allVisitoe[pos].userPhone}': 'رقم التلفون : ${data[pos].userPhone}'),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
+                                              Text(f.trim().isEmpty
+                                                  ? 'اسم العميل : ${snapshot.data.result.allVisitoe[pos].userName}'
+                                                  : 'اسم العميل : ${data[pos].userName}'),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  showDialog(
+                                                    context: context,
+                                                    barrierDismissible: false,
+                                                    builder: (BuildContext
+                                                            context) =>
+                                                        AlertDialog(
+                                                      title: Text('ارسل تنبيه'),
+                                                      content: Container(
+                                                        width: size.width * .8,
+                                                        height: 300,
+                                                        padding:
+                                                            EdgeInsets.all(8),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                            color: Colors.red,
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                        ),
+                                                        child: Column(
+                                                          children: [
+                                                            Container(
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                border:
+                                                                    Border.all(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 1,
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                              ),
+                                                              width:
+                                                                  size.width *
+                                                                      .8,
+                                                              child: TextField(controller: addres,
+                                                                decoration: InputDecoration(
+                                                                    focusedBorder:
+                                                                        InputBorder
+                                                                            .none,
+                                                                    enabledBorder:
+                                                                        InputBorder
+                                                                            .none,
+                                                                    hintText:
+                                                                        'العنوان'),
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                                child:
+                                                                    Container()),
+                                                            Container(
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                border:
+                                                                    Border.all(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 1,
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                              ),
+                                                              child: TextField(controller: contant,
+                                                                maxLines: 5,
+                                                                decoration: InputDecoration(
+                                                                    focusedBorder:
+                                                                        InputBorder
+                                                                            .none,
+                                                                    enabledBorder:
+                                                                        InputBorder
+                                                                            .none,
+                                                                    hintText:
+                                                                        'المحتوي'),
+                                                              ),
+                                                            ),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                TextButton(
+                                                                  child: new Text(
+                                                                      "الغاء"),
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          context,
+                                                                          true),
+                                                                ),
+                                                                TextButton(
+                                                                  child: new Text(
+                                                                      "ارسال"),
+                                                                  onPressed: (){
 
-                                              Text(f.trim().isEmpty?   'عدد الزيارات : ${snapshot
-                                                  .data
-                                                  .result
-                                                  .allVisitoe[pos]
-                                                  .totalCountVisit}':  'عدد الزيارات : ${data[pos]
-                                                  .totalCountVisit}')
-                                            ,   GestureDetector(
+
+
+
+                                                                  },
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Icon(
+                                                    Icons.notifications_active),
+                                              )
+                                            ],
+                                          ),
+                                          Text(f.trim().isEmpty
+                                              ? 'رقم التليفون : ${snapshot.data.result.allVisitoe[pos].userPhone}'
+                                              : 'رقم التلفون : ${data[pos].userPhone}'),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(f.trim().isEmpty
+                                                  ? 'عدد الزيارات : ${snapshot.data.result.allVisitoe[pos].totalCountVisit}'
+                                                  : 'عدد الزيارات : ${data[pos].totalCountVisit}'),
+                                              GestureDetector(
                                                   onTap: () {
                                                     _allNetworking
                                                         .delete_visitor(
-                                                        token_id:
-                                                        widget.token_id,
-                                                        visitor_id: f.trim().isEmpty
-                                                            ?snapshot
-                                                            .data
-                                                            .result
-                                                            .allVisitoe[pos]
-                                                            .visitorId:data[pos]
-                                                            .visitorId)
+                                                            token_id:
+                                                                widget.token_id,
+                                                            visitor_id: f
+                                                                    .trim()
+                                                                    .isEmpty
+                                                                ? snapshot
+                                                                    .data
+                                                                    .result
+                                                                    .allVisitoe[
+                                                                        pos]
+                                                                    .visitorId
+                                                                : data[pos]
+                                                                    .visitorId)
                                                         .then((value) {
                                                       print(value.data);
                                                       setState(() {});
                                                     });
                                                   },
-                                                  child: Icon(Icons.delete)),],
+                                                  child: Icon(Icons.delete)),
+                                            ],
                                           )
                                         ],
                                       ),

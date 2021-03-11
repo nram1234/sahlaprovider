@@ -51,8 +51,8 @@ class _Add_Photography_RequestsState extends State<Add_Photography_Requests> {
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: hexToColor('#00abeb'),
-                    width: 5,
+                    color: Colors.red,
+                    width: 1,
                   ),
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -81,8 +81,8 @@ class _Add_Photography_RequestsState extends State<Add_Photography_Requests> {
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: hexToColor('#00abeb'),
-                      width: 5,
+                      color: Colors.red,
+                      width: 1,
                     ),
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -142,8 +142,8 @@ class _Add_Photography_RequestsState extends State<Add_Photography_Requests> {
                         color: hexToColor('#00abeb'),
                         gradient: new LinearGradient(
                             colors: [
-                              hexToColor('#2358a6'),
-                              hexToColor('#00abeb')
+                              Colors.red[100],
+                              Colors.red[900],
                             ],
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,

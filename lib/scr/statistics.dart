@@ -23,6 +23,7 @@ import 'package:get_storage/get_storage.dart';
 
 import 'package:permission_handler/permission_handler.dart';
 
+import 'add_photography_requests.dart';
 import 'buy_prescription_request.dart';
 import 'doc_profile.dart';
 import 'get_all_orderSCr.dart';
@@ -341,10 +342,10 @@ class _StatisticssState extends State<Statisticss> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            // serchWidget(width: width, high: high, fun: fun),
-                            // SizedBox(
-                            //   height: high * .02,
-                            // ),
+                          //  serchWidget(width: width, high: high, fun: fun),
+                            SizedBox(
+                              height: high * .02,
+                            ),
                             //
                             // GestureDetector(
                             //   onTap: () {
@@ -377,46 +378,30 @@ class _StatisticssState extends State<Statisticss> {
                             //               tileMode: TileMode.clamp),
                             //           borderRadius: BorderRadius.circular(10))),
                             // ),
-                            SizedBox(
-                              height: high * .02,
-                            ),
                             GestureDetector(
                                 onTap: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            Get_all_order(token)),
+                                            Add_Photography_Requests()),
                                   );
                                 },
                                 child: item_home_list(
-                                    icon: 'assets/images/coupon.png',
+                                    icon: 'assets/images/medical.png',
+                                    number: "",//data.totalProduct.toString(),
                                     width: width,
-                                    number: data.totalSelling.toString(),
-                                    name: "عدد الكوبونات")),
+                                    name: "طلب تصميم وتصوير")),
+
+
+
+
+
+
 
                             SizedBox(
                               height: 8,
                             ),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            VisitorCount(token)),
-                                  );
-                                },
-                                child: item_home_list(
-                                    icon: 'assets/images/community.png',
-                                    width: width,
-                                    number: data.totalSelling.toString(),
-                                    name: "عدد الزوار")),
-
-                            SizedBox(
-                              height: 8,
-                            ),
-
                             GestureDetector(
                                 onTap: () {
                                   // Navigator.push(
@@ -431,7 +416,61 @@ class _StatisticssState extends State<Statisticss> {
                                     width: width,
                                     number: data.datePackege,
                                     name: "ﺗﺎﺭﻳﺦ ﺍﻻﺷﺘﺮﺍﻙ")),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            // service_type == '1'
+                            //     ?
 
+                            // service_type == '1'
+                            //     ?
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            List_Appointments()),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/medical.png',
+                                    number: "",//data.totalProduct.toString(),
+                                    width: width,
+                                    name: "مواعيد الكشف")),
+                            //    : SizedBox(height: 1,),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Get_list_wedding_reservation()),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/wedding.png',
+                                    number:"",// data.totalProduct.toString(),
+                                    width: width,
+                                    name: "حجز قاعات افرح ودور مناسبات")),
+                            SizedBox(
+                              height: high * .02,
+                            ),
+
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Buy_prescription_request()),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/medical_prescription.png',
+                                    number:"",// data.totalProduct.toString(),
+                                    width: width,
+                                    name: "تسعير روشتة")),
                             SizedBox(
                               height: 8,
                             ),
@@ -446,25 +485,6 @@ class _StatisticssState extends State<Statisticss> {
                                     width: width,
                                     number: data.totalProduct.toString(),
                                     name: "ﻋﺪﺩ ﺍﻟﻤﻨﺘﺠﺎﺕ")),
-
-                            SizedBox(
-                              height: 8,
-                            ),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => MyOrder()),
-                                  );
-                                },
-                                child: item_home_list(
-                                    icon: 'assets/images/shopping_cart.png',
-                                    width: width,
-                                    number: snapshot.data.result.totalOrders
-                                        .toString(),
-                                    name: "سلة المشتروات")),
-
                             SizedBox(
                               height: 8,
                             ),
@@ -485,8 +505,61 @@ class _StatisticssState extends State<Statisticss> {
                             SizedBox(
                               height: 8,
                             ),
-                            service_type == '1'
-                                ? GestureDetector(
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Get_all_order(token)),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/coupon.png',
+                                    width: width,
+                                    number: data.totalSelling.toString(),
+                                    name: "عدد الكوبونات")),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            VisitorCount(token)),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/community.png',
+                                    width: width,
+                                    number: data.totalSelling.toString(),
+                                    name: "عدد الزوار")),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => MyOrder()),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/shopping_cart.png',
+                                    width: width,
+                                    number: snapshot.data.result.totalOrders
+                                        .toString(),
+                                    name: "سلة المشتروات")),
+                            SizedBox(
+                              height: 8,
+                            ),
+
+                            // service_type == '1'
+                            //     ?
+                            GestureDetector(
                                     onTap: () {
                                       Navigator.push(
                                         context,
@@ -499,30 +572,15 @@ class _StatisticssState extends State<Statisticss> {
                                         icon: 'assets/images/scoreboard.png',
                                         number: "",
                                         width: width,
-                                        name: "تعديل البروفيل"))
-                                : SizedBox(),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            service_type == '1'
-                                ? GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                List_Appointments()),
-                                      );
-                                    },
-                                    child: item_home_list(
-                                        icon: 'assets/images/medical.png',
-                                        number: "",//data.totalProduct.toString(),
-                                        width: width,
-                                        name: "مواعيد الكشف"))
-                                : SizedBox(),
-                            SizedBox(
-                              height: 8,
-                            ),
+                                        name: "تعديل البروفيل")),
+                             //   : SizedBox(),
+                            // SizedBox(
+                            //   height: 8,
+                            // ),
+                            //
+                            // SizedBox(
+                            //   height: 8,
+                            // ),
 
 
 
@@ -544,42 +602,12 @@ class _StatisticssState extends State<Statisticss> {
                             SizedBox(
                               height: 8,
                             ),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            Buy_prescription_request()),
-                                  );
-                                },
-                                child: item_home_list(
-                                    icon: 'assets/images/medical_prescription.png',
-                                    number:"",// data.totalProduct.toString(),
-                                    width: width,
-                                    name: "تسعير روشتة")),
-                            SizedBox(
-                              height: 8,
-                            ),
 
 
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            Get_list_wedding_reservation()),
-                                  );
-                                },
-                                child: item_home_list(
-                                    icon: 'assets/images/wedding.png',
-                                    number:"",// data.totalProduct.toString(),
-                                    width: width,
-                                    name: "حجز قاعات افرح ودور مناسبات")),
-                            SizedBox(
-                              height: 8,
-                            ),
+
+                            // SizedBox(
+                            //   height: 8,
+                            // ),
                             GestureDetector(
                                 onTap: () {
                                   Navigator.push(
