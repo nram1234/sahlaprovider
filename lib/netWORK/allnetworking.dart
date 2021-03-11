@@ -2097,4 +2097,27 @@ class AllNetworking {
         data: formData);
     return response;
   }
+
+
+  Future<Response> sending_notifaction({
+    @required String token_id,
+    @required String title,
+    @required String content,
+    @required String id_user,
+    @required int key_type,
+  }) async {
+    Response response;
+
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "title": title,
+      "content": content,
+      "id_user": id_user, "key_type": key_type,
+    });
+    response = await dio.post(paseurl + '/provider/sending_notifaction',
+        data: formData);
+    return response;
+  }
 }
