@@ -23,10 +23,12 @@ import 'package:sahlaprovider/utilitie/jsondata/get_waiting_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_order_details_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_previous_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/list_appointments_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/list_doctors_services_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/list_wedding_reservation_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/pharmacies_image_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_addproduct_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_doc_profile_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/preparation_doctors_service_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_branch_JSON.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_category_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_offer_JSON.dart';
@@ -2118,6 +2120,159 @@ class AllNetworking {
     });
     response = await dio.post(paseurl + '/provider/sending_notifaction',
         data: formData);
+    return response;
+  }
+
+
+
+
+
+
+
+  Future<Response> subscription_renewal({
+    @required String token_id,
+
+  }) async {
+    Response data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+
+    });
+
+    await dio
+        .post(
+      paseurl + '/provider/subscription_renewal',
+      data: formData,
+    )
+        .then((value) {
+      data = value;
+    });
+
+    return data;
+  }
+
+
+
+
+
+  Future<List_doctors_services_json> list_doctors_services({
+    @required String token_id,
+  }) async {
+    List_doctors_services_json data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+    });
+
+    await dio
+        .post(
+      paseurl + '/medicine/list_doctors_services',
+      data: formData,
+    )
+        .then((value) {
+      print(value.data);
+      data = List_doctors_services_json.fromJson(value.data);
+    });
+
+    return data;
+  }
+
+
+
+
+  Future<Preparation_doctors_service_json> preparation_doctors_service({
+    @required String token_id,
+  }) async {
+    Preparation_doctors_service_json data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+    });
+
+    await dio
+        .post(
+      paseurl + '/medicine/preparation_doctors_service',
+      data: formData,
+    )
+        .then((value) {
+      print(value.data);
+      data =Preparation_doctors_service_json.fromJson(value.data);
+    });
+
+    return data;
+  }
+
+  Future<Response> edit_doctors_service({
+    @required String token_id,
+    @required String name,
+    @required String name_en,
+    @required String price,
+    @required int currency_id,  @required String id_list
+  }) async {
+    Response response;
+
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "name": name,
+      "name_en": name_en,
+      "currency_id": currency_id, "price": price, "id_list": id_list,
+    });
+    response = await dio.post(paseurl + '/medicine/edit_doctors_service',
+        data: formData);
+    return response;
+  }
+
+
+
+  Future<Response> add_doctors_service({
+    @required String token_id,
+    @required String name,
+    @required String name_en,
+    @required String price,
+    @required int currency_id,
+  }) async {
+    Response response;
+
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "name": name,
+      "name_en": name_en,
+      "currency_id": currency_id, "price": price,
+    });
+    response = await dio.post(paseurl + '/medicine/add_doctors_service',
+        data: formData);
+    return response;
+  }
+
+
+
+
+  Future<Response> delete_medicine_service({
+    @required String token_id,
+    @required String id_list,
+  }) async {
+    Response response;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "id_list": id_list,
+    });
+    response = await dio.post(
+      paseurl + '/medicine/delete_doctors_service',
+      data: formData,
+    );
+    print( 'pppppppppppppppppppppppppppppppppppppppppppppp');
+print( response.data);
+    print( 'pppppppppppppppppppppppppppppppppppppppppppppp');
     return response;
   }
 }

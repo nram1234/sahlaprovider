@@ -22,7 +22,9 @@ Widget mydrawer(context) {
   AllNetworking _allNetworking = AllNetworking();
   String phone;
   String point;
+
   final box = GetStorage();
+  String service_type = box.read('service_type');
   return Drawer(
     child: Container(
       padding: EdgeInsets.only(right: 50, left: 50),
@@ -33,7 +35,7 @@ Widget mydrawer(context) {
             height: 100,
           ),
           ListTile(
-            title: Text(box.read( 'name' ),
+            title: Text(box.read('name'),
                 style: TextStyle(
                     fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
             onTap: () {},
@@ -41,95 +43,96 @@ Widget mydrawer(context) {
           Container(
             color: Colors.white,
             height: 2,
-          ),  ListTile(
-            title: Text(  'حذف النقاط'  ,
+          ),
+          service_type=='1'  || service_type=='0'?        ListTile(
+            title: Text('حذف النقاط',
                 style: TextStyle(
                     fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
             onTap: () {
               Get.dialog(
                 AlertDialog(
-                  title: Text( ''),
-                  content:Column(children: [TextFormField(
-
-                    onChanged: (s) {
-                      phone=s;
-                    },
-                    textAlign: TextAlign.center,keyboardType:TextInputType.phone ,
-
-                    style: TextStyle(
-                      fontFamily: 'Arbf',
-                      color: hexToColor('#ed1c6f'),
-                    ),
-                    decoration: InputDecoration(
-                      labelText: 'رقم الهاتف',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.red, width: 2),
-                        borderRadius: BorderRadius.circular(5.0),
+                  title: Text(''),
+                  content: Column(
+                    children: [
+                      TextFormField(
+                        onChanged: (s) {
+                          phone = s;
+                        },
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.phone,
+                        style: TextStyle(
+                          fontFamily: 'Arbf',
+                          color: hexToColor('#ed1c6f'),
+                        ),
+                        decoration: InputDecoration(
+                          labelText: 'رقم الهاتف',
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.red, width: 2),
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.red, width: 2),
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          hintStyle: TextStyle(
+                            fontFamily: 'Arbf',
+                            color: hexToColor('#ed1c6f'),
+                          ),
+                        ),
                       ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.red, width: 2),
-                        borderRadius: BorderRadius.circular(5.0),
+                      SizedBox(
+                        height: 10,
                       ),
-                      hintStyle: TextStyle(
-                        fontFamily: 'Arbf',
-                        color: hexToColor('#ed1c6f'),
-                      ),
-                    ),
-                  ),SizedBox(height: 10,),TextFormField(
-
-                    onChanged: (s) {
-                      point=s;
-                    },
-                    textAlign: TextAlign.center,
-
-                    style: TextStyle(
-                      fontFamily: 'Arbf',
-                      color: hexToColor('#ed1c6f'),
-                    ),
-                    decoration: InputDecoration(
-                      labelText: 'عدد النقاط',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.red, width: 2),
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.red, width: 2),
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      hintStyle: TextStyle(
-                        fontFamily: 'Arbf',
-                        color: hexToColor('#ed1c6f'),
-                      ),
-                    ),
-                  )],),
+                      TextFormField(
+                        onChanged: (s) {
+                          point = s;
+                        },
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'Arbf',
+                          color: hexToColor('#ed1c6f'),
+                        ),
+                        decoration: InputDecoration(
+                          labelText: 'عدد النقاط',
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.red, width: 2),
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.red, width: 2),
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          hintStyle: TextStyle(
+                            fontFamily: 'Arbf',
+                            color: hexToColor('#ed1c6f'),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                   actions: <Widget>[
                     FlatButton(
                       child: Text("CLOSE"),
                       onPressed: () {
                         print(phone);
 
-
-
                         Get.back();
                       },
-                    )
-                ,      FlatButton(
+                    ),
+                    FlatButton(
                       child: Text("تنفيذ"),
                       onPressed: () {
                         print(phone);
 
-
-                        _allNetworking.empty_points(total_points: point, phone: phone,token_id: box.read(
-                            'token' ) ).then((value) {
-
-
+                        _allNetworking
+                            .empty_points(
+                                total_points: point,
+                                phone: phone,
+                                token_id: box.read('token'))
+                            .then((value) {
                           Get.dialog(
                             AlertDialog(
-                              title: Text( ''),
+                              title: Text(''),
                               content: Text(value.data['message']),
                               actions: <Widget>[
                                 FlatButton(
@@ -144,17 +147,15 @@ Widget mydrawer(context) {
                           );
                         });
                       },
-                    )  ],
+                    )
+                  ],
                 ),
                 barrierDismissible: false,
               );
 
               //_allNetworking.empty_points(total_points: null, phone: null)
-
-
-
             },
-          ),
+          ):SizedBox(),
           Container(
             color: Colors.white,
             height: 2,
@@ -207,7 +208,7 @@ Widget mydrawer(context) {
             color: Colors.white,
             height: 2,
           ),
-          ListTile(
+          service_type=='1'  || service_type=='0'?       ListTile(
             title: Text("ﻛﻮﺑﻮﻧﺎﺕ ﺧﺼﻢ",
                 style: TextStyle(
                     fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
@@ -217,11 +218,11 @@ Widget mydrawer(context) {
                 MaterialPageRoute(builder: (context) => QRClient()),
               );
             },
-          ),
-          Container(
+          ):SizedBox(),
+          service_type=='1'  || service_type=='0'?   Container(
             color: Colors.white,
             height: 2,
-          ),
+          ):SizedBox(),
           ListTile(
             title: Text("ﺗﻮﺍﺻﻞ ﻣﻊ ﺍﻻﺩﺍﺭﺓ",
                 style: TextStyle(
@@ -235,11 +236,11 @@ Widget mydrawer(context) {
               //Get.to(Remembering(),);
             },
           ),
-          Container(
+          service_type=='1'  || service_type=='0'?     Container(
             color: Colors.white,
             height: 2,
-          ),
-          ListTile(
+          ):SizedBox(),
+          service_type=='1'  || service_type=='0'?         ListTile(
             title: Text("النقاط",
                 style: TextStyle(
                     fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
@@ -251,44 +252,43 @@ Widget mydrawer(context) {
 
               //Get.to(Remembering(),);
             },
-          ),
+          ):SizedBox(),
           Container(
             color: Colors.white,
             height: 2,
           ),
           ListTile(
-            title: Text("ﺗﺴﺠﻴﻞ ﺍﻟﺨﺮﻭﺝ",
-                style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
-            onTap: () {
-              _allNetworking
-                  .logout(
-                  token_id: box.read('token'),
-                  firebase_token: box.read('firebase_token'))
-                  .then((value) async {
-                await box.remove(
-                  'phone',);
-                await box.remove(
-                    'firebase_token');
-                await box.remove(
-                    'name');
+              title: Text("ﺗﺴﺠﻴﻞ ﺍﻟﺨﺮﻭﺝ",
+                  style: TextStyle(
+                      fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
+              onTap: () {
+                _allNetworking
+                    .logout(
+                        token_id: box.read('token'),
+                        firebase_token: box.read('firebase_token'))
+                    .then(
+                  (value) async {
+                    await box.remove(
+                      'phone',
+                    );
+                    await box.remove('firebase_token');
+                    await box.remove('name');
 
-                await box.remove(
-                    'token');
-                await box.remove(
-                    'email');
-                await box.remove('id');
-                Get.offAll(LoginScr());
-                //   Navigator.pushAndRemoveUntil(
-                //       context,
-                //       new MaterialPageRoute(
-                //           builder: (context) =>
-                //               LoginScr()),
-                //           (Route<dynamic> route) => false  );
-                // });
-              },
-              );
-            })],
+                    await box.remove('token');
+                    await box.remove('email');
+                    await box.remove('id');
+                    Get.offAll(LoginScr());
+                    //   Navigator.pushAndRemoveUntil(
+                    //       context,
+                    //       new MaterialPageRoute(
+                    //           builder: (context) =>
+                    //               LoginScr()),
+                    //           (Route<dynamic> route) => false  );
+                    // });
+                  },
+                );
+              })
+        ],
       ),
     ),
     elevation: 8,
