@@ -105,12 +105,7 @@ class _ProfileeState extends State<Profilee> {
         textDirection: TextDirection.rtl,
         child: Scaffold(
           drawer: mydrawer(context),
-          appBar: AppBar(actions: [GestureDetector(
-            onTap: () {
-              Navigator.pop(context, false);
-            }, child: Icon(Icons.arrow_back),)
-          ]
-            ,
+          appBar: AppBar(
             centerTitle: true,
             title: Text('ﺍﻟﺒﺮﻭﻓﺎﻳﻞ',
                 style: TextStyle(
@@ -124,8 +119,7 @@ class _ProfileeState extends State<Profilee> {
                   .asStream(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  print(snapshot.data);
-                  print('99999999999999999999999999999999999999');
+
                   ServiceDetails dat = snapshot.data.result.serviceDetails[0];
 
                   address.text = dat.address;

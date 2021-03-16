@@ -35,6 +35,7 @@ import 'list_appointments.dart';
 import 'list_doctors_services.dart';
 import 'list_weddings_services.dart';
 import 'myorder.dart';
+import 'myprofile.dart';
 
 class Statisticss extends StatefulWidget {
   @override
@@ -68,6 +69,9 @@ class _StatisticssState extends State<Statisticss> {
 
   @override
   Widget build(BuildContext context) {
+    print('0000000000000000000000000000000000000000000000');
+    print(service_type);
+    print('0000000000000000000000000000000000000000000000');
     final high = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     var color = Colors.red;
@@ -86,7 +90,7 @@ class _StatisticssState extends State<Statisticss> {
             : Icon(
                 Icons.shopping_cart_outlined,
               ),
-        label: service_type == '3' ? 'خدمات اضافيه' : 'الاقسام و المنتجات',
+        label: service_type == '3' ? 'خدمات اضافيه' : service_type == '2' ?'مستحضرات التجميل':service_type == '4'?'خدمات اضافية':'الاقسام و المنتجات',
       ),
       BottomNavigationBarItem(
         icon: Icon(
@@ -364,7 +368,7 @@ class _StatisticssState extends State<Statisticss> {
                                     "\n" +
                                     box.read('name'),
                                 textAlign: TextAlign.center,
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold ,fontSize: 16),
                               ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
@@ -564,38 +568,40 @@ class _StatisticssState extends State<Statisticss> {
                             service_type == '0'
                                 ? SizedBox()
                                 : service_type == '4'
-                                    ? GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    List_weddings_services()),
-                                          );
-                                        },
-                                        child: item_home_list(
-                                            icon: 'assets/images/food.png',
-                                            keyupdata: 0,
-                                            dat: false,
-                                            number: "",
-                                            // data.totalProduct.toString(),
-                                            width: width,
-                                            name: "خدمات القاعة"))
-                                    : service_type == '1'
-                                        ? GestureDetector(
-                                            onTap: () {
-                                              setState(() {
-                                                _selectedIndex = 1;
-                                              });
-                                            },
-                                            child: item_home_list(
-                                                icon: 'assets/images/box.png',
-                                                keyupdata: 0,
-                                                dat: false,
-                                                width: width,
-                                                number: data.totalProduct
-                                                    .toString(),
-                                                name: "الاقسام و المنتجات"))
+                                    ?SizedBox()
+                            // GestureDetector(
+                            //             onTap: () {
+                            //               Navigator.push(
+                            //                 context,
+                            //                 MaterialPageRoute(
+                            //                     builder: (context) =>
+                            //                         List_weddings_services()),
+                            //               );
+                            //             },
+                            //             child: item_home_list(
+                            //                 icon: 'assets/images/food.png',
+                            //                 keyupdata: 0,
+                            //                 dat: false,
+                            //                 number: "",
+                            //                 // data.totalProduct.toString(),
+                            //                 width: width,
+                            //                 name: "خدمات القاعة"))
+                                    : service_type == '1'?
+                                        Container()
+                            // GestureDetector(
+                                        //     onTap: () {
+                                        //       setState(() {
+                                        //         _selectedIndex = 1;
+                                        //       });
+                                        //     },
+                                        //     child: item_home_list(
+                                        //         icon: 'assets/images/box.png',
+                                        //         keyupdata: 0,
+                                        //         dat: false,
+                                        //         width: width,
+                                        //         number: data.totalProduct
+                                        //             .toString(),
+                                        //         name: "الاقسام و المنتجات"))
                                         : service_type == '2'
                                             ? GestureDetector(
                                                 onTap: () {
@@ -614,7 +620,7 @@ class _StatisticssState extends State<Statisticss> {
                                                     number: "",
                                                     // data.totalProduct.toString(),
                                                     width: width,
-                                                    name: "Pharmacy"))
+                                                    name: 'تسعير روشتات'))
                                             : service_type == '2'
                                                 ? GestureDetector(
                                                     onTap: () {
@@ -638,8 +644,8 @@ class _StatisticssState extends State<Statisticss> {
                             SizedBox(
                               height: 8,
                             ),
-                            service_type != '3'
-                                ? GestureDetector(
+                            service_type == '3'? SizedBox():service_type == '2' ?SizedBox()
+                             :  service_type == '4'? SizedBox():  GestureDetector(
                                     onTap: () {
                                       Navigator.push(
                                         context,
@@ -655,7 +661,7 @@ class _StatisticssState extends State<Statisticss> {
                                         number: data.totalPoints.toString(),
                                         width: width,
                                         name: "ﻋﺪﺩ نقاط"))
-                                : SizedBox(),
+                              ,
 
 //=========================================================================  GestureDetector(
 //                                 onTap: () {
@@ -726,15 +732,25 @@ class _StatisticssState extends State<Statisticss> {
                                 ? SizedBox()
                                 : GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Doc_Profile()),
-                                      );
+                                 if(service_type=='3'){
+                                   Navigator.push(
+                                     context,
+                                     MaterialPageRoute(
+                                         builder: (context) =>
+                                             Doc_Profile()),
+                                   );
+                                 }else{
+                                   Navigator.push(
+                                     context,
+                                     MaterialPageRoute(
+                                         builder: (context) =>
+                                             Profilee()),
+                                   );
+
+                                 }
                                     },
                                     child: item_home_list(
-                                        icon: 'assets/images/scoreboard.png',
+                                        icon: 'assets/images/t.png',
                                         keyupdata: 0,
                                         dat: false,
                                         number: "",
@@ -869,6 +885,8 @@ class _StatisticssState extends State<Statisticss> {
           setState(() {});
         });
 
+      }else if(service_type == '4'){
+        return List_weddings_services();
       } else {
         return ProductScr(() {
           _selectedIndex = 0;
