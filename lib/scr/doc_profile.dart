@@ -207,17 +207,19 @@ print( snapshot.data.result.serviceDetails[0].detectionPriceEn);
                         senddata
                             ? CircularProgressIndicator()
                             : GestureDetector(
-                                onTap: () {
+                                onTap: () async{
                                   print(price.text);
                                   print(price.text);
                                   senddata = true;
                                   setState(() {});
+                                  await box.write(
+                                      'name', name.text);
                                   _allNetworking
                                       .edit_doc_profile(
                                           token_id: token,
                                           name_ar: name.text,
                                           name_en: nameen.text,
-                                          phone: phone.text,
+                                          phone: phone.text,lag: 220.22,lat: 6515.222,
                                           waiting_time: watingtime.text,
                                           detection_price: price.text,
                                           description: des.text,
@@ -228,8 +230,7 @@ print( snapshot.data.result.serviceDetails[0].detectionPriceEn);
                                           waiting_time_en: watingtimeen.text,
                                           address: adderss.text,
                                           addressEn: adderssenz.text,
-                                          lat: _locationData.latitude,
-                                          lag: _locationData.longitude)
+                                         )
                                       .then((value) {
                                     print(value.data);
                                     senddata = false;

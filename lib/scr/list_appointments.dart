@@ -222,7 +222,15 @@ class _List_AppointmentsState extends State<List_Appointments> {
                                 MainAxisAlignment.spaceBetween,
                                 children: [
                                   SizedBox(),
-                                  Icon(Icons.delete),
+                                  GestureDetector(onTap: (){
+                                    _allNetworking.delete_appointment(token_id: token, id_list:snapshot.data.result
+                                        .listAppointments[pos].listId).then((value){
+                                          setState(() {
+
+                                          });
+                                    } );
+
+                                  },child: Icon(Icons.delete)),
                                 ],
                               )
                             ],

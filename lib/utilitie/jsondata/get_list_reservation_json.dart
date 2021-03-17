@@ -58,12 +58,13 @@ class AllReservation {
   String toHrs;
   String view;
   String address;
-  String userMakeReservationName;
   String userMakeReservationPhone;
+  String userMakeReservationName;
   String reservationDay;
   String fullname;
   String phone;
-  String orderDate;
+  String reservationDate;
+  String creationDate;
 
   AllReservation(
       {this.codeName,
@@ -72,12 +73,13 @@ class AllReservation {
         this.toHrs,
         this.view,
         this.address,
-        this.userMakeReservationName,
         this.userMakeReservationPhone,
+        this.userMakeReservationName,
         this.reservationDay,
         this.fullname,
         this.phone,
-        this.orderDate});
+        this.reservationDate,
+        this.creationDate});
 
   AllReservation.fromJson(Map<String, dynamic> json) {
     codeName = json['code_name'];
@@ -86,12 +88,13 @@ class AllReservation {
     toHrs = json['to_hrs'];
     view = json['view'];
     address = json['address'];
-    userMakeReservationName = json['user_make_reservation_name'];
     userMakeReservationPhone = json['user_make_reservation_phone'];
+    userMakeReservationName = json['user_make_reservation_name'];
     reservationDay = json['reservation_day'];
     fullname = json['fullname'];
     phone = json['phone'];
-    orderDate = json['order_date'];
+    reservationDate = json['reservation_date'];
+    creationDate = json['creation_date'];
   }
 
   Map<String, dynamic> toJson() {
@@ -102,12 +105,13 @@ class AllReservation {
     data['to_hrs'] = this.toHrs;
     data['view'] = this.view;
     data['address'] = this.address;
-    data['user_make_reservation_name'] = this.userMakeReservationName;
     data['user_make_reservation_phone'] = this.userMakeReservationPhone;
+    data['user_make_reservation_name'] = this.userMakeReservationName;
     data['reservation_day'] = this.reservationDay;
     data['fullname'] = this.fullname;
     data['phone'] = this.phone;
-    data['order_date'] = this.orderDate;
+    data['reservation_date'] = this.reservationDate;
+    data['creation_date'] = this.creationDate;
     return data;
   }
 }

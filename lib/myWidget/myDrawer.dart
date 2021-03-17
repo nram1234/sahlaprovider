@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/scr/branch.dart';
 import 'package:sahlaprovider/scr/contactwithmanager.dart';
+import 'package:sahlaprovider/scr/doc_profile.dart';
 import 'package:sahlaprovider/scr/login.dart';
 import 'package:sahlaprovider/scr/myprofile.dart';
 import 'package:sahlaprovider/scr/notificationScr.dart';
@@ -166,10 +167,18 @@ Widget mydrawer(context) {
                     fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
             onTap: () {
               // Get.to(Profilee(),transition: Transition.cupertino);
-              Navigator.push(
+
+              if(service_type=='3'){  Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Profilee()),
-              );
+                MaterialPageRoute(builder: (context) => Doc_Profile()),
+              );}else{
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Profilee()),
+                );
+              }
+
+
             },
           ),
           Container(

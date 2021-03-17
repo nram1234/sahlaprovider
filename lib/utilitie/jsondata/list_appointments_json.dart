@@ -57,6 +57,7 @@ class ListAppointments {
   String fromHrsEn;
   String toHrs;
   String toHrsEn;
+  String listId;
 
   ListAppointments(
       {this.dayName,
@@ -64,7 +65,8 @@ class ListAppointments {
         this.fromHrs,
         this.fromHrsEn,
         this.toHrs,
-        this.toHrsEn});
+        this.toHrsEn,
+        this.listId});
 
   ListAppointments.fromJson(Map<String, dynamic> json) {
     dayName = json['day_name'];
@@ -73,6 +75,7 @@ class ListAppointments {
     fromHrsEn = json['from_hrs_en'];
     toHrs = json['to_hrs'];
     toHrsEn = json['to_hrs_en'];
+    listId = json['list_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -83,6 +86,7 @@ class ListAppointments {
     data['from_hrs_en'] = this.fromHrsEn;
     data['to_hrs'] = this.toHrs;
     data['to_hrs_en'] = this.toHrsEn;
+    data['list_id'] = this.listId;
     return data;
   }
 }

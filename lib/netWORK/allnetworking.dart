@@ -2275,4 +2275,32 @@ print( response.data);
     print( 'pppppppppppppppppppppppppppppppppppppppppppppp');
     return response;
   }
+
+
+
+
+  Future<Response> delete_appointment({
+    @required String token_id,
+    @required String id_list,
+  }) async {
+    Response data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "id_list": id_list,
+    });
+
+    await dio
+        .post(
+      paseurl + '/medicine/delete_appointment',
+      data: formData,
+    )
+        .then((value) {
+      data = value;
+    });
+
+    return data;
+  }
+
 }

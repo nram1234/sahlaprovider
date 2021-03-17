@@ -538,11 +538,31 @@ class _StatisticssState extends State<Statisticss> {
                                                 number: snapshot
                                                     .data.result.totalOrders
                                                     .toString(),
-                                                name: "طلبات")),
+                                                name: "طلبات")),   SizedBox(
+                              height: 8,
+                            ),
+                            service_type == '3'||service_type == '4'
+                                ? GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            List_Appointments()),
+                                  );
+                                },
+                                child: item_home_list(
+                                    icon: 'assets/images/booking.png',
+                                    keyupdata: 0,
+                                    dat: false,
+                                    number: "",
+                                    //data.totalProduct.toString(),
+                                    width: width,
+                                    name: "اضافه حجز خارجي"))
+                                : SizedBox(),
                             SizedBox(
                               height: 8,
                             ),
-
                             service_type == '0'
                                 ? SizedBox()
                                 : service_type == '3'
@@ -724,9 +744,6 @@ class _StatisticssState extends State<Statisticss> {
                               height: 8,
                             ),
 
-                            SizedBox(
-                              height: 8,
-                            ),
 
                             service_type == '0'
                                 ? SizedBox()

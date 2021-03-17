@@ -390,11 +390,13 @@ class _ProfileeState extends State<Profilee> {
                             height: high * .01,
                           ),
                           senddata?CircularProgressIndicator():   GestureDetector(
-                            onTap: () {
+                            onTap: ()async {
                               senddata=true;
                               setState(() {
 
                               });
+                              await box.write(
+                                  'name', title.text);
                               _allNetworking.edit_profile(
                                 token_id: box.read('token'),
                                 name_ar: title.text,
@@ -411,7 +413,7 @@ class _ProfileeState extends State<Profilee> {
                                 main_img
                                     :_image,password: password.text,
                                 location: addersinmap.text,
-                                instagram: insta.text,
+                                instagram: insta.text,lag: 220.22,lat: 6515.222,addressEn: '',
                                 twitter: twiter.text,
                                 facebook: facebook.text,
                                 website: website.text,

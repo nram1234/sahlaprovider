@@ -122,6 +122,23 @@ class _Add_Photography_RequestsState extends State<Add_Photography_Requests> {
                         title: title,
                         content: data)
                         .then((value) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(''),
+                            content:  Text(value.data['message']),
+                            actions: [
+                              TextButton(
+                                child: Text('Ok'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
                       print(value.data);
                       senddata = false;
                       setState(() {});
