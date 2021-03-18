@@ -23,6 +23,7 @@ import 'package:sahlaprovider/utilitie/jsondata/get_waiting_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_order_details_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_previous_orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/list_appointments_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/list_currency_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/list_doctors_services_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/list_wedding_reservation_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/pharmacies_image_json.dart';
@@ -2369,4 +2370,33 @@ print( response.data);
 
     return response;
   }
+
+
+
+
+
+
+  Future<List_currency_json> list_currency({
+    @required String token_id,
+  }) async {
+    List_currency_json data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+    });
+
+    await dio
+        .post(
+      paseurl + '/medicine/list_currency',
+      data: formData,
+    )
+        .then((value) {
+      print(value.data);
+      data =List_currency_json.fromJson(value.data);
+    });
+
+    return data;
+  }
+
 }
