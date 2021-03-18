@@ -23,7 +23,9 @@ import 'package:get_storage/get_storage.dart';
 
 import 'package:permission_handler/permission_handler.dart';
 
+import 'add_doctor_out_reservation.dart';
 import 'add_photography_requests.dart';
+import 'add_wedding_reservation.dart';
 import 'buy_prescription_request.dart';
 import 'doc_profile.dart';
 import 'get_all_orderSCr.dart';
@@ -74,6 +76,7 @@ class _StatisticssState extends State<Statisticss> {
     print('0000000000000000000000000000000000000000000000');
     final high = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
     var color = Colors.red;
     List bottomitem = <BottomNavigationBarItem>[
       BottomNavigationBarItem(
@@ -119,7 +122,16 @@ class _StatisticssState extends State<Statisticss> {
 
     //swithscren(high: high, width: width, pos: _selectedIndex);
   }
+  TimeOfDay _time = TimeOfDay.now();
+  TimeOfDay _picked;
 
+  Future <String>selecttime({BuildContext context}) async {
+    _picked = await showTimePicker(context: context, initialTime: _time);
+
+    return _picked.format(context);
+  }
+  String starttime='من الساعة';
+  String endtime='الي الساعة';
   Widget swithscren({pos, high, width}) {
     if (pos == 0) {
       return StreamBuilder<Get_home_json>(
@@ -341,7 +353,7 @@ class _StatisticssState extends State<Statisticss> {
                           width: 8,
                         ),
                         Container(
-                          height: high * 0.04,
+                           height: high * 0.04,
                           width: high * 0.05,
                           child: Image.asset(
                             'assets/images/log.png',
@@ -544,12 +556,26 @@ class _StatisticssState extends State<Statisticss> {
                             service_type == '3'||service_type == '4'
                                 ? GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            List_Appointments()),
-                                  );
+
+
+if(service_type=='3'){
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+        builder: (context) =>
+            Add_Doctor_Out_Reservation()),
+  );
+}else{
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+        builder: (context) =>
+            Add_Wedding_Reservation()),
+  );
+
+}
+
+
                                 },
                                 child: item_home_list(
                                     icon: 'assets/images/booking.png',

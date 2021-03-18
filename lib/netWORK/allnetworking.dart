@@ -2303,4 +2303,70 @@ print( response.data);
     return data;
   }
 
+
+
+
+
+
+  Future<Response> add_doctor_out_reservation({
+    @required String token_id,
+    @required String name,
+    @required String phone,
+    @required String address,
+    @required String from_hrs, @required String to_hrs,
+    @required DateTime reservation_date,
+
+  }) async {
+    Response response;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "fullname": name,
+      "phone": phone,
+      "address": address,
+      "from_hrs": from_hrs, "to_hrs": to_hrs,
+      "reservation_date": reservation_date,
+
+    });
+    response = await dio.post(
+      paseurl + '/medicine/add_doctor_out_reservation',
+      data: formData,
+    );
+
+    return response;
+  }
+
+
+
+
+
+  Future<Response>  add_wedding_reservation({
+    @required String token_id,
+    @required String name,
+    @required String phone,
+    @required String address,
+
+    @required DateTime reservation_date,
+
+  }) async {
+    Response response;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "fullname": name,
+      "phone": phone,
+      "address": address,
+
+      "reservation_date": reservation_date,
+
+    });
+    response = await dio.post(
+      paseurl + '/medicine/add_wedding_reservation',
+      data: formData,
+    );
+
+    return response;
+  }
 }
