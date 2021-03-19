@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
@@ -40,7 +41,7 @@ bool sewnddata=false;
     var high = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(title:Text('حجز') ,centerTitle: true,),
+      appBar: AppBar(title:Text('اضافة حجز خارجي  ') ,centerTitle: true,),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
@@ -63,7 +64,7 @@ bool sewnddata=false;
                 ),
               ),
               SizedBox(
-                height: 8,
+                height: 16,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -82,7 +83,7 @@ bool sewnddata=false;
                 ),
               ),
               SizedBox(
-                height: 8,
+                height: 16,
               ),  Container(
                 decoration: BoxDecoration(
                   border: Border.all(
@@ -92,7 +93,7 @@ bool sewnddata=false;
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
-                  controller: phone,
+                  controller: phone,keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                       focusedBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,
@@ -100,159 +101,166 @@ bool sewnddata=false;
                 ),
               ),
               SizedBox(
-                height: 8,
+                height: 16,
               ),
-              Container(
-                width: width,
-                height: 1,
-                color: Colors.grey,
+
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'الوقت',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      selecttime(context: context).then((value) {
+                        if(value!=null){
+
+
+                          starttime = value;}
+                        setState(() {});
+                      });
+                      setState(() {});
+                    },
+                    child: Container(
+                        width: width*.25,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: hexToColor('#00abeb'),
+                            gradient: new LinearGradient(
+                                colors: [
+                                  Colors.red[900],
+                                  Colors.red[100],
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                tileMode: TileMode.clamp),
+                            borderRadius: BorderRadius.circular(5.0)),
+                        child: Center(child: Text("  من  " + starttime))),
+                  ),
+
+                  GestureDetector(
+                    onTap: () {
+                      selecttime(context: context).then((value) {
+                        if(value!=null){
+
+
+                          endtime = value;}
+                        setState(() {});
+                      });
+                      setState(() {});
+                    },
+                    child: Container(
+                        width:width*.25,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: hexToColor('#00abeb'),
+                            gradient: new LinearGradient(
+                                colors: [
+                                  Colors.red[900],
+                                  Colors.red[100],
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                tileMode: TileMode.clamp),
+                            borderRadius: BorderRadius.circular(5.0)),
+                        child: Center(child: Text("  الي  " + endtime))),
+                  ),  ],
               ),
-              Text(
-                'الوقت',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              GestureDetector(
-                onTap: () {
-                  selecttime(context: context).then((value) {
-                    starttime = value;
-                    setState(() {});
-                  });
-                  setState(() {});
-                },
-                child: Container(
-                    width: width,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: hexToColor('#00abeb'),
-                        gradient: new LinearGradient(
-                            colors: [
-                              Colors.red[900],
-                              Colors.red[100],
-                            ],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            tileMode: TileMode.clamp),
-                        borderRadius: BorderRadius.circular(5.0)),
-                    child: Center(child: Text("  من  " + starttime))),
-              ),
+
               SizedBox(
-                height: 8,
+                height: 16,
               ),
-              GestureDetector(
-                onTap: () {
-                  selecttime(context: context).then((value) {
-                    endtime = value;
-                    setState(() {});
-                  });
-                  setState(() {});
-                },
-                child: Container(
-                    width: width,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: hexToColor('#00abeb'),
-                        gradient: new LinearGradient(
-                            colors: [
-                              Colors.red[900],
-                              Colors.red[100],
-                            ],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            tileMode: TileMode.clamp),
-                        borderRadius: BorderRadius.circular(5.0)),
-                    child: Center(child: Text("  الي  " + endtime))),
+
+              Row(
+                children: [
+                  Text(
+                    'التاريخ',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),SizedBox(width: width*.18,),
+                  Expanded(flex: 1,
+                    child: GestureDetector(
+                      onTap: () async {
+                        await showDatePicker(
+                            context: context,
+                            initialDate: _dateTime,
+                            firstDate: _dateTime,
+                            lastDate: DateTime(2035))
+                            .then((value) {
+                          if(value!=null){
+                            _dateTime = value;
+                          }
+
+                          setState(() {});
+                        });
+                      },
+                      child: Container(
+                    
+                          height: 50,
+                          decoration: BoxDecoration(
+                              color: hexToColor('#00abeb'),
+                              gradient: new LinearGradient(
+                                  colors: [
+                                    Colors.red[900],
+                                    Colors.red[100],
+                                  ],
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                  tileMode: TileMode.clamp),
+                              borderRadius: BorderRadius.circular(5.0)),
+                          child: Center(
+                              child: Text(" شهر " +
+                                  _dateTime.month.toString() +
+                                  " يوم " +
+                                  _dateTime.day.toString()))),
+                    ),
+                  ),    ],
               ),
+
+
               SizedBox(
-                height: 8,
+                height: 16,
               ),
-              Container(
-                width: width,
-                height: 1,
-                color: Colors.grey,
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Text(
-                'التاريخ',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              GestureDetector(
-                onTap: () async {
-                  await showDatePicker(
-                          context: context,
-                          initialDate: _dateTime,
-                          firstDate: _dateTime,
-                          lastDate: DateTime(2035))
-                      .then((value) {
-                    _dateTime = value;
-                    setState(() {});
-                  });
-                },
-                child: Container(
-                    width: width,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: hexToColor('#00abeb'),
-                        gradient: new LinearGradient(
-                            colors: [
-                              Colors.red[900],
-                              Colors.red[100],
-                            ],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            tileMode: TileMode.clamp),
-                        borderRadius: BorderRadius.circular(5.0)),
-                    child: Center(
-                        child: Text(" شهر " +
-                            _dateTime.month.toString() +
-                            " يوم " +
-                            _dateTime.day.toString()))),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              sewnddata? Container(height: 100,width: 100,child: CircularProgressIndicator()):  GestureDetector(
-                onTap: () async {
-                  sewnddata=true;
+            Row(children: [ SizedBox(width: width*.285,), sewnddata?
+            Container(height: 100,width: 100,child: CircularProgressIndicator()):
+            GestureDetector(
+              onTap: () async {
+                sewnddata=true;
+                setState(() {
+
+                });
+                print(_dateTime);
+                print(_dateTime);
+                _allNetworking.add_doctor_out_reservation(
+                    token_id: token,
+                    name: name.text,
+                    phone: phone.text,
+                    address: addres.text,
+                    from_hrs: starttime,to_hrs: endtime,
+                    reservation_date:_dateTime).then((value) {
+                  print(value);
+                  Get.snackbar('', value.data["message"]);
+                  sewnddata=false;
                   setState(() {
 
                   });
-                  print(_dateTime);
-                  print(_dateTime);
-                  _allNetworking.add_doctor_out_reservation(
-                      token_id: token,
-                      name: name.text,
-                      phone: phone.text,
-                      address: addres.text,
-                      from_hrs: starttime,to_hrs: endtime,
-                      reservation_date:_dateTime).then((value) {
-                        print(value);
-                        sewnddata=false;
-                        setState(() {
-
-                        });
-                  });
-                },
-                child: Container(
-                    width: width,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: hexToColor('#00abeb'),
-                        gradient: new LinearGradient(
-                            colors: [
-                              Colors.red[900],
-                              Colors.red[100],
-                            ],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            tileMode: TileMode.clamp),
-                        borderRadius: BorderRadius.circular(5.0)),
-                    child: Center(child: Text('حفظ'))),
-              )
+                });
+              },
+              child: Container(
+                  width: width*.67,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: hexToColor('#00abeb'),
+                      gradient: new LinearGradient(
+                          colors: [
+                            Colors.red[900],
+                            Colors.red[100],
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          tileMode: TileMode.clamp),
+                      borderRadius: BorderRadius.circular(5.0)),
+                  child: Center(child: Text('حفظ'))),
+            )],)
             ],
           ),
         ),

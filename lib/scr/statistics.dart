@@ -93,7 +93,13 @@ class _StatisticssState extends State<Statisticss> {
             : Icon(
                 Icons.shopping_cart_outlined,
               ),
-        label: service_type == '3' ? 'خدمات اضافيه' : service_type == '2' ?'مستحضرات التجميل':service_type == '4'?'خدمات اضافية':'الاقسام و المنتجات',
+        label: service_type == '3'
+            ? 'خدمات اضافيه'
+            : service_type == '2'
+                ? 'مستحضرات التجميل'
+                : service_type == '4'
+                    ? 'خدمات اضافية'
+                    : 'الاقسام و المنتجات',
       ),
       BottomNavigationBarItem(
         icon: Icon(
@@ -122,16 +128,19 @@ class _StatisticssState extends State<Statisticss> {
 
     //swithscren(high: high, width: width, pos: _selectedIndex);
   }
+
   TimeOfDay _time = TimeOfDay.now();
   TimeOfDay _picked;
 
-  Future <String>selecttime({BuildContext context}) async {
+  Future<String> selecttime({BuildContext context}) async {
     _picked = await showTimePicker(context: context, initialTime: _time);
 
     return _picked.format(context);
   }
-  String starttime='من الساعة';
-  String endtime='الي الساعة';
+
+  String starttime = 'من الساعة';
+  String endtime = 'الي الساعة';
+
   Widget swithscren({pos, high, width}) {
     if (pos == 0) {
       return StreamBuilder<Get_home_json>(
@@ -353,7 +362,7 @@ class _StatisticssState extends State<Statisticss> {
                           width: 8,
                         ),
                         Container(
-                           height: high * 0.04,
+                          height: high * 0.04,
                           width: high * 0.05,
                           child: Image.asset(
                             'assets/images/log.png',
@@ -380,7 +389,10 @@ class _StatisticssState extends State<Statisticss> {
                                     "\n" +
                                     box.read('name'),
                                 textAlign: TextAlign.center,
-                                style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold ,fontSize: 16),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16),
                               ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
@@ -491,9 +503,7 @@ class _StatisticssState extends State<Statisticss> {
 
                             // service_type == '1'
                             //     ?
-                            service_type == '0'
-                                ? SizedBox()
-                                : service_type == '3'
+                            service_type == '3'
                                     ? GestureDetector(
                                         onTap: () {
                                           Navigator.push(
@@ -532,7 +542,7 @@ class _StatisticssState extends State<Statisticss> {
                                                 width: width,
                                                 name:
                                                     "حجز قاعات افرح ودور مناسبات"))
-                                        : GestureDetector(
+                                        : service_type == '0'? GestureDetector(
                                             onTap: () {
                                               Navigator.push(
                                                 context,
@@ -550,41 +560,37 @@ class _StatisticssState extends State<Statisticss> {
                                                 number: snapshot
                                                     .data.result.totalOrders
                                                     .toString(),
-                                                name: "طلبات")),   SizedBox(
+                                                name: "طلبات")):SizedBox(),
+                            SizedBox(
                               height: 8,
                             ),
-                            service_type == '3'||service_type == '4'
+                            service_type == '3' || service_type == '4'
                                 ? GestureDetector(
-                                onTap: () {
-
-
-if(service_type=='3'){
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-        builder: (context) =>
-            Add_Doctor_Out_Reservation()),
-  );
-}else{
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-        builder: (context) =>
-            Add_Wedding_Reservation()),
-  );
-
-}
-
-
-                                },
-                                child: item_home_list(
-                                    icon: 'assets/images/booking.png',
-                                    keyupdata: 0,
-                                    dat: false,
-                                    number: "",
-                                    //data.totalProduct.toString(),
-                                    width: width,
-                                    name: "اضافه حجز خارجي"))
+                                    onTap: () {
+                                      if (service_type == '3') {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Add_Doctor_Out_Reservation()),
+                                        );
+                                      } else {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Add_Wedding_Reservation()),
+                                        );
+                                      }
+                                    },
+                                    child: item_home_list(
+                                        icon: 'assets/images/booking.png',
+                                        keyupdata: 0,
+                                        dat: false,
+                                        number: "",
+                                        //data.totalProduct.toString(),
+                                        width: width,
+                                        name: "اضافه حجز خارجي"))
                                 : SizedBox(),
                             SizedBox(
                               height: 8,
@@ -614,27 +620,27 @@ if(service_type=='3'){
                             service_type == '0'
                                 ? SizedBox()
                                 : service_type == '4'
-                                    ?SizedBox()
-                            // GestureDetector(
-                            //             onTap: () {
-                            //               Navigator.push(
-                            //                 context,
-                            //                 MaterialPageRoute(
-                            //                     builder: (context) =>
-                            //                         List_weddings_services()),
-                            //               );
-                            //             },
-                            //             child: item_home_list(
-                            //                 icon: 'assets/images/food.png',
-                            //                 keyupdata: 0,
-                            //                 dat: false,
-                            //                 number: "",
-                            //                 // data.totalProduct.toString(),
-                            //                 width: width,
-                            //                 name: "خدمات القاعة"))
-                                    : service_type == '1'?
-                                        Container()
-                            // GestureDetector(
+                                    ? SizedBox()
+                                    // GestureDetector(
+                                    //             onTap: () {
+                                    //               Navigator.push(
+                                    //                 context,
+                                    //                 MaterialPageRoute(
+                                    //                     builder: (context) =>
+                                    //                         List_weddings_services()),
+                                    //               );
+                                    //             },
+                                    //             child: item_home_list(
+                                    //                 icon: 'assets/images/food.png',
+                                    //                 keyupdata: 0,
+                                    //                 dat: false,
+                                    //                 number: "",
+                                    //                 // data.totalProduct.toString(),
+                                    //                 width: width,
+                                    //                 name: "خدمات القاعة"))
+                                    : service_type == '1'
+                                        ? Container()
+                                        // GestureDetector(
                                         //     onTap: () {
                                         //       setState(() {
                                         //         _selectedIndex = 1;
@@ -690,24 +696,33 @@ if(service_type=='3'){
                             SizedBox(
                               height: 8,
                             ),
-                            service_type == '3'? SizedBox():service_type == '2' ?SizedBox()
-                             :  service_type == '4'? SizedBox():  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Get_all_visitor_points(token)),
-                                      );
-                                    },
-                                    child: item_home_list(
-                                        icon: 'assets/images/scoreboard.png',
-                                        keyupdata: 0,
-                                        dat: false,
-                                        number: data.totalPoints.toString(),
-                                        width: width,
-                                        name: "ﻋﺪﺩ نقاط"))
-                              ,
+                            service_type == '3'
+                                ? SizedBox()
+                                : service_type == '2'
+                                    ? SizedBox()
+                                    : service_type == '0'
+                                        ? SizedBox()
+                                        : service_type == '4'
+                                            ? SizedBox()
+                                            : GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Get_all_visitor_points(
+                                                                token)),
+                                                  );
+                                                },
+                                                child: item_home_list(
+                                                    icon:
+                                                        'assets/images/scoreboard.png',
+                                                    keyupdata: 0,
+                                                    dat: false,
+                                                    number: data.totalPoints
+                                                        .toString(),
+                                                    width: width,
+                                                    name: "ﻋﺪﺩ نقاط")),
 
 //=========================================================================  GestureDetector(
 //                                 onTap: () {
@@ -770,27 +785,24 @@ if(service_type=='3'){
                               height: 8,
                             ),
 
-
                             service_type == '0'
                                 ? SizedBox()
                                 : GestureDetector(
                                     onTap: () {
-                                 if(service_type=='3'){
-                                   Navigator.push(
-                                     context,
-                                     MaterialPageRoute(
-                                         builder: (context) =>
-                                             Doc_Profile()),
-                                   );
-                                 }else{
-                                   Navigator.push(
-                                     context,
-                                     MaterialPageRoute(
-                                         builder: (context) =>
-                                             Profilee()),
-                                   );
-
-                                 }
+                                      if (service_type == '3') {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Doc_Profile()),
+                                        );
+                                      } else {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Profilee()),
+                                        );
+                                      }
                                     },
                                     child: item_home_list(
                                         icon: 'assets/images/t.png',
@@ -807,7 +819,7 @@ if(service_type=='3'){
                             //==============================
                             qrgnratt
                                 ? CircularProgressIndicator()
-                                : service_type == '1' || service_type == '0'
+                                : service_type == '1' //|| service_type == '0'
                                     ? GestureDetector(
                                         onTap: () async {
                                           int idOfQR = await box.read('id');
@@ -858,7 +870,7 @@ if(service_type=='3'){
                             SizedBox(
                               height: high * .02,
                             ),
-                            service_type == '1' || service_type == '0'
+                            service_type == '1' //|| service_type == '0'
                                 ? GestureDetector(
                                     onTap: () {
                                       if (activediscount) {
@@ -927,8 +939,7 @@ if(service_type=='3'){
 
           setState(() {});
         });
-
-      }else if(service_type == '4'){
+      } else if (service_type == '4') {
         return List_weddings_services();
       } else {
         return ProductScr(() {
@@ -937,10 +948,7 @@ if(service_type=='3'){
           setState(() {});
         });
       }
-
     } else if (pos == 2) {
-
-
       return OfferScr(() {
         _selectedIndex = 0;
 

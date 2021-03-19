@@ -2346,8 +2346,8 @@ print( response.data);
     @required String token_id,
     @required String name,
     @required String phone,
-    @required String address,
-
+    @required String price,
+    @required String currency_id,
     @required DateTime reservation_date,
 
   }) async {
@@ -2358,13 +2358,13 @@ print( response.data);
       "token_id": token_id,
       "fullname": name,
       "phone": phone,
-      "address": address,
-
+      "currency_id": currency_id,
+      "price": price,
       "reservation_date": reservation_date,
 
     });
     response = await dio.post(
-      paseurl + '/medicine/add_wedding_reservation',
+      paseurl + '/weddings/add_wedding_out_reservation',
       data: formData,
     );
 
