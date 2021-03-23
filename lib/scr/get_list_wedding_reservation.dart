@@ -47,7 +47,8 @@ class _Get_list_wedding_reservationState
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color:snapshot.data.result
+                                  .allReservation[pos].reservationType=="1"?Colors.grey[200]: Colors.white,
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(10),
                                   topRight: Radius.circular(10),
@@ -82,7 +83,8 @@ class _Get_list_wedding_reservationState
                                         MainAxisAlignment.spaceBetween,
                                     children: [],
                                   ),
-                                ),
+                                ),Text(snapshot.data.result
+                                    .allReservation[pos].reservationType=="1"?"حجز من داخل التطبيق":"حجز من خارج التطبيق"),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
