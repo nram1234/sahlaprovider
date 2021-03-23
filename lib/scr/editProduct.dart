@@ -72,9 +72,8 @@ class _EditProductState extends State<EditProduct> {
           appBar: AppBar(actions: [GestureDetector(
             onTap: () {
               Navigator.pop(context, false);
-            }, child: Icon(Icons.arrow_back),)
-          ]
-            ,
+            }, child: Icon(Icons.arrow_forward_outlined),)
+          ],
             centerTitle: true,
             title: Text('تعديل منتج ',
                 style: TextStyle(

@@ -35,7 +35,11 @@ class _Get_all_orderState extends State<Get_all_visitor_points> {
       child: SafeArea(
           top: true,
           child: Scaffold(
-            appBar: AppBar(
+            appBar: AppBar(actions: [GestureDetector(
+              onTap: () {
+                Navigator.pop(context, false);
+              }, child: Icon(Icons.arrow_forward_outlined),)
+            ],
               centerTitle: true,
               title: Text('اجمالي نقاط المستخدمين'),
             ),

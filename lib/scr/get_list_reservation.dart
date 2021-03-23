@@ -28,7 +28,11 @@ class _Get_list_reservationState extends State<Get_list_reservation> {
     return SafeArea(
       top: true,
       child: Scaffold(
-        appBar: AppBar(
+        appBar: AppBar(actions: [GestureDetector(
+          onTap: () {
+            Navigator.pop(context, false);
+          }, child: Icon(Icons.arrow_forward_outlined),)
+        ],
           title: Text('الحجوزات'),
         ),
         body: StreamBuilder<Get_list_reservation_json>(

@@ -63,7 +63,9 @@ class AllReservation {
   String reservationDay;
   String fullname;
   String phone;
-  String orderDate;
+  String creationDate;
+  String reservationDate;
+  String reservationType;
 
   AllReservation(
       {this.codeName,
@@ -77,7 +79,9 @@ class AllReservation {
         this.reservationDay,
         this.fullname,
         this.phone,
-        this.orderDate});
+        this.creationDate,
+        this.reservationDate,
+        this.reservationType});
 
   AllReservation.fromJson(Map<String, dynamic> json) {
     codeName = json['code_name'];
@@ -91,7 +95,9 @@ class AllReservation {
     reservationDay = json['reservation_day'];
     fullname = json['fullname'];
     phone = json['phone'];
-    orderDate = json['order_date'];
+    creationDate = json['creation_date'];
+    reservationDate = json['reservation_date'];
+    reservationType = json['reservation_type'];
   }
 
   Map<String, dynamic> toJson() {
@@ -107,7 +113,9 @@ class AllReservation {
     data['reservation_day'] = this.reservationDay;
     data['fullname'] = this.fullname;
     data['phone'] = this.phone;
-    data['order_date'] = this.orderDate;
+    data['creation_date'] = this.creationDate;
+    data['reservation_date'] = this.reservationDate;
+    data['reservation_type'] = this.reservationType;
     return data;
   }
 }

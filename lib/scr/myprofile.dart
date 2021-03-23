@@ -14,8 +14,10 @@ import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_profile_json.dart';
 
 class Profilee extends StatefulWidget {
+
   @override
   _ProfileeState createState() => _ProfileeState();
+
 }
 
 class _ProfileeState extends State<Profilee> {
@@ -29,7 +31,7 @@ class _ProfileeState extends State<Profilee> {
   TextEditingController phone3 = TextEditingController();
   TextEditingController whatsapp = TextEditingController();
   TextEditingController state_id = TextEditingController();
-
+  TextEditingController email = TextEditingController();
   TextEditingController description = TextEditingController();
   TextEditingController description_en = TextEditingController();
 
@@ -37,7 +39,7 @@ class _ProfileeState extends State<Profilee> {
   TextEditingController facebook = TextEditingController();
   TextEditingController twiter = TextEditingController();
   TextEditingController website = TextEditingController();
-  TextEditingController email = TextEditingController();
+
   TextEditingController insta = TextEditingController();
   TextEditingController dlivery = TextEditingController();
 
@@ -89,6 +91,15 @@ class _ProfileeState extends State<Profilee> {
     //getloc();
 
   }
+  TimeOfDay _time = TimeOfDay.now();
+  TimeOfDay _picked;
+  String starttime = ' الساعة';
+  String endtime = ' الساعة';
+  Future<String> selecttime({BuildContext context}) async {
+    _picked = await showTimePicker(context: context, initialTime: _time);
+
+    return _picked.format(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +116,11 @@ class _ProfileeState extends State<Profilee> {
         textDirection: TextDirection.rtl,
         child: Scaffold(
           drawer: mydrawer(context),
-          appBar: AppBar(
+          appBar: AppBar(actions: [GestureDetector(
+            onTap: () {
+              Navigator.pop(context, false);
+            }, child: Icon(Icons.arrow_forward_outlined),)
+          ],
             centerTitle: true,
             title: Text('ﺍﻟﺒﺮﻭﻓﺎﻳﻞ',
                 style: TextStyle(
@@ -143,7 +158,7 @@ class _ProfileeState extends State<Profilee> {
                   phone2.text = dat.phoneSecond;
                   phone3.text = dat.phoneThird;
                   whatsapp.text = dat.whatsapp;
-
+                  email.text=dat.email;
 
                   description.text = dat.description;
                   description_en.text = dat.descriptionEn;
@@ -307,6 +322,89 @@ class _ProfileeState extends State<Profilee> {
                           SizedBox(
                             height: high * .01,
                           ),
+
+
+                          Container( decoration: BoxDecoration(
+
+
+                            border: Border.all(
+                              color: Colors.grey,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+
+                                Text('  المواعيد  '),
+
+                                GestureDetector(
+                                  onTap: () {
+                                    selecttime(context: context).then((value) {
+                                      if(value!=null){
+
+
+                                        starttime = value;}
+                                      setState(() {});
+                                    });
+                                    setState(() {});
+                                  },
+                                  child: Container(
+                                      width: width*.25,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          color: hexToColor('#00abeb'),
+                                          gradient: new LinearGradient(
+                                              colors: [
+                                                Colors.red[900],
+                                                Colors.red[100],
+                                              ],
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                              tileMode: TileMode.clamp),
+                                          borderRadius: BorderRadius.circular(5.0)),
+                                      child: Center(child: Text("  من  " + starttime))),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    selecttime(context: context).then((value) {
+                                      if(value!=null){
+
+
+                                        endtime = value;}
+                                      setState(() {});
+                                    });
+                                    setState(() {});
+                                  },
+                                  child: Container(
+                                      width:width*.25,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          color: hexToColor('#00abeb'),
+                                          gradient: new LinearGradient(
+                                              colors: [
+                                                Colors.red[900],
+                                                Colors.red[100],
+                                              ],
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                              tileMode: TileMode.clamp),
+                                          borderRadius: BorderRadius.circular(5.0)),
+                                      child: Center(child: Text("  الي  " + endtime))),
+                                ),
+
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: high * .01,
+                          ),
+
+
+
+
                           mywidget(
                             textEditingController: whatsapp,
                             hint: 'رقم الوتس اب',
@@ -354,6 +452,21 @@ class _ProfileeState extends State<Profilee> {
                           SizedBox(
                             height: high * .01,
                           ),
+
+
+
+                          mywidget(
+                              textEditingController: email,
+                              inputtype: TextInputType.text,
+                              hint: 'البريد الالكتروني'),
+                          SizedBox(
+                            height: high * .01,
+                          ),
+
+
+
+
+
                           mywidget(
                               textEditingController: dlivery,
                               inputtype: TextInputType.text,
@@ -417,6 +530,10 @@ class _ProfileeState extends State<Profilee> {
                                 twitter: twiter.text,
                                 facebook: facebook.text,
                                 website: website.text,
+                                from_hrs:starttime,
+
+
+                                to_hrs: endtime,
                                 email: email.text,
                              ).then((value) {
                                 Get.snackbar('', value.statusMessage);

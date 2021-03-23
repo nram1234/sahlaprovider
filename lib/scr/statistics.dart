@@ -447,64 +447,86 @@ class _StatisticssState extends State<Statisticss> {
                             //               tileMode: TileMode.clamp),
                             //           borderRadius: BorderRadius.circular(10))),
                             // ),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            Add_Photography_Requests()),
-                                  );
-                                },
-                                child: item_home_list(
-                                    icon: 'assets/images/cam.png',
-                                    keyupdata: 0,
-                                    dat: false,
-                                    number: "",
-                                    //data.totalProduct.toString(),
-                                    width: width,
-                                    name: "طلب تصميم وتصوير")),
-
                             SizedBox(
                               height: 8,
                             ),
-                            GestureDetector(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) =>
-                                  //           VisitorCount(token)),
-                                  // );
-                                },
-                                child: item_home_list(
-                                    fun: () {
-                                      _allNetworking
-                                          .subscription_renewal(token_id: token)
-                                          .then((value) {
-                                        Get.snackbar('', value.data['message']);
-                                        setState(() {});
-                                      }).catchError((e) {
-                                        print(e);
-                                      });
-                                    },
-                                    icon: 'assets/images/calendar.png',
-                                    dat: true,
-                                    width: width,
-                                    number: data.startDate,
-                                    number2: data.endDate,
-                                    keyupdata: data.keyUpdate,
-                                    name: "ﺗﺎﺭﻳﺦ ﺍﻻﺷﺘﺮﺍﻙ")),
-                            SizedBox(
-                              height: 8,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                              child: GestureDetector(
+                                  onTap: () {},
+                                  child: item_home_list(
+                                      icon: 'assets/images/time.png',
+                                      keyupdata: 0,
+                                      dat: false,
+                                      width: width,
+                                      number: ' من الساعة ${snapshot.data.result.fromHrs} ' +
+                                          "\n" +
+                                          ' الي الساعة ${snapshot.data.result.toHrs} ',
+                                      name: "موعيد")),
                             ),
-                            // service_type == '1'
-                            //     ?
 
-                            // service_type == '1'
-                            //     ?
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Add_Photography_Requests()),
+                                    );
+                                  },
+                                  child: item_home_list(
+                                      icon: 'assets/images/cam.png',
+                                      keyupdata: 0,
+                                      dat: false,
+                                      number: "",
+                                      //data.totalProduct.toString(),
+                                      width: width,
+                                      name: "طلب تصميم وتصوير")),
+                            ),
+
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                              child: GestureDetector(
+                                  onTap: () {
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) =>
+                                    //           VisitorCount(token)),
+                                    // );
+                                  },
+                                  child: item_home_list(
+                                      fun: () {
+                                        _allNetworking
+                                            .subscription_renewal(
+                                                token_id: token)
+                                            .then((value) {
+                                          Get.snackbar(
+                                              '', value.data['message']);
+                                          setState(() {});
+                                        }).catchError((e) {
+                                          print(e);
+                                        });
+                                      },
+                                      icon: 'assets/images/calendar.png',
+                                      dat: true,
+                                      width: width,
+                                      number: data.startDate,
+                                      number2: data.endDate,
+                                      keyupdata: data.keyUpdate,
+                                      name: "ﺗﺎﺭﻳﺦ ﺍﻻﺷﺘﺮﺍﻙ")),
+                            ),
+
                             service_type == '3'
-                                    ? GestureDetector(
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 8.0, bottom: 8.0),
+                                    child: GestureDetector(
                                         onTap: () {
                                           Navigator.push(
                                             context,
@@ -521,9 +543,13 @@ class _StatisticssState extends State<Statisticss> {
                                             number: "",
                                             // data.totalProduct.toString(),
                                             width: width,
-                                            name: 'طلبات حجز'))
-                                    : service_type == '4'
-                                        ? GestureDetector(
+                                            name: 'طلبات حجز')),
+                                  )
+                                : service_type == '4'
+                                    ? Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 8.0, bottom: 8.0),
+                                        child: GestureDetector(
                                             onTap: () {
                                               Navigator.push(
                                                 context,
@@ -541,80 +567,93 @@ class _StatisticssState extends State<Statisticss> {
                                                 // data.totalProduct.toString(),
                                                 width: width,
                                                 name:
-                                                    "حجز قاعات افرح ودور مناسبات"))
-                                        : service_type == '0'? GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        MyOrder()),
-                                              );
-                                            },
-                                            child: item_home_list(
-                                                icon:
-                                                    'assets/images/shopping_cart.png',
-                                                keyupdata: 0,
-                                                dat: false,
-                                                width: width,
-                                                number: snapshot
-                                                    .data.result.totalOrders
-                                                    .toString(),
-                                                name: "طلبات")):SizedBox(),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            service_type == '3' || service_type == '4'
-                                ? GestureDetector(
-                                    onTap: () {
-                                      if (service_type == '3') {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Add_Doctor_Out_Reservation()),
-                                        );
-                                      } else {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Add_Wedding_Reservation()),
-                                        );
-                                      }
-                                    },
-                                    child: item_home_list(
-                                        icon: 'assets/images/booking.png',
-                                        keyupdata: 0,
-                                        dat: false,
-                                        number: "",
-                                        //data.totalProduct.toString(),
-                                        width: width,
-                                        name: "اضافه حجز خارجي"))
-                                : SizedBox(),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            service_type == '0'
-                                ? SizedBox()
-                                : service_type == '3'
-                                    ? GestureDetector(
+                                                    "حجز قاعات افرح ودور مناسبات")),
+                                      )
+                                    : SizedBox(),
+                            service_type == '1'
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 8.0, bottom: 8.0),
+                                    child: GestureDetector(
                                         onTap: () {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    List_Appointments()),
+                                                    MyOrder()),
                                           );
                                         },
                                         child: item_home_list(
-                                            icon: 'assets/images/medical.png',
+                                            icon:
+                                                'assets/images/shopping_cart.png',
+                                            keyupdata: 0,
+                                            dat: false,
+                                            width: width,
+                                            number: snapshot
+                                                .data.result.totalOrders
+                                                .toString(),
+                                            name: "طلبات")),
+                                  )
+                                : SizedBox(),
+
+                            service_type == '3' || service_type == '4'
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 8.0, bottom: 8.0),
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          if (service_type == '3') {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Add_Doctor_Out_Reservation()),
+                                            );
+                                          } else {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Add_Wedding_Reservation()),
+                                            );
+                                          }
+                                        },
+                                        child: item_home_list(
+                                            icon: 'assets/images/booking.png',
                                             keyupdata: 0,
                                             dat: false,
                                             number: "",
                                             //data.totalProduct.toString(),
                                             width: width,
-                                            name: "مواعيد الكشف"))
+                                            name: "اضافه حجز خارجي")),
+                                  )
+                                : SizedBox(),
+
+                            service_type == '0'
+                                ? SizedBox()
+                                : service_type == '3'
+                                    ? Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 8.0, bottom: 8.0),
+                                        child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        List_Appointments()),
+                                              );
+                                            },
+                                            child: item_home_list(
+                                                icon:
+                                                    'assets/images/medical.png',
+                                                keyupdata: 0,
+                                                dat: false,
+                                                number: "",
+                                                //data.totalProduct.toString(),
+                                                width: width,
+                                                name: "مواعيد الكشف")),
+                                      )
                                     : SizedBox(),
 
                             service_type == '0'
@@ -655,47 +694,58 @@ class _StatisticssState extends State<Statisticss> {
                                         //             .toString(),
                                         //         name: "الاقسام و المنتجات"))
                                         : service_type == '2'
-                                            ? GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            Pharmacy()),
-                                                  );
-                                                },
-                                                child: item_home_list(
-                                                    icon:
-                                                        'assets/images/pills.png',
-                                                    keyupdata: 0,
-                                                    dat: false,
-                                                    number: "",
-                                                    // data.totalProduct.toString(),
-                                                    width: width,
-                                                    name: 'تسعير روشتات'))
-                                            : service_type == '2'
-                                                ? GestureDetector(
+                                            ? Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 8.0, bottom: 8.0),
+                                                child: GestureDetector(
                                                     onTap: () {
                                                       Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                Buy_prescription_request()),
+                                                            builder:
+                                                                (context) =>
+                                                                    Pharmacy()),
                                                       );
                                                     },
                                                     child: item_home_list(
                                                         icon:
-                                                            'assets/images/medical_prescription.png',
+                                                            'assets/images/pills.png',
                                                         keyupdata: 0,
                                                         dat: false,
                                                         number: "",
                                                         // data.totalProduct.toString(),
                                                         width: width,
-                                                        name: "تسعير روشتة"))
+                                                        name: 'تسعير روشتات')),
+                                              )
+                                            :SizedBox(),
+                          service_type == '2' ? Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 8.0,
+                                                            bottom: 8.0),
+                                                    child: GestureDetector(
+                                                        onTap: () {
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        Buy_prescription_request()),
+                                                          );
+                                                        },
+                                                        child: item_home_list(
+                                                            icon:
+                                                                'assets/images/medical_prescription.png',
+                                                            keyupdata: 0,
+                                                            dat: false,
+                                                            number: "",
+                                                            // data.totalProduct.toString(),
+                                                            width: width,
+                                                            name:
+                                                                "طلب شراء روشتات ")),
+                                                  )
                                                 : SizedBox(),
-                            SizedBox(
-                              height: 8,
-                            ),
+
                             service_type == '3'
                                 ? SizedBox()
                                 : service_type == '2'
@@ -704,25 +754,29 @@ class _StatisticssState extends State<Statisticss> {
                                         ? SizedBox()
                                         : service_type == '4'
                                             ? SizedBox()
-                                            : GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            Get_all_visitor_points(
-                                                                token)),
-                                                  );
-                                                },
-                                                child: item_home_list(
-                                                    icon:
-                                                        'assets/images/scoreboard.png',
-                                                    keyupdata: 0,
-                                                    dat: false,
-                                                    number: data.totalPoints
-                                                        .toString(),
-                                                    width: width,
-                                                    name: "ﻋﺪﺩ نقاط")),
+                                            : Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 8.0, bottom: 8.0),
+                                                child: GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                Get_all_visitor_points(
+                                                                    token)),
+                                                      );
+                                                    },
+                                                    child: item_home_list(
+                                                        icon:
+                                                            'assets/images/scoreboard.png',
+                                                        keyupdata: 0,
+                                                        dat: false,
+                                                        number: data.totalPoints
+                                                            .toString(),
+                                                        width: width,
+                                                        name: "ﻋﺪﺩ نقاط")),
+                                              ),
 
 //=========================================================================  GestureDetector(
 //                                 onTap: () {
@@ -741,80 +795,82 @@ class _StatisticssState extends State<Statisticss> {
 
                             //    : SizedBox(height: 1,),
 
-                            SizedBox(
-                              height: 8,
-                            ),
                             service_type != '0' || service_type != '1'
                                 ? SizedBox()
-                                : GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Get_all_order(token)),
-                                      );
-                                    },
-                                    child: item_home_list(
-                                        icon: 'assets/images/coupon.png',
-                                        keyupdata: 0,
-                                        dat: false,
-                                        width: width,
-                                        number: data.totalSelling.toString(),
-                                        name: "عدد الكوبونات")),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            VisitorCount(token)),
-                                  );
-                                },
-                                child: item_home_list(
-                                    icon: 'assets/images/community.png',
-                                    keyupdata: 0,
-                                    dat: false,
-                                    width: width,
-                                    number: data.totalSelling.toString(),
-                                    name: "عدد الزوار")),
-                            SizedBox(
-                              height: 8,
+                                : Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 8.0, bottom: 8.0),
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Get_all_order(token)),
+                                          );
+                                        },
+                                        child: item_home_list(
+                                            icon: 'assets/images/coupon.png',
+                                            keyupdata: 0,
+                                            dat: false,
+                                            width: width,
+                                            number:
+                                                data.totalSelling.toString(),
+                                            name: "عدد الكوبونات")),
+                                  ),
+
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              VisitorCount(token)),
+                                    );
+                                  },
+                                  child: item_home_list(
+                                      icon: 'assets/images/community.png',
+                                      keyupdata: 0,
+                                      dat: false,
+                                      width: width,
+                                      number: data.totalSelling.toString(),
+                                      name: "عدد الزوار")),
                             ),
 
                             service_type == '0'
                                 ? SizedBox()
-                                : GestureDetector(
-                                    onTap: () {
-                                      if (service_type == '3') {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Doc_Profile()),
-                                        );
-                                      } else {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Profilee()),
-                                        );
-                                      }
-                                    },
-                                    child: item_home_list(
-                                        icon: 'assets/images/t.png',
-                                        keyupdata: 0,
-                                        dat: false,
-                                        number: "",
-                                        width: width,
-                                        name: "تعديل البروفيل")),
-
-                            SizedBox(
-                              height: 8,
-                            ),
+                                : Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 8.0, bottom: 8.0),
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          if (service_type == '3') {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Doc_Profile()),
+                                            );
+                                          } else {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Profilee()),
+                                            );
+                                          }
+                                        },
+                                        child: item_home_list(
+                                            icon: 'assets/images/t.png',
+                                            keyupdata: 0,
+                                            dat: false,
+                                            number: "",
+                                            width: width,
+                                            name: "تعديل البروفيل")),
+                                  ),
 
                             //==============================
                             qrgnratt
@@ -870,7 +926,7 @@ class _StatisticssState extends State<Statisticss> {
                             SizedBox(
                               height: high * .02,
                             ),
-                            service_type == '1' //|| service_type == '0'
+                            service_type == '1' //|| service_type == '0'Z
                                 ? GestureDetector(
                                     onTap: () {
                                       if (activediscount) {
@@ -1075,16 +1131,16 @@ class _StatisticssState extends State<Statisticss> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text("من" + number,
+                            Text(" من " + number,
                                 style: TextStyle(
                                     fontFamily: 'Arbf',
                                     color: Colors.red,
-                                    fontSize: 16)),
-                            Text("الي" + number2,
+                                    fontSize: 14)),
+                            Text(" الي " + number2,
                                 style: TextStyle(
                                     fontFamily: 'Arbf',
                                     color: Colors.red,
-                                    fontSize: 16)),
+                                    fontSize: 14)),
                           ],
                         ))
                     : Flexible(
@@ -1092,7 +1148,7 @@ class _StatisticssState extends State<Statisticss> {
                             style: TextStyle(
                                 fontFamily: 'Arbf',
                                 color: Colors.red,
-                                fontSize: 16)),
+                                fontSize: 12)),
                       ),
                 SizedBox(
                   width: 8,
@@ -1115,7 +1171,7 @@ class _StatisticssState extends State<Statisticss> {
                                 child: Text(
                                     keyupdata == 1
                                         ? 'تجديد الاشتراك'
-                                        : 'تم ارسال الطلب',
+                                        : ' تم ارسال الطلب',
                                     style: TextStyle(
                                         fontFamily: 'Arbf',
                                         color: Colors.white,

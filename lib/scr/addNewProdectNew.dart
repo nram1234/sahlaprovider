@@ -43,7 +43,7 @@ class _AddNewProdectNEWState extends State<AddNewProdectNEW> {
           appBar: AppBar(actions: [GestureDetector(
             onTap: () {
               Navigator.pop(context, false);
-            }, child: Icon(Icons.arrow_back),)
+            }, child: Icon(Icons.arrow_forward_outlined),)
           ]
             ,
             centerTitle: true,

@@ -31,7 +31,11 @@ class _NotifictionSCRState extends State<NotifictionDetSCR> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(widget._allNotifications.title),
-        ),
+          actions: [GestureDetector(
+            onTap: () {
+              Navigator.pop(context, false);
+            }, child: Icon(Icons.arrow_forward_outlined),)
+          ],  ),
         body: StreamBuilder<Get_notification_details_json>(
             stream: _allNetworking
                 .get_notification_details(

@@ -56,6 +56,7 @@ class _Add_Wedding_ReservationState extends State<Add_Wedding_Reservation> {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+
         title: Text('اضافة حجز خارجي  '),
         centerTitle: true,
       ),
@@ -111,7 +112,8 @@ class _Add_Wedding_ReservationState extends State<Add_Wedding_Reservation> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
-                  controller: phone,keyboardType: TextInputType.phone,
+                  controller: phone,
+                  keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                       focusedBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,
@@ -134,7 +136,8 @@ class _Add_Wedding_ReservationState extends State<Add_Wedding_Reservation> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextField(
-                      controller: price,keyboardType: TextInputType.number,
+                      controller: price,
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
@@ -207,9 +210,9 @@ class _Add_Wedding_ReservationState extends State<Add_Wedding_Reservation> {
                               firstDate: _dateTime,
                               lastDate: DateTime(2035))
                           .then((value) {
-                            if(value!=null){
-                              _dateTime = value;
-                            }
+                        if (value != null) {
+                          _dateTime = value;
+                        }
 
                         setState(() {});
                       });
@@ -229,18 +232,77 @@ class _Add_Wedding_ReservationState extends State<Add_Wedding_Reservation> {
                                 tileMode: TileMode.clamp),
                             borderRadius: BorderRadius.circular(5.0)),
                         child: Center(
-                            child:Text(" شهر " +
-                                    _dateTime.month.toString() +
-                                    " يوم " +
-                                    _dateTime.day.toString())
-                                )),
+                            child: Text(" شهر " +
+                                _dateTime.month.toString() +
+                                " يوم " +
+                                _dateTime.day.toString()))),
                   ),
                 ],
               ),
               SizedBox(
                 height: 16,
               ),
-
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'الوقت',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      selecttime(context: context).then((value) {
+                        if (value != null) {
+                          starttime = value;
+                        }
+                        setState(() {});
+                      });
+                      setState(() {});
+                    },
+                    child: Container(
+                        width: width * .25,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: hexToColor('#00abeb'),
+                            gradient: new LinearGradient(
+                                colors: [
+                                  Colors.red[900],
+                                  Colors.red[100],
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                tileMode: TileMode.clamp),
+                            borderRadius: BorderRadius.circular(5.0)),
+                        child: Center(child: Text("  من  " + starttime))),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      selecttime(context: context).then((value) {
+                        if (value != null) {
+                          endtime = value;
+                        }
+                        setState(() {});
+                      });
+                      setState(() {});
+                    },
+                    child: Container(
+                        width: width * .25,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: hexToColor('#00abeb'),
+                            gradient: new LinearGradient(
+                                colors: [
+                                  Colors.red[900],
+                                  Colors.red[100],
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                tileMode: TileMode.clamp),
+                            borderRadius: BorderRadius.circular(5.0)),
+                        child: Center(child: Text("  الي  " + endtime))),
+                  ),
+                ],
+              ),
               SizedBox(
                 height: 8,
               ),
@@ -251,17 +313,20 @@ class _Add_Wedding_ReservationState extends State<Add_Wedding_Reservation> {
                       child: CircularProgressIndicator())
                   : GestureDetector(
                       onTap: () async {
-                        if(dropdownValue!=null){
+                        if (dropdownValue != null) {
                           sewnddata = true;
                           setState(() {});
-
+                          print(_dateTime);
                           _allNetworking
                               .add_wedding_reservation(
-                              token_id: token,price: price.text,
-                              name: name.text,
-                              phone: phone.text,
-                              currency_id: dropdownValue.idWeddingService,
-                              reservation_date: _dateTime)
+                                  token_id: token,
+                                  price: price.text,addrs: addres.text,
+                                  name: name.text,
+                                  phone: phone.text,
+                                  from_hrs: starttime,
+                                  to_hrs: endtime,
+                                  currency_id: dropdownValue.idWeddingService,
+                                  reservation_date: _dateTime)
                               .then((value) {
                             print(value);
                             Get.snackbar('', value.data["message"]);
@@ -269,7 +334,6 @@ class _Add_Wedding_ReservationState extends State<Add_Wedding_Reservation> {
                             setState(() {});
                           });
                         }
-
                       },
                       child: Container(
                           width: width,

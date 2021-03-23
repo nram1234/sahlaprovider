@@ -145,6 +145,46 @@ class _Get_list_wedding_reservationState
                                 ),
                                 Row(
                                   mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 16, right: 16),
+                                      child: Text(
+                                        'تاريخ انشاء الحجز',
+                                        style: TextStyle(color: Colors.red),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 16, right: 16),
+                                      child: Text(snapshot.data.result
+                                          .allReservation[pos].creationDate),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 16, right: 16),
+                                      child: Text(
+                                        'تاريخ تنفيذ الحجز',
+                                        style: TextStyle(color: Colors.red),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 16, right: 16),
+                                      child: Text(snapshot.data.result
+                                          .allReservation[pos].reservationDate),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(

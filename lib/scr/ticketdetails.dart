@@ -39,9 +39,8 @@ class _TicketDetailsState extends State<TicketDetails> {
       appBar: AppBar(elevation: 8,actions: [GestureDetector(
         onTap: () {
           Navigator.pop(context, false);
-        }, child: Icon(Icons.arrow_back),)
-      ]
-        ,
+        }, child: Icon(Icons.arrow_forward_outlined),)
+      ],
         centerTitle: true,
         title: Text('ﺗﻔﺎﺻﻴﻞ ﺍﻟﺘﺬﻛﺮﺓ'),
       ),

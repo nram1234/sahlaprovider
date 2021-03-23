@@ -59,7 +59,7 @@ class _ProductScrState extends State<ProductScr> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
           drawer: mydrawer(context),
-          appBar: AppBar(actions: [GestureDetector( onTap: widget.back,child: Icon(Icons.arrow_back),)],
+          appBar: AppBar(actions: [GestureDetector( onTap: widget.back,child: Icon(Icons.arrow_forward_outlined),)],
             centerTitle: true,
             title: Text('المنتجات',
                 style: TextStyle(

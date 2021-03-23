@@ -781,6 +781,10 @@ class AllNetworking {
     @required String addressEn,
     @required double lat,
     @required double lag,
+
+
+    @required String  from_hrs,
+    @required String   to_hrs,
   }) async {
     Response data;
     String fileName;
@@ -797,7 +801,8 @@ class AllNetworking {
       "lag": lag, "instagram": instagram, "twitter": twitter,
       "facebook": facebook,
       "website": website,
-      "email": email,
+      "email": email,  "from_hrs": from_hrs,
+      "to_hrs": to_hrs,
       "name_ar": name_ar,
       "name_en": name_en,
       "phone": phone,
@@ -1717,6 +1722,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
+          print(value.data);
       response = Preparation_doc_profile_json.fromJson(value.data);
     });
 
@@ -1753,6 +1759,11 @@ class AllNetworking {
     @required String specialization,
     @required String waiting_time_en,
     @required String specialization_en,
+
+
+    @required String  from_hrs,
+    @required String   to_hrs,
+
   }) async {
     Response data;
     String fileName;
@@ -1763,7 +1774,8 @@ class AllNetworking {
       // "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
-      "location": location,
+      "location": location,      "from_hrs": from_hrs,
+      "to_hrs": to_hrs,
       //==============
       "lat": lat,
       "lag": lag, "instagram": instagram, "twitter": twitter,
@@ -1891,10 +1903,12 @@ class AllNetworking {
 
     await dio
         .post(
-      paseurl + '/medicine/list_wedding_reservation',
+      paseurl + '/weddings/list_wedding_reservation',
       data: formData,
     )
         .then((value) {
+
+          print(value.data);
       data = Get_List_wedding_reservation_json.fromJson(value.data);
     });
 
@@ -2009,6 +2023,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
+          print(value.data);
       data = Get_list_weddings_services_json.fromJson(value.data);
     });
 
@@ -2344,11 +2359,11 @@ print( response.data);
 
   Future<Response>  add_wedding_reservation({
     @required String token_id,
-    @required String name,
+    @required String name,    @required String addrs,
     @required String phone,
     @required String price,
     @required String currency_id,
-    @required DateTime reservation_date,
+    @required DateTime reservation_date, @required String from_hrs, @required String to_hrs,
 
   }) async {
     Response response;
@@ -2357,10 +2372,10 @@ print( response.data);
       "key": "1234567890",
       "token_id": token_id,
       "fullname": name,
-      "phone": phone,
+      "phone": phone,"addrs": addrs,
       "currency_id": currency_id,
       "price": price,
-      "reservation_date": reservation_date,
+      "reservation_date": reservation_date,   "from_hrs": from_hrs, "to_hrs": to_hrs,
 
     });
     response = await dio.post(

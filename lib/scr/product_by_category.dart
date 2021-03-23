@@ -53,7 +53,11 @@ class _Product_By_CategoryState extends State<Product_By_Category> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
           drawer: mydrawer(context),
-          appBar: AppBar(
+          appBar: AppBar(actions: [GestureDetector(
+            onTap: () {
+              Navigator.pop(context, false);
+            }, child: Icon(Icons.arrow_forward_outlined),)
+          ],
             centerTitle: true,
             title: Text('المنتجات',
                 style: TextStyle(

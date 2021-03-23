@@ -113,8 +113,14 @@ class _LoginScrState extends State<LoginScr> {
             ),
             SizedBox(height: 24.0),
             login
-                ? Container(
-                    height: 50, width: 50, child: CircularProgressIndicator(backgroundColor: Colors.white,))
+                ? Container(    height: 50.0,
+              width: 50.0,
+                  child: SizedBox(
+              child: CircularProgressIndicator(backgroundColor: Colors.white,),
+              height: 50.0,
+              width: 50.0,
+            ),
+                )
                 : Padding(
                     padding: EdgeInsets.symmetric(vertical: 16.0),
                     child: RaisedButton(

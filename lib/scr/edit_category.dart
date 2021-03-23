@@ -57,9 +57,8 @@ class _Edit_CategoryState extends State<Edit_Category> {
             actions: [GestureDetector(
               onTap: () {
                 Navigator.pop(context, false);
-              }, child: Icon(Icons.arrow_back),)
-            ]
-            ,
+              }, child: Icon(Icons.arrow_forward_outlined),)
+            ],
             centerTitle: true,
             title: Text('تعديل منتج ',
                 style: TextStyle(

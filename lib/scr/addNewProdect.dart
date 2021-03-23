@@ -80,9 +80,11 @@ class _AddNewProdectState extends State<AddNewProdect> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
           drawer: mydrawer(context),
-          appBar: AppBar(automaticallyImplyLeading: true,leading: IconButton(icon:Icon(Icons.arrow_back),
-        onPressed:() => Navigator.pop(context, false),
-          ),  centerTitle: true,
+          appBar: AppBar(actions: [GestureDetector(
+            onTap: () {
+              Navigator.pop(context, false);
+            }, child: Icon(Icons.arrow_forward_outlined),)
+          ], centerTitle: true,
             title: Text('اضافة منتج جديد',
                 style: TextStyle(
                     fontFamily: 'Arbf', color: Colors.white, fontSize: 18)),

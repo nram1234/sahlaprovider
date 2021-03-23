@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.nram.sahlaprovider">
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
@@ -17,7 +18,9 @@
        android:requestLegacyExternalStorage="true"
        android:name="io.flutter.app.FlutterApplication"
        android:label="sahlaprovider"
-       android:icon="@mipmap/ic_launcher">
+       tools:replace="android:icon"
+       android:icon="@mipmap/launcher_icon">
+
        <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyCXLwyVLcgR8ZDTyFsogoFsSQOg3b52ekk"/>
        <activity

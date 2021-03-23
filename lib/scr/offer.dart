@@ -9,10 +9,10 @@ import 'package:sahlaprovider/myWidget/offertListItem.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_offers_json.dart';
-
+  //for date locale
 import 'addOfeer.dart';
 import 'editoffer.dart';
-
+import 'package:intl/intl.dart' as intl;
 class OfferScr extends StatefulWidget {
   VoidCallback back;
 
@@ -56,7 +56,7 @@ class _OfferScrState extends State<OfferScr> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
           drawer: mydrawer(context),
-          appBar: AppBar(actions: [GestureDetector( onTap: widget.back,child: Icon(Icons.arrow_back),)],
+          appBar: AppBar(actions: [GestureDetector( onTap: widget.back,child: Icon(Icons.arrow_forward_outlined),)],
             centerTitle: true,
             title: Text('offer'.tr,
                 style: TextStyle(
@@ -131,6 +131,7 @@ class _OfferScrState extends State<OfferScr> {
                                 GestureDetector(
                                     onTap: () async {
                                       String end_date;
+
                                       endpick = await showDatePicker(
                                           context: context,
                                           initialDate: endpickDate,
@@ -145,8 +146,10 @@ class _OfferScrState extends State<OfferScr> {
                                             endpickDate.day.toString();
                                         _list.clear();
                                         data.result.allOffers.forEach((element) {
+                                          var theenddate = new  intl. DateFormat('yyyy-MM-dd').parse(element.endDate);
+                                          var thestartdate = new  intl. DateFormat('yyyy-MM-dd').parse(element.startDate);
 
-                                          if(element.endDate==end_date||element.startDate==end_date){
+                                          if(endpick.isBefore(theenddate)&&endpick.isAfter(thestartdate)){
                                             _list.add(element);
                                           }
                                         });

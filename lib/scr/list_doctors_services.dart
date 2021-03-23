@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:sahlaprovider/myWidget/myDrawer.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/scr/edit_doctors_service.dart';
 import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
@@ -39,7 +40,12 @@ class _List_Doctors_ServicesState extends State<List_Doctors_Services> {
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
       top: true,
-      child: Scaffold(
+      child: Scaffold(   drawer: mydrawer(context),  appBar: AppBar(actions: [GestureDetector( onTap: widget.back,child: Icon(Icons.arrow_forward_outlined),)],
+        centerTitle: true,
+        title: Text('الخدمات',
+            style: TextStyle(
+                fontFamily: 'Arbf', color: Colors.white, fontSize: 18)),
+      ),
         body: Column(
           children: [
             SizedBox(

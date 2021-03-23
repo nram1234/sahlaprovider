@@ -26,6 +26,9 @@ Widget mydrawer(context) {
 
   final box = GetStorage();
   String service_type = box.read('service_type');
+  print('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+  print(service_type);
+  print('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
   return Drawer(
     child: Container(
       padding: EdgeInsets.only(right: 50, left: 50),
@@ -45,118 +48,126 @@ Widget mydrawer(context) {
             color: Colors.white,
             height: 2,
           ),
-          service_type=='1'  || service_type=='0'?        ListTile(
-            title: Text('حذف النقاط',
-                style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
-            onTap: () {
-              Get.dialog(
-                AlertDialog(
-                  title: Text(''),
-                  content: Column(
-                    children: [
-                      TextFormField(
-                        onChanged: (s) {
-                          phone = s;
-                        },
-                        textAlign: TextAlign.center,
-                        keyboardType: TextInputType.phone,
-                        style: TextStyle(
+          service_type == '1'
+              ? ListTile(
+                  title: Text('حذف النقاط',
+                      style: TextStyle(
                           fontFamily: 'Arbf',
-                          color: hexToColor('#ed1c6f'),
-                        ),
-                        decoration: InputDecoration(
-                          labelText: 'رقم الهاتف',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.red, width: 2),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.red, width: 2),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintStyle: TextStyle(
-                            fontFamily: 'Arbf',
-                            color: hexToColor('#ed1c6f'),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        onChanged: (s) {
-                          point = s;
-                        },
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Arbf',
-                          color: hexToColor('#ed1c6f'),
-                        ),
-                        decoration: InputDecoration(
-                          labelText: 'عدد النقاط',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.red, width: 2),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.red, width: 2),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintStyle: TextStyle(
-                            fontFamily: 'Arbf',
-                            color: hexToColor('#ed1c6f'),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  actions: <Widget>[
-                    FlatButton(
-                      child: Text("CLOSE"),
-                      onPressed: () {
-                        print(phone);
-
-                        Get.back();
-                      },
-                    ),
-                    FlatButton(
-                      child: Text("تنفيذ"),
-                      onPressed: () {
-                        print(phone);
-
-                        _allNetworking
-                            .empty_points(
-                                total_points: point,
-                                phone: phone,
-                                token_id: box.read('token'))
-                            .then((value) {
-                          Get.dialog(
-                            AlertDialog(
-                              title: Text(''),
-                              content: Text(value.data['message']),
-                              actions: <Widget>[
-                                FlatButton(
-                                  child: Text("CLOSE"),
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                )
-                              ],
+                          color: Colors.white,
+                          fontSize: 25)),
+                  onTap: () {
+                    Get.dialog(
+                      AlertDialog(
+                        title: Text(''),
+                        content: Column(
+                          children: [
+                            TextFormField(
+                              onChanged: (s) {
+                                phone = s;
+                              },
+                              textAlign: TextAlign.center,
+                              keyboardType: TextInputType.phone,
+                              style: TextStyle(
+                                fontFamily: 'Arbf',
+                                color: hexToColor('#ed1c6f'),
+                              ),
+                              decoration: InputDecoration(
+                                labelText: 'رقم الهاتف',
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.red, width: 2),
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.red, width: 2),
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                hintStyle: TextStyle(
+                                  fontFamily: 'Arbf',
+                                  color: hexToColor('#ed1c6f'),
+                                ),
+                              ),
                             ),
-                            barrierDismissible: false,
-                          );
-                        });
-                      },
-                    )
-                  ],
-                ),
-                barrierDismissible: false,
-              );
+                            SizedBox(
+                              height: 10,
+                            ),
+                            TextFormField(
+                              onChanged: (s) {
+                                point = s;
+                              },
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Arbf',
+                                color: hexToColor('#ed1c6f'),
+                              ),
+                              decoration: InputDecoration(
+                                labelText: 'عدد النقاط',
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.red, width: 2),
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.red, width: 2),
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                hintStyle: TextStyle(
+                                  fontFamily: 'Arbf',
+                                  color: hexToColor('#ed1c6f'),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text("CLOSE"),
+                            onPressed: () {
+                              print(phone);
 
-              //_allNetworking.empty_points(total_points: null, phone: null)
-            },
-          ):SizedBox(),
+                              Get.back();
+                            },
+                          ),
+                          FlatButton(
+                            child: Text("تنفيذ"),
+                            onPressed: () {
+                              print(phone);
+
+                              _allNetworking
+                                  .empty_points(
+                                      total_points: point,
+                                      phone: phone,
+                                      token_id: box.read('token'))
+                                  .then((value) {
+                                Get.dialog(
+                                  AlertDialog(
+                                    title: Text(''),
+                                    content: Text(value.data['message']),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        child: Text("CLOSE"),
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                      )
+                                    ],
+                                  ),
+                                  barrierDismissible: false,
+                                );
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                      barrierDismissible: false,
+                    );
+
+                    //_allNetworking.empty_points(total_points: null, phone: null)
+                  },
+                )
+              : SizedBox(),
           Container(
             color: Colors.white,
             height: 2,
@@ -168,17 +179,17 @@ Widget mydrawer(context) {
             onTap: () {
               // Get.to(Profilee(),transition: Transition.cupertino);
 
-              if(service_type=='3'){  Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Doc_Profile()),
-              );}else{
+              if (service_type == '3') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Doc_Profile()),
+                );
+              } else {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Profilee()),
                 );
               }
-
-
             },
           ),
           Container(
@@ -217,21 +228,27 @@ Widget mydrawer(context) {
             color: Colors.white,
             height: 2,
           ),
-          service_type=='1'  || service_type=='0'?       ListTile(
-            title: Text("ﻛﻮﺑﻮﻧﺎﺕ ﺧﺼﻢ",
-                style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => QRClient()),
-              );
-            },
-          ):SizedBox(),
-          service_type=='1'  || service_type=='0'?   Container(
-            color: Colors.white,
-            height: 2,
-          ):SizedBox(),
+          service_type == '1'
+              ? ListTile(
+                  title: Text("ﻛﻮﺑﻮﻧﺎﺕ ﺧﺼﻢ",
+                      style: TextStyle(
+                          fontFamily: 'Arbf',
+                          color: Colors.white,
+                          fontSize: 25)),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => QRClient()),
+                    );
+                  },
+                )
+              : SizedBox(),
+          service_type == '1'
+              ? Container(
+                  color: Colors.white,
+                  height: 2,
+                )
+              : SizedBox(),
           ListTile(
             title: Text("ﺗﻮﺍﺻﻞ ﻣﻊ ﺍﻻﺩﺍﺭﺓ",
                 style: TextStyle(
@@ -245,23 +262,29 @@ Widget mydrawer(context) {
               //Get.to(Remembering(),);
             },
           ),
-          service_type=='1'  || service_type=='0'?     Container(
-            color: Colors.white,
-            height: 2,
-          ):SizedBox(),
-          service_type=='1'  || service_type=='0'?         ListTile(
-            title: Text("النقاط",
-                style: TextStyle(
-                    fontFamily: 'Arbf', color: Colors.white, fontSize: 25)),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PointScr()),
-              );
+          service_type == '1'
+              ? Container(
+                  color: Colors.white,
+                  height: 2,
+                )
+              : SizedBox(),
+          service_type == '1'
+              ? ListTile(
+                  title: Text("النقاط",
+                      style: TextStyle(
+                          fontFamily: 'Arbf',
+                          color: Colors.white,
+                          fontSize: 25)),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PointScr()),
+                    );
 
-              //Get.to(Remembering(),);
-            },
-          ):SizedBox(),
+                    //Get.to(Remembering(),);
+                  },
+                )
+              : SizedBox(),
           Container(
             color: Colors.white,
             height: 2,

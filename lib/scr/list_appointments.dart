@@ -33,6 +33,15 @@ class _List_AppointmentsState extends State<List_Appointments> {
   void initState() {
     token = box.read('token');
   }
+  TimeOfDay _time = TimeOfDay.now();
+  TimeOfDay _picked;
+  String starttime = ' الساعة';
+  String endtime = ' الساعة';
+  Future<String> selecttime({BuildContext context}) async {
+    _picked = await showTimePicker(context: context, initialTime: _time);
+
+    return _picked.format(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +54,11 @@ class _List_AppointmentsState extends State<List_Appointments> {
         .size
         .width;
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(actions: [GestureDetector(
+        onTap: () {
+          Navigator.pop(context, false);
+        }, child: Icon(Icons.arrow_forward_outlined),)
+      ],
         centerTitle: true,
         title: Text('المواعيد'),
       ),
@@ -57,19 +70,62 @@ class _List_AppointmentsState extends State<List_Appointments> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  width: width * .25,
-                  child: mywidget(
-                      hint: 'من الساعه',
-                      inputtype: TextInputType.number,
-                      textEditingController: _from),
+
+
+
+                GestureDetector(
+                  onTap: () {
+                    selecttime(context: context).then((value) {
+                      if(value!=null){
+
+
+                        starttime = value;}
+                      setState(() {});
+                    });
+                    setState(() {});
+                  },
+                  child: Container(
+                      width: width*.25,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          color: hexToColor('#00abeb'),
+                          gradient: new LinearGradient(
+                              colors: [
+                                Colors.red[900],
+                                Colors.red[100],
+                              ],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              tileMode: TileMode.clamp),
+                          borderRadius: BorderRadius.circular(5.0)),
+                      child: Center(child: Text("  من  " + starttime))),
                 ),
-                Container(
-                  width: width * .25,
-                  child: mywidget(
-                      hint: 'الي الساعه',
-                      inputtype: TextInputType.number,
-                      textEditingController: _to),
+                GestureDetector(
+                  onTap: () {
+                    selecttime(context: context).then((value) {
+                      if(value!=null){
+
+
+                        endtime = value;}
+                      setState(() {});
+                    });
+                    setState(() {});
+                  },
+                  child: Container(
+                      width:width*.25,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          color: hexToColor('#00abeb'),
+                          gradient: new LinearGradient(
+                              colors: [
+                                Colors.red[900],
+                                Colors.red[100],
+                              ],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              tileMode: TileMode.clamp),
+                          borderRadius: BorderRadius.circular(5.0)),
+                      child: Center(child: Text("  الي  " + endtime))),
                 ),
                 DropdownButton<String>(
                   value: dropdownValue,
@@ -125,11 +181,11 @@ class _List_AppointmentsState extends State<List_Appointments> {
                   _allNetworking.add_appointment(token_id: token,
                       name: dropdownValue,
                       name_en: dropdownValueeng,
-                      from_hrs: _from.text,
-                      from_hrs_en:_from.text
+                      from_hrs:starttime,
+                      from_hrs_en:starttime
                       ,
-                      to_hrs: _to.text,
-                      to_hrs_en: _to.text).then((value) {
+                      to_hrs: endtime,
+                      to_hrs_en: endtime).then((value) {
                         print(value.data);
                         Get.snackbar('', value.data['message']);
                         setState(() {

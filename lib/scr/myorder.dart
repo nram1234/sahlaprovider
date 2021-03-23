@@ -32,9 +32,8 @@ class _MyOrderState extends State<MyOrder> {
             appBar: AppBar(actions: [GestureDetector(
               onTap: () {
                 Navigator.pop(context, false);
-              }, child: Icon(Icons.arrow_back),)
-            ]
-              ,
+              }, child: Icon(Icons.arrow_forward_outlined),)
+            ],
               centerTitle: true,
               title: Text('طلباتي'),
             ),

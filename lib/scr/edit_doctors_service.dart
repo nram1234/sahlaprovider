@@ -61,10 +61,11 @@ class _Edit_Doctors_ServiceState extends State<Edit_Doctors_Service> {
           drawer: mydrawer(context),
           appBar: AppBar(
             automaticallyImplyLeading: true,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context, false),
-            ),
+            actions: [GestureDetector(
+              onTap: () {
+                Navigator.pop(context, false);
+              }, child: Icon(Icons.arrow_forward_outlined),)
+            ],
             centerTitle: true,
             title: Text('تعديل خدمة',
                 style: TextStyle(

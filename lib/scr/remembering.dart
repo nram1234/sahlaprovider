@@ -43,11 +43,11 @@ class _RememberingState extends State<Remembering> {
     return Scaffold(
       drawer: mydrawer(context),
       appBar: AppBar(
-        automaticallyImplyLeading: true,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context, false),
-        ),
+        actions: [GestureDetector(
+          onTap: () {
+            Navigator.pop(context, false);
+          }, child: Icon(Icons.arrow_forward_outlined),)
+        ],
         elevation: 8,
         centerTitle: true,
         title: Text("ﺍﻟﺘﺬﺍﻛﺮ"),

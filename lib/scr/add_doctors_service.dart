@@ -50,11 +50,11 @@ class _Add_Doctors_ServiceState extends State<Add_Doctors_Service> {
       child: Scaffold(
           drawer: mydrawer(context),
           appBar: AppBar(
-            automaticallyImplyLeading: true,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context, false),
-            ),
+            actions: [GestureDetector(
+              onTap: () {
+                Navigator.pop(context, false);
+              }, child: Icon(Icons.arrow_forward_outlined),)
+            ],
             centerTitle: true,
             title: Text('اضافة خدمات',
                 style: TextStyle(

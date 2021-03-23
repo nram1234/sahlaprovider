@@ -37,13 +37,10 @@ class _NotificationScrState extends State<NotificationScr> {
     return Scaffold(
       drawer: mydrawer(context),
       appBar: AppBar(
-        actions: [
-          GestureDetector(
-            onTap: () {
-              Navigator.pop(context, false);
-            },
-            child: Icon(Icons.arrow_back),
-          )
+        actions: [GestureDetector(
+          onTap: () {
+            Navigator.pop(context, false);
+          }, child: Icon(Icons.arrow_forward_outlined),)
         ],
         centerTitle: true,
         title: Text('التنبيهات'),

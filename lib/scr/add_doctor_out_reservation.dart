@@ -41,7 +41,11 @@ bool sewnddata=false;
     var high = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(title:Text('اضافة حجز خارجي  ') ,centerTitle: true,),
+      appBar: AppBar(title:Text('اضافة حجز خارجي  ') ,centerTitle: true,actions: [GestureDetector(
+        onTap: () {
+          Navigator.pop(context, false);
+        }, child: Icon(Icons.arrow_forward_outlined),)
+      ],),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(

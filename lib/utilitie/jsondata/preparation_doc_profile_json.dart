@@ -52,20 +52,22 @@ class Result {
 }
 
 class ServiceDetails {
-  String detectionPrice;
-  String detectionPriceEn;
-  String waitingTime;
-  String waitingTimeEn;
-  String specializationEn;
-  String specialization;
-  String nameAr;
-  String nameEn;
   String whatsapp;
   String facebook;
   String email;
   String website;
   String instagram;
   String twitter;
+  String fromHrs;
+  String toHrs;
+  String detectionPrice;
+  String detectionPriceEn;
+  String waitingTime;
+  String waitingTimeEn;
+  String specialization;
+  String specializationEn;
+  String nameAr;
+  String nameEn;
   String lat;
   String lag;
   String address;
@@ -82,20 +84,22 @@ class ServiceDetails {
   int id;
 
   ServiceDetails(
-      {this.detectionPrice,
-        this.detectionPriceEn,
-        this.waitingTime,
-        this.waitingTimeEn,
-        this.specializationEn,
-        this.specialization,
-        this.nameAr,
-        this.nameEn,
-        this.whatsapp,
+      {this.whatsapp,
         this.facebook,
         this.email,
         this.website,
         this.instagram,
         this.twitter,
+        this.fromHrs,
+        this.toHrs,
+        this.detectionPrice,
+        this.detectionPriceEn,
+        this.waitingTime,
+        this.waitingTimeEn,
+        this.specialization,
+        this.specializationEn,
+        this.nameAr,
+        this.nameEn,
         this.lat,
         this.lag,
         this.address,
@@ -112,20 +116,22 @@ class ServiceDetails {
         this.id});
 
   ServiceDetails.fromJson(Map<String, dynamic> json) {
-    detectionPrice = json['detection_price'];
-    detectionPriceEn = json['detection_price_en'];
-    waitingTime = json['waiting_time'];
-    waitingTimeEn = json['waiting_time_en'];
-    specializationEn = json['specialization_en'];
-    specialization = json['specialization'];
-    nameAr = json['name_ar'];
-    nameEn = json['name_en'];
     whatsapp = json['whatsapp'];
     facebook = json['facebook'];
     email = json['email'];
     website = json['website'];
     instagram = json['instagram'];
     twitter = json['twitter'];
+    fromHrs = json['from_hrs'];
+    toHrs = json['to_hrs'];
+    detectionPrice = json['detection_price'];
+    detectionPriceEn = json['detection_price_en'];
+    waitingTime = json['waiting_time'];
+    waitingTimeEn = json['waiting_time_en'];
+    specialization = json['specialization'];
+    specializationEn = json['specialization_en'];
+    nameAr = json['name_ar'];
+    nameEn = json['name_en'];
     lat = json['lat'];
     lag = json['lag'];
     address = json['address'];
@@ -144,20 +150,22 @@ class ServiceDetails {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['detection_price'] = this.detectionPrice;
-    data['detection_price_en'] = this.detectionPriceEn;
-    data['waiting_time'] = this.waitingTime;
-    data['waiting_time_en'] = this.waitingTimeEn;
-    data['specialization_en'] = this.specializationEn;
-    data['specialization'] = this.specialization;
-    data['name_ar'] = this.nameAr;
-    data['name_en'] = this.nameEn;
     data['whatsapp'] = this.whatsapp;
     data['facebook'] = this.facebook;
     data['email'] = this.email;
     data['website'] = this.website;
     data['instagram'] = this.instagram;
     data['twitter'] = this.twitter;
+    data['from_hrs'] = this.fromHrs;
+    data['to_hrs'] = this.toHrs;
+    data['detection_price'] = this.detectionPrice;
+    data['detection_price_en'] = this.detectionPriceEn;
+    data['waiting_time'] = this.waitingTime;
+    data['waiting_time_en'] = this.waitingTimeEn;
+    data['specialization'] = this.specialization;
+    data['specialization_en'] = this.specializationEn;
+    data['name_ar'] = this.nameAr;
+    data['name_en'] = this.nameEn;
     data['lat'] = this.lat;
     data['lag'] = this.lag;
     data['address'] = this.address;

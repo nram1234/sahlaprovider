@@ -18,7 +18,11 @@ bool save=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(actions: [GestureDetector(
+        onTap: () {
+          Navigator.pop(context, false);
+        }, child: Icon(Icons.arrow_forward_outlined),)
+      ],
         title: Text('نقاطي'),
         centerTitle: true,
       ),

@@ -29,9 +29,11 @@ class _Add_Photography_RequestsState extends State<Add_Photography_Requests> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: mydrawer(context),
-      appBar: AppBar(automaticallyImplyLeading: true,leading: IconButton(icon:Icon(Icons.arrow_back),
-        onPressed:() => Navigator.pop(context, false),
-      ),
+      appBar: AppBar(actions: [GestureDetector(
+        onTap: () {
+          Navigator.pop(context, false);
+        }, child: Icon(Icons.arrow_forward_outlined),)
+      ],
         centerTitle: true,
         title: Text('طلب تصميم وتصوير'),
       ),

@@ -28,9 +28,10 @@ class Get_home_json {
 
 class Result {
   String servicesTypeName;
-  List<ListData> listData;
   int totalProduct;
   String totalViews;
+  String fromHrs;
+  String toHrs;
   String startDate;
   String endDate;
   int keyUpdate;
@@ -42,9 +43,10 @@ class Result {
 
   Result(
       {this.servicesTypeName,
-        this.listData,
         this.totalProduct,
         this.totalViews,
+        this.fromHrs,
+        this.toHrs,
         this.startDate,
         this.endDate,
         this.keyUpdate,
@@ -56,14 +58,10 @@ class Result {
 
   Result.fromJson(Map<String, dynamic> json) {
     servicesTypeName = json['services_type_name'];
-    if (json['list_data'] != null) {
-      listData = new List<ListData>();
-      json['list_data'].forEach((v) {
-        listData.add(new ListData.fromJson(v));
-      });
-    }
     totalProduct = json['total_product'];
     totalViews = json['total_views'];
+    fromHrs = json['from_hrs'];
+    toHrs = json['to_hrs'];
     startDate = json['start_date'];
     endDate = json['end_date'];
     keyUpdate = json['key_update'];
@@ -77,11 +75,10 @@ class Result {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['services_type_name'] = this.servicesTypeName;
-    if (this.listData != null) {
-      data['list_data'] = this.listData.map((v) => v.toJson()).toList();
-    }
     data['total_product'] = this.totalProduct;
     data['total_views'] = this.totalViews;
+    data['from_hrs'] = this.fromHrs;
+    data['to_hrs'] = this.toHrs;
     data['start_date'] = this.startDate;
     data['end_date'] = this.endDate;
     data['key_update'] = this.keyUpdate;
@@ -90,34 +87,6 @@ class Result {
     data['total_orders'] = this.totalOrders;
     data['service_coupon'] = this.serviceCoupon;
     data['type'] = this.type;
-    return data;
-  }
-}
-
-class ListData {
-  String id;
-  String name;
-  String view;
-  String txtName;
-  String enTxt;
-
-  ListData({this.id, this.name, this.view, this.txtName, this.enTxt});
-
-  ListData.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    view = json['view'];
-    txtName = json['txt_name'];
-    enTxt = json['en_txt'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['view'] = this.view;
-    data['txt_name'] = this.txtName;
-    data['en_txt'] = this.enTxt;
     return data;
   }
 }

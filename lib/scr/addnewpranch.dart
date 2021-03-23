@@ -85,9 +85,11 @@ bool svaedata=false;
         textDirection: TextDirection.rtl,
         child: Scaffold(
           drawer: mydrawer(context),
-          appBar: AppBar(automaticallyImplyLeading: true,leading: IconButton(icon:Icon(Icons.arrow_back),
-            onPressed:() => Navigator.pop(context, false),
-          ),
+          appBar: AppBar(actions: [GestureDetector(
+            onTap: () {
+              Navigator.pop(context, false);
+            }, child: Icon(Icons.arrow_forward_outlined),)
+          ],
             centerTitle: true,
             title: Text('اضافه فرع',
                 style: TextStyle(
