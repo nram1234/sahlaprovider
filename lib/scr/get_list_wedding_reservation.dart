@@ -267,7 +267,8 @@ class _Get_list_wedding_reservationState
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    GestureDetector(onTap: (){
+                                    snapshot.data.result
+                                        .allReservation[pos].view=='1'?SizedBox(width: 1,):         GestureDetector(onTap: (){
                                       _allNetworking
                                           .accepted_list_reservation(
                                           token_id: token,
