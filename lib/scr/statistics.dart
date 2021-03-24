@@ -172,7 +172,7 @@ class _StatisticssState extends State<Statisticss> {
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
                               hintText:
-                                  service_type == '1' || service_type == '0'
+                                  service_type == '1'
                                       ? 'بحث بالكود او رقم التليفون '
                                       : 'رقم التليفون'),
                         )),
@@ -463,7 +463,7 @@ class _StatisticssState extends State<Statisticss> {
                                       number: ' من الساعة ${snapshot.data.result.fromHrs} ' +
                                           "\n" +
                                           ' الي الساعة ${snapshot.data.result.toHrs} ',
-                                      name: "موعيد")),
+                                      name: "مواعيد العمل")),
                             ),
 
                             Padding(
@@ -543,7 +543,7 @@ class _StatisticssState extends State<Statisticss> {
                                             number: "",
                                             // data.totalProduct.toString(),
                                             width: width,
-                                            name: 'طلبات حجز')),
+                                            name: 'طلبات الحجوزات')),
                                   )
                                 : service_type == '4'
                                     ? Padding(
@@ -625,7 +625,7 @@ class _StatisticssState extends State<Statisticss> {
                                             number: "",
                                             //data.totalProduct.toString(),
                                             width: width,
-                                            name: "اضافه حجز خارجي")),
+                                            name: "اضافة حجز خارجي")),
                                   )
                                 : SizedBox(),
 
@@ -746,6 +746,36 @@ class _StatisticssState extends State<Statisticss> {
                                                   )
                                                 : SizedBox(),
 
+
+
+
+                            service_type == '2'
+                                ? Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 8.0, bottom: 8.0),
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              MyOrder()),
+                                    );
+                                  },
+                                  child: item_home_list(
+                                      icon:
+                                      'assets/images/shopping_cart.png',
+                                      keyupdata: 0,
+                                      dat: false,
+                                      width: width,
+                                      number: snapshot
+                                          .data.result.totalOrders
+                                          .toString(),
+                                      name: "طلبات شراء مستحضرات تجميل")),
+                            )
+                                : SizedBox(),
+
+
                             service_type == '3'
                                 ? SizedBox()
                                 : service_type == '2'
@@ -840,9 +870,7 @@ class _StatisticssState extends State<Statisticss> {
                                       name: "عدد الزوار")),
                             ),
 
-                            service_type == '0'
-                                ? SizedBox()
-                                : Padding(
+                            Padding(
                                     padding: const EdgeInsets.only(
                                         top: 8.0, bottom: 8.0),
                                     child: GestureDetector(

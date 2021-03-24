@@ -30,11 +30,7 @@ class _PharmacyState extends State<Pharmacy> {
         .of(context)
         .size;
     String dropdownValue = 'One';
-    return Scaffold(appBar: AppBar(title: Text('صيدلية'),centerTitle: true,actions: [GestureDetector(
-      onTap: () {
-        Navigator.pop(context, false);
-      }, child: Icon(Icons.arrow_forward_outlined),)
-    ]
+    return Scaffold(appBar: AppBar(title: Text('صيدلية'),centerTitle: true
       ,),
       body: Column(
         children: [

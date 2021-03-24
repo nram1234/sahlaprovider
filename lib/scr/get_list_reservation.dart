@@ -28,11 +28,7 @@ class _Get_list_reservationState extends State<Get_list_reservation> {
     return SafeArea(
       top: true,
       child: Scaffold(
-        appBar: AppBar(actions: [GestureDetector(
-          onTap: () {
-            Navigator.pop(context, false);
-          }, child: Icon(Icons.arrow_forward_outlined),)
-        ],
+        appBar: AppBar(
           title: Text('الحجوزات'),
         ),
         body: StreamBuilder<Get_list_reservation_json>(
@@ -44,245 +40,299 @@ class _Get_list_reservationState extends State<Get_list_reservation> {
                   return ListView.builder(
                       itemCount: snapshot.data.result.allReservation.length,
                       itemBuilder: (context, pos) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: snapshot.data.result
-                                              .allReservation[pos].view ==
-                                          "0"
-                                      ? Colors.blueAccent.withOpacity(0.5)
-                                      : Colors.red.withOpacity(0.5),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              // mainAxisAlignment: MainAxisAlignment.end,crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  height: 3,
-                                  color: snapshot.data.result
-                                              .allReservation[pos].view ==
-                                          "0"
-                                      ? Colors.blue
-                                      : Colors.red,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [],
+                        return
+
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: snapshot.data.result.allReservation[pos]
+                                    .reservationType ==
+                                    "1"
+                                    ? Colors.grey[200]
+                                    : Colors.white,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: snapshot.data.result
+                                        .allReservation[pos].view ==
+                                        "0"
+                                        ? Colors.blueAccent.withOpacity(0.5)
+                                        : Colors.red.withOpacity(0.5),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
                                   ),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
+                                ],
+                              ),
+                              child: Column(
+                                // mainAxisAlignment: MainAxisAlignment.end,crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: 3,
+                                    color: snapshot.data.result
+                                        .allReservation[pos].view ==
+                                        "0"
+                                        ? Colors.blue
+                                        : Colors.red,
+                                    child: Row(
+                                      mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 16, right: 16),
-                                      child: Text(
-                                        'من الساعه : ',
-                                        style: TextStyle(color: Colors.red),
+                                      children: [],
+                                    ),
+                                  ),
+                                  Text(snapshot.data.result.allReservation[pos]
+                                      .reservationType ==
+                                      "1"
+                                      ? "حجز من داخل التطبيق"
+                                      : "حجز من خارج التطبيق"),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(
+                                          'من الساعه : ',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 16, right: 16),
-                                      child: Text(snapshot.data.result
-                                          .allReservation[pos].fromHrs),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 16, right: 16),
-                                      child: Text(
-                                        'الي الساعة',
-                                        style: TextStyle(color: Colors.red),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 16, right: 16),
-                                      child: Text(snapshot.data.result
-                                          .allReservation[pos].toHrs),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 16, right: 16),
-                                      child: Text(
-                                        'اليوم',
-                                        style: TextStyle(color: Colors.red),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 16, right: 16),
-                                      child: Text(snapshot.data.result
-                                          .allReservation[pos].reservationDay),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 16, right: 16),
-                                      child: Text(
-                                        'الاسم',
-                                        style: TextStyle(color: Colors.red),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 16, right: 16),
-                                      child: Text(snapshot.data.result
-                                          .allReservation[pos].fullname),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 16, right: 16),
-                                      child: Text(
-                                        'العنوان : ',
-                                        style: TextStyle(color: Colors.red),
-                                      ),
-                                    ),
-                                    Expanded(
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
                                         child: Text(snapshot.data.result
-                                            .allReservation[pos].address)),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'الشخص المسؤال عن الحجز : ',
-                                        style: TextStyle(color: Colors.red),
+                                            .allReservation[pos].fromHrs),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(snapshot
-                                          .data
-                                          .result
-                                          .allReservation[pos]
-                                          .userMakeReservationName),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 16, right: 16),
-                                      child: Text(
-                                        'التلفون : ',
-                                        style: TextStyle(color: Colors.red),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 16, right: 16),
-                                      child: Text(snapshot.data.result
-                                          .allReservation[pos].phone),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    GestureDetector(onTap: (){
-                                      _allNetworking
-                                          .accepted_list_reservation(
-                                          token_id: token,
-                                          id_list: snapshot
-                                              .data
-                                              .result
-                                              .allReservation[pos]
-                                              .idOrder)
-                                          .then((value) {
-                                        print(value.data);
-                                        setState(() {
-
-                                        });
-                                      })
-                                          .catchError((e) {
-                                        print(e);
-                                      });
-                                    },
-                                      child: Padding(
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
                                         padding: const EdgeInsets.only(
                                             left: 16, right: 16),
-                                        child: Icon(Icons.check),
+                                        child: Text(
+                                          'الي الساعة',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
                                       ),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        _allNetworking
-                                            .delete_list_reservation(
-                                            token_id: token,
-                                            id_list: snapshot
-                                                .data
-                                                .result
-                                                .allReservation[pos]
-                                                .idOrder)
-                                            .then((value) {
-                                          print(value.data);
-                                          setState(() {
-
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(snapshot.data.result
+                                            .allReservation[pos].toHrs),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(
+                                          'اليوم',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(snapshot.data.result
+                                            .allReservation[pos].reservationDay),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(
+                                          'تاريخ انشاء الحجز',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(snapshot.data.result
+                                            .allReservation[pos].creationDate),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(
+                                          'تاريخ تنفيذ الحجز',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(snapshot.data.result
+                                            .allReservation[pos].reservationDate),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(
+                                          'الاسم',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(snapshot.data.result
+                                            .allReservation[pos].fullname),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(
+                                          'العنوان : ',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                      Expanded(
+                                          child: Text(snapshot.data.result
+                                              .allReservation[pos].address)),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          'الشخص المسؤال عن الحجز : ',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(snapshot
+                                            .data
+                                            .result
+                                            .allReservation[pos]
+                                            .userMakeReservationName),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(
+                                          'التلفون : ',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 16, right: 16),
+                                        child: Text(snapshot.data.result
+                                            .allReservation[pos].phone),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      snapshot.data.result.allReservation[pos]
+                                          .view ==
+                                          '1'
+                                          ? SizedBox(
+                                        width: 1,
+                                      )
+                                          : GestureDetector(
+                                        onTap: () {
+                                          _allNetworking
+                                              .accepted_list_reservation(
+                                              token_id: token,
+                                              id_list: snapshot
+                                                  .data
+                                                  .result
+                                                  .allReservation[pos]
+                                                  .idOrder)
+                                              .then((value) {
+                                            print(value.data);
+                                            setState(() {});
+                                          }).catchError((e) {
+                                            print(e);
                                           });
-                                        })
-                                            .catchError((e) {
-                                          print(e);
-                                        });
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 16, right: 16),
-                                        child: Icon(Icons.clear),
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 16, right: 16),
+                                          child: Icon(Icons.check),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                      GestureDetector(
+                                        onTap: () {
+                                          _allNetworking
+                                              .delete_list_reservation(
+                                              token_id: token,
+                                              id_list: snapshot
+                                                  .data
+                                                  .result
+                                                  .allReservation[pos]
+                                                  .idOrder)
+                                              .then((value) {
+                                            print(value.data);
+                                            setState(() {});
+                                          }).catchError((e) {
+                                            print(e);
+                                          });
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 16, right: 16),
+                                          child: Icon(Icons.clear),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        );
+                          );
+
+
                       });
                 } else {
                   return Center(

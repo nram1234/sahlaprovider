@@ -29,11 +29,7 @@ class _MyOrderState extends State<MyOrder> {
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
-            appBar: AppBar(actions: [GestureDetector(
-              onTap: () {
-                Navigator.pop(context, false);
-              }, child: Icon(Icons.arrow_forward_outlined),)
-            ],
+            appBar: AppBar(
               centerTitle: true,
               title: Text('طلباتي'),
             ),

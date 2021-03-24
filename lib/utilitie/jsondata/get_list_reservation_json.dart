@@ -58,13 +58,14 @@ class AllReservation {
   String toHrs;
   String view;
   String address;
-  String userMakeReservationPhone;
   String userMakeReservationName;
+  String userMakeReservationPhone;
   String reservationDay;
   String fullname;
   String phone;
-  String reservationDate;
   String creationDate;
+  String reservationDate;
+  String reservationType;
 
   AllReservation(
       {this.codeName,
@@ -73,13 +74,14 @@ class AllReservation {
         this.toHrs,
         this.view,
         this.address,
-        this.userMakeReservationPhone,
         this.userMakeReservationName,
+        this.userMakeReservationPhone,
         this.reservationDay,
         this.fullname,
         this.phone,
+        this.creationDate,
         this.reservationDate,
-        this.creationDate});
+        this.reservationType});
 
   AllReservation.fromJson(Map<String, dynamic> json) {
     codeName = json['code_name'];
@@ -88,13 +90,14 @@ class AllReservation {
     toHrs = json['to_hrs'];
     view = json['view'];
     address = json['address'];
-    userMakeReservationPhone = json['user_make_reservation_phone'];
     userMakeReservationName = json['user_make_reservation_name'];
+    userMakeReservationPhone = json['user_make_reservation_phone'];
     reservationDay = json['reservation_day'];
     fullname = json['fullname'];
     phone = json['phone'];
-    reservationDate = json['reservation_date'];
     creationDate = json['creation_date'];
+    reservationDate = json['reservation_date'];
+    reservationType = json['reservation_type'];
   }
 
   Map<String, dynamic> toJson() {
@@ -105,13 +108,14 @@ class AllReservation {
     data['to_hrs'] = this.toHrs;
     data['view'] = this.view;
     data['address'] = this.address;
-    data['user_make_reservation_phone'] = this.userMakeReservationPhone;
     data['user_make_reservation_name'] = this.userMakeReservationName;
+    data['user_make_reservation_phone'] = this.userMakeReservationPhone;
     data['reservation_day'] = this.reservationDay;
     data['fullname'] = this.fullname;
     data['phone'] = this.phone;
-    data['reservation_date'] = this.reservationDate;
     data['creation_date'] = this.creationDate;
+    data['reservation_date'] = this.reservationDate;
+    data['reservation_type'] = this.reservationType;
     return data;
   }
 }

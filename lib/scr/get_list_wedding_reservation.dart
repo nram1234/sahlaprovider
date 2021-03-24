@@ -47,8 +47,11 @@ class _Get_list_wedding_reservationState
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
                             decoration: BoxDecoration(
-                              color:snapshot.data.result
-                                  .allReservation[pos].reservationType=="1"?Colors.grey[200]: Colors.white,
+                              color: snapshot.data.result.allReservation[pos]
+                                          .reservationType ==
+                                      "1"
+                                  ? Colors.grey[200]
+                                  : Colors.white,
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(10),
                                   topRight: Radius.circular(10),
@@ -83,8 +86,12 @@ class _Get_list_wedding_reservationState
                                         MainAxisAlignment.spaceBetween,
                                     children: [],
                                   ),
-                                ),Text(snapshot.data.result
-                                    .allReservation[pos].reservationType=="1"?"حجز من داخل التطبيق":"حجز من خارج التطبيق"),
+                                ),
+                                Text(snapshot.data.result.allReservation[pos]
+                                            .reservationType ==
+                                        "1"
+                                    ? "حجز من داخل التطبيق"
+                                    : "حجز من خارج التطبيق"),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -147,7 +154,7 @@ class _Get_list_wedding_reservationState
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(
@@ -167,7 +174,7 @@ class _Get_list_wedding_reservationState
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(
@@ -267,49 +274,49 @@ class _Get_list_wedding_reservationState
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    snapshot.data.result
-                                        .allReservation[pos].view=='1'?SizedBox(width: 1,):         GestureDetector(onTap: (){
-                                      _allNetworking
-                                          .accepted_list_reservation(
-                                          token_id: token,
-                                          id_list: snapshot
-                                              .data
-                                              .result
-                                              .allReservation[pos]
-                                              .idOrder)
-                                          .then((value) {
-                                        print(value.data);
-                                        setState(() {
-
-                                        });
-                                      })
-                                          .catchError((e) {
-                                        print(e);
-                                      });
-                                    },
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 16, right: 16),
-                                        child: Icon(Icons.check),
-                                      ),
-                                    ),
+                                    snapshot.data.result.allReservation[pos]
+                                                .view ==
+                                            '1'
+                                        ? SizedBox(
+                                            width: 1,
+                                          )
+                                        : GestureDetector(
+                                            onTap: () {
+                                              _allNetworking
+                                                  .accepted_list_reservation(
+                                                      token_id: token,
+                                                      id_list: snapshot
+                                                          .data
+                                                          .result
+                                                          .allReservation[pos]
+                                                          .idOrder)
+                                                  .then((value) {
+                                                print(value.data);
+                                                setState(() {});
+                                              }).catchError((e) {
+                                                print(e);
+                                              });
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 16, right: 16),
+                                              child: Icon(Icons.check),
+                                            ),
+                                          ),
                                     GestureDetector(
                                       onTap: () {
                                         _allNetworking
                                             .delete_list_reservation(
                                                 token_id: token,
-                                            id_list: snapshot
+                                                id_list: snapshot
                                                     .data
                                                     .result
                                                     .allReservation[pos]
                                                     .idOrder)
                                             .then((value) {
-                                              print(value.data);
-                                              setState(() {
-
-                                              });
-                                        })
-                                            .catchError((e) {
+                                          print(value.data);
+                                          setState(() {});
+                                        }).catchError((e) {
                                           print(e);
                                         });
                                       },
