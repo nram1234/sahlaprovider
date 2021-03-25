@@ -5,19 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:sahlaprovider/myWidget/gallery.dart';
 import 'package:sahlaprovider/myWidget/myDrawer.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
+import 'package:sahlaprovider/scr/statistics.dart';
 import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_profile_json.dart';
 
 class Profilee extends StatefulWidget {
+  BuildContext mycontext;
 
   @override
   _ProfileeState createState() => _ProfileeState();
 
+  Profilee(this.mycontext);
 }
 
 class _ProfileeState extends State<Profilee> {
@@ -43,22 +47,22 @@ class _ProfileeState extends State<Profilee> {
   TextEditingController insta = TextEditingController();
   TextEditingController dlivery = TextEditingController();
 
-
   TextEditingController address = TextEditingController();
-
-
 
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
+
   // Location location = new Location();
   Completer<GoogleMapController> _controller = Completer();
+
   //PermissionStatus _permissionGranted;
   LatLng _locationData;
   bool _serviceEnabled;
   CameraPosition _kGooglePlex;
   bool setcaruntloction = false;
   File _image;
-  bool senddata=false;
+  bool senddata = false;
+
   // getloc() async {
   //   _serviceEnabled = await location.serviceEnabled();
   //   if (!_serviceEnabled) {
@@ -89,12 +93,13 @@ class _ProfileeState extends State<Profilee> {
   void initState() {
     super.initState();
     //getloc();
-
   }
+
   TimeOfDay _time = TimeOfDay.now();
   TimeOfDay _picked;
   String starttime = ' الساعة';
   String endtime = ' الساعة';
+
   Future<String> selecttime({BuildContext context}) async {
     _picked = await showTimePicker(context: context, initialTime: _time);
 
@@ -103,24 +108,22 @@ class _ProfileeState extends State<Profilee> {
 
   @override
   Widget build(BuildContext context) {
-    var high = MediaQuery
-        .of(context)
-        .size
-        .height;
-    var width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    var high = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
 
     return Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
-          drawer: mydrawer(context),
-          appBar: AppBar(actions: [GestureDetector(
-            onTap: () {
-              Navigator.pop(context, false);
-            }, child: Icon(Icons.arrow_forward_outlined),)
-          ],
+          drawer: Mydrawer(), // mydrawer(context),
+          appBar: AppBar(
+            actions: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context, false);
+                },
+                child: Icon(Icons.arrow_forward_outlined),
+              )
+            ],
             centerTitle: true,
             title: Text('ﺍﻟﺒﺮﻭﻓﺎﻳﻞ',
                 style: TextStyle(
@@ -134,22 +137,11 @@ class _ProfileeState extends State<Profilee> {
                   .asStream(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-
                   ServiceDetails dat = snapshot.data.result.serviceDetails[0];
 
                   address.text = dat.address;
 
-
-
-
-
-
-
-
-
-
                   title.text = dat.nameAr;
-
 
                   password.text = dat.password;
 
@@ -158,7 +150,7 @@ class _ProfileeState extends State<Profilee> {
                   phone2.text = dat.phoneSecond;
                   phone3.text = dat.phoneThird;
                   whatsapp.text = dat.whatsapp;
-                  email.text=dat.email;
+                  email.text = dat.email;
 
                   description.text = dat.description;
                   description_en.text = dat.descriptionEn;
@@ -167,15 +159,15 @@ class _ProfileeState extends State<Profilee> {
                   facebook.text = dat.facebook;
                   twiter.text = dat.twitter;
                   insta.text = dat.instagram;
-                  if(dat.lag.trim().isEmpty){
+                  if (dat.lag.trim().isEmpty) {
                     _kGooglePlex = CameraPosition(
                       target: LatLng(30.518043908795214, 31.575481854379177),
                       zoom: 15,
                     );
-                  }else{
+                  } else {
                     _kGooglePlex = CameraPosition(
-                      target: LatLng(double.parse(dat.lat),
-                          double.parse(dat.lag)),
+                      target:
+                          LatLng(double.parse(dat.lat), double.parse(dat.lag)),
                       zoom: 15,
                     );
                   }
@@ -196,53 +188,53 @@ class _ProfileeState extends State<Profilee> {
                           SizedBox(
                             width: 50,
                           ),
-                          GestureDetector(onTap: () async {
-                            var image = await ImagePicker.platform
-                                .pickImage(
-                                source: ImageSource.gallery,
-                                maxHeight: 200,
-                                maxWidth: 200,
-                                imageQuality: 100);
-                            setState(() {
-                              if (image != null) {
-                                _image = File(image.path);
-                              }
-                            });
-                          },
-                            child: _image == null && dat.mainImg
-                                .trim()
-                                .isEmpty ? Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              //  crossAxisAlignment: CrossAxisAlignment.baseline,
-                              children: [
-                                Text('اضافة صورة المكان',
-                                    style: TextStyle(
-                                        fontFamily: 'Arbf',
-                                        color: hexToColor('#ed1c6f'),
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold)),
-                                SizedBox(
-                                  width: 50,
-                                ),
-                                Icon(Icons.camera_alt)
-                              ],
-                            ) : _image == null ? Container(height: MediaQuery
-                                .of(context)
-                                .size
-                                .width * .3,
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width * .3,
-                              child: Image.network(dat.mainImg,fit: BoxFit.fill,),):Container(height: MediaQuery
-                                .of(context)
-                                .size
-                                .width * .3,
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width * .3,
-                              child: Image.file(_image,fit: BoxFit.fill,),),
+                          GestureDetector(
+                            onTap: () async {
+                              _pickImage();
+                            },
+                            child: _image == null && dat.mainImg.trim().isEmpty
+                                ? Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    //  crossAxisAlignment: CrossAxisAlignment.baseline,
+                                    children: [
+                                      Text('اضافة صورة المكان',
+                                          style: TextStyle(
+                                              fontFamily: 'Arbf',
+                                              color: hexToColor('#ed1c6f'),
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold)),
+                                      SizedBox(
+                                        width: 50,
+                                      ),
+                                      Icon(Icons.camera_alt)
+                                    ],
+                                  )
+                                : _image == null
+                                    ? Container(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                .3,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                .3,
+                                        child: Image.network(
+                                          dat.mainImg,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      )
+                                    : Container(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                .3,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                .3,
+                                        child: Image.file(
+                                          _image,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
                           ),
                           SizedBox(
                             height: 10,
@@ -251,7 +243,7 @@ class _ProfileeState extends State<Profilee> {
                             padding: EdgeInsets.only(right: 50, left: 50),
                             height: 5,
                             decoration: BoxDecoration(
-                                color:Colors.red,
+                                color: Colors.red,
                                 gradient: new LinearGradient(
                                     colors: [
                                       Colors.red[100],
@@ -265,12 +257,14 @@ class _ProfileeState extends State<Profilee> {
                           SizedBox(
                             height: 10,
                           ),
-                          GestureDetector(onTap: (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Gallery() ),
-                            );
-                          },
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Gallery()),
+                              );
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -294,7 +288,8 @@ class _ProfileeState extends State<Profilee> {
                             textEditingController: title,
                             hint: 'الاسم بالكامل',
                             inputtype: TextInputType.text,
-                          ),SizedBox(
+                          ),
+                          SizedBox(
                             height: high * .01,
                           ),
 
@@ -323,36 +318,30 @@ class _ProfileeState extends State<Profilee> {
                             height: high * .01,
                           ),
 
-
-                          Container( decoration: BoxDecoration(
-
-
-                            border: Border.all(
-                              color: Colors.grey,
-                              width: 1,
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.grey,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-
-                                Text('  المواعيد  '),
-
+                                Text(' مواعيد العمل '),
                                 GestureDetector(
                                   onTap: () {
                                     selecttime(context: context).then((value) {
-                                      if(value!=null){
-
-
-                                        starttime = value;}
+                                      if (value != null) {
+                                        starttime = value;
+                                      }
                                       setState(() {});
                                     });
                                     setState(() {});
                                   },
                                   child: Container(
-                                      width: width*.25,
+                                      width: width * .25,
                                       height: 50,
                                       decoration: BoxDecoration(
                                           color: hexToColor('#00abeb'),
@@ -364,22 +353,23 @@ class _ProfileeState extends State<Profilee> {
                                               begin: Alignment.centerLeft,
                                               end: Alignment.centerRight,
                                               tileMode: TileMode.clamp),
-                                          borderRadius: BorderRadius.circular(5.0)),
-                                      child: Center(child: Text("  من  " + starttime))),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0)),
+                                      child: Center(
+                                          child: Text("  من  " + starttime))),
                                 ),
                                 GestureDetector(
                                   onTap: () {
                                     selecttime(context: context).then((value) {
-                                      if(value!=null){
-
-
-                                        endtime = value;}
+                                      if (value != null) {
+                                        endtime = value;
+                                      }
                                       setState(() {});
                                     });
                                     setState(() {});
                                   },
                                   child: Container(
-                                      width:width*.25,
+                                      width: width * .25,
                                       height: 50,
                                       decoration: BoxDecoration(
                                           color: hexToColor('#00abeb'),
@@ -391,19 +381,17 @@ class _ProfileeState extends State<Profilee> {
                                               begin: Alignment.centerLeft,
                                               end: Alignment.centerRight,
                                               tileMode: TileMode.clamp),
-                                          borderRadius: BorderRadius.circular(5.0)),
-                                      child: Center(child: Text("  الي  " + endtime))),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0)),
+                                      child: Center(
+                                          child: Text("  الي  " + endtime))),
                                 ),
-
                               ],
                             ),
                           ),
                           SizedBox(
                             height: high * .01,
                           ),
-
-
-
 
                           mywidget(
                             textEditingController: whatsapp,
@@ -453,8 +441,6 @@ class _ProfileeState extends State<Profilee> {
                             height: high * .01,
                           ),
 
-
-
                           mywidget(
                               textEditingController: email,
                               inputtype: TextInputType.text,
@@ -463,19 +449,15 @@ class _ProfileeState extends State<Profilee> {
                             height: high * .01,
                           ),
 
-
-
-
-
                           mywidget(
                               textEditingController: dlivery,
                               inputtype: TextInputType.text,
                               hint: 'ﺧﺪﻣﺔ ﺍﻟﺪﻟﻴﻔﺮﻱ'),
                           SizedBox(
                             height: high * .01,
-                          ), TextFormField(
+                          ),
+                          TextFormField(
                             textAlign: TextAlign.center,
-
                             controller: addersinmap,
                             style: TextStyle(
                               fontFamily: 'Arbf',
@@ -484,13 +466,13 @@ class _ProfileeState extends State<Profilee> {
                             decoration: InputDecoration(
                               labelText: 'عنوان علي الخريطه',
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.red, width: 2),
+                                borderSide:
+                                    BorderSide(color: Colors.red, width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color:Colors.red, width: 2),
+                                borderSide:
+                                    BorderSide(color: Colors.red, width: 2),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               hintText: 'عنوان علي الخريطه',
@@ -499,74 +481,85 @@ class _ProfileeState extends State<Profilee> {
                                 color: hexToColor('#ed1c6f'),
                               ),
                             ),
-                          ), SizedBox(
+                          ),
+                          SizedBox(
                             height: high * .01,
                           ),
-                          senddata?CircularProgressIndicator():   GestureDetector(
-                            onTap: ()async {
-                              senddata=true;
-                              setState(() {
+                          senddata
+                              ? CircularProgressIndicator()
+                              : GestureDetector(
+                                  onTap: () async {
+                                    print(
+                                        '0000000000000000000000000000000000000000000000000000000000');
+                                    print(starttime);
+                                    print(box.read('token'));
+                                    print(
+                                        '0000000000000000000000000000000000000000000000000000000000');
+                                    senddata = true;
+                                    setState(() {});
+                                    await box.write('name', title.text);
+                                    _allNetworking
+                                        .edit_profile(
+                                      token_id: box.read('token'),
+                                      name_ar: title.text,
+                                      name_en: titlen_en.text,
+                                      phone: phone.text,
+                                      whatsapp: whatsapp.text,
+                                      address: address.text,
+                                      floar_num: bilednumber.text,
+                                      description: description.text,
+                                      description_en: description_en.text,
+                                      phone_second: phone2.text,
+                                      phone_third: phone3.text,
+                                      main_img: _image,
+                                      password: password.text,
+                                      location: addersinmap.text,
+                                      instagram: insta.text,
+                                      lag: 220.22,
+                                      lat: 6515.222,
+                                      addressEn: '',
+                                      twitter: twiter.text,
+                                      facebook: facebook.text,
+                                      website: website.text,
+                                      from_hrs: starttime,
+                                      to_hrs: endtime,
+                                      email: email.text,
+                                    )
+                                        .then((value) {
+                                      Get.snackbar('', value.data['message']);
+                                      Navigator.of(context).pushAndRemoveUntil(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Statisticss()),
+                                          (Route<dynamic> route) => false);
 
-                              });
-                              await box.write(
-                                  'name', title.text);
-                              _allNetworking.edit_profile(
-                                token_id: box.read('token'),
-                                name_ar: title.text,
-                                name_en: titlen_en.text,
-                                phone: phone.text,
-                                whatsapp: whatsapp.text,
-                                address: address.text,
-
-                                floar_num: bilednumber.text,
-                                description: description.text,  description_en: description_en.text,
-
-                                phone_second: phone2.text,
-                                phone_third: phone3.text,
-                                main_img
-                                    :_image,password: password.text,
-                                location: addersinmap.text,
-                                instagram: insta.text,lag: 220.22,lat: 6515.222,addressEn: '',
-                                twitter: twiter.text,
-                                facebook: facebook.text,
-                                website: website.text,
-                                from_hrs:starttime,
-
-
-                                to_hrs: endtime,
-                                email: email.text,
-                             ).then((value) {
-                                Get.snackbar('', value.statusMessage);
-
-
-                                senddata=false;
-                                setState(() {
-
-                                });
-                              });
-                            },
-                            child: Container(
-                                height: high * .1,
-                                width: width * 0.5,
-                                child: Center(
-                                  child: Text('حفظ',
-                                      style: TextStyle(
-                                          fontFamily: 'Arbf',
-                                          color: Colors.white,
-                                          fontSize: 25)),
+                                      senddata = false;
+                                      setState(() {});
+                                    });
+                                  },
+                                  child: Container(
+                                      height: high * .1,
+                                      width: width * 0.5,
+                                      child: Center(
+                                        child: Text('حفظ',
+                                            style: TextStyle(
+                                                fontFamily: 'Arbf',
+                                                color: Colors.white,
+                                                fontSize: 25)),
+                                      ),
+                                      decoration: BoxDecoration(
+                                          color: hexToColor('#00abeb'),
+                                          gradient: new LinearGradient(
+                                              colors: [
+                                                Colors.red[100],
+                                                Colors.red[900],
+                                              ],
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                              tileMode: TileMode.clamp),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0))),
                                 ),
-                                decoration: BoxDecoration(
-                                    color: hexToColor('#00abeb'),
-                                    gradient: new LinearGradient(
-                                        colors: [
-                                          Colors.red[100],
-                                          Colors.red[900],
-                                        ],
-                                        begin: Alignment.centerLeft,
-                                        end: Alignment.centerRight,
-                                        tileMode: TileMode.clamp),
-                                    borderRadius: BorderRadius.circular(5.0))),
-                          ),
                           // SizedBox(
                           //   height: high * .01,
                           // ),
@@ -583,23 +576,25 @@ class _ProfileeState extends State<Profilee> {
                           // ),
                           SizedBox(
                             height: high * .01,
-                          ), Container(
+                          ),
+                          Container(
                             height: high * .3,
                             child: Center(
                               child: _kGooglePlex == null
                                   ? CircularProgressIndicator()
                                   : GoogleMap(
-                                mapType: MapType.normal,onTap: (LatLng mylocation){
-
-                                _locationData=mylocation;
-                                print(_locationData);
-                              },
-                                initialCameraPosition: _kGooglePlex,   zoomGesturesEnabled: true,
-                                onMapCreated:
-                                    (GoogleMapController controller) {
-                                  _controller.complete(controller);
-                                },
-                              ),
+                                      mapType: MapType.normal,
+                                      onTap: (LatLng mylocation) {
+                                        _locationData = mylocation;
+                                        print(_locationData);
+                                      },
+                                      initialCameraPosition: _kGooglePlex,
+                                      zoomGesturesEnabled: true,
+                                      onMapCreated:
+                                          (GoogleMapController controller) {
+                                        _controller.complete(controller);
+                                      },
+                                    ),
                             ),
                           ),
                         ],
@@ -642,4 +637,52 @@ class _ProfileeState extends State<Profilee> {
       ),
     );
   }
+
+
+  Future<Null> _pickImage() async {
+
+    var image = await ImagePicker.platform.pickImage(
+        source: ImageSource.gallery,
+        maxHeight: 200,
+        maxWidth: 200,
+        imageQuality: 100);
+    _cropImage(image);
+    //  setState(() {
+    //    if (image != null) {
+    //      _image = File(image.path);
+    //    }
+    // });
+
+  }
+
+  Future<Null> _cropImage(image) async {
+    print('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp');
+    File croppedFile =
+    await ImageCropper.cropImage(
+        sourcePath: image.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9
+        ],
+        androidUiSettings: AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.deepOrange,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        iosUiSettings: IOSUiSettings(
+          minimumAspectRatio: 1.0,
+        )
+    );
+    if (croppedFile != null) {
+      _image = croppedFile;
+      setState(() {
+
+      });
+    }
+  }
+
 }

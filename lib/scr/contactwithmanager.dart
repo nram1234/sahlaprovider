@@ -40,7 +40,7 @@ List<TicketsTypes>dataaa=[];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: mydrawer(context),
+      drawer: Mydrawer(),// mydrawer(context),
       appBar: AppBar(actions: [GestureDetector(
         onTap: () {
           Navigator.pop(context, false);

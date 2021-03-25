@@ -35,7 +35,7 @@ class _NotificationScrState extends State<NotificationScr> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: mydrawer(context),
+      drawer: Mydrawer(),// mydrawer(context),
       appBar: AppBar(
         actions: [GestureDetector(
           onTap: () {

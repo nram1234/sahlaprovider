@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
@@ -17,7 +18,7 @@ class LoginScr extends StatefulWidget {
 class _LoginScrState extends State<LoginScr> {
   PushNotificationManagger _pushNotificationManagger =
       PushNotificationManagger();
-
+  bool o = true;
   AllNetworking _allNetworking = AllNetworking();
   final box = GetStorage();
   bool login = false;
@@ -63,22 +64,22 @@ class _LoginScrState extends State<LoginScr> {
           shrinkWrap: true,
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
+
             logo,
             SizedBox(height: 48.0),
             TextFormField(
                 keyboardType: TextInputType.phone,
                 controller: phone,
-                decoration: InputDecoration(  fillColor: Colors.white,
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
                   filled: true,
                   //labelText: ' رقم الهاتف',
                   enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.white, width: 2),
+                    borderSide: BorderSide(color: Colors.white, width: 2),
                     borderRadius: BorderRadius.circular(5.0),
                   ),
                   border: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color:Colors.white, width: 2),
+                    borderSide: BorderSide(color: Colors.white, width: 2),
                     borderRadius: BorderRadius.circular(5.0),
                   ),
                   hintText: 'رقم الهاتف',
@@ -89,19 +90,28 @@ class _LoginScrState extends State<LoginScr> {
                 )),
             SizedBox(height: 8.0),
             TextFormField(
-              obscureText: true,
+              obscureText: o,
               controller: password,
-              decoration: InputDecoration( fillColor: Colors.white,
+              decoration: InputDecoration(
+                fillColor: Colors.white,
+                prefixIcon: GestureDetector(
+                  onTap: () {
+                    o = !o;
+                    setState(() {});
+                  },
+                  child: Icon(
+                    o ? Ionicons.ios_eye_off : Ionicons.ios_eye,
+                    color: Colors.red,
+                  ),
+                ),
                 filled: true,
-              // labelText: ' كلمه السر',
+                // labelText: ' كلمه السر',
                 enabledBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.white, width: 2),
+                  borderSide: BorderSide(color: Colors.white, width: 2),
                   borderRadius: BorderRadius.circular(5.0),
                 ),
                 border: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.white, width: 2),
+                  borderSide: BorderSide(color: Colors.white, width: 2),
                   borderRadius: BorderRadius.circular(5.0),
                 ),
                 hintText: ' كلمه السر',
@@ -113,14 +123,12 @@ class _LoginScrState extends State<LoginScr> {
             ),
             SizedBox(height: 24.0),
             login
-                ? Container(    height: 50.0,
-              width: 50.0,
-                  child: SizedBox(
-              child: CircularProgressIndicator(backgroundColor: Colors.white,),
-              height: 50.0,
-              width: 50.0,
-            ),
-                )
+                ? Center(
+              child: Container(
+                  width: 50,
+                  height: 50,
+                  child: CircularProgressIndicator(backgroundColor: Colors.white,)),
+            )
                 : Padding(
                     padding: EdgeInsets.symmetric(vertical: 16.0),
                     child: RaisedButton(
@@ -128,7 +136,9 @@ class _LoginScrState extends State<LoginScr> {
                         borderRadius: BorderRadius.circular(24),
                       ),
                       onPressed: () async {
-                        if (phone.text != null && password.text != null) {
+                        if (phone.text != null && password.text != null&&
+                            phone.text.trim().isNotEmpty &&
+                                password.text.trim().isNotEmpty) {
                           login = true;
                           setState(() {});
                           await _pushNotificationManagger
@@ -141,14 +151,15 @@ class _LoginScrState extends State<LoginScr> {
                                     firebase_token: valueee,
                                     lang: 'ar')
                                 .then((value) async {
-
                               if (value.status) {
-                                print('00000000000000000000000000000000000000000000000');
-print(value.result.agentData.serviceType);
-print(value.result.agentData.token);
-                                print('00000000000000000000000000000000000000000000000');
-                                await box.write(
-                                    'service_type', value.result.agentData.serviceType);
+                                print(
+                                    '00000000000000000000000000000000000000000000000');
+                                print(value.result.agentData.serviceType);
+                                print(value.result.agentData.token);
+                                print(
+                                    '00000000000000000000000000000000000000000000000');
+                                await box.write('service_type',
+                                    value.result.agentData.serviceType);
                                 await box.write(
                                     'phone', value.result.agentData.phone);
                                 await box.write('firebase_token', valueee);
@@ -159,7 +170,8 @@ print(value.result.agentData.token);
                                     'token', value.result.agentData.token);
                                 await box.write(
                                     'email', value.result.agentData.email);
-                                await box.write('id', value.result.agentData.id);
+                                await box.write(
+                                    'id', value.result.agentData.id);
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     new MaterialPageRoute(
@@ -173,6 +185,8 @@ print(value.result.agentData.token);
                               setState(() {});
                             });
                           });
+                        }else {
+                          Get.snackbar('', ' برجاء ادخال بيانات');
                         }
                       },
                       padding: EdgeInsets.all(12),

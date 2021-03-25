@@ -48,7 +48,7 @@ class _Add_Doctors_ServiceState extends State<Add_Doctors_Service> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-          drawer: mydrawer(context),
+          drawer: Mydrawer(),// mydrawer(context),
           appBar: AppBar(
             actions: [GestureDetector(
               onTap: () {

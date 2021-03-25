@@ -41,7 +41,7 @@ class _RememberingState extends State<Remembering> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: mydrawer(context),
+      drawer: Mydrawer(),// mydrawer(context),
       appBar: AppBar(
         actions: [GestureDetector(
           onTap: () {

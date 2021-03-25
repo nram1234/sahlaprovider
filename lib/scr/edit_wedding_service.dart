@@ -59,7 +59,7 @@ TextEditingController thename=TextEditingController();
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-          drawer: mydrawer(context),
+          drawer: Mydrawer(),// mydrawer(context),
           appBar: AppBar(
             automaticallyImplyLeading: true,
             actions: [GestureDetector(

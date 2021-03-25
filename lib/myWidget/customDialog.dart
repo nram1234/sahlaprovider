@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -6,14 +5,17 @@ class CustomDialog extends StatelessWidget {
   final String title, description, buttonText, buttonText2, Text2;
   final Image image;
   final Function function;
-  final  bool phone;
+  final bool phone;
+
   CustomDialog({
     @required this.title,
     @required this.description,
     @required this.buttonText,
     this.image,
     @required this.buttonText2,
-    @required this.function, this.Text2, this.phone,
+    @required this.function,
+    this.Text2,
+    this.phone,
   });
 
   @override
@@ -76,40 +78,50 @@ class CustomDialog extends StatelessWidget {
             ],
           ),
         ),
-        phone?SizedBox():  Positioned(
-          bottom: 10,
-          left: 10,
-          child: GestureDetector( onTap: function,
-            child: Container(width: 50,height: 30,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(7), //border corner radius
-                boxShadow:[
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5), //color of shadow
-                    spreadRadius: 5, //spread radius
-                    blurRadius: 7, // blur radius
-                    offset: Offset(0, 2), // changes position of shadow
-                    //first paramerter of offset is left-right
-                    //second parameter is top to down
+        phone
+            ? SizedBox()
+            : Positioned(
+                bottom: 10,
+                left: 10,
+                child: GestureDetector(
+                  onTap: function,
+                  child: Container(
+                    width: 50,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius:
+                          BorderRadius.circular(7), //border corner radius
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5), //color of shadow
+                          spreadRadius: 5, //spread radius
+                          blurRadius: 7, // blur radius
+                          offset: Offset(0, 2), // changes position of shadow
+                          //first paramerter of offset is left-right
+                          //second parameter is top to down
+                        ),
+                        //you can set more BoxShadow() here
+                      ],
+                    ),
+                    child: Center(child: Text(buttonText2)),
                   ),
-                  //you can set more BoxShadow() here
-                ],
+                ),
               ),
-              child: Center(child: Text(buttonText2)),
-            ),
-          ),
-        ),
         Positioned(
           bottom: 10,
-          right: phone?MediaQuery.of(context).size.width*.35   :10,
-          child: GestureDetector( onTap: (){Navigator.of(context, rootNavigator: true)
-              .pop();},
-            child: Container(width: 50,height: 30,
+          right: phone ? MediaQuery.of(context).size.width * .35 : 10,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context, rootNavigator: true).pop();
+            },
+            child: Container(
+              width: 50,
+              height: 30,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(7), //border corner radius
-                boxShadow:[
+                boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5), //color of shadow
                     spreadRadius: 5, //spread radius
@@ -130,7 +142,11 @@ class CustomDialog extends StatelessWidget {
           right: Consts.padding,
           child: CircleAvatar(
             backgroundColor: Colors.blueAccent,
-            radius: Consts.avatarRadius,child: Center(child: Container(child: Text(Text2)),),
+            backgroundImage: AssetImage('assets/images/alert.png'),
+            radius: Consts.avatarRadius,
+            child: Center(
+              child: Container(child: Text(Text2)),
+            ),
           ),
         ),
         //...top circlular image part,

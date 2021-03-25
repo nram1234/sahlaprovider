@@ -108,21 +108,65 @@ class _StatisticssState extends State<Statisticss> {
         label: 'ﺍﻟﻌﺮﻭﺽ',
       ),
     ];
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: mydrawer(context),
-      body: swithscren(pos: _selectedIndex, width: width, high: high),
-      bottomNavigationBar: BottomNavigationBar(
-        //backgroundColor: hexToColor('#00abeb'),
-        items: bottomitem,
-        currentIndex: _selectedIndex,
-        selectedItemColor: color, // Colors.amber[800],
-        onTap: (i) {
-          _selectedIndex = i;
 
-          swithscren(pos: i, width: width, high: high);
-          setState(() {});
-        },
+    return WillPopScope(onWillPop: () async {
+      final value = await showDialog<bool>(
+          context: context,
+          builder: (context) {
+            return
+
+              CustomDialog(
+                Text2:
+                " ",
+                title: "تنبية",
+                function: () { Navigator.of(context).pop(true);},
+                buttonText2: "اغلاق",
+                description: "هل تريد اغلاق التطبيق؟",
+                buttonText: "الفاء",
+                phone: false,
+              );
+
+
+
+            //
+            //   AlertDialog(
+            //   content: Text('Are you sure you want to exit?'),
+            //   actions: <Widget>[
+            //     FlatButton(
+            //       child: Text('No'),
+            //       onPressed: () {
+            //         Navigator.of(context).pop(false);
+            //       },
+            //     ),
+            //     FlatButton(
+            //       child: Text('Yes, exit'),
+            //       onPressed: () {
+            //         Navigator.of(context).pop(true);
+            //       },
+            //     ),
+            //   ],
+            // );
+          }
+      );
+
+      return value == true;
+    },
+      child: Scaffold(
+        key: _scaffoldKey,
+        drawer:Mydrawer(),// mydrawer(context),
+        body: swithscren(pos: _selectedIndex, width: width, high: high),
+        bottomNavigationBar: BottomNavigationBar(
+          //backgroundColor: hexToColor('#00abeb'),
+          items: bottomitem,
+          currentIndex: _selectedIndex,
+          selectedItemColor: color, // Colors.amber[800],
+          onTap: (i) {
+            _selectedIndex = i;
+
+            swithscren(pos: i, width: width, high: high);
+            setState(() {});
+          },
+        ),
       ),
     );
 
@@ -372,7 +416,7 @@ class _StatisticssState extends State<Statisticss> {
                       ],
                     ),
                   ),
-                  drawer: mydrawer(context),
+                  drawer: Mydrawer(),// mydrawer(context),
                   body: SafeArea(
                     top: true,
                     child: Padding(
@@ -567,7 +611,7 @@ class _StatisticssState extends State<Statisticss> {
                                                 // data.totalProduct.toString(),
                                                 width: width,
                                                 name:
-                                                    "حجز قاعات افرح ودور مناسبات")),
+                                                    "الحجوزات")),
                                       )
                                     : SizedBox(),
                             service_type == '1'
@@ -874,21 +918,45 @@ class _StatisticssState extends State<Statisticss> {
                                     padding: const EdgeInsets.only(
                                         top: 8.0, bottom: 8.0),
                                     child: GestureDetector(
-                                        onTap: () {
+                                        onTap: () async{
                                           if (service_type == '3') {
-                                            Navigator.push(
+
+                                            final value = await Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Doc_Profile()),
+                                                  builder: (context) => Doc_Profile(context)),
+
                                             );
+                                            setState(() {
+
+                                            });
+
+
+
+
+                                            // Navigator.push(
+                                            //   context,
+                                            //   MaterialPageRoute(
+                                            //       builder: (context) =>
+                                            //           Doc_Profile()),
+                                            // );
                                           } else {
-                                            Navigator.push(
+                                            final value = await Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Profilee()),
+                                                  builder: (context) => Profilee(context)),
+
                                             );
+                                            setState(() {
+
+                                            });
+
+                                            // Navigator.push(
+                                            //   context,
+                                            //   MaterialPageRoute(
+                                            //       builder: (context) =>
+                                            //           Profilee()),
+                                            // );
                                           }
                                         },
                                         child: item_home_list(
@@ -1151,7 +1219,7 @@ class _StatisticssState extends State<Statisticss> {
               children: [
                 Text(name,
                     style: TextStyle(
-                        fontFamily: 'Arbf', color: Colors.black, fontSize: 18)),
+                        fontFamily: 'Arbf', color: Colors.black, fontSize: 15)),
                 dat ? SizedBox() : Expanded(flex: 1, child: SizedBox()),
                 dat
                     ? Expanded(
@@ -1163,12 +1231,12 @@ class _StatisticssState extends State<Statisticss> {
                                 style: TextStyle(
                                     fontFamily: 'Arbf',
                                     color: Colors.red,
-                                    fontSize: 14)),
+                                    fontSize: 13)),
                             Text(" الي " + number2,
                                 style: TextStyle(
                                     fontFamily: 'Arbf',
                                     color: Colors.red,
-                                    fontSize: 14)),
+                                    fontSize: 13)),
                           ],
                         ))
                     : Flexible(

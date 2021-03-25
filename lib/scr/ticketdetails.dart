@@ -35,7 +35,7 @@ class _TicketDetailsState extends State<TicketDetails> {
   ScrollController _scrollController = new ScrollController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(drawer: mydrawer(context),
+    return Scaffold(drawer: Mydrawer(),// mydrawer(context),
       appBar: AppBar(elevation: 8,actions: [GestureDetector(
         onTap: () {
           Navigator.pop(context, false);

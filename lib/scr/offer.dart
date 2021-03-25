@@ -55,7 +55,7 @@ class _OfferScrState extends State<OfferScr> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-          drawer: mydrawer(context),
+          drawer: Mydrawer(),// mydrawer(context),
           appBar: AppBar(actions: [GestureDetector( onTap: widget.back,child: Icon(Icons.arrow_forward_outlined),)],
             centerTitle: true,
             title: Text('offer'.tr,

@@ -34,7 +34,7 @@ class _QRReadState extends State<QRRead> {
       bottom: true,
       left: true,
       child: Scaffold(
-        drawer: mydrawer(context),
+        drawer:  Mydrawer(),// mydrawer(context),
         body: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.all(16),

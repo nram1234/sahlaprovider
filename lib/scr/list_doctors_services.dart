@@ -40,7 +40,8 @@ class _List_Doctors_ServicesState extends State<List_Doctors_Services> {
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
       top: true,
-      child: Scaffold(   drawer: mydrawer(context),  appBar: AppBar(actions: [GestureDetector( onTap: widget.back,child: Icon(Icons.arrow_forward_outlined),)],
+      child: Scaffold(   drawer:Mydrawer(),// mydrawer(context),
+       appBar: AppBar(actions: [GestureDetector( onTap: widget.back,child: Icon(Icons.arrow_forward_outlined),)],
         centerTitle: true,
         title: Text('الخدمات',
             style: TextStyle(

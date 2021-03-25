@@ -52,7 +52,7 @@ class _Product_By_CategoryState extends State<Product_By_Category> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-          drawer: mydrawer(context),
+          drawer: Mydrawer(),// mydrawer(context),
           appBar: AppBar(actions: [GestureDetector(
             onTap: () {
               Navigator.pop(context, false);

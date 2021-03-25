@@ -63,7 +63,7 @@ class _AddOfferState extends State<AddOffer> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-          drawer: mydrawer(context),
+          drawer: Mydrawer(),// mydrawer(context),
           appBar: AppBar(   actions: [GestureDetector(
             onTap: () {
               Navigator.pop(context, false);
