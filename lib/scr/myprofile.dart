@@ -138,7 +138,9 @@ class _ProfileeState extends State<Profilee> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   ServiceDetails dat = snapshot.data.result.serviceDetails[0];
-
+             //     starttime= snapshot.data.result.serviceDetails[0].;
+                  starttime=snapshot.data.result.serviceDetails[0].fromHrs;
+                 endtime=snapshot.data.result.serviceDetails[0].toHrs;
                   address.text = dat.address;
 
                   title.text = dat.nameAr;
@@ -422,7 +424,7 @@ class _ProfileeState extends State<Profilee> {
                           mywidget(
                               textEditingController: facebook,
                               inputtype: TextInputType.text,
-                              hint: 'ﺭﺍﺑﻂ ﺍﻟﻔﻴﺲ'),
+                              hint: 'ﺭﺍﺑﻂ ﺍﻟﻔﻴﺲ بوك'),
                           SizedBox(
                             height: high * .01,
                           ),
@@ -457,7 +459,7 @@ class _ProfileeState extends State<Profilee> {
                             height: high * .01,
                           ),
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign:TextAlign.right,
                             controller: addersinmap,
                             style: TextStyle(
                               fontFamily: 'Arbf',
@@ -613,7 +615,7 @@ class _ProfileeState extends State<Profilee> {
     return TextFormField(
       keyboardType: inputtype,
       controller: textEditingController,
-      textAlign: TextAlign.center,
+      textAlign:TextAlign.right,
       maxLines: null,
       style: TextStyle(
         fontFamily: 'Arbf',

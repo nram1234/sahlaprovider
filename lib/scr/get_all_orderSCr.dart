@@ -73,7 +73,7 @@ print(data.length);
                                 children: [
                                   Expanded(
                                       child: TextFormField(
-                                          textAlign: TextAlign.center,controller: _textEditingController,onChanged: (v){
+                                          textAlign: TextAlign.right,controller: _textEditingController,onChanged: (v){
                                             f=v;
                                             setState(() {
 

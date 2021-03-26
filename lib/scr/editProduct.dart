@@ -152,7 +152,7 @@ class _EditProductState extends State<EditProduct> {
                         TextFormField(
                           controller: pronamear,
                           onChanged: (s) {},
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.right,
                           maxLines: null,
                           style: TextStyle(
                             fontFamily: 'Arbf',
@@ -182,7 +182,7 @@ class _EditProductState extends State<EditProduct> {
                         TextFormField(
                           controller: pronameen,
                           onChanged: (s) {},
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.right,
                           maxLines: null,
                           style: TextStyle(
                             fontFamily: 'Arbf',
@@ -212,7 +212,7 @@ class _EditProductState extends State<EditProduct> {
                         TextFormField(
                           controller: detailsar,
                           onChanged: (s) {},
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.right,
                           maxLines: null,
                           style: TextStyle(
                             fontFamily: 'Arbf',
@@ -242,7 +242,7 @@ class _EditProductState extends State<EditProduct> {
                         TextFormField(
                           controller: detailsen,
                           onChanged: (s) {},
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.right,
                           maxLines: null,
                           style: TextStyle(
                             fontFamily: 'Arbf',
@@ -272,7 +272,7 @@ class _EditProductState extends State<EditProduct> {
                         // TextFormField(
                         //   controller: theoldprice,
                         //   onChanged: (s) {},
-                        //   textAlign: TextAlign.center,
+                        //   textAlign: TextAlign.right,
                         //   maxLines: null,
                         //   style: TextStyle(
                         //     fontFamily: 'Arbf',
@@ -302,7 +302,7 @@ class _EditProductState extends State<EditProduct> {
                         TextFormField(
                           controller: thenewprice,
                           onChanged: (s) {},
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.right,
                           maxLines: null,
                           style: TextStyle(
                             fontFamily: 'Arbf',

@@ -182,8 +182,8 @@ class _StatisticssState extends State<Statisticss> {
     return _picked.format(context);
   }
 
-  String starttime = 'من الساعة';
-  String endtime = 'الي الساعة';
+  String starttime = 'من ';
+  String endtime = 'الي ';
 
   Widget swithscren({pos, high, width}) {
     if (pos == 0) {
@@ -1195,7 +1195,27 @@ class _StatisticssState extends State<Statisticss> {
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Container(
+            child:keyupdata == 1
+                ? GestureDetector(
+              onTap: keyupdata == 1 ? fun : null,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Container(
+                    height: 75,
+                    color: Colors.red,
+                    width: 75,
+                    child: Center(
+                        child: Text(
+                            keyupdata == 1
+                                ? 'تجديد الاشتراك'
+                                : ' تم ارسال الطلب',
+                            style: TextStyle(
+                                fontFamily: 'Arbf',
+                                color: Colors.white,
+                                fontSize: 10)))),
+              ),
+            ):
+            Container(
               padding: EdgeInsets.all(20),
               height: 75,
               color: Colors.red,
@@ -1220,7 +1240,7 @@ class _StatisticssState extends State<Statisticss> {
                 Text(name,
                     style: TextStyle(
                         fontFamily: 'Arbf', color: Colors.black, fontSize: 15)),
-                dat ? SizedBox() : Expanded(flex: 1, child: SizedBox()),
+                 SizedBox(width: 8,)  ,
                 dat
                     ? Expanded(
                         flex: 1,

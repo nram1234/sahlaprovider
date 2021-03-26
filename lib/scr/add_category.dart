@@ -85,7 +85,7 @@ bool adddata=false;
 
                 onChanged: (s) {
                   thename=s;             },
-                textAlign: TextAlign.center,maxLines: null,
+                textAlign: TextAlign.right,maxLines: null,
                 style:   TextStyle(
                   fontFamily: 'Arbf', color: hexToColor('#ed1c6f'), ),
                 decoration: InputDecoration(
@@ -113,7 +113,7 @@ bool adddata=false;
                 onChanged: (s) {
                  theenname=s;
                 },
-                textAlign: TextAlign.center,maxLines: null,
+                textAlign: TextAlign.right,maxLines: null,
                 style:   TextStyle(
                   fontFamily: 'Arbf', color: hexToColor('#ed1c6f'), ),
                 decoration: InputDecoration(

@@ -141,7 +141,7 @@ class _EditOfferState extends State<EditOffer> {
                         TextFormField(
                           controller: pronamear,
                           onChanged: (s) {},
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.right,
                           maxLines: null,
                           style: TextStyle(
                             fontFamily: 'Arbf',
@@ -171,7 +171,7 @@ class _EditOfferState extends State<EditOffer> {
                         TextFormField(
                           controller: pronameen,
                           onChanged: (s) {},
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.right,
                           maxLines: null,
                           style: TextStyle(
                             fontFamily: 'Arbf',
@@ -201,7 +201,7 @@ class _EditOfferState extends State<EditOffer> {
                         TextFormField(
                           controller: detailsar,
                           onChanged: (s) {},
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.right,
                           maxLines: null,
                           style: TextStyle(
                             fontFamily: 'Arbf',
@@ -231,7 +231,7 @@ class _EditOfferState extends State<EditOffer> {
                         TextFormField(
                           controller: detailsen,
                           onChanged: (s) {},
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.right,
                           maxLines: null,
                           style: TextStyle(
                             fontFamily: 'Arbf',
@@ -262,7 +262,7 @@ class _EditOfferState extends State<EditOffer> {
                           controller: theoldprice,
                           keyboardType: TextInputType.number,
                           onChanged: (s) {},
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.right,
                           maxLines: null,
                           style: TextStyle(
                             fontFamily: 'Arbf',
@@ -293,7 +293,7 @@ class _EditOfferState extends State<EditOffer> {
                           controller: thenewprice,
                           keyboardType: TextInputType.number,
                           onChanged: (s) {},
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.right,
                           maxLines: null,
                           style: TextStyle(
                             fontFamily: 'Arbf',

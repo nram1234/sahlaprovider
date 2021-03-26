@@ -115,7 +115,7 @@ TextEditingController thename=TextEditingController();
               TextFormField(
                 keyboardType: TextInputType.text,controller: thename,
 
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.right,
                 maxLines: null,
                 style: TextStyle(
                   fontFamily: 'Arbf',
@@ -144,7 +144,7 @@ TextEditingController thename=TextEditingController();
               TextFormField(
                 keyboardType: TextInputType.text,controller: theenname,
 
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.right,
                 maxLines: null,
                 style: TextStyle(
                   fontFamily: 'Arbf',
@@ -173,7 +173,7 @@ TextEditingController thename=TextEditingController();
               TextFormField(
                 keyboardType: TextInputType.number,controller: price,
 
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.right,
                 maxLines: null,
                 style: TextStyle(
                   fontFamily: 'Arbf',

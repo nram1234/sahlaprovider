@@ -252,7 +252,7 @@ bool svaedata=false;
                     height: high * .01,
                   ),
                   TextFormField(
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.right,
                     maxLines: null,
                     controller: address,
                     style: TextStyle(
@@ -283,7 +283,7 @@ bool svaedata=false;
                     height: high * .01,
                   ),
                   TextFormField(
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.right,
                     maxLines: null,
                     controller: address_en,
                     style: TextStyle(
@@ -313,7 +313,7 @@ bool svaedata=false;
                     height: high * .01,
                   ),
                   TextFormField(
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.right,
                     maxLines: null,
                     onChanged: (v){
                       description=v;
@@ -344,7 +344,7 @@ bool svaedata=false;
                     height: high * .01,
                   ),
                   TextFormField(
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.right,
                     maxLines: null,
                     onChanged: (v){
                       description_en=v;

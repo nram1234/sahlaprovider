@@ -245,7 +245,7 @@ class _EditPranchState extends State<EditPranch> {
                             height: high * .01,
                           ),
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.right,
                             maxLines: null,
                             controller: title,
                             style: TextStyle(
@@ -275,7 +275,7 @@ class _EditPranchState extends State<EditPranch> {
                             height: high * .01,
                           ),
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.right,
                             maxLines: null,
                             controller: titlen_en,
                             style: TextStyle(
@@ -305,7 +305,7 @@ class _EditPranchState extends State<EditPranch> {
                             height: high * .01,
                           ),
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.right,
                             maxLines: null,
                             controller: phone,
                             style: TextStyle(
@@ -335,7 +335,7 @@ class _EditPranchState extends State<EditPranch> {
                             height: high * .01,
                           ),
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.right,
                             maxLines: null,
                             controller: phone2,
                             style: TextStyle(
@@ -365,7 +365,7 @@ class _EditPranchState extends State<EditPranch> {
                             height: high * .01,
                           ),
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.right,
                             maxLines: null,
                             controller: phone3,
                             style: TextStyle(
@@ -395,7 +395,7 @@ class _EditPranchState extends State<EditPranch> {
                             height: high * .01,
                           ),
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.right,
                             maxLines: null,
                             controller: whatsapp,
                             style: TextStyle(
@@ -425,7 +425,7 @@ class _EditPranchState extends State<EditPranch> {
                             height: high * .01,
                           ),
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.right,
                             maxLines: null,
                             controller: address,
                             style: TextStyle(
@@ -455,7 +455,7 @@ class _EditPranchState extends State<EditPranch> {
                             height: high * .01,
                           ),
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.right,
                             maxLines: null,
                             controller: address_en,
                             style: TextStyle(
@@ -485,7 +485,7 @@ class _EditPranchState extends State<EditPranch> {
                             height: high * .01,
                           ),
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.right,
                             maxLines: null,
                             controller: description,
                             style: TextStyle(
@@ -515,7 +515,7 @@ class _EditPranchState extends State<EditPranch> {
                             height: high * .01,
                           ),
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.right,
                             maxLines: null,
                             controller: description_en,
                             style: TextStyle(
@@ -545,7 +545,7 @@ class _EditPranchState extends State<EditPranch> {
                             height: high * .01,
                           ),
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.right,
                             maxLines: null,
                             controller: addersinmap,
                             style: TextStyle(

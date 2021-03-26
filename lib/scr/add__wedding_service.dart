@@ -110,7 +110,7 @@ class _Add__wedding_serviceState extends State<Add__wedding_service> {
                 onChanged: (s) {
                   thename = s;
                 },
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.right,
                 maxLines: null,
                 style: TextStyle(
                   fontFamily: 'Arbf',
@@ -141,7 +141,7 @@ class _Add__wedding_serviceState extends State<Add__wedding_service> {
                 onChanged: (s) {
                   theenname = s;
                 },
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.right,
                 maxLines: null,
                 style: TextStyle(
                   fontFamily: 'Arbf',
@@ -172,7 +172,7 @@ class _Add__wedding_serviceState extends State<Add__wedding_service> {
                 onChanged: (s) {
                   price = s;
                 },
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.right,
                 maxLines: null,
                 style: TextStyle(
                   fontFamily: 'Arbf',

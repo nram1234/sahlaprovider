@@ -311,7 +311,7 @@ class _List_AppointmentsState extends State<List_Appointments> {
     return TextFormField(
       keyboardType: inputtype,
       controller: textEditingController,
-      //   textAlign: TextAlign.center,
+         textAlign: TextAlign.right,
       maxLines: null,
       style: TextStyle(
         fontFamily: 'Arbf',

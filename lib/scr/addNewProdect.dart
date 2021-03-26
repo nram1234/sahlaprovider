@@ -188,7 +188,7 @@ class _AddNewProdectState extends State<AddNewProdect> {
                   onChanged: (s) {
                     thenewprice = s;
                   },
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.right,
                   maxLines: null,
                   style: TextStyle(
                     fontFamily: 'Arbf',

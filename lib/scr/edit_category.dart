@@ -129,7 +129,7 @@ class _Edit_CategoryState extends State<Edit_Category> {
                         TextFormField(
                           controller: pronamear,
                           onChanged: (s) {},
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.right,
                           maxLines: null,
                           style: TextStyle(
                             fontFamily: 'Arbf',
@@ -159,7 +159,7 @@ class _Edit_CategoryState extends State<Edit_Category> {
                         TextFormField(
                           controller: pronameen,
                           onChanged: (s) {},
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.right,
                           maxLines: null,
                           style: TextStyle(
                             fontFamily: 'Arbf',

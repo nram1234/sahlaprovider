@@ -73,7 +73,7 @@ class _Get_all_orderState extends State<Get_all_visitor_points> {
                                 children: [
                                   Expanded(
                                       child: TextFormField(
-                                          textAlign: TextAlign.center,controller: _textEditingController,onChanged: (v){
+                                          textAlign: TextAlign.right,controller: _textEditingController,onChanged: (v){
                                         f=v;
                                         setState(() {
 

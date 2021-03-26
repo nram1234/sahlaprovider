@@ -38,7 +38,7 @@ class _Doc_ProfileState extends State<Doc_Profile> {
   TextEditingController twiter = TextEditingController();
   TextEditingController insta = TextEditingController();
   TextEditingController email = TextEditingController();
-
+  TextEditingController password = TextEditingController();
   //================================================
   TextEditingController nameen = TextEditingController();
   TextEditingController kinden = TextEditingController();
@@ -60,6 +60,12 @@ class _Doc_ProfileState extends State<Doc_Profile> {
   final box = GetStorage();
   String token;
   String imgelinke;
+
+
+  TimeOfDay _time = TimeOfDay.now();
+  TimeOfDay _picked;
+  String starttime = ' الساعة';
+  String endtime = ' الساعة';
   @override
   void initState() {
     super.initState();
@@ -70,7 +76,6 @@ class _Doc_ProfileState extends State<Doc_Profile> {
       zoom: 15,
     );
   }
-
 
   getdatafromwep(){
     _allNetworking
@@ -92,7 +97,7 @@ class _Doc_ProfileState extends State<Doc_Profile> {
       facebook.text = value.result.serviceDetails[0].facebook;
       twiter.text = value.result.serviceDetails[0].twitter;
       insta.text =value.result.serviceDetails[0].instagram;
-
+password.text=value.result.serviceDetails[0].password;
       email.text = value.result.serviceDetails[0].email;
 //===========================================================
       kinden.text =
@@ -108,7 +113,8 @@ class _Doc_ProfileState extends State<Doc_Profile> {
       print(value.result.serviceDetails[0].detectionPriceEn);
 
       print(value.result.serviceDetails[0].waitingTimeEn);
-
+      starttime=value.result.serviceDetails[0].fromHrs;
+      endtime=value.result.serviceDetails[0].toHrs;
       imgelinke=value.result.serviceDetails[0].mainImg;
       print('000000000000000000000000000000000000');
       print(imgelinke);
@@ -120,16 +126,19 @@ class _Doc_ProfileState extends State<Doc_Profile> {
       });
     });
   }
-  TimeOfDay _time = TimeOfDay.now();
-  TimeOfDay _picked;
-  String starttime = ' الساعة';
-  String endtime = ' الساعة';
+
   Future<String> selecttime({BuildContext context}) async {
     _picked = await showTimePicker(context: context, initialTime: _time);
 
     return _picked.format(context);
   }
 
+
+  @override
+  void dispose() {
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -229,6 +238,17 @@ class _Doc_ProfileState extends State<Doc_Profile> {
                 SizedBox(
                   height: high * .01,
                 ),
+
+
+
+                mywidget(
+                    hint: 'كلمة السر',
+                    inputtype: TextInputType.phone,
+                    textEditingController: password),
+                SizedBox(
+                  height: high * .01,
+                ),
+
                 mywidget(
                     hint: 'التخصص',
                     inputtype: TextInputType.text,
@@ -387,7 +407,7 @@ Text('  المواعيد  '),
                 mywidget(
                     textEditingController: facebook,
                     inputtype: TextInputType.text,
-                    hint: 'ﺭﺍﺑﻂ ﺍﻟﻔﻴﺲ'),
+                    hint: 'ﺭﺍﺑﻂ ﺍﻟﻔﻴﺲ بوك'),
                 SizedBox(
                   height: high * .01,
                 ),
@@ -448,7 +468,7 @@ Text('  المواعيد  '),
                       facebook: facebook.text,
                       email: email.text,
 
-                      from_hrs:starttime,
+                      from_hrs:starttime,main_img: _image,password:password.text ,
 
 
                       to_hrs: endtime,
@@ -521,7 +541,7 @@ Text('  المواعيد  '),
     return TextFormField(
       keyboardType: inputtype,
       controller: textEditingController,
-      //   textAlign: TextAlign.center,
+        textAlign: TextAlign.right,
       maxLines: null,
       style: TextStyle(
         fontFamily: 'Arbf',
@@ -551,7 +571,7 @@ Text('  المواعيد  '),
     return TextFormField(
       keyboardType: inputtype,
       controller: textEditingController,
-      // textAlign: TextAlign.center,
+      textAlign:TextAlign.right,
       maxLines: 5,
       style: TextStyle(
         fontFamily: 'Arbf',
@@ -582,8 +602,8 @@ Text('  المواعيد  '),
 
     var image = await ImagePicker.platform.pickImage(
         source: ImageSource.gallery,
-        maxHeight: 200,
-        maxWidth: 200,
+        maxHeight: 600,
+        maxWidth: 400,
         imageQuality: 100);
     _cropImage(image);
    //  setState(() {

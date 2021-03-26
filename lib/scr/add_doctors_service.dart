@@ -105,7 +105,7 @@ class _Add_Doctors_ServiceState extends State<Add_Doctors_Service> {
                 onChanged: (s) {
                   thename = s;
                 },
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.right,
                 maxLines: null,
                 style: TextStyle(
                   fontFamily: 'Arbf',
@@ -136,7 +136,7 @@ class _Add_Doctors_ServiceState extends State<Add_Doctors_Service> {
                 onChanged: (s) {
                   theenname = s;
                 },
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.right,
                 maxLines: null,
                 style: TextStyle(
                   fontFamily: 'Arbf',
@@ -167,7 +167,7 @@ class _Add_Doctors_ServiceState extends State<Add_Doctors_Service> {
                 onChanged: (s) {
                   price = s;
                 },
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.right,
                 maxLines: null,
                 style: TextStyle(
                   fontFamily: 'Arbf',

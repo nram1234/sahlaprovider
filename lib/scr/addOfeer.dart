@@ -163,7 +163,7 @@ class _AddOfferState extends State<AddOffer> {
                   onChanged: (s) {
                     theoldprice = s;
                   },
-                  textAlign: TextAlign.center,maxLines: null,
+                  textAlign: TextAlign.right,maxLines: null,
                   style:   TextStyle(
                     fontFamily: 'Arbf', color: hexToColor('#ed1c6f'), ),
                   decoration: InputDecoration(
@@ -192,7 +192,7 @@ class _AddOfferState extends State<AddOffer> {
                   onChanged: (s) {
                     thenewprice = s;
                   },
-                  textAlign: TextAlign.center,maxLines: null,
+                  textAlign: TextAlign.right,maxLines: null,
                   style:   TextStyle(
                     fontFamily: 'Arbf', color: hexToColor('#ed1c6f'), ),
                   decoration: InputDecoration(

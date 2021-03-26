@@ -70,6 +70,8 @@ class ServiceDetails {
   String password;
   String phone;
   String phoneSecond;
+  String fromHrs;
+  String toHrs;
   String phoneThird;
   String location;
   String mainImg;
@@ -94,6 +96,8 @@ class ServiceDetails {
         this.password,
         this.phone,
         this.phoneSecond,
+        this.fromHrs,
+        this.toHrs,
         this.phoneThird,
         this.location,
         this.mainImg,
@@ -118,6 +122,8 @@ class ServiceDetails {
     password = json['password'];
     phone = json['phone'];
     phoneSecond = json['phone_second'];
+    fromHrs = json['from_hrs'];
+    toHrs = json['to_hrs'];
     phoneThird = json['phone_third'];
     location = json['location'];
     mainImg = json['main_img'];
@@ -144,6 +150,8 @@ class ServiceDetails {
     data['password'] = this.password;
     data['phone'] = this.phone;
     data['phone_second'] = this.phoneSecond;
+    data['from_hrs'] = this.fromHrs;
+    data['to_hrs'] = this.toHrs;
     data['phone_third'] = this.phoneThird;
     data['location'] = this.location;
     data['main_img'] = this.mainImg;
