@@ -2137,6 +2137,7 @@ class AllNetworking {
     });
     response = await dio.post(paseurl + '/provider/sending_notifaction',
         data: formData);
+    print(response.data);
     return response;
   }
 
