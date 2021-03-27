@@ -201,8 +201,13 @@ class _Buy_prescription_requestState extends State<Buy_prescription_request> {
                                                                   .data
                                                                   .result
                                                                   .allRequested[
-                                                                      pos]
-                                                                  .descriptionDec),
+                                                              pos]
+                                                                  .descriptionDec+" "+snapshot
+                                                                  .data
+                                                                  .result
+                                                                  .allRequested[
+                                                              pos]
+                                                                  .currentPrice),
                                                             ),
                                                             actions: <Widget>[
                                                               TextButton(

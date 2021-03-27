@@ -51,16 +51,18 @@ class NotificationDetails {
   String title;
   int id;
   String body;
+  String img;
   int isRead;
   String createdAt;
 
   NotificationDetails(
-      {this.title, this.id, this.body, this.isRead, this.createdAt});
+      {this.title, this.id, this.body, this.img, this.isRead, this.createdAt});
 
   NotificationDetails.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     id = json['id'];
     body = json['body'];
+    img = json['img'];
     isRead = json['is_read'];
     createdAt = json['created_at'];
   }
@@ -70,6 +72,7 @@ class NotificationDetails {
     data['title'] = this.title;
     data['id'] = this.id;
     data['body'] = this.body;
+    data['img'] = this.img;
     data['is_read'] = this.isRead;
     data['created_at'] = this.createdAt;
     return data;

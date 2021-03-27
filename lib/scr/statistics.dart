@@ -504,9 +504,9 @@ class _StatisticssState extends State<Statisticss> {
                                       keyupdata: 0,
                                       dat: false,
                                       width: width,
-                                      number: ' من الساعة ${snapshot.data.result.fromHrs} ' +
+                                      number: ' من ${snapshot.data.result.fromHrs} ' +
                                           "\n" +
-                                          ' الي الساعة ${snapshot.data.result.toHrs} ',
+                                          ' الي ${snapshot.data.result.toHrs} ',
                                       name: "مواعيد العمل")),
                             ),
 
@@ -1170,6 +1170,9 @@ class _StatisticssState extends State<Statisticss> {
       fun,
       number2,
       bool dat}) {
+    print("111111111111111111111111111111");
+    print(keyupdata);
+    print("111111111111111111111111111111");
     return Container(
       width: width,
       height: 75,
@@ -1272,29 +1275,7 @@ class _StatisticssState extends State<Statisticss> {
               ],
             ),
           ),
-          dat == false
-              ? SizedBox()
-              : keyupdata == 1
-                  ? GestureDetector(
-                      onTap: keyupdata == 1 ? fun : null,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Container(
-                            height: 75,
-                            color: Colors.red,
-                            width: 75,
-                            child: Center(
-                                child: Text(
-                                    keyupdata == 1
-                                        ? 'تجديد الاشتراك'
-                                        : ' تم ارسال الطلب',
-                                    style: TextStyle(
-                                        fontFamily: 'Arbf',
-                                        color: Colors.white,
-                                        fontSize: 10)))),
-                      ),
-                    )
-                  : SizedBox(),
+
         ],
       ),
     );
