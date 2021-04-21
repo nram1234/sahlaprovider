@@ -35,6 +35,10 @@ class _AddNewProdectState extends State<AddNewProdect> {
       TextEditingController();
   TextEditingController _textEditingControllerthenewprice =
       TextEditingController();
+  TextEditingController _textEditingControllerthesearil_number =
+  TextEditingController();
+  TextEditingController _textEditingControllerthestock =
+  TextEditingController();
 
   File _image;
   AllNetworking _allNetworking = AllNetworking();
@@ -69,7 +73,7 @@ class _AddNewProdectState extends State<AddNewProdect> {
     super.dispose();
   }
 
-  String thename, theenname, theoldprice, theardes, theendes, thenewprice;
+  String thename, theenname, theoldprice, theardes, theendes, thenewprice,stock,searil_number;
 
   @override
   Widget build(BuildContext context) {
@@ -214,6 +218,90 @@ class _AddNewProdectState extends State<AddNewProdect> {
                 SizedBox(
                   height: high * .02,
                 ),
+
+
+                TextFormField(
+                  controller: _textEditingControllerthesearil_number,
+                  keyboardType: TextInputType.text,
+                  onChanged: (s) {
+                    searil_number = s;
+                  },
+                  textAlign: TextAlign.right,
+                  maxLines: null,
+                  style: TextStyle(
+                    fontFamily: 'Arbf',
+                    color: hexToColor('#ed1c6f'),
+                  ),
+                  decoration: InputDecoration(
+                    labelText: 'الرقم التسلسلي',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 2),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 2),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    hintText: 'الرقم التسلسلي',
+                    hintStyle: TextStyle(
+                      fontFamily: 'Arbf',
+                      color:  hexToColor('#ed1c6f'),
+                    ),
+                  ),
+                ),
+
+
+
+                SizedBox(
+                  height: high * .02,
+                ),
+
+
+                TextFormField(
+                  controller: _textEditingControllerthestock,
+                  keyboardType: TextInputType.number,
+                  onChanged: (s) {
+                    stock = s;
+                  },
+                  textAlign: TextAlign.right,
+                  maxLines: null,
+                  style: TextStyle(
+                    fontFamily: 'Arbf',
+                    color: hexToColor('#ed1c6f'),
+                  ),
+                  decoration: InputDecoration(
+                    labelText: 'المخزن',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 2),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 2),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    hintText: 'المخزن',
+                    hintStyle: TextStyle(
+                      fontFamily: 'Arbf',
+                      color:  hexToColor('#ed1c6f'),
+                    ),
+                  ),
+                ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+                SizedBox(
+                  height: high * .02,
+                ),
                 service_type == '0'
                     ? SizedBox()
                     :getcategoryList?CircularProgressIndicator(): Container(
@@ -292,7 +380,7 @@ class _AddNewProdectState extends State<AddNewProdect> {
                                             token_id: token,
                                             title: thename,
                                             title_en: theenname,
-                                            current_price: thenewprice,
+                                            current_price: thenewprice,serial_number: searil_number,stock: stock,
                                             old_price: "",
                                             //theoldprice,
                                             description_ar: theardes,

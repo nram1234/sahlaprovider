@@ -118,7 +118,7 @@ class AllNetworking {
   }
 
   Future<Response> add_product(
-      {@required String phone,
+      {@required String phone,@required String serial_number,@required String stock,
       @required String token_id,
       @required String title,
       @required String title_en,
@@ -133,7 +133,7 @@ class AllNetworking {
 
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
-      "cat_id": cat_id,
+      "cat_id": cat_id,  "serial_number": serial_number,"stock": stock,
       "key": "1234567890",
       "token_id": token_id,
       "title": title,
@@ -177,6 +177,11 @@ class AllNetworking {
 
   Future<Response> edit_product({
     @required String token_id,
+
+    @required String stock,
+    @required String serial_number,
+
+
     @required String title,
     @required String title_en,
     @required String current_price,
@@ -194,6 +199,14 @@ class AllNetworking {
     }
 
     FormData formData = new FormData.fromMap({
+
+
+
+
+      "token_id": stock,
+      "title": serial_number,
+
+
       // "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,

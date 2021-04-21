@@ -31,6 +31,13 @@ class _EditProductState extends State<EditProduct> {
   TextEditingController detailsen = TextEditingController();
   TextEditingController theoldprice = TextEditingController();
   TextEditingController thenewprice = TextEditingController();
+
+
+  TextEditingController theserial_number = TextEditingController();
+  TextEditingController thestock = TextEditingController();
+
+
+
   File _image;
   bool savedata = false;
   @override
@@ -69,11 +76,7 @@ class _EditProductState extends State<EditProduct> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-          appBar: AppBar(actions: [GestureDetector(
-            onTap: () {
-              Navigator.pop(context, false);
-            }, child: Icon(Icons.arrow_forward_outlined),)
-          ],
+          appBar: AppBar(
             centerTitle: true,
             title: Text('تعديل منتج ',
                 style: TextStyle(
@@ -98,6 +101,14 @@ class _EditProductState extends State<EditProduct> {
                       snapshot.data.result.allProducts[0].oldPrice;
                   thenewprice.text =
                       snapshot.data.result.allProducts[0].newPrice ?? ' ';
+
+                  theserial_number.text =
+                      snapshot.data.result.allProducts[0].serial_number;
+                  print('snapshot.data.result.allProducts[0].stock ');
+                  print(snapshot.data.result.allProducts[0].serial_number);
+                  print(theserial_number.text);
+                  thestock.text =
+                      snapshot.data.result.allProducts[0].stock  ;
 
                   return Padding(
                     padding:
@@ -300,7 +311,7 @@ class _EditProductState extends State<EditProduct> {
                           height: high * .02,
                         ),
                         TextFormField(
-                          controller: thenewprice,
+                          controller: thenewprice,keyboardType: TextInputType.number,
                           onChanged: (s) {},
                           textAlign: TextAlign.right,
                           maxLines: null,
@@ -329,6 +340,81 @@ class _EditProductState extends State<EditProduct> {
                         SizedBox(
                           height: high * .02,
                         ),
+
+
+
+                        TextFormField(
+                          controller: theserial_number,
+                          onChanged: (s) {},
+                          textAlign: TextAlign.right,
+                          maxLines: null,
+                          style: TextStyle(
+                            fontFamily: 'Arbf',
+                            color: hexToColor('#ed1c6f'),
+                          ),
+                          decoration: InputDecoration(
+                            labelText: 'الرقم التسلسلي',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            hintStyle: TextStyle(
+                              fontFamily: 'Arbf',
+                              color: hexToColor('#ed1c6f'),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: high * .02,
+                        ),
+
+
+
+
+                        TextFormField(
+                          controller: thestock,
+                          onChanged: (s) {},
+                          textAlign: TextAlign.right,
+                          maxLines: null,
+                          style: TextStyle(
+                            fontFamily: 'Arbf',
+                            color: hexToColor('#ed1c6f'),
+                          ),
+                          decoration: InputDecoration(
+                            labelText: 'المخزن',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            hintStyle: TextStyle(
+                              fontFamily: 'Arbf',
+                              color: hexToColor('#ed1c6f'),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: high * .02,
+                        ),
+
+
+
+
+
+
+
+
                         service_type == '0'
                             ? SizedBox()
                             :getcategoryList?CircularProgressIndicator(): Container(
@@ -389,13 +475,13 @@ class _EditProductState extends State<EditProduct> {
                                   print('0000000000000000000000000000000');
                                   savedata = true;
                                   setState(() {
-                                    
+
                                   });
                                   String token = box.read('token');
                                   _allNetworking
                                       .edit_product(
                                           token_id: token,
-                                          title: pronamear.text,
+                                          title: pronamear.text,stock: thestock.text,serial_number: theserial_number.text,
                                           id_product: widget.proid,
                                           title_en: pronameen.text,
                                           current_price: thenewprice.text,

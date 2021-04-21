@@ -602,8 +602,8 @@ Text('  المواعيد  '),
 
     var image = await ImagePicker.platform.pickImage(
         source: ImageSource.gallery,
-        maxHeight: 600,
-        maxWidth: 400,
+        maxHeight: 1000,
+        maxWidth: 800,
         imageQuality: 100);
     _cropImage(image);
    //  setState(() {

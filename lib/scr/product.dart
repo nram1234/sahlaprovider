@@ -10,21 +10,21 @@ import 'package:sahlaprovider/utilitie/hexToColor%D9%90Convert.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_products_JSON.dart';
 
 import 'addNewProdect.dart';
- 
+
 import 'editProduct.dart';
 import 'mainSections.dart';
 
 class ProductScr extends StatefulWidget {
-   VoidCallback back;
+  VoidCallback back;
 
-   ProductScr(this.back);
+  ProductScr(this.back);
 
   @override
   _ProductScrState createState() => _ProductScrState();
 }
 
 List<AllProducts> list = [];
-int sizelist=0;
+int sizelist = 0;
 bool getprodect = true;
 int limit = 10;
 String token;
@@ -35,6 +35,7 @@ class _ProductScrState extends State<ProductScr> {
   final box = GetStorage();
   ScrollController _scrollController;
   String service_type = '0';
+  String f = "";
   @override
   void initState() {
     super.initState();
@@ -46,149 +47,165 @@ class _ProductScrState extends State<ProductScr> {
     print('oooooooooooooooooooooooooooooooo');
     print(token);
     print('oooooooooooooooooooooooooooooooo');
-
   }
 
   @override
   Widget build(BuildContext context) {
     var high = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
- 
 
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-          drawer: Mydrawer(),// mydrawer(context),
-          appBar: AppBar(actions: [GestureDetector( onTap: widget.back,child: Icon(Icons.arrow_forward_outlined),)],
+          drawer: Mydrawer(), // mydrawer(context),
+          appBar: AppBar(
+            actions: [
+              GestureDetector(
+                onTap: widget.back,
+                child: Icon(Icons.arrow_forward_outlined),
+              )
+            ],
             centerTitle: true,
             title: Text('المنتجات',
                 style: TextStyle(
                     fontFamily: 'Arbf', color: Colors.white, fontSize: 18)),
           ),
           body: Column(
-            children: [SizedBox(height: 10,),
-      service_type!=0?
-      Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
-        GestureDetector(
-        onTap: ()async {
-
-
-
-
-          final value = await Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => AddNewProdect(context)),
-
-          );
-          setState(() {
-
-          });
-
-
-          // Get.to(
-          //   AddNewProdect(context),
-          //   transition: Transition.cupertino,
-          // );
-        },
-        child: Container(
-            height: high * .05,
-            width: width * 0.35,
-            child: Center(
-              child: Text('اضافه منتج جديد',
-                  style: TextStyle(
-                      fontFamily: 'Arbf',
-                      color: Colors.white,
-                      fontSize: 18)),
-            ),
-            decoration: BoxDecoration(
-                color: hexToColor('#00abeb'),
-                gradient: new LinearGradient(
-                    colors: [
-                      Colors.red[100],
-                      Colors.red[900],
-                    ],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                    tileMode: TileMode.clamp),
-                borderRadius: BorderRadius.circular(5.0))),
-      ),
-        GestureDetector(
-          onTap: () {
-
-            Navigator.push(
-              context,
-              new MaterialPageRoute(
-                  builder: (context) =>
-                      MainSections( )),
-            );
-
-          },
-          child: Container(
-              height: high * .05,
-              width: width * 0.35,
-              child: Center(
-                child: Text('الاقسام الرئيسية',
-                    style: TextStyle(
-                        fontFamily: 'Arbf',
-                        color: Colors.white,
-                        fontSize: 18)),
+            children: [
+              SizedBox(
+                height: 10,
               ),
-              decoration: BoxDecoration(
-                  color: hexToColor('#00abeb'),
-                  gradient: new LinearGradient(
-                      colors: [
-                        Colors.red[100],
-                        Colors.red[900],
+              service_type != 0
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            final value = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AddNewProdect(context)),
+                            );
+                            setState(() {});
+
+                            // Get.to(
+                            //   AddNewProdect(context),
+                            //   transition: Transition.cupertino,
+                            // );
+                          },
+                          child: Container(
+                              height: high * .05,
+                              width: width * 0.35,
+                              child: Center(
+                                child: Text('اضافه منتج جديد',
+                                    style: TextStyle(
+                                        fontFamily: 'Arbf',
+                                        color: Colors.white,
+                                        fontSize: 18)),
+                              ),
+                              decoration: BoxDecoration(
+                                  color: hexToColor('#00abeb'),
+                                  gradient: new LinearGradient(
+                                      colors: [
+                                        Colors.red[100],
+                                        Colors.red[900],
+                                      ],
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                      tileMode: TileMode.clamp),
+                                  borderRadius: BorderRadius.circular(5.0))),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => MainSections()),
+                            );
+                          },
+                          child: Container(
+                              height: high * .05,
+                              width: width * 0.35,
+                              child: Center(
+                                child: Text('الاقسام الرئيسية',
+                                    style: TextStyle(
+                                        fontFamily: 'Arbf',
+                                        color: Colors.white,
+                                        fontSize: 18)),
+                              ),
+                              decoration: BoxDecoration(
+                                  color: hexToColor('#00abeb'),
+                                  gradient: new LinearGradient(
+                                      colors: [
+                                        Colors.red[100],
+                                        Colors.red[900],
+                                      ],
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                      tileMode: TileMode.clamp),
+                                  borderRadius: BorderRadius.circular(5.0))),
+                        ),
                       ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      tileMode: TileMode.clamp),
-                  borderRadius: BorderRadius.circular(5.0))),
-        ),],):
-      GestureDetector(
-                onTap: ()async {
+                    )
+                  : GestureDetector(
+                      onTap: () async {
+                        final value = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AddNewProdect(context)),
+                        );
+                        setState(() {});
 
-
-
-                  final value = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AddNewProdect(context)),
-
-                  );
-                  setState(() {
-
-                  });
-
-                  // Get.to(
-                  //   AddNewProdect(),
-                  //   transition: Transition.cupertino,
-                  // );
-                },
-                child: Container(
-                    height: high * .05,
-                    width: width * 0.5,
-                    child: Center(
-                      child: Text('اضافه منتج جديد',
-                          style: TextStyle(
-                              fontFamily: 'Arbf',
-                              color: Colors.white,
-                              fontSize: 18)),
+                        // Get.to(
+                        //   AddNewProdect(),
+                        //   transition: Transition.cupertino,
+                        // );
+                      },
+                      child: Container(
+                          height: high * .05,
+                          width: width * 0.5,
+                          child: Center(
+                            child: Text('اضافه منتج جديد',
+                                style: TextStyle(
+                                    fontFamily: 'Arbf',
+                                    color: Colors.white,
+                                    fontSize: 18)),
+                          ),
+                          decoration: BoxDecoration(
+                              color: hexToColor('#00abeb'),
+                              gradient: new LinearGradient(
+                                  colors: [
+                                    Colors.red[100],
+                                    Colors.red[900],
+                                  ],
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                  tileMode: TileMode.clamp),
+                              borderRadius: BorderRadius.circular(5.0))),
                     ),
-                    decoration: BoxDecoration(
-                        color: hexToColor('#00abeb'),
-                        gradient: new LinearGradient(
-                            colors: [
-                              Colors.red[100],
-                              Colors.red[900],
-                            ],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            tileMode: TileMode.clamp),
-                        borderRadius: BorderRadius.circular(5.0))),
+              SizedBox(
+                height: 10,
               ),
-              SizedBox(height: 10,),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white),
+                width: width * .9,
+                height: 50,
+                child: TextField(  onChanged: (v) {
+                  f = v;
+                  setState(() {});
+                },
+
+                  decoration: InputDecoration( border: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  errorBorder: InputBorder.none,
+                  disabledBorder: InputBorder.none,prefixIcon: Icon(Icons.search)),),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               Expanded(
                   flex: 1,
                   child: StreamBuilder(
@@ -199,42 +216,66 @@ class _ProductScrState extends State<ProductScr> {
                               page_number: 0.toString())
                           .asStream(),
                       builder: (context, snapdata) {
-
                         if (snapdata.hasData) {
-                         
                           Get_all_products_JSON data =
-                          Get_all_products_JSON.fromJson(
-                              json.decode(snapdata.data.body));
-                          sizelist=data.result.allProducts.length;
+                              Get_all_products_JSON.fromJson(
+                                  json.decode(snapdata.data.body));
+                          sizelist = data.result.allProducts.length;
+                          List<AllProducts>listt=data.result.allProducts;
+                          List<AllProducts> datash = [];
+
+                          listt.forEach((element) {
+                            if (element.productName.contains(f)) {
+                              datash.add(element);
+                            }
+                          });
                           return ListView.builder(
-                              itemCount: data.result.allProducts.length,controller: _scrollController,
+                              itemCount: f
+                                  .trim()
+                                  .isEmpty
+                                  ?  data.result.allProducts.length
+                                  : datash.length,
+                              controller: _scrollController,
                               itemBuilder: (context, pos) {
                                 return productListItem(
-                                    high: high,offer: false,
-                                    data: data.result.allProducts[pos],
+                                    high: high,
+                                    offer: false,
+                                    data:f
+                                        .trim()
+                                        .isEmpty
+                                        ?  listt[pos]:datash[pos],
                                     fun: () async {
                                       getprodect = true;
                                       setState(() {});
                                       _allNetworking
                                           .delete_product(
                                               token_id: token,
-                                              product_id:data.result.allProducts[pos].productId)
-                                          .then((value) {
-                                       // var v = json.decode(value.body);
+                                              product_id:
+                                              f
+                                                  .trim()
+                                                  .isEmpty
+                                                  ?  listt[pos].productId:datash[pos].productId,
 
-                                          setState(() {});
-                                        }
-                                      );
+                                               )
+                                          .then((value) {
+                                        // var v = json.decode(value.body);
+
+                                        setState(() {});
+                                      });
                                     },
                                     funedit: () {
-                                      print(data.result.allProducts[pos].productId);
+                                      print(data
+                                          .result.allProducts[pos].productId);
 
                                       Navigator.push(
                                         context,
                                         new MaterialPageRoute(
                                             builder: (context) => EditProduct(
-                                                  proid: int.parse(
-                                                      data.result.allProducts[pos].productId),
+                                                  proid: int.parse(  f
+                                                      .trim()
+                                                      .isEmpty
+                                                      ?  listt[pos].productId:datash[pos].productId,
+                                                  ),
                                                   token: token,
                                                 )),
                                       );
@@ -255,14 +296,9 @@ class _ProductScrState extends State<ProductScr> {
     if (_scrollController.offset >=
             _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
-
       if (sizelist > 8) {
-
-
         limit = limit + 20;
-        setState(() {
-
-        });
+        setState(() {});
         // getallp(
         //     limit: limit.toString().toString(),
         //     page_number: 0.toString(),
