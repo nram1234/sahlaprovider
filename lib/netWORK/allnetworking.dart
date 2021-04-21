@@ -203,8 +203,8 @@ class AllNetworking {
 
 
 
-      "token_id": stock,
-      "title": serial_number,
+      "stock": stock,
+      "serial_number": serial_number,
 
 
       // "mode": "formdata",
