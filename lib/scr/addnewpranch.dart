@@ -111,7 +111,7 @@ bool svaedata=false;
                     children: [
                       GestureDetector(
                         onTap: () async {
-                          var image = await ImagePicker.platform.pickImage(
+                          var image = await ImagePicker.pickImage(
                               source: ImageSource.gallery,
                               maxHeight: 1000,
                               maxWidth: 1000,

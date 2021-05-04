@@ -20,6 +20,7 @@ class Product_By_Category extends StatefulWidget {
 
 class _Product_By_CategoryState extends State<Product_By_Category> {
   List<AllProducts> list = [];
+
   int sizelist=0;
   bool getprodect = true;
   int limit = 10;
@@ -29,6 +30,7 @@ class _Product_By_CategoryState extends State<Product_By_Category> {
   final box = GetStorage();
   ScrollController _scrollController;
   String service_type = '0';
+  String f = "";
   @override
   void initState() {
     super.initState();
@@ -102,7 +104,29 @@ class _Product_By_CategoryState extends State<Product_By_Category> {
                         tileMode: TileMode.clamp),
                     borderRadius: BorderRadius.circular(40.0))),
           )
-              ,
+              ,   SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white),
+                width: width * .9,
+                height: 50,
+                child: TextField(  onChanged: (v) {
+                  f = v;
+                  setState(() {});
+                },
+
+                  decoration: InputDecoration( border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,prefixIcon: Icon(Icons.search)),),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               SizedBox(height: 10,),    Expanded(
                   flex: 1,
                   child: StreamBuilder<Get_all_products_cat_json>(
@@ -118,12 +142,26 @@ class _Product_By_CategoryState extends State<Product_By_Category> {
 
 
                           sizelist=snapdata.data.result.allProducts.length;
+
+                          List<AllProducts>listt=snapdata.data.result.allProducts;
+                          List<AllProducts> datash = [];
+                          listt.forEach((element) {
+                            if (element.serialNumber.contains(f)) {
+                              datash.add(element);
+                            }
+                          });
                           return ListView.builder(
-                              itemCount: snapdata.data.result.allProducts.length,controller: _scrollController,
+                              itemCount: f
+                                  .trim()
+                                  .isEmpty
+                                  ?snapdata.data.result.allProducts.length:datash.length,controller: _scrollController,
                               itemBuilder: (context, pos) {
                                 return productListItem(
                                     high: high,offer: false,
-                                    data:snapdata.data.result.allProducts[pos],
+                                    data:f
+                                        .trim()
+                                        .isEmpty
+                                        ? snapdata.data.result.allProducts[pos]:datash[pos],
                                     fun: () async {
                                       getprodect = true;
                                       setState(() {});
@@ -189,6 +227,11 @@ class _Product_By_CategoryState extends State<Product_By_Category> {
 
 
   Widget productListItem({high, AllProducts data,fun ,funedit,bool offer}) {
+    print("000000000000000000000000000000000");
+print(data.stock);
+print(data.serialNumber);
+print("000000000000000000000000000000000");
+
 
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -196,12 +239,12 @@ class _Product_By_CategoryState extends State<Product_By_Category> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            height: high * .17,
+            height: high * .2,
             child: Stack(
               children: [
                 Positioned(
                     top: 2,
-                    right: 2,
+                    left: 2,
                     child: Container(child: Image.network(data.productImage,fit: BoxFit.fill,),
                       width: high * .12,
                       height: high * .12,
@@ -209,18 +252,18 @@ class _Product_By_CategoryState extends State<Product_By_Category> {
                     )),
                 Positioned(
                     top: 2,
-                    left: 5,
+                    right:2,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          data.productName,
+                          "الاسم عربي  : "+ data.productName,
                           style: TextStyle(
                               fontFamily: 'Arbf',
                               color: Colors.red,fontWeight: FontWeight.bold ),
                         ),
                         Text(
-                          data.productNameEn,
+                          "الاسم انجليزي  : "+data.productNameEn,
                           style: TextStyle(
                               fontFamily: 'Arbf',
                               color: Colors.red,fontWeight: FontWeight.bold),
@@ -233,13 +276,24 @@ class _Product_By_CategoryState extends State<Product_By_Category> {
                         //       fontSize: 16),
                         // ),
                         data.newPrice.trim().isEmpty?SizedBox() : Text(
-                          ' السعر   ' +data.newPrice,
+                          'السعر  : ' +data.newPrice,
                           style: TextStyle(
                               fontFamily: 'Arbf',
-                              color: Colors.black,
+                              color: Colors.red,
                               fontSize: 16),
                         ),
-
+                        Text(
+                         "الرقم الكودي  : "+ data.serialNumber??"",
+                          style: TextStyle(
+                              fontFamily: 'Arbf',
+                              color: Colors.red,fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                         "المخزن : "+ data.stock??"",
+                          style: TextStyle(
+                              fontFamily: 'Arbf',
+                              color: Colors.red,fontWeight: FontWeight.bold),
+                        ),
                         Row(
                           children: [
                             InkWell( child: Icon(Icons.delete,color: Colors.amber,),onTap: fun,),SizedBox(width: 8,)

@@ -84,7 +84,7 @@ bool uplodpic=false;
                               snapshot.data.result.allImages.length
                           ? Null
                           : () async {
-                              var image = await ImagePicker.platform.pickImage(
+                              var image = await ImagePicker.pickImage(
                                   source: ImageSource.gallery,
                                   maxHeight: 1000,
                                   maxWidth: 1000,

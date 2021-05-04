@@ -225,7 +225,7 @@ class _ProductScrState extends State<ProductScr> {
                           List<AllProducts> datash = [];
 
                           listt.forEach((element) {
-                            if (element.productName.contains(f)) {
+                            if (element.serialNumber.contains(f)) {
                               datash.add(element);
                             }
                           });

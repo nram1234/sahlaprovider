@@ -67,7 +67,7 @@ class _AddNewProdectNEWState extends State<AddNewProdectNEW> {
                           fontSize: 20)),
                   GestureDetector(
                     onTap: () async {
-                      var image = await ImagePicker.platform.pickImage(
+                      var image = await ImagePicker.pickImage(
                           source: ImageSource.gallery,
                           maxHeight: 200,
                           maxWidth: 200,

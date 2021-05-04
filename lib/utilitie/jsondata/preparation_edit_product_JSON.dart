@@ -59,33 +59,24 @@ class AllProducts {
   String productId;
   String newPrice;
   String oldPrice;
-
+  String catName;
   String stock;
-  String serial_number;
-
-
+  String serialNumber;
 
   AllProducts(
       {this.productImage,
-        this.productName,    this.stock,
-
-        this.serial_number,
-
-
+        this.productName,
         this.productNameEn,
         this.productDescription,
         this.productDescriptionEn,
         this.productId,
         this.newPrice,
-        this.oldPrice});
+        this.oldPrice,
+        this.catName,
+        this.stock,
+        this.serialNumber});
 
   AllProducts.fromJson(Map<String, dynamic> json) {
-    stock = json['stock'];
-    serial_number = json['serial_number'];
-
-
-
-
     productImage = json['product_image'];
     productName = json['product_name'];
     productNameEn = json['product_name_en'];
@@ -94,17 +85,13 @@ class AllProducts {
     productId = json['product_id'];
     newPrice = json['new_price'];
     oldPrice = json['old_price'];
+    catName = json['cat_name'];
+    stock = json['stock'];
+    serialNumber = json['serial_number'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-
-
-    data['serial_number'] = this.serial_number;
-    data['stock'] = this.stock;
-
-
-
     data['product_image'] = this.productImage;
     data['product_name'] = this.productName;
     data['product_name_en'] = this.productNameEn;
@@ -113,6 +100,9 @@ class AllProducts {
     data['product_id'] = this.productId;
     data['new_price'] = this.newPrice;
     data['old_price'] = this.oldPrice;
+    data['cat_name'] = this.catName;
+    data['stock'] = this.stock;
+    data['serial_number'] = this.serialNumber;
     return data;
   }
 }

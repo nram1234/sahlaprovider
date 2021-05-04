@@ -94,7 +94,7 @@ class _Edit_CategoryState extends State<Edit_Category> {
                                     fontSize: 20)),
                             InkWell(
                               onTap: () async {
-                                var image = await ImagePicker.platform
+                                var image = await ImagePicker
                                     .pickImage(
                                     source: ImageSource.gallery,
                                     maxHeight: 200,

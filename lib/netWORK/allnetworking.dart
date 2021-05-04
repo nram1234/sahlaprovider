@@ -7,6 +7,7 @@ import 'package:sahlaprovider/utilitie/jsondata/check_coupon_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/create_coupon_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/delete_pharamices_image_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/galler_jason.dart';
+import 'package:sahlaprovider/utilitie/jsondata/get_Future_Orders_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_branches_JSON.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_category_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/get_all_order_json.dart';
@@ -2428,5 +2429,35 @@ print( response.data);
 
     return data;
   }
+
+
+
+
+
+
+
+  Future<Get_Future_Orders_json> get_future_orders({
+    @required String token_id,
+  }) async {
+    Get_Future_Orders_json data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+    });
+
+    await dio
+        .post(
+      paseurl + '/provider/get_future_orders',
+      data: formData,
+    )
+        .then((value) {
+      print(value.data);
+      data = Get_Future_Orders_json.fromJson(value.data);
+    });
+
+    return data;
+  }
+
 
 }

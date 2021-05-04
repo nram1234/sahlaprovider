@@ -170,7 +170,7 @@ class _EditPranchState extends State<EditPranch> {
                             children: [
                               GestureDetector(
                                 onTap: () async {
-                                  var image = await ImagePicker.platform
+                                  var image = await ImagePicker
                                       .pickImage(
                                       source: ImageSource.gallery,
                                       maxHeight: 200,
@@ -192,7 +192,7 @@ class _EditPranchState extends State<EditPranch> {
 
                               InkWell(
                                 onTap: () async {
-                                  var image = await ImagePicker.platform
+                                  var image = await ImagePicker
                                       .pickImage(
                                       source: ImageSource.gallery,
                                       maxHeight: 200,

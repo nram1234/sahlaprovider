@@ -1,4 +1,6 @@
 
+
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +10,7 @@ import 'package:sahlaprovider/scr/login.dart';
 import 'package:sahlaprovider/scr/splashSCR.dart';
 import 'Translation/Trans.dart';
 import 'myWidget/testthemap.dart';
+import 'netWORK/allnetworking.dart';
 import 'scr/QRread.dart';
 import 'scr/branch.dart';
 import 'scr/homePage.dart';
@@ -16,10 +19,14 @@ import 'scr/statistics.dart';
 import 'utilitie/hexToColorِConvert.dart';
 
 void main()async {
-  WidgetsFlutterBinding.ensureInitialized();
+    WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();
+  await AndroidAlarmManager.initialize();
   runApp(MyApp());
+
+
+
 }
 
 class MyApp extends StatelessWidget {
@@ -30,8 +37,7 @@ class MyApp extends StatelessWidget {
     final box = GetStorage();
     String token=  box.read(
         'token' );
-    print('000000000000000000000000000000000000000000000000000000000');
-    print(token);
+
     return GetMaterialApp(
         locale: LocalizationService.locale,
         translations: LocalizationService(),
@@ -79,4 +85,8 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
+
 }
+
+

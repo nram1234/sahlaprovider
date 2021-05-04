@@ -30,6 +30,7 @@ import 'buy_prescription_request.dart';
 import 'doc_profile.dart';
 import 'get_all_orderSCr.dart';
 import 'get_all_visitor_pointsSCR.dart';
+import 'get_future_orders.dart';
 import 'get_list_reservation.dart';
 
 import 'get_list_wedding_reservation.dart';
@@ -71,9 +72,7 @@ class _StatisticssState extends State<Statisticss> {
 
   @override
   Widget build(BuildContext context) {
-    print('0000000000000000000000000000000000000000000000');
-    print(service_type);
-    print('0000000000000000000000000000000000000000000000');
+
     final high = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
@@ -639,7 +638,29 @@ class _StatisticssState extends State<Statisticss> {
                                             name: "طلبات")),
                                   )
                                 : SizedBox(),
-
+                            service_type == '1'?Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 8.0, bottom: 8.0),
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Get_Future_Orders(
+                                               )),
+                                    );
+                                  },
+                                  child: item_home_list(
+                                      icon:
+                                      'assets/images/scoreboard.png',
+                                      keyupdata: 0,
+                                      dat: false,
+                                      number: data.totalPoints
+                                          .toString(),
+                                      width: width,
+                                      name: "طلبات مؤجلة")),
+                            ):SizedBox(),
                             service_type == '3' || service_type == '4'
                                 ? Padding(
                                     padding: const EdgeInsets.only(

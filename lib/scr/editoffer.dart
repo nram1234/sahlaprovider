@@ -106,7 +106,7 @@ class _EditOfferState extends State<EditOffer> {
                                     fontSize: 20)),
                             InkWell(
                               onTap: () async {
-                                var image = await ImagePicker.platform
+                                var image = await ImagePicker
                                     .pickImage(
                                         source: ImageSource.gallery,
                                         maxHeight: 200,

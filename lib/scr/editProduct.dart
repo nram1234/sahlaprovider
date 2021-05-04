@@ -32,44 +32,47 @@ class _EditProductState extends State<EditProduct> {
   TextEditingController theoldprice = TextEditingController();
   TextEditingController thenewprice = TextEditingController();
 
-
   TextEditingController theserial_number = TextEditingController();
   TextEditingController thestock = TextEditingController();
 
-
-
   File _image;
   bool savedata = false;
+
   @override
   void dispose() {
     v.despoos();
     super.dispose();
   }
+
   String service_type = '0';
   String token;
   CategoryList _categoryList;
-  List<CategoryList>categoryList = [];
-  bool getcategoryList=true;
+
+  CategoryList _categoryListfromprper;
+  List<CategoryList> categoryList = [];
+  bool getcategoryList = true;
+
   @override
-  void initState() {token = box.read('token');
-  service_type = box.read('service_type');
-  _allNetworking.preparation_addproduct(token_id: token).then((value){
-    for(int i=0;i<value.result.categoryList.length;i++){
+  void initState() {
+    token = box.read('token');
+    service_type = box.read('service_type');
+    _allNetworking.preparation_addproduct(token_id: token).then((value) {
+      for (int i = 0; i < value.result.categoryList.length; i++) {
+        categoryList.add(value.result.categoryList[i]);
+      }
 
-      categoryList.add( value.result.categoryList[i]);
-    }
-
-    getcategoryList=false;
-    setState(() {
-
+      getcategoryList = false;
+      setState(() {});
     });
-
-  });
   }
-
 
   @override
   Widget build(BuildContext context) {
+    print("     ooooooooooooooooooooooooooooowidget.proid");
+    print(widget.token);
+    print(widget.proid);
+    print("     ooooooooooooooooooooooooooooowidget.proid");
+
     var high = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
@@ -103,12 +106,19 @@ class _EditProductState extends State<EditProduct> {
                       snapshot.data.result.allProducts[0].newPrice ?? ' ';
 
                   theserial_number.text =
-                      snapshot.data.result.allProducts[0].serial_number;
+                      snapshot.data.result.allProducts[0].serialNumber;
                   print('snapshot.data.result.allProducts[0].stock ');
-                  print(snapshot.data.result.allProducts[0].serial_number);
+                  print(snapshot.data.result.allProducts[0].serialNumber);
                   print(theserial_number.text);
-                  thestock.text =
-                      snapshot.data.result.allProducts[0].stock  ;
+                  thestock.text = snapshot.data.result.allProducts[0].stock;
+                  //var v=snapshot.data.result.allProducts[0].catName;
+
+                  categoryList.forEach((element) {
+                    if (element.categoryName ==
+                        snapshot.data.result.allProducts[0].catName) {
+                      _categoryListfromprper = element;
+                    }
+                  });
 
                   return Padding(
                     padding:
@@ -128,7 +138,7 @@ class _EditProductState extends State<EditProduct> {
                                     fontSize: 20)),
                             InkWell(
                               onTap: () async {
-                                var image = await ImagePicker.platform
+                                var image = await ImagePicker
                                     .pickImage(
                                         source: ImageSource.gallery,
                                         maxHeight: 200,
@@ -172,13 +182,13 @@ class _EditProductState extends State<EditProduct> {
                           decoration: InputDecoration(
                             labelText: 'اسم المنتج',
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.red, width: 2),
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 2),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.red, width: 2),
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 2),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
@@ -202,13 +212,13 @@ class _EditProductState extends State<EditProduct> {
                           decoration: InputDecoration(
                             labelText: 'Product name',
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.red, width: 2),
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 2),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.red, width: 2),
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 2),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
@@ -232,13 +242,13 @@ class _EditProductState extends State<EditProduct> {
                           decoration: InputDecoration(
                             labelText: 'ﻭﺻﻒ ﺍﻟﻤﻨﺘﺞ',
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.red, width: 2),
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 2),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.red, width: 2),
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 2),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
@@ -262,13 +272,13 @@ class _EditProductState extends State<EditProduct> {
                           decoration: InputDecoration(
                             labelText: 'Details',
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.red, width: 2),
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 2),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.red, width: 2),
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 2),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
@@ -311,7 +321,8 @@ class _EditProductState extends State<EditProduct> {
                           height: high * .02,
                         ),
                         TextFormField(
-                          controller: thenewprice,keyboardType: TextInputType.number,
+                          controller: thenewprice,
+                          keyboardType: TextInputType.number,
                           onChanged: (s) {},
                           textAlign: TextAlign.right,
                           maxLines: null,
@@ -322,13 +333,13 @@ class _EditProductState extends State<EditProduct> {
                           decoration: InputDecoration(
                             labelText: 'ﺍﻟﺴﻌﺮ',
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.red, width: 2),
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 2),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.red, width: 2),
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 2),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
@@ -340,8 +351,6 @@ class _EditProductState extends State<EditProduct> {
                         SizedBox(
                           height: high * .02,
                         ),
-
-
 
                         TextFormField(
                           controller: theserial_number,
@@ -355,13 +364,13 @@ class _EditProductState extends State<EditProduct> {
                           decoration: InputDecoration(
                             labelText: 'الرقم التسلسلي',
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.red, width: 2),
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 2),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.red, width: 2),
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 2),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
@@ -373,9 +382,6 @@ class _EditProductState extends State<EditProduct> {
                         SizedBox(
                           height: high * .02,
                         ),
-
-
-
 
                         TextFormField(
                           controller: thestock,
@@ -389,13 +395,13 @@ class _EditProductState extends State<EditProduct> {
                           decoration: InputDecoration(
                             labelText: 'المخزن',
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.red, width: 2),
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 2),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.red, width: 2),
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 2),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             hintStyle: TextStyle(
@@ -408,59 +414,58 @@ class _EditProductState extends State<EditProduct> {
                           height: high * .02,
                         ),
 
-
-
-
-
-
-
-
                         service_type == '0'
                             ? SizedBox()
-                            :getcategoryList?CircularProgressIndicator(): Container(
-                          decoration: BoxDecoration(
-                            border: Border.all( color: Colors.red ),
-                            borderRadius: BorderRadius.all(Radius.circular(
-                                5.0) //         <--- border radius here
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text('القسم'),
-                              ),
-                              SizedBox(
-                                width: 16,
-                              ),
-                              DropdownButton<CategoryList>(
-                                value: _categoryList,
-                                //  hint: Text(hintcety),
-                                icon: Icon(Icons.arrow_downward),
-                                iconSize: 24,
-                                elevation: 16,
-                                style: TextStyle(color: Colors.deepPurple),
-                                underline: Container(
-                                  height: 2,
-                                  color: Colors.deepPurpleAccent,
-                                ),
-                                onChanged: (CategoryList newValue) {
-                                  setState(() {
-                                    _categoryList = newValue;
-                                  });
-                                },
-                                items: categoryList
-                                    .map<DropdownMenuItem<CategoryList>>(
-                                        (CategoryList value) {
-                                      return DropdownMenuItem<CategoryList>(
-                                        value: value,
-                                        child: Text(value.categoryName),
-                                      );
-                                    }).toList(),
-                              ),
-                            ],
-                          ),
-                        ),
+                            : getcategoryList
+                                ? CircularProgressIndicator()
+                                : Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.red),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                              5.0) //         <--- border radius here
+                                          ),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text('القسم'),
+                                        ),
+                                        SizedBox(
+                                          width: 16,
+                                        ),
+                                        DropdownButton<CategoryList>(
+                                          value: _categoryList,
+                                          //  hint: Text(hintcety),
+                                          icon: Icon(Icons.arrow_downward),
+                                          iconSize: 24,
+                                          elevation: 16,
+                                          style: TextStyle(
+                                              color: Colors.deepPurple),
+                                          underline: Container(
+                                            height: 2,
+                                            color: Colors.deepPurpleAccent,
+                                          ),
+                                          onChanged: (CategoryList newValue) {
+                                            setState(() {
+                                              _categoryList = newValue;
+                                            });
+                                          },
+                                          items: categoryList.map<
+                                                  DropdownMenuItem<
+                                                      CategoryList>>(
+                                              (CategoryList value) {
+                                            return DropdownMenuItem<
+                                                CategoryList>(
+                                              value: value,
+                                              child: Text(value.categoryName),
+                                            );
+                                          }).toList(),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                         SizedBox(
                           height: high * .02,
                         ),
@@ -474,20 +479,22 @@ class _EditProductState extends State<EditProduct> {
                                 onTap: () {
                                   print('0000000000000000000000000000000');
                                   savedata = true;
-                                  setState(() {
-
-                                  });
+                                  setState(() {});
                                   String token = box.read('token');
                                   _allNetworking
                                       .edit_product(
                                           token_id: token,
-                                          title: pronamear.text,stock: thestock.text,serial_number: theserial_number.text,
-                                          id_product: widget.proid,
-                                          title_en: pronameen.text,
-                                          current_price: thenewprice.text,
-                                          old_price:'',// theoldprice.text,
-                                          description_ar: detailsar.text,
-                                          description_en: detailsen.text,cat_id: _categoryList.categoryId ,
+                                          title: pronamear.text??"",
+                                          stock: thestock.text??"",
+                                          serial_number: theserial_number.text??"",
+                                          id_product: widget.proid??"",
+                                          title_en: pronameen.text??"",
+                                          current_price: thenewprice.text??"",
+                                          old_price: '',
+                                          // theoldprice.text,
+                                          description_ar: detailsar.text??"",
+                                          description_en: detailsen.text??"",
+                                          cat_id: _categoryList==null?_categoryListfromprper.categoryId:_categoryList.categoryId,
                                           file: _image)
                                       .then((value) {
                                     print(value.data);
@@ -497,7 +504,7 @@ class _EditProductState extends State<EditProduct> {
                                     setState(() {});
                                     Get.dialog(
                                       AlertDialog(
-                                        title: Text( ''),
+                                        title: Text(''),
                                         content: Text("تم التعديل"),
                                         actions: <Widget>[
                                           FlatButton(
@@ -509,7 +516,8 @@ class _EditProductState extends State<EditProduct> {
                                         ],
                                       ),
                                       barrierDismissible: false,
-                                    );});
+                                    );
+                                  });
                                 },
                                 child: Container(
                                     height: high * .1,

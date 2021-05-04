@@ -11,12 +11,12 @@ Widget productListItem({high, AllProducts data,fun ,funedit,bool offer}) {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-           height: high * .17,
+           height: high * .2,
           child: Stack(
             children: [
               Positioned(
                   top: 2,
-                  right: 2,
+                  left: 2,
                   child: Container(child: Image.network(data.productImage,fit: BoxFit.fill,),
                     width: high * .12,
                     height: high * .12,
@@ -24,18 +24,18 @@ Widget productListItem({high, AllProducts data,fun ,funedit,bool offer}) {
                   )),
               Positioned(
                   top: 2,
-                  left: 5,
+                  right:  2,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        data.productName,
+                        "الاسم عربي  : "+     data.productName,
                         style: TextStyle(
                             fontFamily: 'Arbf',
                              color: Colors.red,fontWeight: FontWeight.bold ),
                       ),
                       Text(
-                        data.productNameEn,
+                        "الاسم انجليزي  : "+  data.productNameEn,
                         style: TextStyle(
                             fontFamily: 'Arbf',
                             color: Colors.red,fontWeight: FontWeight.bold),
@@ -48,13 +48,23 @@ Widget productListItem({high, AllProducts data,fun ,funedit,bool offer}) {
                       //       fontSize: 16),
                       // ),
                       data.newPrice.trim().isEmpty?SizedBox() : Text(
-                        ' السعر   ' +data.newPrice,
+                        'السعر  : ' +data.newPrice,
                         style: TextStyle(
                             fontFamily: 'Arbf',
-                            color: Colors.black,
+                            color: Colors.red,
                             fontSize: 16),
                       ),
-
+                      Text(
+                        "الرقم الكودي  : "+   data.serialNumber,
+                        style: TextStyle(
+                            fontFamily: 'Arbf',
+                            color: Colors.red,fontWeight: FontWeight.bold),
+                      ), Text(
+                        "المخزن : "+  data.stock,
+                        style: TextStyle(
+                            fontFamily: 'Arbf',
+                            color: Colors.red,fontWeight: FontWeight.bold),
+                      ),
                       Row(
                         children: [
                           InkWell( child: Icon(Icons.delete,color: Colors.amber,),onTap: fun,),SizedBox(width: 8,)
