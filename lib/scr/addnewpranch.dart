@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -116,11 +117,7 @@ bool svaedata=false;
                               maxHeight: 1000,
                               maxWidth: 1000,
                               imageQuality: 100);
-                          setState(() {
-                            if (image != null) {
-                              _image = File(image.path);
-                            }
-                          });
+                          _cropImage(image);
                         },
                         child: Text('اضافة صورة المكان',
                             style: TextStyle(
@@ -473,5 +470,34 @@ bool svaedata=false;
             ),
           ),
         ));
+  }
+  Future<Null> _cropImage(image) async {
+    print('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp');
+    File croppedFile =
+    await ImageCropper.cropImage(
+        sourcePath: image.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9
+        ],
+        androidUiSettings: AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.deepOrange,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        iosUiSettings: IOSUiSettings(
+          minimumAspectRatio: 1.0,
+        )
+    );
+    if (croppedFile != null) {
+      _image = croppedFile;
+      setState(() {
+
+      });
+    }
   }
 }

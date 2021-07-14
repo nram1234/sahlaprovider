@@ -33,7 +33,7 @@ class Result {
 
   Result.fromJson(Map<String, dynamic> json) {
     if (json['all_requested'] != null) {
-      allRequested = new List<AllRequested>();
+      allRequested = <AllRequested>[];
       json['all_requested'].forEach((v) {
         allRequested.add(new AllRequested.fromJson(v));
       });
