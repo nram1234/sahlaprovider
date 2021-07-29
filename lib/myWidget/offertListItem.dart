@@ -11,7 +11,7 @@ Widget offertListItem({high, AllOffers data,fun ,funedit }) {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          height: high * .23,
+          height: high * .28,
           child: Stack(
             children: [
               Positioned(
