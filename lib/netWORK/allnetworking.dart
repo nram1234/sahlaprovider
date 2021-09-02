@@ -1556,6 +1556,7 @@ class AllNetworking {
   Future<Get_current_orders_json> get_current_orders({
     @required String token_id,
   }) async {
+
     Get_current_orders_json data;
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
@@ -1568,6 +1569,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
+          print('valuevalue     $value');
       data = Get_current_orders_json.fromJson(value.data);
     });
     //  print(data.result.contactInfo[0].);
@@ -1900,6 +1902,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
+          print(value.data);
       data = Get_list_reservation_json.fromJson(value.data);
     });
 

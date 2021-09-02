@@ -39,7 +39,9 @@ class _Get_current_ordersState extends State<Get_current_orders> {
                       .get_current_orders(token_id: token)
                       .asStream(),
                   builder: (context, snapshot) {
+                //    print('snapshotsnapshotsnapshotsnapshot   ${snapshot.data}');
                     if (snapshot.hasData) {
+
                       if (snapshot.data.result.allOrders.length > 0) {
                         return ListView.builder(
                             itemCount: snapshot.data.result.allOrders.length,

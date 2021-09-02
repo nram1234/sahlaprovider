@@ -52,6 +52,7 @@ class _OfferScrState extends State<OfferScr> {
   Widget build(BuildContext context) {
     var high = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(

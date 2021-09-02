@@ -59,6 +59,8 @@ class AllReservation {
   String view;
   String address;
   String userMakeReservationName;
+  String weddingSericesValue;
+  String weddingSericesPrice;
   String userMakeReservationPhone;
   String reservationDay;
   String fullname;
@@ -75,6 +77,8 @@ class AllReservation {
         this.view,
         this.address,
         this.userMakeReservationName,
+        this.weddingSericesValue,
+        this.weddingSericesPrice,
         this.userMakeReservationPhone,
         this.reservationDay,
         this.fullname,
@@ -91,6 +95,8 @@ class AllReservation {
     view = json['view'];
     address = json['address'];
     userMakeReservationName = json['user_make_reservation_name'];
+    weddingSericesValue = json['wedding_serices_value'];
+    weddingSericesPrice = json['wedding_serices_price'];
     userMakeReservationPhone = json['user_make_reservation_phone'];
     reservationDay = json['reservation_day'];
     fullname = json['fullname'];
@@ -109,6 +115,8 @@ class AllReservation {
     data['view'] = this.view;
     data['address'] = this.address;
     data['user_make_reservation_name'] = this.userMakeReservationName;
+    data['wedding_serices_value'] = this.weddingSericesValue;
+    data['wedding_serices_price'] = this.weddingSericesPrice;
     data['user_make_reservation_phone'] = this.userMakeReservationPhone;
     data['reservation_day'] = this.reservationDay;
     data['fullname'] = this.fullname;

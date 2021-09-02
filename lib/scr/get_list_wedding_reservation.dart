@@ -43,6 +43,8 @@ class _Get_list_wedding_reservationState
                   return ListView.builder(
                       itemCount: snapshot.data.result.allReservation.length,
                       itemBuilder: (context, pos) {
+                        print(snapshot.data.result.allReservation[pos]
+                            .weddingSericesValue);
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
@@ -89,7 +91,7 @@ class _Get_list_wedding_reservationState
                                 ),
                                 Text(snapshot.data.result.allReservation[pos]
                                             .reservationType ==
-                                        "1"
+                                        "0"
                                     ? "حجز من داخل التطبيق"
                                     : "حجز من خارج التطبيق"),
                                 Row(
@@ -272,6 +274,41 @@ class _Get_list_wedding_reservationState
                                 ),
                                 Row(
                                   mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 16, right: 16),
+                                      child: Text(
+                                        'التكلفة : ',
+                                        style: TextStyle(color: Colors.red),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 16, right: 16),
+                                      child: Text(snapshot.data.result
+                                          .allReservation[pos].weddingSericesPrice),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Center(
+                                  child: Text(
+                                    "تفاصيل الحجز",
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                                Container(
+                                    child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Text(snapshot.data.result
+                                      .allReservation[pos].weddingSericesValue),
+                                )),
+                                Row(
+                                  mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     snapshot.data.result.allReservation[pos]
@@ -328,6 +365,7 @@ class _Get_list_wedding_reservationState
                                     ),
                                   ],
                                 ),
+                                //     ExpansionTile(title: Text('تفاصيل'),)
                               ],
                             ),
                           ),

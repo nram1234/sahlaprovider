@@ -490,7 +490,7 @@ print(start_date);
     );
   }
   Future<Null> _cropImage(image) async {
-    print('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp');
+
     File croppedFile =
     await ImageCropper.cropImage(
         sourcePath: image.path,
