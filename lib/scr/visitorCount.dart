@@ -103,7 +103,7 @@ class _VisitorCountState extends State<VisitorCount> {
                                     title: Text('ارسل تنبيه'),
                                     content: Container(
                                       width: size.width * .8,
-                                      height: 300,
+                                      height: size.height*.4,
                                       padding:
                                       EdgeInsets.all(8),
                                       decoration:
@@ -147,9 +147,7 @@ class _VisitorCountState extends State<VisitorCount> {
                                                   'العنوان'),
                                             ),
                                           ),
-                                          Expanded(
-                                              child:
-                                              Container()),
+
                                           Container(
                                             decoration:
                                             BoxDecoration(
@@ -166,7 +164,7 @@ class _VisitorCountState extends State<VisitorCount> {
                                             ),
                                             child: TextField(
                                               controller: contant,
-                                              maxLines: 5,
+                                              maxLines:3,
                                               decoration: InputDecoration(
                                                   focusedBorder:
                                                   InputBorder
@@ -259,7 +257,7 @@ class _VisitorCountState extends State<VisitorCount> {
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Column(
+                                      child: Column(mainAxisSize: MainAxisSize.min,
                                         mainAxisAlignment:
                                         MainAxisAlignment.start,
                                         crossAxisAlignment:
@@ -290,7 +288,7 @@ class _VisitorCountState extends State<VisitorCount> {
                                                           content: Container(
                                                             width: size.width *
                                                                 .8,
-                                                            height: 300,
+
                                                             padding:
                                                             EdgeInsets.all(8),
                                                             decoration:
@@ -337,9 +335,7 @@ class _VisitorCountState extends State<VisitorCount> {
                                                                         'العنوان'),
                                                                   ),
                                                                 ),
-                                                                Expanded(
-                                                                    child:
-                                                                    Container()),
+
                                                                 Container(
                                                                   decoration:
                                                                   BoxDecoration(
@@ -356,7 +352,7 @@ class _VisitorCountState extends State<VisitorCount> {
                                                                   ),
                                                                   child: TextField(
                                                                     controller: contant,
-                                                                    maxLines: 5,
+                                                                    maxLines: 3,
                                                                     decoration: InputDecoration(
                                                                         focusedBorder:
                                                                         InputBorder
@@ -386,13 +382,15 @@ class _VisitorCountState extends State<VisitorCount> {
                                                                       child: new Text(
                                                                           "ارسال"),
                                                                       onPressed: () {
+                                                                        print(snapshot
+                                                                            .data.result.allVisitoe[pos].userId);
                                                                         _allNetworking
                                                                             .sending_notifaction(
                                                                             token_id:token,
                                                                             title: addres.text,
                                                                             content: contant.text,
                                                                             id_user:snapshot
-                                                                                .data.result.allVisitoe[pos].visitorId,
+                                                                                .data.result.allVisitoe[pos].userId,
                                                                             key_type: 0).then((value) {
                                                                               addres.clear();
                                                                               contant.clear();

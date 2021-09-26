@@ -142,8 +142,8 @@ class _EditProductState extends State<EditProduct> {
                                 var image = await ImagePicker
                                     .pickImage(
                                         source: ImageSource.gallery,
-                                        maxHeight: 200,
-                                        maxWidth: 200,
+                                        maxHeight: 1500,
+                                        maxWidth: 1200,
                                         imageQuality: 100);
                                 _cropImage(image);
                               },

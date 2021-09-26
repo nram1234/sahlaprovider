@@ -59,11 +59,12 @@ class _EditOfferState extends State<EditOffer> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-          appBar: AppBar(actions: [GestureDetector(
-            onTap: () {
-              Navigator.pop(context, false);
-            }, child: Icon(Icons.arrow_forward_outlined),)
-          ],
+          appBar: AppBar(
+          //   actions: [GestureDetector(
+          //   onTap: () {
+          //     Navigator.pop(context, false);
+          //   }, child: Icon(Icons.arrow_forward_outlined),)
+          // ],
             centerTitle: true,
             title: Text('تعديل العرض ',
                 style: TextStyle(
@@ -110,8 +111,8 @@ class _EditOfferState extends State<EditOffer> {
                                 var image = await ImagePicker
                                     .pickImage(
                                         source: ImageSource.gallery,
-                                        maxHeight: 200,
-                                        maxWidth: 200,
+                                        maxHeight: 1500,
+                                        maxWidth: 1200,
                                         imageQuality: 100);
                                 _cropImage(image);
                               },

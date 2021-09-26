@@ -58,15 +58,21 @@ class AllVisitoe {
   String totalCountVisit;
   String userPhone;
   String visitorId;
+  String userId;
 
   AllVisitoe(
-      {this.userName, this.totalCountVisit, this.userPhone, this.visitorId});
+      {this.userName,
+        this.totalCountVisit,
+        this.userPhone,
+        this.visitorId,
+        this.userId});
 
   AllVisitoe.fromJson(Map<String, dynamic> json) {
     userName = json['user_name'];
     totalCountVisit = json['total_count_visit'];
     userPhone = json['user_phone'];
     visitorId = json['visitor_id'];
+    userId = json['user_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -75,6 +81,7 @@ class AllVisitoe {
     data['total_count_visit'] = this.totalCountVisit;
     data['user_phone'] = this.userPhone;
     data['visitor_id'] = this.visitorId;
+    data['user_id'] = this.userId;
     return data;
   }
 }

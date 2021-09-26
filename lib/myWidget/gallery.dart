@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:image_cropper/image_cropper.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
 import 'package:sahlaprovider/utilitie/jsondata/galler_jason.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,7 +52,7 @@ bool uplodpic=false;
                                     Container(
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              .30,
+                                              .27,
                                       width: MediaQuery.of(context).size.width,
                                       child: Image.network(
                                         snapshot.data.result.allImages[pos].img,
@@ -80,31 +81,30 @@ bool uplodpic=false;
                           })),
                   uplodpic?CircularProgressIndicator():  RaisedButton(
                       child: Text('اضافه صوره'),
-                      onPressed: snapshot.data.result.totalImg <=
-                              snapshot.data.result.allImages.length
-                          ? Null
-                          : () async {
-                              var image = await ImagePicker.pickImage(
-                                  source: ImageSource.gallery,
-                                  maxHeight: 1000,
-                                  maxWidth: 1000,
-                                  imageQuality: 100);
-                              setState(() {
-                                if (image != null) {
-                                  _image = File(image.path);
-                                  uplodpic=true;
-                                }
-                              });
+                      onPressed:
 
-                              _allNetworking
-                                  .add_img(
-                                      token_id: box.read('token'), file: _image)
-                                  .then((value) {
-                                print(value);
-                                setState(() {
-                                  uplodpic=false;
-                                });
-                              });
+                            () async {
+
+
+                        if( snapshot.data.result.totalImg <=
+                            snapshot.data.result.allImages.length){
+                          var image = await ImagePicker.pickImage(
+                              source: ImageSource.gallery,
+                              maxHeight: 1000,
+                              maxWidth: 1000,
+                              imageQuality: 100);
+                          _cropImage(image);
+                          // setState(() {
+                          //   if (image != null) {
+                          //     _image = File(image.path);
+                          //     uplodpic=true;
+                          //   }
+                          //
+                          // });
+
+
+                        }
+
                             })
                 ],
               );
@@ -115,5 +115,42 @@ bool uplodpic=false;
             }
           }),
     );
+  }
+  Future<Null> _cropImage(image) async {
+    print('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp');
+    File croppedFile =
+    await ImageCropper.cropImage(
+        sourcePath: image.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9
+        ],
+        androidUiSettings: AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.deepOrange,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        iosUiSettings: IOSUiSettings(
+          minimumAspectRatio: 1.0,
+        )
+    );
+    if (croppedFile != null) {
+      _image = croppedFile;
+      uplodpic=true;
+      _allNetworking
+          .add_img(
+          token_id: box.read('token'), file: _image)
+          .then((value) {
+        print(value);
+        setState(() {
+          uplodpic=false;
+        });
+      });
+
+    }
   }
 }

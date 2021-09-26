@@ -43,6 +43,7 @@ dependencies:
 
   permission_handler:
 
+
   firebase_core:
   firebase_messaging: ^9.1.3
 

@@ -44,7 +44,7 @@ class _Buy_prescription_requestState extends State<Buy_prescription_request> {
                     print("snapshot.data.result.allRequested");
                     print(snapshot.data.result.allRequested);
                     print("snapshot.data.result.allRequested");
-                    return ListView.builder(
+                    return ListView.builder(shrinkWrap: true,
                         itemCount: snapshot.data.result.allRequested.length,
                         itemBuilder: (context, pos) {
                           return Padding(
@@ -128,14 +128,16 @@ class _Buy_prescription_requestState extends State<Buy_prescription_request> {
                                                       // height: size.height * .8,
                                                       // width: size.width * .9,
                                                       color: Colors.white,
-                                                      child: PhotoView(
-                                                        imageProvider:
-                                                            NetworkImage(snapshot
-                                                                .data
-                                                                .result
-                                                                .allRequested[
-                                                                    pos]
-                                                                .pharmacyImage),
+                                                      child: Container(height: MediaQuery.of(context).size.height*.5,width:MediaQuery.of(context).size.width ,
+                                                        child: PhotoView(
+                                                          imageProvider:
+                                                              NetworkImage(snapshot
+                                                                  .data
+                                                                  .result
+                                                                  .allRequested[
+                                                                      pos]
+                                                                  .pharmacyImage),
+                                                        ),
                                                       ),
                                                     ),
                                                     actions: <Widget>[
@@ -231,6 +233,20 @@ class _Buy_prescription_requestState extends State<Buy_prescription_request> {
                                                   style: TextStyle(
                                                       color: Colors.red),
                                                 )),
+                                        GestureDetector(    onTap: () {
+                                          _allNetworking
+                                              .accepted_pharamices_image(
+                                              token_id: token,
+                                              id_request: snapshot
+                                                  .data
+                                                  .result
+                                                  .allRequested[pos]
+                                                  .id)
+                                              .then((value) {
+                                            setState(() {});
+                                            Get.snackbar('', value.message);
+                                          });
+                                        },child: Icon(Icons.check),),
                                         GestureDetector(
                                             onTap: () {
                                               _allNetworking

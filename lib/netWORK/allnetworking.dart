@@ -1647,7 +1647,31 @@ class AllNetworking {
 
     return data;
   }
+  Future<Delete_pharamices_image_json> accepted_pharamices_image({
+    @required String token_id,
+    @required String id_request,
+  }) async {
+    Delete_pharamices_image_json data;
+    FormData formData = new FormData.fromMap({
+      // "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "id_request": id_request,
+    });
 
+    await dio
+        .post(
+      paseurl + '/medicine/accepted_pharamices_image',
+      data: formData,
+    )
+        .then((value) {
+          print('/medicine/accepted_pharamices_image');
+          print(value.data);
+      data = Delete_pharamices_image_json.fromJson(value.data);
+    });
+
+    return data;
+  }
   Future<Response> add_replay({
     @required String token_id,
     @required String id_request,
@@ -2147,10 +2171,11 @@ class AllNetworking {
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
       "key": "1234567890",
-      "token_id": token_id,
+     "token_id": token_id,
       "title": title,
       "content": content,
-      "id_user": id_user, "key_type": key_type,
+       "id_user": id_user,
+     "key_type": key_type,
     });
     response = await dio.post(paseurl + '/provider/sending_notifaction',
         data: formData);

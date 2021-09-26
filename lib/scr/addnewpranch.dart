@@ -114,8 +114,8 @@ bool svaedata=false;
                         onTap: () async {
                           var image = await ImagePicker.pickImage(
                               source: ImageSource.gallery,
-                              maxHeight: 1000,
-                              maxWidth: 1000,
+                              maxHeight: 1500,
+                              maxWidth: 1200,
                               imageQuality: 100);
                           _cropImage(image);
                         },
