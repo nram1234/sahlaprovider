@@ -17,7 +17,7 @@ class _GalleryState extends State<Gallery> {
   final box = GetStorage();
   AllNetworking _allNetworking = AllNetworking();
   File _image;
-bool uplodpic=false;
+  bool uplodpic = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,9 +67,7 @@ bool uplodpic=false;
                                                 img_id: snapshot.data.result
                                                     .allImages[pos].id)
                                             .then((value) {
-                                              setState(() {
-
-                                              });
+                                          setState(() {});
                                         });
                                       },
                                       child: Icon(Icons.delete),
@@ -79,33 +77,31 @@ bool uplodpic=false;
                               ),
                             );
                           })),
-                  uplodpic?CircularProgressIndicator():  RaisedButton(
-                      child: Text('اضافه صوره'),
-                      onPressed:
+                  uplodpic
+                      ? CircularProgressIndicator()
+                      : RaisedButton(
+                          child: Text('اضافه صوره'),
+                          onPressed: () async {
+                            print(snapshot.data.result.totalImg);
+                            print(snapshot.data.result.allImages.length);
+                            if (snapshot.data.result.totalImg >=
+                                snapshot.data.result.allImages.length) {
+                              var image = await ImagePicker.pickImage(
+                                  source: ImageSource.gallery,
+                                  maxHeight: 1000,
+                                  maxWidth: 1000,
+                                  imageQuality: 100);
+                              _cropImage(image);
+                              // setState(() {
+                              //   if (image != null) {
+                              //     _image = File(image.path);
+                              //     uplodpic=true;
+                              //   }
+                              //
+                              // });
 
-                            () async {
-
-
-                        if( snapshot.data.result.totalImg <=
-                            snapshot.data.result.allImages.length){
-                          var image = await ImagePicker.pickImage(
-                              source: ImageSource.gallery,
-                              maxHeight: 1000,
-                              maxWidth: 1000,
-                              imageQuality: 100);
-                          _cropImage(image);
-                          // setState(() {
-                          //   if (image != null) {
-                          //     _image = File(image.path);
-                          //     uplodpic=true;
-                          //   }
-                          //
-                          // });
-
-
-                        }
-
-                            })
+                            }
+                          })
                 ],
               );
             } else {
@@ -116,10 +112,10 @@ bool uplodpic=false;
           }),
     );
   }
+
   Future<Null> _cropImage(image) async {
     print('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp');
-    File croppedFile =
-    await ImageCropper.cropImage(
+    File croppedFile = await ImageCropper.cropImage(
         sourcePath: image.path,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
@@ -136,21 +132,18 @@ bool uplodpic=false;
             lockAspectRatio: false),
         iosUiSettings: IOSUiSettings(
           minimumAspectRatio: 1.0,
-        )
-    );
+        ));
     if (croppedFile != null) {
       _image = croppedFile;
-      uplodpic=true;
+      uplodpic = true;
       _allNetworking
-          .add_img(
-          token_id: box.read('token'), file: _image)
+          .add_img(token_id: box.read('token'), file: _image)
           .then((value) {
         print(value);
         setState(() {
-          uplodpic=false;
+          uplodpic = false;
         });
       });
-
     }
   }
 }
