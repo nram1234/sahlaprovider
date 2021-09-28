@@ -779,6 +779,7 @@ class AllNetworking {
     @required String phone_second,
     @required String phone_third,
     @required File main_img,
+    @required File profileImage,
     @required String location,
 //========================
     @required String instagram,
@@ -795,8 +796,12 @@ class AllNetworking {
   }) async {
     Response data;
     String fileName;
+    String profileName;
     if (main_img != null) {
       fileName = main_img.path.split('/').last;
+    }
+    if (profileImage != null) {
+      profileName = profileImage.path.split('/').last;
     }
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
@@ -824,6 +829,10 @@ class AllNetworking {
       "main_img": main_img != null
           ? await MultipartFile.fromFile(main_img.path,
               filename: fileName, contentType: new MediaType('image', 'png'))
+          : null,
+      "cover_img": profileImage != null
+          ? await MultipartFile.fromFile(profileImage.path,
+              filename: profileName, contentType: new MediaType('image', 'png'))
           : null,
     });
 

@@ -12,7 +12,7 @@ class Preparation_doc_profile_json {
     codenum = json['codenum'];
     status = json['status'];
     result =
-    json['result'] != null ? new Result.fromJson(json['result']) : null;
+        json['result'] != null ? new Result.fromJson(json['result']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -70,6 +70,7 @@ class ServiceDetails {
   String nameEn;
   String lat;
   String lag;
+  String profileImage;
   String address;
   String addressEn;
   String description;
@@ -85,35 +86,36 @@ class ServiceDetails {
 
   ServiceDetails(
       {this.whatsapp,
-        this.facebook,
-        this.email,
-        this.website,
-        this.instagram,
-        this.twitter,
-        this.fromHrs,
-        this.toHrs,
-        this.detectionPrice,
-        this.detectionPriceEn,
-        this.waitingTime,
-        this.waitingTimeEn,
-        this.specialization,
-        this.specializationEn,
-        this.nameAr,
-        this.nameEn,
-        this.lat,
-        this.lag,
-        this.address,
-        this.addressEn,
-        this.description,
-        this.descriptionEn,
-        this.deliveryOn,
-        this.password,
-        this.phone,
-        this.phoneSecond,
-        this.phoneThird,
-        this.location,
-        this.mainImg,
-        this.id});
+      this.facebook,
+      this.email,
+      this.website,
+      this.instagram,
+      this.twitter,
+      this.fromHrs,
+      this.toHrs,
+      this.detectionPrice,
+      this.detectionPriceEn,
+      this.waitingTime,
+      this.waitingTimeEn,
+      this.specialization,
+      this.specializationEn,
+      this.nameAr,
+      this.nameEn,
+      this.profileImage,
+      this.lat,
+      this.lag,
+      this.address,
+      this.addressEn,
+      this.description,
+      this.descriptionEn,
+      this.deliveryOn,
+      this.password,
+      this.phone,
+      this.phoneSecond,
+      this.phoneThird,
+      this.location,
+      this.mainImg,
+      this.id});
 
   ServiceDetails.fromJson(Map<String, dynamic> json) {
     whatsapp = json['whatsapp'];
@@ -132,6 +134,7 @@ class ServiceDetails {
     specializationEn = json['specialization_en'];
     nameAr = json['name_ar'];
     nameEn = json['name_en'];
+    profileImage = json['cover_img'];
     lat = json['lat'];
     lag = json['lag'];
     address = json['address'];
@@ -169,6 +172,7 @@ class ServiceDetails {
     data['lat'] = this.lat;
     data['lag'] = this.lag;
     data['address'] = this.address;
+    data['cover_img'] = this.profileImage;
     data['address_en'] = this.addressEn;
     data['description'] = this.description;
     data['description_en'] = this.descriptionEn;

@@ -26,8 +26,10 @@ class _SplashState extends State<Splash> {
   void initState() {
     token = box.read('token');
     super.initState();
-    _controller = VideoPlayerController.asset('assets/mov.mp4',videoPlayerOptions:VideoPlayerOptions(), )
-      ..initialize().then((_) {
+    _controller = VideoPlayerController.asset(
+      'assets/mov.mp4',
+      videoPlayerOptions: VideoPlayerOptions(),
+    )..initialize().then((_) {
         _controller.play();
 
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
@@ -37,22 +39,17 @@ class _SplashState extends State<Splash> {
       if (_controller.value.position == _controller.value.duration) {
         print(token);
         if (token != null) {
-
           Navigator.pushAndRemoveUntil(
-                   context,
-                   MaterialPageRoute(builder: (BuildContext context) => Statisticss()),
-                  (context) => false,
-                  );
-
-
+            context,
+            MaterialPageRoute(builder: (BuildContext context) => Statisticss()),
+            (context) => false,
+          );
         } else {
-
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (BuildContext context) => LoginScr()),
-                (context) => false,
+            (context) => false,
           );
-
         }
       }
     });
@@ -61,13 +58,23 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: [Positioned(right: -50,left: -50,top: -50,bottom: -50,
-        child: Container(color: Colors.white,
-          width: MediaQuery.of(context).size.width*9,
-          height: MediaQuery.of(context).size.height*1.5,
-          child: VideoPlayer(_controller,),
+        body: Stack(
+      children: [
+        Positioned(
+          right: -50,
+          left: -50,
+          top: -50,
+          bottom: -50,
+          child: Container(
+            color: Colors.white,
+            width: MediaQuery.of(context).size.width * 9,
+            height: MediaQuery.of(context).size.height * 1.5,
+            child: VideoPlayer(
+              _controller,
+            ),
+          ),
         ),
-      ),],)
-    );
+      ],
+    ));
   }
 }
