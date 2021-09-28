@@ -38,6 +38,7 @@ import 'package:sahlaprovider/utilitie/jsondata/preparation_edit_product_JSON.da
 import 'package:sahlaprovider/utilitie/jsondata/preparation_points_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_profile_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/preparation_wedding_service_json.dart';
+import 'package:sahlaprovider/utilitie/jsondata/tags_model.dart';
 import 'package:sahlaprovider/utilitie/jsondata/ticket_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/tickets_json.dart';
 import 'package:sahlaprovider/utilitie/jsondata/tickets_types_json.dart';
@@ -119,7 +120,9 @@ class AllNetworking {
   }
 
   Future<Response> add_product(
-      {@required String phone,@required String serial_number,@required String stock,
+      {@required String phone,
+      @required String serial_number,
+      @required String stock,
       @required String token_id,
       @required String title,
       @required String title_en,
@@ -134,7 +137,7 @@ class AllNetworking {
 
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
-      "cat_id": cat_id,  "serial_number": serial_number,"stock": stock,
+      "cat_id": cat_id, "serial_number": serial_number, "stock": stock,
       "key": "1234567890",
       "token_id": token_id,
       "title": title,
@@ -178,11 +181,8 @@ class AllNetworking {
 
   Future<Response> edit_product({
     @required String token_id,
-
     @required String stock,
     @required String serial_number,
-
-
     @required String title,
     @required String title_en,
     @required String current_price,
@@ -200,13 +200,8 @@ class AllNetworking {
     }
 
     FormData formData = new FormData.fromMap({
-
-
-
-
       "stock": stock,
       "serial_number": serial_number,
-
 
       // "mode": "formdata",
       "key": "1234567890",
@@ -795,10 +790,8 @@ class AllNetworking {
     @required String addressEn,
     @required double lat,
     @required double lag,
-
-
-    @required String  from_hrs,
-    @required String   to_hrs,
+    @required String from_hrs,
+    @required String to_hrs,
   }) async {
     Response data;
     String fileName;
@@ -815,7 +808,7 @@ class AllNetworking {
       "lag": lag, "instagram": instagram, "twitter": twitter,
       "facebook": facebook,
       "website": website,
-      "email": email,  "from_hrs": from_hrs,
+      "email": email, "from_hrs": from_hrs,
       "to_hrs": to_hrs,
       "name_ar": name_ar,
       "name_en": name_en,
@@ -840,7 +833,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-          print(value.data);
+      print(value.data);
       data = value;
     });
 
@@ -1556,7 +1549,6 @@ class AllNetworking {
   Future<Get_current_orders_json> get_current_orders({
     @required String token_id,
   }) async {
-
     Get_current_orders_json data;
     FormData formData = new FormData.fromMap({
       "mode": "formdata",
@@ -1569,7 +1561,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-          print('valuevalue     $value');
+      print('valuevalue     $value');
       data = Get_current_orders_json.fromJson(value.data);
     });
     //  print(data.result.contactInfo[0].);
@@ -1647,6 +1639,7 @@ class AllNetworking {
 
     return data;
   }
+
   Future<Delete_pharamices_image_json> accepted_pharamices_image({
     @required String token_id,
     @required String id_request,
@@ -1665,13 +1658,14 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-          print('/medicine/accepted_pharamices_image');
-          print(value.data);
+      print('/medicine/accepted_pharamices_image');
+      print(value.data);
       data = Delete_pharamices_image_json.fromJson(value.data);
     });
 
     return data;
   }
+
   Future<Response> add_replay({
     @required String token_id,
     @required String id_request,
@@ -1763,7 +1757,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-          print(value.data);
+      print(value.data);
       response = Preparation_doc_profile_json.fromJson(value.data);
     });
 
@@ -1800,11 +1794,8 @@ class AllNetworking {
     @required String specialization,
     @required String waiting_time_en,
     @required String specialization_en,
-
-
-    @required String  from_hrs,
-    @required String   to_hrs,
-
+    @required String from_hrs,
+    @required String to_hrs,
   }) async {
     Response data;
     String fileName;
@@ -1815,7 +1806,7 @@ class AllNetworking {
       // "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
-      "location": location,      "from_hrs": from_hrs,
+      "location": location, "from_hrs": from_hrs,
       "to_hrs": to_hrs,
       //==============
       "lat": lat,
@@ -1926,7 +1917,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-          print(value.data);
+      print(value.data);
       data = Get_list_reservation_json.fromJson(value.data);
     });
 
@@ -1949,8 +1940,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-
-          print(value.data);
+      print(value.data);
       data = Get_List_wedding_reservation_json.fromJson(value.data);
     });
 
@@ -2065,7 +2055,7 @@ class AllNetworking {
       data: formData,
     )
         .then((value) {
-          print(value.data);
+      print(value.data);
       data = Get_list_weddings_services_json.fromJson(value.data);
     });
 
@@ -2136,13 +2126,13 @@ class AllNetworking {
     return data;
   }
 
-  Future<Response> edit_wedding_service({
-    @required String token_id,
-    @required String name,
-    @required String name_en,
-    @required String price,
-    @required int currency_id,  @required String id_list
-  }) async {
+  Future<Response> edit_wedding_service(
+      {@required String token_id,
+      @required String name,
+      @required String name_en,
+      @required String price,
+      @required int currency_id,
+      @required String id_list}) async {
     Response response;
 
     FormData formData = new FormData.fromMap({
@@ -2158,7 +2148,6 @@ class AllNetworking {
     return response;
   }
 
-
   Future<Response> sending_notifaction({
     @required String token_id,
     @required String title,
@@ -2171,11 +2160,11 @@ class AllNetworking {
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
       "key": "1234567890",
-     "token_id": token_id,
+      "token_id": token_id,
       "title": title,
       "content": content,
-       "id_user": id_user,
-     "key_type": key_type,
+      "id_user": id_user,
+      "key_type": key_type,
     });
     response = await dio.post(paseurl + '/provider/sending_notifaction',
         data: formData);
@@ -2183,22 +2172,14 @@ class AllNetworking {
     return response;
   }
 
-
-
-
-
-
-
   Future<Response> subscription_renewal({
     @required String token_id,
-
   }) async {
     Response data;
     FormData formData = new FormData.fromMap({
       // "mode": "formdata",
       "key": "1234567890",
       "token_id": token_id,
-
     });
 
     await dio
@@ -2212,10 +2193,6 @@ class AllNetworking {
 
     return data;
   }
-
-
-
-
 
   Future<List_doctors_services_json> list_doctors_services({
     @required String token_id,
@@ -2240,9 +2217,6 @@ class AllNetworking {
     return data;
   }
 
-
-
-
   Future<Preparation_doctors_service_json> preparation_doctors_service({
     @required String token_id,
   }) async {
@@ -2260,19 +2234,19 @@ class AllNetworking {
     )
         .then((value) {
       print(value.data);
-      data =Preparation_doctors_service_json.fromJson(value.data);
+      data = Preparation_doctors_service_json.fromJson(value.data);
     });
 
     return data;
   }
 
-  Future<Response> edit_doctors_service({
-    @required String token_id,
-    @required String name,
-    @required String name_en,
-    @required String price,
-    @required int currency_id,  @required String id_list
-  }) async {
+  Future<Response> edit_doctors_service(
+      {@required String token_id,
+      @required String name,
+      @required String name_en,
+      @required String price,
+      @required int currency_id,
+      @required String id_list}) async {
     Response response;
 
     FormData formData = new FormData.fromMap({
@@ -2287,8 +2261,6 @@ class AllNetworking {
         data: formData);
     return response;
   }
-
-
 
   Future<Response> add_doctors_service({
     @required String token_id,
@@ -2312,9 +2284,6 @@ class AllNetworking {
     return response;
   }
 
-
-
-
   Future<Response> delete_medicine_service({
     @required String token_id,
     @required String id_list,
@@ -2330,14 +2299,11 @@ class AllNetworking {
       paseurl + '/medicine/delete_doctors_service',
       data: formData,
     );
-    print( 'pppppppppppppppppppppppppppppppppppppppppppppp');
-print( response.data);
-    print( 'pppppppppppppppppppppppppppppppppppppppppppppp');
+    print('pppppppppppppppppppppppppppppppppppppppppppppp');
+    print(response.data);
+    print('pppppppppppppppppppppppppppppppppppppppppppppp');
     return response;
   }
-
-
-
 
   Future<Response> delete_appointment({
     @required String token_id,
@@ -2363,19 +2329,14 @@ print( response.data);
     return data;
   }
 
-
-
-
-
-
   Future<Response> add_doctor_out_reservation({
     @required String token_id,
     @required String name,
     @required String phone,
     @required String address,
-    @required String from_hrs, @required String to_hrs,
+    @required String from_hrs,
+    @required String to_hrs,
     @required DateTime reservation_date,
-
   }) async {
     Response response;
     FormData formData = new FormData.fromMap({
@@ -2385,9 +2346,9 @@ print( response.data);
       "fullname": name,
       "phone": phone,
       "address": address,
-      "from_hrs": from_hrs, "to_hrs": to_hrs,
+      "from_hrs": from_hrs,
+      "to_hrs": to_hrs,
       "reservation_date": reservation_date,
-
     });
     response = await dio.post(
       paseurl + '/medicine/add_doctor_out_reservation',
@@ -2397,18 +2358,16 @@ print( response.data);
     return response;
   }
 
-
-
-
-
-  Future<Response>  add_wedding_reservation({
+  Future<Response> add_wedding_reservation({
     @required String token_id,
-    @required String name,    @required String addrs,
+    @required String name,
+    @required String addrs,
     @required String phone,
     @required String price,
     @required String currency_id,
-    @required DateTime reservation_date, @required String from_hrs, @required String to_hrs,
-
+    @required DateTime reservation_date,
+    @required String from_hrs,
+    @required String to_hrs,
   }) async {
     Response response;
     FormData formData = new FormData.fromMap({
@@ -2416,11 +2375,13 @@ print( response.data);
       "key": "1234567890",
       "token_id": token_id,
       "fullname": name,
-      "phone": phone,"addrs": addrs,
+      "phone": phone,
+      "addrs": addrs,
       "currency_id": currency_id,
       "price": price,
-      "reservation_date": reservation_date,   "from_hrs": from_hrs, "to_hrs": to_hrs,
-
+      "reservation_date": reservation_date,
+      "from_hrs": from_hrs,
+      "to_hrs": to_hrs,
     });
     response = await dio.post(
       paseurl + '/weddings/add_wedding_out_reservation',
@@ -2429,11 +2390,6 @@ print( response.data);
 
     return response;
   }
-
-
-
-
-
 
   Future<List_currency_json> list_currency({
     @required String token_id,
@@ -2452,17 +2408,11 @@ print( response.data);
     )
         .then((value) {
       print(value.data);
-      data =List_currency_json.fromJson(value.data);
+      data = List_currency_json.fromJson(value.data);
     });
 
     return data;
   }
-
-
-
-
-
-
 
   Future<Get_Future_Orders_json> get_future_orders({
     @required String token_id,
@@ -2487,5 +2437,110 @@ print( response.data);
     return data;
   }
 
+  Future<TagsModel> getAllTags({
+    @required String token_id,
+    @required String pageNumber,
+    @required String limit,
+  }) async {
+    TagsModel data;
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "limit": limit,
+      "page_number": pageNumber,
+    });
+    await dio
+        .post(
+      paseurl + '/provider/gate_list_tags',
+      data: formData,
+    )
+        .then((value) {
+      data = TagsModel.fromJson(value.data);
+      print(value);
+    });
+    return data;
+  }
 
+  Future editTags({
+    @required String token_id,
+    @required String tagName,
+    @required int tagId,
+  }) async {
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "tage_name": tagName,
+      "tag_id": tagId,
+    });
+    await dio
+        .post(
+          paseurl + '/provider/edit_tag',
+          data: formData,
+        )
+        .then((value) {});
+    //  print(data.result.contactInfo[0].);
+  }
+
+  Future deleteTags({
+    @required String token_id,
+    @required int tagId,
+  }) async {
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "tag_id": tagId,
+    });
+    await dio
+        .post(
+      paseurl + '/provider/delete_tag',
+      data: formData,
+    )
+        .then((value) {
+      print(value);
+    });
+    // print(value);
+  }
+
+  Future addTags({
+    @required String token_id,
+    @required String tagName,
+  }) async {
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "tag_name": tagName,
+    });
+    await dio
+        .post(
+          paseurl + '/provider/add_tag',
+          data: formData,
+        )
+        .then((value) {});
+    //  print(data.result.contactInfo[0].);
+  }
+
+  Future getTagsDetails({
+    @required String token_id,
+    @required int tagId,
+  }) async {
+    FormData formData = new FormData.fromMap({
+      "mode": "formdata",
+      "key": "1234567890",
+      "token_id": token_id,
+      "tag_id": tagId,
+    });
+    await dio
+        .post(
+      paseurl + '/provider/get_tag_details',
+      data: formData,
+    )
+        .then((value) {
+      print(value.data);
+    });
+    //  print(data.result.contactInfo[0].);
+  }
 }
