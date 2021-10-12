@@ -26,6 +26,8 @@
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
+key.jks
+android/key.properties
 .packages
 .pub-cache/
 .pub/

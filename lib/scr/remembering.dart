@@ -41,12 +41,15 @@ class _RememberingState extends State<Remembering> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: Mydrawer(),// mydrawer(context),
+      drawer: Mydrawer(), // mydrawer(context),
       appBar: AppBar(
-        actions: [GestureDetector(
-          onTap: () {
-            Navigator.pop(context, false);
-          }, child: Icon(Icons.arrow_forward_outlined),)
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context, false);
+            },
+            child: Icon(Icons.arrow_forward_outlined),
+          )
         ],
         elevation: 8,
         centerTitle: true,
@@ -66,7 +69,8 @@ class _RememberingState extends State<Remembering> {
                 final value = await Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ContactWithManager(context)),
+                      builder: (context) =>
+                          ContactWithManager(mycontext: context)),
                 );
                 setState(() {});
               },
@@ -133,7 +137,8 @@ class _RememberingState extends State<Remembering> {
           Get.to(TicketDetails(data.id));
         },
         child: Container(
-          padding: EdgeInsets.all(8),color: data.senderReplay=='0'?Colors.white:Colors.grey,
+          padding: EdgeInsets.all(8),
+          color: data.senderReplay == '0' ? Colors.white : Colors.grey,
           height: high * .15,
           child: Column(
             children: [
@@ -141,26 +146,16 @@ class _RememberingState extends State<Remembering> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(data.createdAt),
-                  GestureDetector(onTap: ( ) {
-
-
-
-
-
-_allNetworking.delete_ticket(token_id: token, id_ticket: data.id).then((value) {
-
-  setState(() {
-
-  });
-  Get.snackbar('', value.data["message"]);
-
-
-});
-
-
-
-
-                  }, child: Icon(Icons.delete)),
+                  GestureDetector(
+                      onTap: () {
+                        _allNetworking
+                            .delete_ticket(token_id: token, id_ticket: data.id)
+                            .then((value) {
+                          setState(() {});
+                          Get.snackbar('', value.data["message"]);
+                        });
+                      },
+                      child: Icon(Icons.delete)),
                 ],
               ),
               Expanded(child: Text(data.title))

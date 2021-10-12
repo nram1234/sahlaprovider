@@ -28,6 +28,12 @@ class _AddNewProdectState extends State<AddNewProdect> {
   TextEditingController _textEditingControllerthename = TextEditingController();
   TextEditingController _textEditingControllertheenname =
       TextEditingController();
+  TextEditingController _featureName1Controller = TextEditingController();
+  TextEditingController _featurePrice1Controller = TextEditingController();
+  TextEditingController _featureName2Controller = TextEditingController();
+  TextEditingController _featurePrice2Controller = TextEditingController();
+  TextEditingController _featureName3Controller = TextEditingController();
+  TextEditingController _featurePrice3Controller = TextEditingController();
   TextEditingController _textEditingControllertheoldprice =
       TextEditingController();
   TextEditingController _textEditingControllertheardes =
@@ -37,9 +43,9 @@ class _AddNewProdectState extends State<AddNewProdect> {
   TextEditingController _textEditingControllerthenewprice =
       TextEditingController();
   TextEditingController _textEditingControllerthesearil_number =
-  TextEditingController();
+      TextEditingController();
   TextEditingController _textEditingControllerthestock =
-  TextEditingController();
+      TextEditingController();
 
   File _image;
   AllNetworking _allNetworking = AllNetworking();
@@ -49,22 +55,19 @@ class _AddNewProdectState extends State<AddNewProdect> {
   String service_type = '0';
   String token;
   CategoryList _categoryList;
-  List<CategoryList>categoryList = [];
-  bool getcategoryList=true;
+  List<CategoryList> categoryList = [];
+  bool getcategoryList = true;
   @override
-  void initState() {token = box.read('token');
+  void initState() {
+    token = box.read('token');
     service_type = box.read('service_type');
-    _allNetworking.preparation_addproduct(token_id: token).then((value){
-      for(int i=0;i<value.result.categoryList.length;i++){
-
-        categoryList.add( value.result.categoryList[i]);
+    _allNetworking.preparation_addproduct(token_id: token).then((value) {
+      for (int i = 0; i < value.result.categoryList.length; i++) {
+        categoryList.add(value.result.categoryList[i]);
       }
 
-      getcategoryList=false;
-      setState(() {
-
-      });
-
+      getcategoryList = false;
+      setState(() {});
     });
   }
 
@@ -74,7 +77,14 @@ class _AddNewProdectState extends State<AddNewProdect> {
     super.dispose();
   }
 
-  String thename, theenname, theoldprice, theardes, theendes, thenewprice,stock,searil_number;
+  String thename,
+      theenname,
+      theoldprice,
+      theardes,
+      theendes,
+      thenewprice,
+      stock,
+      searil_number;
 
   @override
   Widget build(BuildContext context) {
@@ -84,12 +94,17 @@ class _AddNewProdectState extends State<AddNewProdect> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-          drawer: Mydrawer(),// mydrawer(context),
-          appBar: AppBar(actions: [GestureDetector(
-            onTap: () {
-              Navigator.pop(context, false);
-            }, child: Icon(Icons.arrow_forward_outlined),)
-          ], centerTitle: true,
+          drawer: Mydrawer(), // mydrawer(context),
+          appBar: AppBar(
+            actions: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context, false);
+                },
+                child: Icon(Icons.arrow_forward_outlined),
+              )
+            ],
+            centerTitle: true,
             title: Text('اضافة منتج جديد',
                 style: TextStyle(
                     fontFamily: 'Arbf', color: Colors.white, fontSize: 18)),
@@ -107,7 +122,7 @@ class _AddNewProdectState extends State<AddNewProdect> {
                     Text('اضافه صوره للمنتج',
                         style: TextStyle(
                             fontFamily: 'Arbf',
-                            color:  hexToColor('#ed1c6f'),
+                            color: hexToColor('#ed1c6f'),
                             fontSize: 20)),
                     GestureDetector(
                       onTap: () async {
@@ -177,12 +192,73 @@ class _AddNewProdectState extends State<AddNewProdect> {
                       theendes = st;
                     },
                     stram: v.endesoffer,
-                    hint: 'Details'),
+                    hint: 'التفاصيل'),
                 SizedBox(
                   height: high * .02,
                 ),
-
-
+                TextButton.icon(
+                  icon: Icon(Icons.add),
+                  label: Text("اضافة مميزات"),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return Dialog(
+                            child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              TextField(
+                                controller: _featureName1Controller,
+                                decoration: InputDecoration(hintText: "الميزة"),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                controller: _featurePrice1Controller,
+                                decoration: InputDecoration(hintText: "السعر"),
+                              ),
+                              Divider(
+                                height: 2,
+                                thickness: 2,
+                                color: Colors.red,
+                              ),
+                              TextField(
+                                controller: _featureName2Controller,
+                                decoration: InputDecoration(hintText: "الميزة"),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                controller: _featurePrice2Controller,
+                                decoration: InputDecoration(hintText: "السعر"),
+                              ),
+                              Divider(
+                                height: 2,
+                                thickness: 2,
+                                color: Colors.red,
+                              ),
+                              TextField(
+                                controller: _featureName3Controller,
+                                decoration: InputDecoration(hintText: "الميزة"),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                controller: _featurePrice3Controller,
+                                decoration: InputDecoration(hintText: "السعر"),
+                              ),
+                            ],
+                          ),
+                        ));
+                      },
+                    );
+                  },
+                ),
                 TextFormField(
                   controller: _textEditingControllerthenewprice,
                   keyboardType: TextInputType.number,
@@ -208,15 +284,13 @@ class _AddNewProdectState extends State<AddNewProdect> {
                     hintText: 'ﺍﻟﺴﻌﺮ',
                     hintStyle: TextStyle(
                       fontFamily: 'Arbf',
-                      color:  hexToColor('#ed1c6f'),
+                      color: hexToColor('#ed1c6f'),
                     ),
                   ),
                 ),
                 SizedBox(
                   height: high * .02,
                 ),
-
-
                 TextFormField(
                   controller: _textEditingControllerthesearil_number,
                   keyboardType: TextInputType.text,
@@ -242,18 +316,13 @@ class _AddNewProdectState extends State<AddNewProdect> {
                     hintText: 'الرقم التسلسلي',
                     hintStyle: TextStyle(
                       fontFamily: 'Arbf',
-                      color:  hexToColor('#ed1c6f'),
+                      color: hexToColor('#ed1c6f'),
                     ),
                   ),
                 ),
-
-
-
                 SizedBox(
                   height: high * .02,
                 ),
-
-
                 TextFormField(
                   controller: _textEditingControllerthestock,
                   keyboardType: TextInputType.number,
@@ -279,72 +348,61 @@ class _AddNewProdectState extends State<AddNewProdect> {
                     hintText: 'المخزن',
                     hintStyle: TextStyle(
                       fontFamily: 'Arbf',
-                      color:  hexToColor('#ed1c6f'),
+                      color: hexToColor('#ed1c6f'),
                     ),
                   ),
                 ),
-
-
-
-
-
-
-
-
-
-
-
-
-
                 SizedBox(
                   height: high * .02,
                 ),
                 service_type == '0'
                     ? SizedBox()
-                    :getcategoryList?CircularProgressIndicator(): Container(
-                  decoration: BoxDecoration(
-                    border: Border.all( color: Colors.red ),
-                    borderRadius: BorderRadius.all(Radius.circular(
-                        5.0) //         <--- border radius here
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('القسم'),
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      DropdownButton<CategoryList>(
-                        value: _categoryList,
-                      //  hint: Text(hintcety),
-                        icon: Icon(Icons.arrow_downward),
-                        iconSize: 24,
-                        elevation: 16,
-                        style: TextStyle(color: Colors.deepPurple),
-                        underline: Container(
-                          height: 2,
-                          color: Colors.deepPurpleAccent,
-                        ),
-                        onChanged: (CategoryList newValue) {
-                          setState(() {
-                            _categoryList = newValue;
-                          });
-                        },
-                        items: categoryList
-                            .map<DropdownMenuItem<CategoryList>>(
-                                (CategoryList value) {
-                              return DropdownMenuItem<CategoryList>(
-                                value: value,
-                                child: Text(value.categoryName),
-                              );
-                            }).toList(),
-                      ),
-                    ],
-                  ),
-                ),
+                    : getcategoryList
+                        ? CircularProgressIndicator()
+                        : Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.red),
+                              borderRadius: BorderRadius.all(Radius.circular(
+                                      5.0) //         <--- border radius here
+                                  ),
+                            ),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text('القسم'),
+                                ),
+                                SizedBox(
+                                  width: 16,
+                                ),
+                                DropdownButton<CategoryList>(
+                                  value: _categoryList,
+                                  //  hint: Text(hintcety),
+                                  icon: Icon(Icons.arrow_downward),
+                                  iconSize: 24,
+                                  elevation: 16,
+                                  style: TextStyle(color: Colors.deepPurple),
+                                  underline: Container(
+                                    height: 2,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  onChanged: (CategoryList newValue) {
+                                    setState(() {
+                                      _categoryList = newValue;
+                                    });
+                                  },
+                                  items: categoryList
+                                      .map<DropdownMenuItem<CategoryList>>(
+                                          (CategoryList value) {
+                                    return DropdownMenuItem<CategoryList>(
+                                      value: value,
+                                      child: Text(value.categoryName),
+                                    );
+                                  }).toList(),
+                                ),
+                              ],
+                            ),
+                          ),
                 SizedBox(
                   height: high * .02,
                 ),
@@ -362,7 +420,6 @@ class _AddNewProdectState extends State<AddNewProdect> {
                                 ? () async {
                                     savedata = true;
                                     setState(() {});
-
                                     String phone = box.read('phone');
                                     String token = box.read('token');
                                     // final bytes =
@@ -373,11 +430,20 @@ class _AddNewProdectState extends State<AddNewProdect> {
 
                                     _allNetworking
                                         .add_product(
-                                            phone: phone,cat_id: _categoryList==null?"":_categoryList.categoryId ,
+                                            phone: phone,
+                                            cat_id: _categoryList == null
+                                                ? ""
+                                                : _categoryList.categoryId,
                                             token_id: token,
                                             title: thename,
                                             title_en: theenname,
-                                            current_price: thenewprice,serial_number: searil_number,stock: stock,
+                                            current_price: thenewprice,
+                                            serial_number: searil_number,
+                                            stock: stock,
+                                            productNameFeature:
+                                                "${_featureName1Controller.text},${_featureName2Controller.text},${_featureName3Controller.text}",
+                                            productPriceFeature:
+                                                "${_featurePrice1Controller.text},${_featurePrice2Controller.text},${_featurePrice3Controller.text}",
                                             old_price: "",
                                             //theoldprice,
                                             description_ar: theardes,
@@ -387,38 +453,37 @@ class _AddNewProdectState extends State<AddNewProdect> {
                                       print(value.data);
                                       Navigator.pop(widget.mycontext);
 
-
-                                    //   Get.dialog(
-                                    //     AlertDialog(
-                                    //       title: Text(''),
-                                    //       content: Text("تم اضافة المنتج"),
-                                    //       actions: <Widget>[
-                                    //         FlatButton(
-                                    //           child: Text("CLOSE"),
-                                    //           onPressed: () {
-                                    //             Get.back();
-                                    //           },
-                                    //         )
-                                    //       ],
-                                    //     ),
-                                    //     barrierDismissible: false,
-                                    //   );
-                                    //
-                                    //   _image = null;
-                                    //   _textEditingControllerthename.clear();
-                                    //
-                                    //   _textEditingControllertheenname.clear();
-                                    //   _textEditingControllertheoldprice.clear();
-                                    //   _textEditingControllertheardes.clear();
-                                    //   _textEditingControllertheendes.clear();
-                                    //   _textEditingControllerthenewprice.clear();
-                                    //
-                                    //   print(
-                                    //       'ppppppppppppppppppppppppppppppppppppppppppp');
-                                    //   savedata = false;
-                                    //
-                                    //   setState(() {});
-                                  });
+                                      //   Get.dialog(
+                                      //     AlertDialog(
+                                      //       title: Text(''),
+                                      //       content: Text("تم اضافة المنتج"),
+                                      //       actions: <Widget>[
+                                      //         FlatButton(
+                                      //           child: Text("CLOSE"),
+                                      //           onPressed: () {
+                                      //             Get.back();
+                                      //           },
+                                      //         )
+                                      //       ],
+                                      //     ),
+                                      //     barrierDismissible: false,
+                                      //   );
+                                      //
+                                      //   _image = null;
+                                      //   _textEditingControllerthename.clear();
+                                      //
+                                      //   _textEditingControllertheenname.clear();
+                                      //   _textEditingControllertheoldprice.clear();
+                                      //   _textEditingControllertheardes.clear();
+                                      //   _textEditingControllertheendes.clear();
+                                      //   _textEditingControllerthenewprice.clear();
+                                      //
+                                      //   print(
+                                      //       'ppppppppppppppppppppppppppppppppppppppppppp');
+                                      //   savedata = false;
+                                      //
+                                      //   setState(() {});
+                                    });
                                   }
                                 : null,
                             child: Container(
@@ -445,8 +510,7 @@ class _AddNewProdectState extends State<AddNewProdect> {
                                       borderRadius: BorderRadius.circular(5.0))
                                   : BoxDecoration(
                                       color: Colors.grey,
-                                      borderRadius:
-                                          BorderRadius.circular(5.0)),
+                                      borderRadius: BorderRadius.circular(5.0)),
                             ),
                           );
                         },
@@ -456,10 +520,10 @@ class _AddNewProdectState extends State<AddNewProdect> {
           )),
     );
   }
+
   Future<Null> _cropImage(image) async {
     print('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp');
-    File croppedFile =
-    await ImageCropper.cropImage(
+    File croppedFile = await ImageCropper.cropImage(
         sourcePath: image.path,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
@@ -476,13 +540,10 @@ class _AddNewProdectState extends State<AddNewProdect> {
             lockAspectRatio: false),
         iosUiSettings: IOSUiSettings(
           minimumAspectRatio: 1.0,
-        )
-    );
+        ));
     if (croppedFile != null) {
       _image = croppedFile;
-      setState(() {
-
-      });
+      setState(() {});
     }
   }
 }

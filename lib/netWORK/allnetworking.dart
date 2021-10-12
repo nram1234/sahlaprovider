@@ -129,6 +129,8 @@ class AllNetworking {
       @required String current_price,
       @required String old_price,
       @required String description_ar,
+      @required String productNameFeature,
+      @required String productPriceFeature,
       @required String description_en,
       @required String cat_id,
       @required File file}) async {
@@ -143,6 +145,8 @@ class AllNetworking {
       "title": title,
       "title_en": title_en,
       "current_price": current_price,
+      "product_feature_name": productNameFeature,
+      "product_feature_price": productPriceFeature,
 
       "old_price": old_price,
       "description_ar": description_ar,

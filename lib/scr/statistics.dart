@@ -72,7 +72,6 @@ class _StatisticssState extends State<Statisticss> {
 
   @override
   Widget build(BuildContext context) {
-
     final high = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
@@ -108,51 +107,48 @@ class _StatisticssState extends State<Statisticss> {
       ),
     ];
 
-    return WillPopScope(onWillPop: () async {
-      final value = await showDialog<bool>(
-          context: context,
-          builder: (context) {
-            return
-
-              CustomDialog(
-                Text2:
-                " ",
+    return WillPopScope(
+      onWillPop: () async {
+        final value = await showDialog<bool>(
+            context: context,
+            builder: (context) {
+              return CustomDialog(
+                Text2: " ",
                 title: "تنبية",
-                function: () { Navigator.of(context).pop(true);},
+                function: () {
+                  Navigator.of(context).pop(true);
+                },
                 buttonText2: "اغلاق",
                 description: "هل تريد اغلاق التطبيق؟",
                 buttonText: "الفاء",
                 phone: false,
               );
 
+              //
+              //   AlertDialog(
+              //   content: Text('Are you sure you want to exit?'),
+              //   actions: <Widget>[
+              //     FlatButton(
+              //       child: Text('No'),
+              //       onPressed: () {
+              //         Navigator.of(context).pop(false);
+              //       },
+              //     ),
+              //     FlatButton(
+              //       child: Text('Yes, exit'),
+              //       onPressed: () {
+              //         Navigator.of(context).pop(true);
+              //       },
+              //     ),
+              //   ],
+              // );
+            });
 
-
-            //
-            //   AlertDialog(
-            //   content: Text('Are you sure you want to exit?'),
-            //   actions: <Widget>[
-            //     FlatButton(
-            //       child: Text('No'),
-            //       onPressed: () {
-            //         Navigator.of(context).pop(false);
-            //       },
-            //     ),
-            //     FlatButton(
-            //       child: Text('Yes, exit'),
-            //       onPressed: () {
-            //         Navigator.of(context).pop(true);
-            //       },
-            //     ),
-            //   ],
-            // );
-          }
-      );
-
-      return value == true;
-    },
+        return value == true;
+      },
       child: Scaffold(
         key: _scaffoldKey,
-        drawer:Mydrawer(),// mydrawer(context),
+        drawer: Mydrawer(), // mydrawer(context),
         body: swithscren(pos: _selectedIndex, width: width, high: high),
         bottomNavigationBar: BottomNavigationBar(
           //backgroundColor: hexToColor('#00abeb'),
@@ -214,10 +210,9 @@ class _StatisticssState extends State<Statisticss> {
                           controller: _textEditingController,
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
-                              hintText:
-                                  service_type == '1'
-                                      ? 'بحث بالكود او رقم التليفون '
-                                      : 'رقم التليفون'),
+                              hintText: service_type == '1'
+                                  ? 'بحث بالكود او رقم التليفون '
+                                  : 'رقم التليفون'),
                         )),
                         service_type == '1' || service_type == '0'
                             ? GestureDetector(
@@ -415,7 +410,7 @@ class _StatisticssState extends State<Statisticss> {
                       ],
                     ),
                   ),
-                  drawer: Mydrawer(),// mydrawer(context),
+                  drawer: Mydrawer(), // mydrawer(context),
                   body: SafeArea(
                     top: true,
                     child: Padding(
@@ -609,8 +604,7 @@ class _StatisticssState extends State<Statisticss> {
                                                 number: "",
                                                 // data.totalProduct.toString(),
                                                 width: width,
-                                                name:
-                                                    "الحجوزات")),
+                                                name: "الحجوزات")),
                                       )
                                     : SizedBox(),
                             service_type == '1'
@@ -638,29 +632,29 @@ class _StatisticssState extends State<Statisticss> {
                                             name: "طلبات")),
                                   )
                                 : SizedBox(),
-                            service_type == '1'?Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 8.0, bottom: 8.0),
-                              child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              Get_Future_Orders(
-                                               )),
-                                    );
-                                  },
-                                  child: item_home_list(
-                                      icon:
-                                      'assets/images/scoreboard.png',
-                                      keyupdata: 0,
-                                      dat: false,
-                                      number: data.totalPoints
-                                          .toString(),
-                                      width: width,
-                                      name: "طلبات مؤجلة")),
-                            ):SizedBox(),
+                            service_type == '1'
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 8.0, bottom: 8.0),
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Get_Future_Orders()),
+                                          );
+                                        },
+                                        child: item_home_list(
+                                            icon:
+                                                'assets/images/scoreboard.png',
+                                            keyupdata: 0,
+                                            dat: false,
+                                            number: data.totalPoints.toString(),
+                                            width: width,
+                                            name: "طلبات مؤجلة")),
+                                  )
+                                : SizedBox(),
                             service_type == '3' || service_type == '4'
                                 ? Padding(
                                     padding: const EdgeInsets.only(
@@ -782,64 +776,57 @@ class _StatisticssState extends State<Statisticss> {
                                                         width: width,
                                                         name: 'تسعير روشتات')),
                                               )
-                                            :SizedBox(),
-                          service_type == '2' ? Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 8.0,
-                                                            bottom: 8.0),
-                                                    child: GestureDetector(
-                                                        onTap: () {
-                                                          Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        Buy_prescription_request()),
-                                                          );
-                                                        },
-                                                        child: item_home_list(
-                                                            icon:
-                                                                'assets/images/medical_prescription.png',
-                                                            keyupdata: 0,
-                                                            dat: false,
-                                                            number: "",
-                                                            // data.totalProduct.toString(),
-                                                            width: width,
-                                                            name:
-                                                                "طلب شراء روشتات ")),
-                                                  )
-                                                : SizedBox(),
-
-
-
+                                            : SizedBox(),
+                            service_type == '2'
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 8.0, bottom: 8.0),
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Buy_prescription_request()),
+                                          );
+                                        },
+                                        child: item_home_list(
+                                            icon:
+                                                'assets/images/medical_prescription.png',
+                                            keyupdata: 0,
+                                            dat: false,
+                                            number: "",
+                                            // data.totalProduct.toString(),
+                                            width: width,
+                                            name: "طلب شراء روشتات ")),
+                                  )
+                                : SizedBox(),
 
                             service_type == '2'
                                 ? Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 8.0, bottom: 8.0),
-                              child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              MyOrder()),
-                                    );
-                                  },
-                                  child: item_home_list(
-                                      icon:
-                                      'assets/images/shopping_cart.png',
-                                      keyupdata: 0,
-                                      dat: false,
-                                      width: width,
-                                      number: snapshot
-                                          .data.result.totalOrders
-                                          .toString(),
-                                      name: "طلبات شراء مستحضرات تجميل")),
-                            )
+                                    padding: const EdgeInsets.only(
+                                        top: 8.0, bottom: 8.0),
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MyOrder()),
+                                          );
+                                        },
+                                        child: item_home_list(
+                                            icon:
+                                                'assets/images/shopping_cart.png',
+                                            keyupdata: 0,
+                                            dat: false,
+                                            width: width,
+                                            number: snapshot
+                                                .data.result.totalOrders
+                                                .toString(),
+                                            name: "طلبات شراء مستحضرات تجميل")),
+                                  )
                                 : SizedBox(),
-
 
                             service_type == '3'
                                 ? SizedBox()
@@ -936,58 +923,50 @@ class _StatisticssState extends State<Statisticss> {
                             ),
 
                             Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 8.0, bottom: 8.0),
-                                    child: GestureDetector(
-                                        onTap: () async{
-                                          if (service_type == '3') {
+                              padding:
+                                  const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                              child: GestureDetector(
+                                  onTap: () async {
+                                    if (service_type == '3') {
+                                      final value = await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Doc_Profile(context)),
+                                      );
+                                      setState(() {});
 
-                                            final value = await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) => Doc_Profile(context)),
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //       builder: (context) =>
+                                      //           Doc_Profile()),
+                                      // );
+                                    } else {
+                                      final value = await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Profilee(context)),
+                                      );
+                                      setState(() {});
 
-                                            );
-                                            setState(() {
-
-                                            });
-
-
-
-
-                                            // Navigator.push(
-                                            //   context,
-                                            //   MaterialPageRoute(
-                                            //       builder: (context) =>
-                                            //           Doc_Profile()),
-                                            // );
-                                          } else {
-                                            final value = await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) => Profilee(context)),
-
-                                            );
-                                            setState(() {
-
-                                            });
-
-                                            // Navigator.push(
-                                            //   context,
-                                            //   MaterialPageRoute(
-                                            //       builder: (context) =>
-                                            //           Profilee()),
-                                            // );
-                                          }
-                                        },
-                                        child: item_home_list(
-                                            icon: 'assets/images/t.png',
-                                            keyupdata: 0,
-                                            dat: false,
-                                            number: "",
-                                            width: width,
-                                            name: "تعديل البروفيل")),
-                                  ),
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //       builder: (context) =>
+                                      //           Profilee()),
+                                      // );
+                                    }
+                                  },
+                                  child: item_home_list(
+                                      icon: 'assets/images/t.png',
+                                      keyupdata: 0,
+                                      dat: false,
+                                      number: "",
+                                      width: width,
+                                      name: "تعديل البروفيل")),
+                            ),
 
                             //==============================
                             qrgnratt
@@ -1001,7 +980,6 @@ class _StatisticssState extends State<Statisticss> {
                                           print(box.read('id'));
                                           await _generateBarCode(
                                               box.read('id').toString());
-
                                           //  Get.to(QRRead(),
                                           //     transition: Transition.leftToRightWithFade);
                                         },
@@ -1219,38 +1197,38 @@ class _StatisticssState extends State<Statisticss> {
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child:keyupdata == 1
+            child: keyupdata == 1
                 ? GestureDetector(
-              onTap: keyupdata == 1 ? fun : null,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Container(
+                    onTap: keyupdata == 1 ? fun : null,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                          height: 75,
+                          color: Colors.red,
+                          width: 75,
+                          child: Center(
+                              child: Text(
+                                  keyupdata == 1
+                                      ? 'تجديد الاشتراك'
+                                      : ' تم ارسال الطلب',
+                                  style: TextStyle(
+                                      fontFamily: 'Arbf',
+                                      color: Colors.white,
+                                      fontSize: 10)))),
+                    ),
+                  )
+                : Container(
+                    padding: EdgeInsets.all(20),
                     height: 75,
                     color: Colors.red,
                     width: 75,
-                    child: Center(
-                        child: Text(
-                            keyupdata == 1
-                                ? 'تجديد الاشتراك'
-                                : ' تم ارسال الطلب',
-                            style: TextStyle(
-                                fontFamily: 'Arbf',
-                                color: Colors.white,
-                                fontSize: 10)))),
-              ),
-            ):
-            Container(
-              padding: EdgeInsets.all(20),
-              height: 75,
-              color: Colors.red,
-              width: 75,
-              child: Image.asset(
-                icon,
-                height: 30,
-                width: 30,
-                color: Colors.white,
-              ),
-            ),
+                    child: Image.asset(
+                      icon,
+                      height: 30,
+                      width: 30,
+                      color: Colors.white,
+                    ),
+                  ),
           ),
           SizedBox(
             width: 4,
@@ -1264,7 +1242,9 @@ class _StatisticssState extends State<Statisticss> {
                 Text(name,
                     style: TextStyle(
                         fontFamily: 'Arbf', color: Colors.black, fontSize: 15)),
-                 SizedBox(width: 8,)  ,
+                SizedBox(
+                  width: 8,
+                ),
                 dat
                     ? Expanded(
                         flex: 1,
@@ -1296,7 +1276,6 @@ class _StatisticssState extends State<Statisticss> {
               ],
             ),
           ),
-
         ],
       ),
     );

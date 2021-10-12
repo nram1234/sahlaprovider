@@ -57,10 +57,11 @@ class _Doc_ProfileState extends State<Doc_Profile> {
   bool setcaruntloction = false;
   File croppedFile;
   File _image;
+  File _profileImage;
   final box = GetStorage();
   String token;
   String imgelinke;
-
+  String profileLink;
 
   TimeOfDay _time = TimeOfDay.now();
   TimeOfDay _picked;
@@ -77,53 +78,43 @@ class _Doc_ProfileState extends State<Doc_Profile> {
     );
   }
 
-  getdatafromwep(){
-    _allNetworking
-        .preparation_doc_profile(token_id: token).then((value) {
+  getdatafromwep() {
+    _allNetworking.preparation_doc_profile(token_id: token).then((value) {
       name.text = value.result.serviceDetails[0].nameAr;
       nameen.text = value.result.serviceDetails[0].nameEn;
-      kind.text =
-          value.result.serviceDetails[0].specialization;
+      kind.text = value.result.serviceDetails[0].specialization;
       des.text = value.result.serviceDetails[0].description;
-      watingtime.text =
-          value.result.serviceDetails[0].waitingTime;
+      watingtime.text = value.result.serviceDetails[0].waitingTime;
       adderss.text = value.result.serviceDetails[0].address;
-      price.text =
-          value.result.serviceDetails[0].detectionPrice;
+      price.text = value.result.serviceDetails[0].detectionPrice;
 
       phone.text = value.result.serviceDetails[0].phone;
       //================================================
       whatsapp.text = value.result.serviceDetails[0].whatsapp;
       facebook.text = value.result.serviceDetails[0].facebook;
       twiter.text = value.result.serviceDetails[0].twitter;
-      insta.text =value.result.serviceDetails[0].instagram;
-password.text=value.result.serviceDetails[0].password;
+      insta.text = value.result.serviceDetails[0].instagram;
+      password.text = value.result.serviceDetails[0].password;
       email.text = value.result.serviceDetails[0].email;
 //===========================================================
-      kinden.text =
-          value.result.serviceDetails[0].specializationEn;
-      desen.text =
-          value.result.serviceDetails[0].descriptionEn;
-      watingtimeen.text =
-          value.result.serviceDetails[0].waitingTimeEn;
-      adderssenz.text =
-          value.result.serviceDetails[0].specialization;
-      priceen.text =
-          value.result.serviceDetails[0].detectionPriceEn;
+      kinden.text = value.result.serviceDetails[0].specializationEn;
+      desen.text = value.result.serviceDetails[0].descriptionEn;
+      watingtimeen.text = value.result.serviceDetails[0].waitingTimeEn;
+      adderssenz.text = value.result.serviceDetails[0].specialization;
+      priceen.text = value.result.serviceDetails[0].detectionPriceEn;
       print(value.result.serviceDetails[0].detectionPriceEn);
 
       print(value.result.serviceDetails[0].waitingTimeEn);
-      starttime=value.result.serviceDetails[0].fromHrs;
-      endtime=value.result.serviceDetails[0].toHrs;
-      imgelinke=value.result.serviceDetails[0].mainImg;
+      starttime = value.result.serviceDetails[0].fromHrs;
+      endtime = value.result.serviceDetails[0].toHrs;
+      imgelinke = value.result.serviceDetails[0].mainImg;
+      profileLink = value.result.serviceDetails[0].profileImage;
       print('000000000000000000000000000000000000');
       print(imgelinke);
       print('000000000000000000000000000000000000');
-    //  bool senddata = false;
-      getdata=false;
-      setState(() {
-
-      });
+      //  bool senddata = false;
+      getdata = false;
+      setState(() {});
     });
   }
 
@@ -133,10 +124,8 @@ password.text=value.result.serviceDetails[0].password;
     return _picked.format(context);
   }
 
-
   @override
   void dispose() {
-
     super.dispose();
   }
 
@@ -147,392 +136,433 @@ password.text=value.result.serviceDetails[0].password;
     return SafeArea(
       top: true,
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('البروفيل'),
-          centerTitle: true,
-        ),
-        body: getdata?Center(child: CircularProgressIndicator()):SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 10,
-                ),
-                GestureDetector(
-                  onTap: () async {
-
-
-
-
-
-
-                    _pickImage();
-                  },
-                  child: _image == null &&
-                      imgelinke
-                          .trim()
-                          .isEmpty
-                      ? Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
-                    //  crossAxisAlignment: CrossAxisAlignment.baseline,
-                    children: [
-                      Text('اضافة صورة ',
-                          style: TextStyle(
-                              fontFamily: 'Arbf',
-                              color: hexToColor('#ed1c6f'),
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold)),
-                      SizedBox(
-                        width: 50,
-                      ),
-                      Icon(Icons.camera_alt)
-                    ],
-                  )
-                      : _image == null
-                      ? Container(
-                    height:
-                    MediaQuery.of(context).size.width *
-                        .3,
-                    width: MediaQuery.of(context).size.width *
-                        .3,
-                    child: Image.network(
-                      imgelinke,
-                      fit: BoxFit.fill,
-                    ),
-                  )
-                      : Container(
-                    height:
-                    MediaQuery.of(context).size.width *
-                        .3,
-                    width: MediaQuery.of(context).size.width *
-                        .3,
-                    child: Image.file(
-                      _image,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                mywidget(
-                    hint: 'الاسم',
-                    inputtype: TextInputType.text,
-                    textEditingController: name),
-                SizedBox(
-                  height: 10,
-                ),
-                mywidget(
-                    hint: 'Name',
-                    inputtype: TextInputType.text,
-                    textEditingController: nameen),
-                SizedBox(
-                  height: 10,
-                ),
-                mywidget(
-                    hint: 'رقم الهاتف',
-                    inputtype: TextInputType.phone,
-                    textEditingController: phone),
-                SizedBox(
-                  height: high * .01,
-                ),
-
-
-
-                mywidget(
-                    hint: 'كلمة السر',
-                    inputtype: TextInputType.phone,
-                    textEditingController: password),
-                SizedBox(
-                  height: high * .01,
-                ),
-
-                mywidget(
-                    hint: 'التخصص',
-                    inputtype: TextInputType.text,
-                    textEditingController: kind),
-                SizedBox(
-                  height: high * .01,
-                ),
-                Container( decoration: BoxDecoration(
-
-
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-
-Text('  المواعيد  '),
-
-                      GestureDetector(
-                        onTap: () {
-                          selecttime(context: context).then((value) {
-                            if(value!=null){
-
-
-                              starttime = value;}
-                            setState(() {});
-                          });
-                          setState(() {});
-                        },
-                        child: Container(
-                            width: width*.25,
-                            height: 50,
-                            decoration: BoxDecoration(
-                                color: hexToColor('#00abeb'),
-                                gradient: new LinearGradient(
-                                    colors: [
-                                      Colors.red[900],
-                                      Colors.red[100],
-                                    ],
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    tileMode: TileMode.clamp),
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: Center(child: Text("  من  " + starttime))),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          selecttime(context: context).then((value) {
-                            if(value!=null){
-
-
-                              endtime = value;}
-                            setState(() {});
-                          });
-                          setState(() {});
-                        },
-                        child: Container(
-                            width:width*.25,
-                            height: 50,
-                            decoration: BoxDecoration(
-                                color: hexToColor('#00abeb'),
-                                gradient: new LinearGradient(
-                                    colors: [
-                                      Colors.red[900],
-                                      Colors.red[100],
-                                    ],
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    tileMode: TileMode.clamp),
-                                borderRadius: BorderRadius.circular(5.0)),
-                            child: Center(child: Text("  الي  " + endtime))),
-                      ),
-
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: high * .01,
-                ),
-                mywidget(
-                    hint: 'category',
-                    inputtype: TextInputType.text,
-                    textEditingController: kinden),
-                SizedBox(
-                  height: high * .01,
-                ),
-                mydeswidget(
-                    hint: 'الوصف',
-                    inputtype: TextInputType.text,
-                    textEditingController: des),
-                SizedBox(
-                  height: high * .01,
-                ),
-                mydeswidget(
-                    hint: 'description',
-                    inputtype: TextInputType.text,
-                    textEditingController: desen),
-                SizedBox(
-                  height: high * .01,
-                ),
-                mywidget(
-                    hint: 'مده الانتظار',
-                    inputtype: TextInputType.text,
-                    textEditingController: watingtime),
-                SizedBox(
-                  height: high * .01,
-                ),
-                mywidget(
-                    hint: 'Wait time',
-                    inputtype: TextInputType.text,
-                    textEditingController: watingtimeen),
-                SizedBox(
-                  height: high * .01,
-                ),
-                mywidget(
-                    hint: 'العنوان',
-                    inputtype: TextInputType.text,
-                    textEditingController: adderss),
-                SizedBox(
-                  height: high * .01,
-                ),
-                mywidget(
-                    hint: 'Address',
-                    inputtype: TextInputType.text,
-                    textEditingController: adderssenz),
-                SizedBox(
-                  height: high * .01,
-                ),
-                mywidget(
-                    hint: 'سعر الكشف',
-                    inputtype: TextInputType.text,
-                    textEditingController: price),
-                SizedBox(
-                  height: high * .01,
-                ),
-                mywidget(
-                    textEditingController: email,
-                    inputtype: TextInputType.text,
-                    hint: 'البريد الالكتروني'),
-                SizedBox(
-                  height: high * .01,
-                ),
-                mywidget(
-                  textEditingController: whatsapp,
-                  hint: 'رقم الوتس اب',
-                  inputtype: TextInputType.phone,
-                ),
-                SizedBox(
-                  height: high * .01,
-                ),
-                mywidget(
-                    textEditingController: facebook,
-                    inputtype: TextInputType.text,
-                    hint: 'ﺭﺍﺑﻂ ﺍﻟﻔﻴﺲ بوك'),
-                SizedBox(
-                  height: high * .01,
-                ),
-                mywidget(
-                    textEditingController: twiter,
-                    inputtype: TextInputType.text,
-                    hint: 'ﺭﺍﺑﻂ ﺍﻟﺘﻮﻳﺘﺮ'),
-                SizedBox(
-                  height: high * .01,
-                ),
-                mywidget(
-                    textEditingController: insta,
-                    inputtype: TextInputType.text,
-                    hint: 'ﺭﺍﺑﻂ ﺍﻻﻧﺴﺠﺮﺍﻡ'),
-                SizedBox(
-                  height: high * .01,
-                ),
-                mywidget(
-                    hint: 'price',
-                    inputtype: TextInputType.text,
-                    textEditingController: priceen),
-                SizedBox(
-                  height: high * .01,
-                ),
-                SizedBox(
-                  height: high * .01,
-                ),
-                senddata
-                    ? CircularProgressIndicator()
-                    : GestureDetector(
-                  onTap: () async {
-                    print(price.text);
-                    print(price.text);
-                    senddata = true;
-                    setState(() {});
-                    await box.write('name', name.text);
-                    _allNetworking
-                        .edit_doc_profile(
-                      token_id: token,
-                      name_ar: name.text,
-                      name_en: nameen.text,
-                      phone: phone.text,
-                      waiting_time: watingtime.text,
-                      detection_price: price.text,
-                      description: des.text,
-                      detection_price_en: priceen.text,
-                      specialization: kind.text,
-                      description_en: desen.text,
-                      specialization_en: kinden.text,
-                      waiting_time_en: watingtimeen.text,
-                      address: adderss.text,
-                      addressEn: adderssenz.text,
-                      instagram: insta.text,
-                      lag: 220.22,
-                      lat: 6515.222,
-                      whatsapp: whatsapp.text,
-                      twitter: twiter.text,
-                      facebook: facebook.text,
-                      email: email.text,
-
-                      from_hrs:starttime,main_img: _image,password:password.text ,
-
-
-                      to_hrs: endtime,
-                    )
-                        .then((value) {
-                      print(value.data);
-                      senddata = false;
-
-                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                          Statisticss()), (Route<dynamic> route) => false);
-                     setState(() {});
-                    });
-                  },
-                  child: Container(
-                      height: high * .1,
-                      width: width * 0.5,
-                      child: Center(
-                        child: Text('حفظ',
-                            style: TextStyle(
-                                fontFamily: 'Arbf',
-                                color: Colors.white,
-                                fontSize: 25)),
-                      ),
-                      decoration: BoxDecoration(
-                          color: hexToColor('#00abeb'),
-                          gradient: new LinearGradient(
-                              colors: [
-                                Colors.red[900],
-                                Colors.red[100],
-                              ],
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                              tileMode: TileMode.clamp),
-                          borderRadius:
-                          BorderRadius.circular(40.0))),
-                ),
-                SizedBox(
-                  height: high * .01,
-                ),
-                Container(
-                  height: high * .3,
-                  child: Center(
-                    child: _kGooglePlex == null
-                        ? CircularProgressIndicator()
-                        : GoogleMap(
-                      mapType: MapType.normal,
-                      initialCameraPosition: _kGooglePlex,
-                      onTap: (LatLng mylocation) {
-                        _locationData = mylocation;
-                        print(_locationData);
-                      },
-                      onMapCreated:
-                          (GoogleMapController controller) {
-                        _controller.complete(controller);
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          appBar: AppBar(
+            title: Text('البروفيل'),
+            centerTitle: true,
           ),
-        )
-
-      ),
+          body: getdata
+              ? Center(child: CircularProgressIndicator())
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                _pickMainImage();
+                              },
+                              child: _image == null && imgelinke.trim().isEmpty
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      //  crossAxisAlignment: CrossAxisAlignment.baseline,
+                                      children: [
+                                        Text('صورة مكان',
+                                            style: TextStyle(
+                                                fontFamily: 'Arbf',
+                                                color: hexToColor('#ed1c6f'),
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold)),
+                                      ],
+                                    )
+                                  : _image == null
+                                      ? Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .3,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .3,
+                                          child: Image.network(
+                                            imgelinke,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        )
+                                      : Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .3,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .3,
+                                          child: Image.file(
+                                            _image,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                            ),
+                            GestureDetector(
+                              onTap: () async {
+                                _pickProfileImage();
+                              },
+                              child: _profileImage == null &&
+                                      profileLink.trim().isEmpty
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      //  crossAxisAlignment: CrossAxisAlignment.baseline,
+                                      children: [
+                                        Text(' صورة بروفايل',
+                                            style: TextStyle(
+                                                fontFamily: 'Arbf',
+                                                color: hexToColor('#ed1c6f'),
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold)),
+                                      ],
+                                    )
+                                  : _profileImage == null
+                                      ? Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .3,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .3,
+                                          child: Image.network(
+                                            profileLink,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        )
+                                      : Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .3,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .3,
+                                          child: Image.file(
+                                            _profileImage,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        mywidget(
+                            hint: 'الاسم',
+                            inputtype: TextInputType.text,
+                            textEditingController: name),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        mywidget(
+                            hint: 'Name',
+                            inputtype: TextInputType.text,
+                            textEditingController: nameen),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        mywidget(
+                            hint: 'رقم الهاتف',
+                            inputtype: TextInputType.phone,
+                            textEditingController: phone),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mywidget(
+                            hint: 'كلمة السر',
+                            inputtype: TextInputType.phone,
+                            textEditingController: password),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mywidget(
+                            hint: 'التخصص',
+                            inputtype: TextInputType.text,
+                            textEditingController: kind),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.grey,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('  المواعيد  '),
+                              GestureDetector(
+                                onTap: () {
+                                  selecttime(context: context).then((value) {
+                                    if (value != null) {
+                                      starttime = value;
+                                    }
+                                    setState(() {});
+                                  });
+                                  setState(() {});
+                                },
+                                child: Container(
+                                    width: width * .25,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        color: hexToColor('#00abeb'),
+                                        gradient: new LinearGradient(
+                                            colors: [
+                                              Colors.red[900],
+                                              Colors.red[100],
+                                            ],
+                                            begin: Alignment.centerLeft,
+                                            end: Alignment.centerRight,
+                                            tileMode: TileMode.clamp),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0)),
+                                    child: Center(
+                                        child: Text("  من  " + starttime))),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  selecttime(context: context).then((value) {
+                                    if (value != null) {
+                                      endtime = value;
+                                    }
+                                    setState(() {});
+                                  });
+                                  setState(() {});
+                                },
+                                child: Container(
+                                    width: width * .25,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        color: hexToColor('#00abeb'),
+                                        gradient: new LinearGradient(
+                                            colors: [
+                                              Colors.red[900],
+                                              Colors.red[100],
+                                            ],
+                                            begin: Alignment.centerLeft,
+                                            end: Alignment.centerRight,
+                                            tileMode: TileMode.clamp),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0)),
+                                    child: Center(
+                                        child: Text("  الي  " + endtime))),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mywidget(
+                            hint: 'category',
+                            inputtype: TextInputType.text,
+                            textEditingController: kinden),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mydeswidget(
+                            hint: 'الوصف',
+                            inputtype: TextInputType.text,
+                            textEditingController: des),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mydeswidget(
+                            hint: 'description',
+                            inputtype: TextInputType.text,
+                            textEditingController: desen),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mywidget(
+                            hint: 'مده الانتظار',
+                            inputtype: TextInputType.text,
+                            textEditingController: watingtime),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mywidget(
+                            hint: 'Wait time',
+                            inputtype: TextInputType.text,
+                            textEditingController: watingtimeen),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mywidget(
+                            hint: 'العنوان',
+                            inputtype: TextInputType.text,
+                            textEditingController: adderss),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mywidget(
+                            hint: 'Address',
+                            inputtype: TextInputType.text,
+                            textEditingController: adderssenz),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mywidget(
+                            hint: 'سعر الكشف',
+                            inputtype: TextInputType.text,
+                            textEditingController: price),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mywidget(
+                            textEditingController: email,
+                            inputtype: TextInputType.text,
+                            hint: 'البريد الالكتروني'),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mywidget(
+                          textEditingController: whatsapp,
+                          hint: 'رقم الوتس اب',
+                          inputtype: TextInputType.phone,
+                        ),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mywidget(
+                            textEditingController: facebook,
+                            inputtype: TextInputType.text,
+                            hint: 'ﺭﺍﺑﻂ ﺍﻟﻔﻴﺲ بوك'),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mywidget(
+                            textEditingController: twiter,
+                            inputtype: TextInputType.text,
+                            hint: 'ﺭﺍﺑﻂ ﺍﻟﺘﻮﻳﺘﺮ'),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mywidget(
+                            textEditingController: insta,
+                            inputtype: TextInputType.text,
+                            hint: 'ﺭﺍﺑﻂ ﺍﻻﻧﺴﺠﺮﺍﻡ'),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        mywidget(
+                            hint: 'price',
+                            inputtype: TextInputType.text,
+                            textEditingController: priceen),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        senddata
+                            ? CircularProgressIndicator()
+                            : GestureDetector(
+                                onTap: () async {
+                                  print(price.text);
+                                  print(price.text);
+                                  senddata = true;
+                                  setState(() {});
+                                  await box.write('name', name.text);
+                                  _allNetworking
+                                      .edit_doc_profile(
+                                    token_id: token,
+                                    name_ar: name.text,
+                                    name_en: nameen.text,
+                                    phone: phone.text,
+                                    waiting_time: watingtime.text,
+                                    detection_price: price.text,
+                                    description: des.text,
+                                    detection_price_en: priceen.text,
+                                    specialization: kind.text,
+                                    description_en: desen.text,
+                                    specialization_en: kinden.text,
+                                    waiting_time_en: watingtimeen.text,
+                                    address: adderss.text,
+                                    addressEn: adderssenz.text,
+                                    instagram: insta.text,
+                                    lag: 220.22,
+                                    lat: 6515.222,
+                                    whatsapp: whatsapp.text,
+                                    twitter: twiter.text,
+                                    facebook: facebook.text,
+                                    email: email.text,
+                                    from_hrs: starttime,
+                                    main_img: _image,
+                                    password: password.text,
+                                    to_hrs: endtime,
+                                  )
+                                      .then((value) {
+                                    print(value.data);
+                                    senddata = false;
+                                    Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Statisticss()),
+                                        (Route<dynamic> route) => false);
+                                    setState(() {});
+                                  });
+                                },
+                                child: Container(
+                                    height: high * .1,
+                                    width: width * 0.5,
+                                    child: Center(
+                                      child: Text('حفظ',
+                                          style: TextStyle(
+                                              fontFamily: 'Arbf',
+                                              color: Colors.white,
+                                              fontSize: 25)),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        color: hexToColor('#00abeb'),
+                                        gradient: new LinearGradient(
+                                            colors: [
+                                              Colors.red[900],
+                                              Colors.red[100],
+                                            ],
+                                            begin: Alignment.centerLeft,
+                                            end: Alignment.centerRight,
+                                            tileMode: TileMode.clamp),
+                                        borderRadius:
+                                            BorderRadius.circular(40.0))),
+                              ),
+                        SizedBox(
+                          height: high * .01,
+                        ),
+                        Container(
+                          height: high * .3,
+                          child: Center(
+                            child: _kGooglePlex == null
+                                ? CircularProgressIndicator()
+                                : GoogleMap(
+                                    mapType: MapType.normal,
+                                    initialCameraPosition: _kGooglePlex,
+                                    onTap: (LatLng mylocation) {
+                                      _locationData = mylocation;
+                                      print(_locationData);
+                                    },
+                                    onMapCreated:
+                                        (GoogleMapController controller) {
+                                      _controller.complete(controller);
+                                    },
+                                  ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )),
     );
   }
 
@@ -541,7 +571,7 @@ Text('  المواعيد  '),
     return TextFormField(
       keyboardType: inputtype,
       controller: textEditingController,
-        textAlign: TextAlign.right,
+      textAlign: TextAlign.right,
       maxLines: null,
       style: TextStyle(
         fontFamily: 'Arbf',
@@ -571,7 +601,7 @@ Text('  المواعيد  '),
     return TextFormField(
       keyboardType: inputtype,
       controller: textEditingController,
-      textAlign:TextAlign.right,
+      textAlign: TextAlign.right,
       maxLines: 5,
       style: TextStyle(
         fontFamily: 'Arbf',
@@ -596,28 +626,37 @@ Text('  المواعيد  '),
     );
   }
 
-
-
-  Future<Null> _pickImage() async {
-
+  Future<Null> _pickMainImage() async {
     var image = await ImagePicker.pickImage(
         source: ImageSource.gallery,
         maxHeight: 1000,
         maxWidth: 800,
         imageQuality: 100);
-    _cropImage(image);
-   //  setState(() {
-   //    if (image != null) {
-   //      _image = File(image.path);
-   //    }
-   // });
-
+    _cropMainImage(image);
+    //  setState(() {
+    //    if (image != null) {
+    //      _image = File(image.path);
+    //    }
+    // });
   }
 
-  Future<Null> _cropImage(image) async {
-     print('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp');
-   File croppedFile =
-    await ImageCropper.cropImage(
+  Future<Null> _pickProfileImage() async {
+    var image = await ImagePicker.pickImage(
+        source: ImageSource.gallery,
+        maxHeight: 1000,
+        maxWidth: 800,
+        imageQuality: 100);
+    _cropProfileImage(image);
+    //  setState(() {
+    //    if (image != null) {
+    //      _image = File(image.path);
+    //    }
+    // });
+  }
+
+  Future<Null> _cropMainImage(image) async {
+    print('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp');
+    File croppedFile = await ImageCropper.cropImage(
         sourcePath: image.path,
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
@@ -634,16 +673,36 @@ Text('  المواعيد  '),
             lockAspectRatio: false),
         iosUiSettings: IOSUiSettings(
           minimumAspectRatio: 1.0,
-        )
-    );
+        ));
     if (croppedFile != null) {
       _image = croppedFile;
-      setState(() {
-
-      });
+      setState(() {});
     }
   }
 
-
+  Future<Null> _cropProfileImage(image) async {
+    print('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp');
+    File croppedFile = await ImageCropper.cropImage(
+        sourcePath: image.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9
+        ],
+        androidUiSettings: AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.deepOrange,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        iosUiSettings: IOSUiSettings(
+          minimumAspectRatio: 1.0,
+        ));
+    if (croppedFile != null) {
+      _profileImage = croppedFile;
+      setState(() {});
+    }
+  }
 }
-

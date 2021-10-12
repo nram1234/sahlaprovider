@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sahlaprovider/myWidget/myDrawer.dart';
 import 'package:sahlaprovider/netWORK/allnetworking.dart';
@@ -35,12 +36,15 @@ class _NotificationScrState extends State<NotificationScr> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Mydrawer(),// mydrawer(context),
+      drawer: Mydrawer(), // mydrawer(context),
       appBar: AppBar(
-        actions: [GestureDetector(
-          onTap: () {
-            Navigator.pop(context, false);
-          }, child: Icon(Icons.arrow_forward_outlined),)
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context, false);
+            },
+            child: Icon(Icons.arrow_forward_outlined),
+          )
         ],
         centerTitle: true,
         title: Text('التنبيهات'),
@@ -61,12 +65,11 @@ class _NotificationScrState extends State<NotificationScr> {
                     itemCount: snapshot.data.result.allNotifications.length,
                     itemBuilder: (cont, pos) {
                       return Card(
-
                         elevation: 8,
                         child: Container(
-                          color:
-                          snapshot.data.result.allNotifications[pos].isRead ==
-                              1
+                          color: snapshot.data.result.allNotifications[pos]
+                                      .isRead ==
+                                  1
                               ? Colors.black12
                               : Colors.grey,
                           child: Column(

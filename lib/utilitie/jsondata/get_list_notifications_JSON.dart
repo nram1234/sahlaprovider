@@ -14,7 +14,7 @@ class Get_list_notifications_JSON {
     status = json['status'];
     total = json['total'];
     result =
-    json['result'] != null ? new Result.fromJson(json['result']) : null;
+        json['result'] != null ? new Result.fromJson(json['result']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -59,15 +59,17 @@ class AllNotifications {
   int id;
   String body;
   int isRead;
+  int type;
   String createdAt;
 
   AllNotifications(
-      {this.title, this.id, this.body, this.isRead, this.createdAt});
+      {this.title, this.id, this.body, this.type, this.isRead, this.createdAt});
 
   AllNotifications.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     id = json['id'];
     body = json['body'];
+    type = json['message_type'];
     isRead = json['is_read'];
     createdAt = json['created_at'];
   }
@@ -78,6 +80,7 @@ class AllNotifications {
     data['id'] = this.id;
     data['body'] = this.body;
     data['is_read'] = this.isRead;
+    data['message_type'] = this.type;
     data['created_at'] = this.createdAt;
     return data;
   }

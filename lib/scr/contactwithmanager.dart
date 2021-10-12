@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sahlaprovider/myWidget/myDrawer.dart';
@@ -9,7 +8,7 @@ import 'package:sahlaprovider/utilitie/jsondata/tickets_types_json.dart';
 class ContactWithManager extends StatefulWidget {
   BuildContext mycontext;
 
-  ContactWithManager(this.mycontext);
+  ContactWithManager({this.mycontext});
 
   @override
   _ContactWithManagerState createState() => _ContactWithManagerState();
@@ -22,30 +21,33 @@ class _ContactWithManagerState extends State<ContactWithManager> {
   String title = '';
   bool senddata = false;
   String token;
-bool getdata=true;
+  bool getdata = true;
   @override
   void initState() {
     super.initState();
     token = box.read('token');
     _allNetworking.tickets_types(token_id: token).then((value) {
-      dataaa=value.result .ticketsTypes;
-      getdata=false;
-    setState(() {
-
-    });});
+      dataaa = value.result.ticketsTypes;
+      getdata = false;
+      setState(() {});
+    });
   }
 
-  TicketsTypes dropdownValue  ;
-List<TicketsTypes>dataaa=[];
+  TicketsTypes dropdownValue;
+  List<TicketsTypes> dataaa = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Mydrawer(),// mydrawer(context),
-      appBar: AppBar(actions: [GestureDetector(
-        onTap: () {
-          Navigator.pop(context, false);
-        }, child: Icon(Icons.arrow_forward_outlined),)
-      ],
+      drawer: Mydrawer(), // mydrawer(context),
+      appBar: AppBar(
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context, false);
+            },
+            child: Icon(Icons.arrow_forward_outlined),
+          )
+        ],
         centerTitle: true,
         title: Text('تواصل مع الادارة'),
       ),
@@ -60,9 +62,12 @@ List<TicketsTypes>dataaa=[];
                 ),
               ),
               Container(
-                width: MediaQuery.of(context).size.width*.9,
-                child:  getdata?CircularProgressIndicator(): DropdownButton<TicketsTypes>(
-                        value: dropdownValue,hint: Text('نوع التذكرة'),
+                width: MediaQuery.of(context).size.width * .9,
+                child: getdata
+                    ? CircularProgressIndicator()
+                    : DropdownButton<TicketsTypes>(
+                        value: dropdownValue,
+                        hint: Text('نوع التذكرة'),
                         icon: Icon(Icons.arrow_downward),
                         iconSize: 24,
                         elevation: 16,
@@ -76,14 +81,14 @@ List<TicketsTypes>dataaa=[];
                             dropdownValue = newValue;
                           });
                         },
-                        items:  dataaa
-                            .map<DropdownMenuItem<TicketsTypes>>((TicketsTypes value) {
+                        items: dataaa.map<DropdownMenuItem<TicketsTypes>>(
+                            (TicketsTypes value) {
                           return DropdownMenuItem<TicketsTypes>(
                             value: value,
                             child: Text(value.name),
                           );
                         }).toList(),
-                      ) ,
+                      ),
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.grey,
@@ -91,9 +96,10 @@ List<TicketsTypes>dataaa=[];
                   ),
                   borderRadius: BorderRadius.circular(10),
                 ),
-              ), SizedBox(
-      height: 10,
-    ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(
@@ -168,8 +174,6 @@ List<TicketsTypes>dataaa=[];
                                   title: title,
                                   content: data)
                               .then((value) {
-
-
                             Navigator.pop(widget.mycontext);
                             print(value.data);
                             senddata = false;
